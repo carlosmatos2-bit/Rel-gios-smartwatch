@@ -6,68 +6,148 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: #e6f0ff;
+            margin: 0;
+            padding: 0;
+            color: #1a2a40;
+        }
+
+        header {
+            background: #003366;
+            color: white;
+            padding: 20px;
             text-align: center;
-            background: #f2f2f2;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .home-btn {
+        .btn-container {
             position: absolute;
-            right: 20px;
             top: 20px;
-            font-size: 20px;
-            text-decoration: none;
-            background: black;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .btn {
+            background: #003366;
             color: white;
+            text-decoration: none;
             padding: 10px 20px;
             border-radius: 8px;
-        }
-
-        .voltar-btn {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            font-size: 20px;
-            text-decoration: none;
-            background: black;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
-
-        img {
-            width: 280px;
-            margin-top: 100px;
-            border-radius: 10px;
-        }
-
-        .linkbox {
-            margin-top: 20px;
+            font-weight: bold;
             font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0059b3;
+        }
+
+        .product-container {
+            max-width: 900px;
+            margin: 120px auto 50px auto;
             background: white;
-            padding: 10px 15px;
-            display: inline-block;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .product-images {
+            text-align: center;
+        }
+
+        .product-images img {
+            border-radius: 12px;
+            margin: 15px;
+        }
+
+        .main-img {
+            width: 300px;
+        }
+
+        .medium-img {
+            width: 220px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 32px;
+            color: #003366;
+        }
+
+        .description {
+            text-align: left;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .description h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #003366;
+        }
+
+        .description ul {
+            margin-left: 20px;
+        }
+
+        .highlight {
+            color: #004080;
+            font-weight: bold;
+        }
+
+        .summary {
+            background: #cfe7ff;
+            padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO VOLTAR PARA A PÁGINA 2 -->
-    <a href="loja.html" class="voltar-btn">Voltar</a>
+    <header>Loja Digital - Produto</header>
 
-    <!-- BOTÃO HOME -->
-    <a href="loja.html" class="home-btn">Home</a>
+    <div class="btn-container">
+        <a href="loja.html" class="btn">Voltar</a>
+        <a href="loja.html" class="btn">Home</a>
+    </div>
 
-    <h1>Relógio Inteligente Ultra AI 3 5G</h1>
+    <div class="product-container">
 
-    <!-- FOTO -->
-    <img src="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" alt="Ultra AI 3 5G">
+        <h1>Relógio Inteligente Ultra AI 3 5G</h1>
 
-    <!-- LINK CURTO -->
-    <div class="linkbox">
-        🔗 Link curto:<br>
-        <a href="https://encurtador.com.br/xyz123">encurtador.com.br/xyz123</a>
+        <div class="product-images">
+            <img src="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" alt="Ultra AI 3 5G" class="main-img">
+            <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Ultra AI 3 5G extra" class="medium-img">
+        </div>
+
+        <div class="description">
+            <h2>Descrição Completa</h2>
+            <p>O <span class="highlight">Ultra AI 3 5G</span> é um smartwatch de última geração, ideal para quem deseja alta performance, conectividade total e design premium no pulso.</p>
+
+            <ul>
+                <li><span class="highlight">Conectividade completa:</span> Suporte 5G, chip SIM, Wi-Fi, Bluetooth e GPS integrado.</li>
+                <li><span class="highlight">Sistema Android:</span> Permite instalar apps como WhatsApp, Instagram, YouTube, TikTok, Spotify e Google Maps.</li>
+                <li><span class="highlight">Tela AMOLED:</span> Excelente visibilidade mesmo sob luz direta.</li>
+                <li><span class="highlight">Processamento e memória:</span> Quad-core, ~2GB RAM, ~16GB armazenamento (varia conforme versão).</li>
+                <li><span class="highlight">Câmeras integradas:</span> 8MP principal, 2MP secundária, gravação Full HD.</li>
+                <li><span class="highlight">Recursos inteligentes:</span> Assistente de voz AI, ChatGPT integrado, notificações, chamadas, controle de música e monitoramento de saúde.</li>
+                <li><span class="highlight">Design premium:</span> Corpo leve e resistente, pulseira de silicone confortável para uso diário.</li>
+                <li><span class="highlight">Ideal para:</span> Substituir o smartphone em atividades rápidas mantendo conectividade e estilo.</li>
+            </ul>
+
+            <div class="summary">
+                Internet 5G, chip SIM, apps Android, câmeras, GPS e design premium — uma experiência completa de smartwatch para quem vive conectado.
+            </div>
+        </div>
+
     </div>
 
 </body>
