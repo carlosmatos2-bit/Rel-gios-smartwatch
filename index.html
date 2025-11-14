@@ -59,6 +59,30 @@
     button:hover {
       background-color: #34495e;
     }
+
+    /* 🔽🔽 ÍCONES FIXOS NO CANTO INFERIOR DIREITO 🔽🔽 */
+    .social-icons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+
+    .social-icons img {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.15);
+    }
+    /* 🔼🔼 FIM DOS ÍCONES FIXOS 🔼🔼 */
+
   </style>
 </head>
 <body>
@@ -99,11 +123,26 @@
 
   <script>
     document.getElementById("formulario").addEventListener("submit", function(event) {
-      event.preventDefault(); // impede o envio padrão
-      alert("Formulário enviado com sucesso!");
-      window.location.href = "index.html"; // redireciona para a página inicial
+      event.preventDefault(); 
+      window.location.href = "resultado.html"; 
     });
   </script>
+
+  <!-- 🔽🔽 ÍCONES SOCIAIS NO CANTO INFERIOR DIREITO 🔽🔽 -->
+  <div class="social-icons">
+    <a href="https://facebook.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+    </a>
+
+    <a href="https://wa.me/5599999999" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+
+    <a href="https://instagram.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+  </div>
+  <!-- 🔼🔼 FIM DOS ÍCONES SOCIAIS 🔼🔼 -->
 
 </body>
 </html>
