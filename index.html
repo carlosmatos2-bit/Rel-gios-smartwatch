@@ -8,39 +8,49 @@
     body {
       font-family: Arial, sans-serif;
       margin: 40px;
-      background-color: #f4f4f4;
+      background-color: #d8ecff; /* azul clarinho */
       color: #333;
     }
+
     .container {
       max-width: 1200px; 
       margin: auto;
       background: white;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+
+      /* BORDA BRILHANTE AZUL ESCURO */
+      border: 4px solid #003366;
+      box-shadow: 0 0 20px #003366;
     }
+
     img {
       max-width: 100%;
       height: auto;
       border-radius: 8px;
     }
+
     h1 {
       color: #2c3e50;
     }
+
     p {
       line-height: 1.6;
     }
+
     form {
       margin-top: 30px;
       background: #ecf0f1;
       padding: 20px;
       border-radius: 8px;
     }
+
     label {
       display: block;
       margin-top: 10px;
       font-weight: bold;
     }
+
     input, textarea, select, button {
       width: 100%;
       padding: 10px;
@@ -49,6 +59,7 @@
       border-radius: 5px;
       font-size: 1em;
     }
+
     button {
       background-color: #2c3e50;
       color: white;
@@ -56,6 +67,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+
     button:hover {
       background-color: #34495e;
     }
@@ -64,6 +76,7 @@
 <body>
   <div class="container">
     <h1>Smartwatch: Tecnologia no Seu Pulso</h1>
+
     <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Imagem de um smartwatch moderno">
     
     <p>O <strong>smartwatch</strong>, ou relógio inteligente, é mais do que um simples acessório para mostrar as horas. Ele atua como uma extensão do seu smartphone, permitindo visualizar notificações, atender chamadas, ler mensagens e controlar músicas diretamente do seu pulso.</p>
@@ -95,28 +108,19 @@
       <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua dúvida ou comentário..."></textarea>
 
       <button type="submit">Enviar</button>
-      <window.location.href = "resultado.html";>
 
       <div style="margin-top: 20px; display: flex; justify-content: center; gap: 40px;">
-
         <a href="https://facebook.com" target="_blank">
           <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" width="40" height="40" alt="Facebook">
         </a>
 
-        <!-- AQUI ESTÁ O NOVO BLOCO COM A FRASE -->
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <a href="https://wa.me/5562940028922" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" height="40" alt="WhatsApp">
-          </a>
-          <span style="font-size: 16px; color: #333; font-weight: bold;">
-        
-          </span>
-        </div>
+        <a href="https://wa.me/5562940028922" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" height="40" alt="WhatsApp">
+        </a>
 
         <a href="https://instagram.com" target="_blank">
           <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" width="40" height="40" alt="Instagram">
         </a>
-
       </div>
     </form>
   </div>
