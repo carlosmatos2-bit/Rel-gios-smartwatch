@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Garmin Epix Gen 2</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -22,13 +23,11 @@
         font-weight: bold;
     }
 
+    /* Botão voltar */
     .btn-container {
         position: absolute;
         top: 20px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        padding: 0 20px;
+        left: 20px;
     }
 
     .btn {
@@ -46,41 +45,57 @@
         background: #0059b3;
     }
 
+    /* Caixa principal */
     .product-container {
-        max-width: 900px;
-        margin: 120px auto 50px auto;
+        max-width: 1000px;
+        margin: 100px auto;
         background: white;
         border-radius: 15px;
         padding: 30px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
-    .product-images {
+    /* Galeria */
+    .image-gallery {
         text-align: center;
     }
 
-    .product-images img {
-        border-radius: 12px;
-        margin: 15px;
-    }
-
     .main-img {
-        width: 300px;
+        width: 350px;
+        border-radius: 12px;
+        transition: transform 0.3s;
     }
 
-    .medium-img {
-        width: 220px;
+    .main-img:hover {
+        transform: scale(1.05);
+    }
+
+    .thumbs {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .thumbs img {
+        width: 90px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: transform 0.2s;
+        border: 2px solid transparent;
+    }
+
+    .thumbs img:hover {
+        transform: scale(1.1);
+        border-color: #003366;
     }
 
     h1 {
         text-align: center;
-        margin-top: 0;
-        font-size: 32px;
         color: #003366;
     }
 
     .description {
-        text-align: left;
         margin-top: 30px;
         line-height: 1.6;
     }
@@ -88,12 +103,7 @@
     .description h2 {
         text-align: center;
         font-size: 28px;
-        margin-bottom: 15px;
         color: #003366;
-    }
-
-    .description ul {
-        margin-left: 20px;
     }
 
     .highlight {
@@ -104,10 +114,51 @@
     .summary {
         background: #cfe7ff;
         padding: 15px;
-        border-radius: 8px;
+        border-radius: 10px;
         margin-top: 20px;
         text-align: center;
         font-size: 18px;
+    }
+
+    /* Botão comprar */
+    .buy-btn {
+        margin-top: 20px;
+        background: #003366;
+        color: white;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .buy-btn:hover {
+        background: #004080;
+    }
+
+    /* Especificações */
+    .spec-box {
+        margin-top: 40px;
+        padding: 20px;
+        background: #f0f6ff;
+        border-radius: 10px;
+    }
+
+    .spec-box h3 {
+        color: #003366;
+    }
+
+    .comparison {
+        margin-top: 30px;
+        padding: 15px;
+        background: #e4eeff;
+        border-radius: 10px;
+        font-size: 17px;
     }
 </style>
 </head>
@@ -121,32 +172,86 @@
 
 <div class="product-container">
 
-    <h1>Relógio Inteligente Garmin Epix Gen 2</h1>
+    <h1>Garmin Epix Gen 2</h1>
 
-    <div class="product-images">
-        <img src="https://cdn.garmin.com/p/702e12aa-54d5-48e0-bcb4-1f36e5b6b1b8-epix-gen-2.jpg" alt="Garmin Epix Gen 2" class="main-img">
-    </div>
+    <!-- GALERIA -->
+    <div class="image-gallery">
+        <img id="mainImage" src="https://cdn.garmin.com/p/702e12aa-54d5-48e0-bcb4-1f36e5b6b1b8-epix-gen-2.jpg" class="main-img">
 
-    <div class="description">
-        <h2>Descrição Completa</h2>
-        <p>O <span class="highlight">Garmin Epix Gen 2</span> é um smartwatch premium voltado para esportistas e pessoas que buscam tecnologia avançada em seu pulso, combinando GPS de alta precisão, monitoramento completo da saúde e conectividade total.</p>
-
-        <ul>
-            <li><span class="highlight">Tela AMOLED:</span> Visualização nítida em qualquer condição de iluminação.</li>
-            <li><span class="highlight">Monitoramento completo:</span> Frequência cardíaca, SpO2, estresse, sono, hidratação, energia Body Battery.</li>
-            <li><span class="highlight">GPS avançado:</span> Multi-GNSS para precisão em esportes ao ar livre e navegação.</li>
-            <li><span class="highlight">Modos esportivos:</span> Corrida, ciclismo, natação, triatlo, esqui, golfe e muito mais.</li>
-            <li><span class="highlight">Conectividade:</span> Notificações inteligentes, música integrada, Garmin Pay e compatível com aplicativos externos.</li>
-            <li><span class="highlight">Design premium:</span> Leve, resistente à água (até 100m) e com pulseiras intercambiáveis.</li>
-            <li><span class="highlight">Bateria duradoura:</span> Até 16 dias no modo smartwatch e até 42 horas no modo GPS.</li>
-        </ul>
-
-        <div class="summary">
-            Um smartwatch completo, robusto e elegante, ideal para esportistas e usuários que buscam performance, monitoramento de saúde e conectividade avançada.
+        <div class="thumbs">
+            <img src="https://cdn.garmin.com/p/702e12aa-54d5-48e0-bcb4-1f36e5b6b1b8-epix-gen-2.jpg" onclick="trocarImagem(this)">
+            <img src="https://www.tradeinn.com/f/13861/138610262/garmin-epix-gen-2-sapphire-titanium-smartwatch.jpg" onclick="trocarImagem(this)">
+            <img src="https://m.media-amazon.com/images/I/71UIgSZg7GL._AC_SL1500_.jpg" onclick="trocarImagem(this)">
         </div>
     </div>
 
+    <button class="buy-btn" onclick="addToCart('Garmin Epix Gen 2', 259)">Adicionar ao Carrinho – R$ 259,00</button>
+
+    <div class="description">
+        <h2>Descrição Completa</h2>
+
+        <p>
+            O <span class="highlight">Garmin Epix Gen 2</span> combina elegância premium com desempenho extremo,
+            oferecendo uma das melhores experiências disponíveis em smartwatches esportivos.
+        </p>
+
+        <ul>
+            <li><span class="highlight">Tela AMOLED:</span> brilho intenso e excelente visibilidade externa.</li>
+            <li><span class="highlight">GPS Multi-GNSS:</span> precisão superior em trilhas, rotas e treinos.</li>
+            <li><span class="highlight">Saúde 24/7:</span> batimentos, estresse, Body Battery, VO2 Max, SpO2.</li>
+            <li><span class="highlight">Modos esportivos avançados:</span> corrida, ciclismo, natação, triatlo e esportes outdoor.</li>
+            <li><span class="highlight">Bateria de longa duração:</span> até 16 dias no modo smartwatch.</li>
+            <li><span class="highlight">Música Offline:</span> Spotify, Deezer e Amazon Music.</li>
+        </ul>
+
+        <div class="summary">
+            O equilíbrio perfeito entre performance profissional e estilo premium.
+        </div>
+    </div>
+
+    <!-- ESPECIFICAÇÕES TÉCNICAS -->
+    <div class="spec-box">
+        <h3>Especificações Técnicas</h3>
+        <ul>
+            <li>📡 GPS, GLONASS, GALILEO</li>
+            <li>💓 Sensor Elevado de Batimentos</li>
+            <li>🩸 PulseOx – Oxigenação no sangue</li>
+            <li>🏃 Treinos avançados com métricas de performance</li>
+            <li>🎵 Armazena até 2.000 músicas</li>
+            <li>💧 Resistência à água: 100m</li>
+            <li>🔋 Carregamento rápido</li>
+        </ul>
+    </div>
+
+    <!-- COMPARAÇÃO -->
+    <div class="comparison">
+        ⭐ Comparado a outros modelos, o Epix Gen 2 oferece:
+        <br><br>
+        ✔ Melhor visibilidade em AMOLED  
+        ✔ Bateria mais duradoura que smartwatches convencionais  
+        ✔ GPS superior para esportes outdoor  
+    </div>
+
 </div>
+
+<script>
+function trocarImagem(img) {
+    document.getElementById("mainImage").src = img.src;
+}
+
+function addToCart(product, price) {
+    let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let total = Number(localStorage.getItem("total")) || 0;
+
+    cart.push({ product, price });
+    total += price;
+
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    localStorage.setItem("total", total);
+
+    alert(product + " foi adicionado ao carrinho!");
+}
+</script>
 
 </body>
 </html>
