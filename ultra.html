@@ -37,7 +37,6 @@
     z-index: -1;
   }
 
-  /* header */
   header{
     background:var(--brand);
     color:#fff;
@@ -56,29 +55,21 @@
   header .small-cta{background:transparent; border:2px solid rgba(255,255,255,0.12); padding:8px 12px; border-radius:8px; color:#fff; cursor:pointer}
   header .small-cta:hover{background:rgba(255,255,255,0.06)}
 
-  /* page container */
   .wrap{max-width:1100px; margin:40px auto; padding:0 20px;}
-  /* produto em grid */
   .grid{display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start;}
-  /* cartão produto */
   .card{background:var(--card); border-radius:14px; padding:22px; box-shadow:0 10px 30px rgba(2,30,66,0.08);}
-  .gallery{display:flex; gap:16px;}
-  .main-image{width:100%; max-width:520px; border-radius:12px; overflow:hidden; position:relative; margin:auto;}
-  .main-image img{width:100%; height:auto; display:block; transition: transform .35s ease, filter .35s; cursor:zoom-in;}
-  .main-image:hover img{ transform:scale(1.06) }
-  .thumbs{display:flex; gap:12px; margin-top:12px; justify-content:center;}
-  .thumbs img{width:96px; height:96px; object-fit:cover; border-radius:10px; border:2px solid transparent; cursor:pointer; transition:transform .22s, border-color .2s;}
-  .thumbs img:hover{ transform:scale(1.03); }
-  .thumbs img.active{ border-color:var(--brand); box-shadow:0 6px 18px rgba(0,51,102,0.18); }
+  
+  .gallery{display:flex; gap:16px; justify-content:center;}
+  .main-image{width:100%; max-width:520px; border-radius:12px; overflow:hidden; margin:auto;}
+  .main-image img{width:100%; height:auto; display:block; transition: transform .35s ease; cursor:zoom-in;}
+  .main-image:hover img{ transform:scale(1.06); }
 
   .title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
   .title h1{color:var(--brand); font-size:26px; margin:0 0 8px;}
+  
   .price-block{text-align:right;}
   .price-block .old{ text-decoration:line-through; color:#888; font-size:14px;}
   .price-block .now{ color:#0a8a3a; font-weight:800; font-size:22px;}
-
-  .badges{display:flex; gap:10px; margin:14px 0 18px; flex-wrap:wrap;}
-  .badge{background:var(--soft); color:var(--brand); padding:8px 12px; border-radius:999px; font-weight:700; border:1px solid rgba(0,51,102,0.06);}
 
   .specs{margin-top:18px; display:grid; gap:8px;}
   .specs p{margin:0; line-height:1.5; color:#1b2b3a;}
@@ -98,10 +89,6 @@
 
   .interactions{margin-top:18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
   .pulse{ color:var(--brand); font-weight:800; }
-
-  .carousel{margin-top:22px; display:flex; gap:12px; overflow:hidden; border-radius:12px;}
-  .carousel img{ width:220px; height:140px; object-fit:cover; border-radius:10px; transition:transform .25s;}
-  .carousel img:hover{ transform:scale(1.04);}
 
   .faq{margin-top:22px;}
   .faq details{background:#f8fdff; padding:12px 14px; border-radius:10px; margin-bottom:10px; border:1px solid rgba(0,51,102,0.05);}
@@ -124,9 +111,8 @@
 
   @media (max-width:980px){
     .grid{grid-template-columns:1fr;}
-    .carousel img{width:160px;height:100px;}
-    .buybox{position:static;margin-top:16px;}
-    .cart-panel{right:12px;top:70px; width:92%; max-height:50vh;}
+    .buybox{position:static; margin-top:16px;}
+    .cart-panel{right:12px; top:70px; width:92%; max-height:50vh;}
   }
 </style>
 </head>
@@ -142,9 +128,9 @@
 
 <div class="wrap">
   <div class="grid">
-    <!-- LEFT: gallery + details -->
     <div>
       <div class="card">
+
         <div class="title" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
           <div>
             <h1>Relógio Inteligente Ultra AI 3 5G</h1>
@@ -157,74 +143,13 @@
         </div>
 
         <div class="gallery" style="margin-top:16px">
-          <div style="flex:1">
-            <div class="main-image" id="mainImageWrap">
-              <img id="mainImg" src="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" alt="Ultra AI 3 5G">
-            </div>
-
-            <div class="thumbs" id="thumbs">
-              <img src="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" data-full="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" class="active" alt="principal">
-              <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" data-full="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="ângulo lateral">
-              <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=500&q=60" data-full="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1000&q=80" alt="pulso lifestyle">
-            </div>
-
-            <div class="carousel" id="carousel">
-              <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=800&q=60" alt="">
-              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=60" alt="">
-              <img src="https://images.unsplash.com/photo-1519222970733-f546218fa6d7?auto=format&fit=crop&w=800&q=60" alt="">
-            </div>
+          <div class="main-image" id="mainImageWrap">
+            <img id="mainImg" src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Ultra AI 3 5G">
           </div>
-
-          <aside class="buybox">
-            <h3>Comprar</h3>
-            <div class="sku">SKU: UAI3-5G-BLK</div>
-
-            <div style="display:flex;gap:12px;align-items:center;">
-              <div style="flex:1">
-                <label style="font-weight:700">Cor</label>
-                <select id="color">
-                  <option>Preto</option>
-                  <option>Prata</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="qtd">
-              <label style="font-weight:700">Quantidade</label>
-              <div style="flex:1;display:flex;gap:8px;align-items:center; justify-content:flex-end">
-                <button onclick="decreaseQty()">−</button>
-                <input type="number" id="qty" value="1" min="1">
-                <button onclick="increaseQty()">+</button>
-              </div>
-            </div>
-
-            <div style="font-size:14px;color:#556">Entrega: 3–7 dias úteis</div>
-
-            <div class="cta">
-              <button class="btn-primary" onclick="buyNow()">Comprar agora</button>
-              <button class="btn-outline" onclick="openCart()">Ver carrinho</button>
-            </div>
-
-            <div class="interactions">
-              <div>
-                <div style="font-size:13px;color:#556">Garantia</div>
-                <div class="pulse">2 anos</div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-size:13px;color:#556">Estoque</div>
-                <div style="color:#0a8a3a;font-weight:800">Em estoque</div>
-              </div>
-            </div>
-
-            <div style="margin-top:14px; text-align:center">
-              <button class="btn-outline" onclick="openSimulator()">Simular no pulso</button>
-            </div>
-          </aside>
         </div>
 
         <div class="specs">
           <p><strong>Resumo:</strong> Ultra AI 3 5G combina conectividade completa (5G + chip), sistema Android, câmeras, GPS e longa autonomia em um design premium.</p>
-
           <ul>
             <li>Notificações, chamadas, controle de mídia e apps nativos.</li>
             <li>Monitoramento de saúde: batimento, SPO₂, sono, estresse.</li>
@@ -238,173 +163,155 @@
             <tr><td>Processador</td><td>Quad-core</td></tr>
             <tr><td>Memória RAM</td><td>~2GB</td></tr>
             <tr><td>Armazenamento</td><td>~16GB</td></tr>
-            <tr><td>Tela</td><td>AMOLED 1.6" (resolução alta)</td></tr>
+            <tr><td>Tela</td><td>AMOLED 1.6"</td></tr>
             <tr><td>Conectividade</td><td>5G (SIM), Wi-Fi, Bluetooth, GPS</td></tr>
             <tr><td>Câmeras</td><td>8MP + 2MP</td></tr>
-            <tr><td>Bateria</td><td>Até 2 dias (uso misto)</td></tr>
+            <tr><td>Bateria</td><td>Até 2 dias</td></tr>
             <tr><td>Resistência</td><td>IP68</td></tr>
           </table>
         </div>
 
         <div class="faq">
-          <h4 style="color:var(--brand); margin-top:18px">Perguntas frequentes</h4>
-
-          <details>
-            <summary>O Ultra AI 3 5G aceita chip de operadora?</summary>
-            <div style="margin-top:8px">Sim — possui slot para nano-SIM e suporta redes 5G (dependendo de versão/operadora).</div>
-          </details>
-
-          <details>
-            <summary>Posso instalar apps como WhatsApp e Spotify?</summary>
-            <div style="margin-top:8px">Sim — roda uma versão do Android e permite instalação de diversos apps compatíveis.</div>
-          </details>
-
-          <details>
-            <summary>Qual a política de garantia?</summary>
-            <div style="margin-top:8px">2 anos de garantia contra defeitos de fabricação (consulte os termos).</div>
-          </details>
+          <details><summary>O Ultra AI 3 5G aceita chip de operadora?</summary><div>Sim — slot para nano-SIM com 5G em algumas operadoras.</div></details>
+          <details><summary>Posso instalar WhatsApp/Spotify?</summary><div>Sim — roda apps Android.</div></details>
+          <details><summary>Garantia?</summary><div>2 anos de garantia contra defeito de fabricação.</div></details>
         </div>
 
       </div>
     </div>
+
+    <aside class="buybox">
+      <h3>Comprar</h3>
+      <div class="sku">SKU: UAI3-5G-BLK</div>
+
+      <div class="qtd">
+        <label style="font-weight:700">Quantidade</label>
+        <div style="display:flex;gap:8px;align-items:center; justify-content:flex-end">
+          <button onclick="decreaseQty()">−</button>
+          <input type="number" id="qty" value="1" min="1">
+          <button onclick="increaseQty()">+</button>
+        </div>
+      </div>
+
+      <div style="font-size:14px;color:#556">Entrega: 3–7 dias úteis</div>
+
+      <div class="cta">
+        <button class="btn-primary" onclick="buyNow()">Comprar agora</button>
+        <button class="btn-outline" onclick="openCart()">Ver carrinho</button>
+      </div>
+
+      <div class="interactions">
+        <div><div style="font-size:13px;color:#556">Garantia</div><div class="pulse">2 anos</div></div>
+        <div style="text-align:right"><div style="font-size:13px;color:#556">Estoque</div><div style="color:#0a8a3a;font-weight:800">Em estoque</div></div>
+      </div>
+
+      <div style="margin-top:14px; text-align:center">
+        <button class="btn-outline" onclick="openSimulator()">Simular no pulso</button>
+      </div>
+    </aside>
+
   </div>
 </div>
 
-<!-- CART PANEL -->
 <div id="cartPanel" class="cart-panel" aria-hidden="true">
   <h4>Seu Carrinho</h4>
   <div id="cartItemsContainer"></div>
-  <div class="cart-total" id="cartTotal">Total: R$ 0.00</div>
+  <div class="cart-total" id="cartTotal">Total: R$ 0,00</div>
   <div style="display:flex; gap:8px; margin-top:10px">
     <button style="flex:1; background:#ff6b6b; color:white; border:none; padding:10px; border-radius:8px" onclick="clearCart()">Limpar</button>
     <button style="flex:1; background:var(--brand); color:white; border:none; padding:10px; border-radius:8px" onclick="goToFinalize()">Finalizar</button>
   </div>
 </div>
 
-<!-- SIMULATOR MODAL -->
 <div id="modal" class="modal" role="dialog" aria-hidden="true">
   <div class="box">
     <h3>Simulação no pulso</h3>
     <p>Veja como o relógio aparenta no pulso.</p>
     <img class="mock-wrist" src="https://images.unsplash.com/photo-1519750157634-ba9f6e9cc5b2?auto=format&fit=crop&w=800&q=60" alt="simulação pulso">
-    <div style="margin-top:12px">
-      <button class="close" onclick="closeSimulator()">Fechar</button>
-    </div>
+    <div style="margin-top:12px"><button class="close" onclick="closeSimulator()">Fechar</button></div>
   </div>
 </div>
 
 <script>
-/* ========== Gallery logic ========== */
-const thumbs = document.querySelectorAll('#thumbs img');
-const mainImg = document.getElementById('mainImg');
+  const mainImg = document.getElementById('mainImg');
+  function increaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)+1); }
+  function decreaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)-1); }
 
-thumbs.forEach(t => {
-  t.addEventListener('click', () => {
-    thumbs.forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    mainImg.src = t.dataset.full || t.src;
-  });
-});
+  let cart = JSON.parse(localStorage.getItem('carrinho')) || [];
+  let total = parseFloat(localStorage.getItem('total')) || 0;
+  const cartPanel = document.getElementById('cartPanel');
+  const cartItemsContainer = document.getElementById('cartItemsContainer');
+  const cartTotalEl = document.getElementById('cartTotal');
 
-/* small autoplay carousel */
-let cidx = 0;
-const carousel = document.getElementById('carousel');
-if(carousel){
-  const imgs = carousel.querySelectorAll('img');
-  setInterval(()=> {
-    imgs.forEach(i=> i.style.opacity=0.6);
-    imgs[cidx].style.opacity=1;
-    cidx = (cidx+1)%imgs.length;
-  }, 2800);
-}
-
-/* zoom click: open larger in new tab */
-document.getElementById('mainImageWrap').addEventListener('click', ()=> {
-  window.open(mainImg.src, '_blank');
-});
-
-/* ========== Simulator modal ========== */
-const modal = document.getElementById('modal');
-function openSimulator(){ modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); }
-function closeSimulator(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
-
-/* ========== Qty buttons ========== */
-function increaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)+1); }
-function decreaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)-1); }
-
-/* ========== Cart logic ========== */
-let cart = JSON.parse(localStorage.getItem('carrinho')) || [];
-let total = parseFloat(localStorage.getItem('total')) || 0;
-const cartPanel = document.getElementById('cartPanel');
-const cartItemsContainer = document.getElementById('cartItemsContainer');
-const cartTotalEl = document.getElementById('cartTotal');
-
-function syncCartToStorage(){
-  localStorage.setItem('carrinho', JSON.stringify(cart));
-  localStorage.setItem('total', total.toFixed(2));
-}
-
-function renderCartPanel(){
-  cartItemsContainer.innerHTML = '';
-  if(cart.length === 0){
-    cartItemsContainer.innerHTML = '<div style="padding:10px;color:#556">Seu carrinho está vazio.</div>';
-  } else {
-    cart.forEach((it, idx) => {
-      const div = document.createElement('div');
-      div.className = 'cart-item';
-      div.innerHTML = `<div>${it.product} x${it.qty}</div><div>R$ ${(it.price*it.qty).toFixed(2)}</div>`;
-      cartItemsContainer.appendChild(div);
-    });
+  function syncCartToStorage(){
+    localStorage.setItem('carrinho', JSON.stringify(cart));
+    localStorage.setItem('total', total.toFixed(2));
   }
-  cartTotalEl.innerText = 'Total: R$ ' + total.toFixed(2);
-}
 
-function openCart(){
-  cartPanel.style.display = 'block';
-  cartPanel.setAttribute('aria-hidden','false');
-  renderCartPanel();
-}
-function clearCart(){
-  if(!confirm('Limpar todo o carrinho?')) return;
-  cart = []; total = 0;
-  syncCartToStorage();
-  renderCartPanel();
-}
-function goToFinalize(){
-  if(cart.length === 0){ alert('Seu carrinho está vazio!'); return; }
-  syncCartToStorage();
-  window.location.href = 'finalizar.html';
-}
-
-function buyNow(){
-  const q = Math.max(1, parseInt(document.getElementById('qty').value||1));
-  addToCart('Ultra AI 3 5G', 349.00, q);
-  openCart();
-  const el = document.createElement('div');
-  el.style.position='fixed'; el.style.right='28px'; el.style.bottom='130px';
-  el.style.background='linear-gradient(90deg,#00b894,#00d388)'; el.style.color='#fff';
-  el.style.padding='12px 16px'; el.style.borderRadius='10px'; el.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';
-  el.innerText = `${q}× Ultra AI 3 5G adicionado(s) ao carrinho`;
-  document.body.appendChild(el);
-  setTimeout(()=> el.remove(),1800);
-}
-
-function addToCart(product, price, qty=1){
-  const existing = cart.find(i=>i.product===product);
-  if(existing){
-    existing.qty += qty;
-  } else {
-    cart.push({ product, price, qty });
+  function renderCartPanel(){
+    cartItemsContainer.innerHTML = '';
+    if(cart.length === 0){
+      cartItemsContainer.innerHTML = '<div style="padding:10px;color:#556">Seu carrinho está vazio.</div>';
+    } else {
+      cart.forEach((it) => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `<div>${it.product} x${it.qty}</div><div>R$ ${(it.price*it.qty).toFixed(2)}</div>`;
+        cartItemsContainer.appendChild(div);
+      });
+    }
+    cartTotalEl.innerText = 'Total: R$ ' + total.toFixed(2);
   }
-  total = cart.reduce((s,i)=> s + i.price*i.qty, 0);
-  syncCartToStorage();
-  renderCartPanel();
-}
 
-/* init */
-(function initFromStorage(){
-  renderCartPanel();
-})();
+  function openCart(){
+    cartPanel.style.display = 'block';
+    cartPanel.setAttribute('aria-hidden','false');
+    renderCartPanel();
+  }
+  function clearCart(){
+    if(!confirm('Limpar todo o carrinho?')) return;
+    cart = []; total = 0;
+    syncCartToStorage();
+    renderCartPanel();
+  }
+  function goToFinalize(){
+    if(cart.length === 0){ alert('Seu carrinho está vazio!'); return; }
+    syncCartToStorage();
+    window.location.href = 'finalizar.html';
+  }
+
+  function buyNow(){
+    const q = Math.max(1, parseInt(document.getElementById('qty').value||1));
+    cart.push({ product: 'Ultra AI 3 5G', price: 349.00, qty: q });
+    total = cart.reduce((s,i)=> s + i.price*i.qty, 0);
+    syncCartToStorage();
+    openCart();
+    const el = document.createElement('div');
+    el.style.position = 'fixed';
+    el.style.right = '28px';
+    el.style.bottom = '130px';
+    el.style.background = 'linear-gradient(90deg,#00b894,#00d388)';
+    el.style.color = '#fff';
+    el.style.padding = '12px 16px';
+    el.style.borderRadius = '10px';
+    el.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+    el.innerText = `${q}× Ultra AI 3 5G adicionado(s)`;
+    document.body.appendChild(el);
+    setTimeout(()=> el.remove(), 1800);
+  }
+
+  function openSimulator(){
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modal').setAttribute('aria-hidden','false');
+  }
+  function closeSimulator(){
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('modal').setAttribute('aria-hidden','true');
+  }
+
+  (function initFromStorage(){
+    renderCartPanel();
+  })();
 </script>
 
 </body>
