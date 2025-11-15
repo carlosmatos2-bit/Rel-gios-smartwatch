@@ -39,7 +39,6 @@
         padding: 20px;
         background: #002b55;
         color: white;
-        position: relative;
     }
 
     header h1 {
@@ -47,41 +46,6 @@
         font-size: 26px;
         letter-spacing: 1px;
         font-weight: bold;
-    }
-
-    /* HOME LINK */
-    #home-link {
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        text-decoration: none;
-        margin-left: 20px;
-    }
-
-    #home-link:hover {
-        text-decoration: underline;
-    }
-
-    /* BOTÃO CARRINHO NO CANTO DIREITO */
-    #cart-btn {
-        background:#004080;
-        color:white;
-        padding:5px 10px;
-        border:none;
-        border-radius:6px;
-        cursor:pointer;
-        font-size:16px;
-        font-weight:bold;
-        box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
-        transition: all 0.3s ease;
-        position: absolute;
-        top:20px;
-        right:20px;
-    }
-
-    #cart-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
     }
 
     /* CONTAINER */
@@ -147,7 +111,7 @@
         font-weight: bold;
     }
 
-    /* BOTÕES */
+    /* BOTÕES DE PRODUTOS */
     button {
         margin-top: 12px;
         background: #003366;
@@ -219,8 +183,6 @@
 
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <a id="home-link" href="#">🏠 Home</a>
-    <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
 <div class="container">
@@ -275,10 +237,6 @@
     let cart = [];
     let total = 0;
 
-    const cartBtn = document.getElementById("cart-btn");
-
-    cartBtn.addEventListener("click", toggleCart);
-
     function addToCart(product, price) {
         cart.push({ product, price });
         total += price;
@@ -311,12 +269,6 @@
         cart = [];
         total = 0;
         updateCart();
-    }
-
-    function toggleCart() {
-        const cartBox = document.getElementById("cart");
-        cartBox.style.display = 
-            cartBox.style.display === "block" ? "none" : "block";
     }
 
     function finalizarCompra() {
