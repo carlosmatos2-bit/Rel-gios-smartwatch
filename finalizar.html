@@ -1,1 +1,109 @@
-bem vindo
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar Compra</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f2f2f2;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #003366;
+    }
+
+    .cart-summary {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .total {
+        font-weight: bold;
+        font-size: 20px;
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    button {
+        margin-top: 20px;
+        background: #003366;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0059b3;
+    }
+
+</style>
+</head>
+<body>
+
+<h1>Finalizar Compra</h1>
+
+<div class="cart-summary" id="cart-summary">
+    <!-- Itens do carrinho serão inseridos aqui via JavaScript -->
+</div>
+
+<script>
+    // Recupera os dados do carrinho
+    const cart = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const total = localStorage.getItem("total") || 0;
+
+    const cartSummary = document.getElementById("cart-summary");
+
+    if(cart.length === 0){
+        cartSummary.innerHTML = "<p>Seu carrinho está vazio.</p>";
+    } else {
+        cart.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("cart-item");
+            div.innerHTML = `
+                <span>${item.product}</span>
+                <span>R$ ${item.price}</span>
+            `;
+            cartSummary.appendChild(div);
+        });
+
+        const totalDiv = document.createElement("div");
+        totalDiv.classList.add("total");
+        totalDiv.innerHTML = `Total: R$ ${total}`;
+        cartSummary.appendChild(totalDiv);
+
+        const btnFinalizar = document.createElement("button");
+        btnFinalizar.innerText = "Concluir Compra";
+        btnFinalizar.onclick = () => {
+            alert("Compra concluída com sucesso!");
+            localStorage.removeItem("carrinho");
+            localStorage.removeItem("total");
+            window.location.href = "resultado.html"; // redireciona após finalizar
+        };
+        cartSummary.appendChild(btnFinalizar);
+    }
+</script>
+
+</body>
+</html>
