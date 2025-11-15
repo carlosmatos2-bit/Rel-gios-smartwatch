@@ -3,37 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polar Unite</title>
+<title>Garmin Epix 2</title>
 
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: #e6f0ff;
+        background: url('https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f') no-repeat center/cover;
+        backdrop-filter: blur(12px);
         margin: 0;
         padding: 0;
         color: #1a2a40;
     }
 
     header {
-        background: #003366;
+        background: rgba(0,0,0,0.6);
         color: white;
         padding: 20px;
         text-align: center;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: bold;
+        backdrop-filter: blur(4px);
     }
 
     .btn-container {
         position: absolute;
         top: 20px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        padding: 0 20px;
+        left: 20px;
     }
 
     .btn {
-        background: #003366;
+        background: rgba(0,0,0,0.7);
         color: white;
         text-decoration: none;
         padding: 10px 20px;
@@ -44,165 +43,118 @@
     }
 
     .btn:hover {
-        background: #0059b3;
+        background: rgba(0,0,0,0.9);
     }
 
+    /* CONTAINER */
     .product-container {
-        max-width: 1000px;
-        margin: 120px auto 50px auto;
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    /* --- GALERIA --- */
-    .product-images {
-        text-align: center;
-    }
-
-    .main-img {
-        width: 320px;
-        border-radius: 12px;
-        transition: 0.3s;
-        cursor: zoom-in;
-    }
-
-    .main-img:hover {
-        transform: scale(1.05);
-    }
-
-    .thumbs {
-        margin-top: 20px;
+        max-width: 1100px;
+        margin: 150px auto;
+        background: rgba(255,255,255,0.88);
+        border-radius: 18px;
+        padding: 35px;
         display: flex;
-        justify-content: center;
-        gap: 15px;
+        gap: 40px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
     }
 
-    .thumbs img {
-        width: 90px;
-        border-radius: 10px;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: 0.3s;
+    /* ESQUERDA */
+    .left {
+        width: 55%;
     }
 
-    .thumbs img:hover {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    /* --- TITULO --- */
-    h1 {
-        text-align: center;
-        font-size: 32px;
-        color: #003366;
-        margin-top: 0;
-    }
-
-    /* --- DESCRIÇÃO --- */
-    .description {
-        margin-top: 30px;
-        line-height: 1.6;
-        font-size: 18px;
-    }
-
-    .description h2 {
-        text-align: center;
-        font-size: 28px;
+    .left img {
+        width: 100%;
+        border-radius: 14px;
+        border: 3px solid #cfe3ff;
         margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 34px;
+        margin-bottom: 10px;
         color: #003366;
     }
 
-    .highlight {
-        color: #004080;
-        font-weight: bold;
-    }
-
-    .summary {
-        background: #cfe7ff;
-        padding: 15px;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 18px;
+    h2 {
         margin-top: 20px;
+        color: #003366;
     }
 
-    /* --- AVALIAÇÕES --- */
-    .rating {
-        margin-top: 30px;
-        text-align: center;
-        font-size: 22px;
-        color: #ffbb00;
+    ul {
+        margin-left: 20px;
+        line-height: 1.7;
     }
 
-    /* --- PREÇO E COMPRA --- */
-    .buy-box {
-        margin-top: 40px;
-        text-align: center;
-        padding: 20px;
-        background: #e0efff;
-        border-radius: 12px;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-
-    .old-price {
-        text-decoration: line-through;
-        color: #777;
-        font-size: 20px;
+    /* DIREITA */
+    .right {
+        width: 40%;
+        background: #eaf3ff;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: inset 0 0 12px rgba(0,0,0,0.15);
     }
 
     .price {
         font-size: 32px;
         font-weight: bold;
         color: green;
-        margin-top: 10px;
     }
 
-    .btn-buy {
-        margin-top: 20px;
-        background: #003366;
-        color: white;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 10px;
+    .old-price {
+        text-decoration: line-through;
+        color: #666;
+        margin-bottom: 5px;
         font-size: 20px;
-        cursor: pointer;
-        transition: 0.3s;
     }
 
-    .btn-buy:hover {
-        background: #0059b3;
-        transform: scale(1.03);
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+        font-size: 16px;
     }
 
-    /* --- FAQ --- */
-    .faq {
-        margin-top: 40px;
-    }
-
-    .faq h2 {
-        text-align: center;
-        color: #003366;
-    }
-
-    details {
-        background: #dceaff;
+    .buy-btn {
+        width: 100%;
+        margin-top: 25px;
+        background: #004aad;
+        color: white;
         padding: 15px;
         border-radius: 10px;
-        margin-top: 10px;
+        font-size: 20px;
+        border: none;
         cursor: pointer;
-        font-size: 18px;
+        transition: 0.3s;
+        font-weight: bold;
     }
 
-    details[open] {
-        background: #c7ddff;
+    .buy-btn:hover {
+        transform: scale(1.04);
+        background: #0066d6;
     }
+
+    .cart-btn {
+        width: 100%;
+        margin-top: 12px;
+        background: #0a244d;
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+    }
+
 </style>
+
 </head>
 <body>
 
-<header>Loja Digital - Produto</header>
+<header>Loja Digital - Garmin Epix 2</header>
 
 <div class="btn-container">
     <a href="resultado.html" class="btn">Voltar</a>
@@ -210,89 +162,88 @@
 
 <div class="product-container">
 
-    <h1>Relógio Inteligente Polar Unite</h1>
+    <!-- ESQUERDA -->
+    <div class="left">
 
-    <!-- GALERIA DE IMAGENS -->
-    <div class="product-images">
-        <img id="mainImg" src="https://www.polar.com/blog/sites/blog/files/styles/media_crop/public/2020-11/polar-unite-blog-post.png" class="main-img">
+        <h1>Garmin Epix Gen 2</h1>
 
-        <div class="thumbs">
-            <img src="https://m.media-amazon.com/images/I/61ZfNcaUVPL._AC_UF1000,1000_QL80_.jpg" onclick="trocarImagem(this.src)">
-            <img src="https://m.media-amazon.com/images/I/7176Yr2vNhL.jpg" onclick="trocarImagem(this.src)">
-            <img src="https://www.polar.com/sites/default/files/media_images/polar-unite-hero-2.webp" onclick="trocarImagem(this.src)">
-        </div>
-    </div>
+        <img src="https://static.garmincdn.com/en/products/010-02582-10/v/cf-lg-1320.jpg">
 
-    <!-- AVALIAÇÃO -->
-    <div class="rating">⭐⭐⭐⭐☆ (4.7/5 baseado em 1.248 avaliações)</div>
-
-    <!-- DESCRIÇÃO -->
-    <div class="description">
         <h2>Descrição Completa</h2>
-        <p>O <span class="highlight">Polar Unite</span> é um smartwatch focado em saúde, fitness e estilo de vida saudável. Ele oferece recursos avançados de <b>monitoramento físico, sono e treinos guiados</b>, garantindo praticidade e acompanhamento detalhado de todas as suas atividades.</p>
+        <p>O <b>Garmin Epix Gen 2</b> é um dos smartwatches mais completos e poderosos do mundo, combinando luxo, resistência e tecnologia premium.</p>
 
         <ul>
-            <li><span class="highlight">Sleep Plus Stages:</span> Relatórios completos de sono.</li>
-            <li><span class="highlight">FitSpark™:</span> Sugestões diárias de treinos personalizadas.</li>
-            <li><span class="highlight">Frequência cardíaca 24h:</span> Sensor de alta precisão.</li>
-            <li><span class="highlight">GPS conectado:</span> Usa o GPS do celular para maior precisão.</li>
-            <li><span class="highlight">Respiração guiada:</span> Exercícios de relaxamento.</li>
-            <li><span class="highlight">Resistência à água:</span> 30m.</li>
+            <li>Tela AMOLED ultra nítida</li>
+            <li>GPS Multi-GNSS extremamente preciso</li>
+            <li>Monitoramento completo de saúde: sono, estresse, SpO2, respiração e mais</li>
+            <li>Body Battery e métricas para atletas</li>
+            <li>Modos avançados de treino e performance</li>
+            <li>Música integrada + Spotify, Deezer e Amazon Music</li>
+            <li>Resistência à água 100m</li>
+            <li>Bateria de até 16 dias</li>
         </ul>
 
-        <div class="summary">
-            Um smartwatch completo para quem deseja acompanhar treinos, sono, saúde e performance com precisão profissional.
-        </div>
+        <h2>Benefícios</h2>
+        <ul>
+            <li>Ideal para esportes intensos e aventura</li>
+            <li>Design premium com materiais avançados</li>
+            <li>Relatórios profissionais de saúde</li>
+            <li>Interface fluida e brilho automático</li>
+        </ul>
+
     </div>
 
-    <!-- CAIXA DE COMPRA -->
-    <div class="buy-box">
-        <p class="old-price">R$ 199,00</p>
-        <p class="price">R$ 149,00</p>
+    <!-- DIREITA -->
+    <div class="right">
 
-        <button class="btn-buy" onclick="adicionarCarrinho()">
-            Adicionar ao Carrinho 🛒
-        </button>
-    </div>
+        <p class="old-price">R$ 4.299,00</p>
+        <p class="price">R$ 3.499,00</p>
 
-    <!-- FAQ -->
-    <div class="faq">
-        <h2>Perguntas Frequentes</h2>
+        <label>Quantidade:</label>
+        <input type="number" id="qtd" value="1" min="1">
 
-        <details>
-            <summary>Ele é resistente à água?</summary>
-            <p>Sim, resistente até 30m para natação leve.</p>
-        </details>
+        <label>Garantia:</label>
+        <select>
+            <option>Garantia de 2 anos (inclusa)</option>
+            <option>Garantia estendida +1 ano (R$ 99)</option>
+        </select>
 
-        <details>
-            <summary>Funciona no iPhone e Android?</summary>
-            <p>Sim, é compatível com ambos sistemas.</p>
-        </details>
+        <label>Entrega:</label>
+        <input value="Chega em até 8 dias úteis" disabled>
 
-        <details>
-            <summary>Tem GPS integrado?</summary>
-            <p>Ele usa o GPS do smartphone, trazendo ótima precisão.</p>
-        </details>
+        <button class="buy-btn" onclick="comprar()">Comprar Agora</button>
+
+        <button class="cart-btn" onclick="verCarrinho()">Ver Carrinho 🛒</button>
+
     </div>
 
 </div>
 
 <script>
-function trocarImagem(src) {
-    document.getElementById("mainImg").src = src;
-}
+function comprar() {
+    let qtd = Number(document.getElementById("qtd").value);
 
-function adicionarCarrinho() {
-    let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     let total = Number(localStorage.getItem("total")) || 0;
 
-    cart.push({ product: "Relógio Polar Unite", price: 149 });
-    total += 149;
+    let preco = 3499 * qtd;
 
-    localStorage.setItem("carrinho", JSON.stringify(cart));
+    carrinho.push({
+        nome: "Garmin Epix Gen 2",
+        quantidade: qtd,
+        preco: preco
+    });
+
+    total += preco;
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
     localStorage.setItem("total", total.toFixed(2));
 
-    alert("Polar Unite adicionado ao carrinho!");
+    alert("Produto adicionado ao carrinho!");
+}
+
+function verCarrinho() {
+    window.location.href = "carrinho.html";
 }
 </script>
 
