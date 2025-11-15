@@ -12,6 +12,22 @@
         background: #eef3ff;
         padding: 20px;
     }
+    /* ======== BODY COM FUNDO BORRADO ======== */
+body {
+  font-family: 'Arial', sans-serif;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  filter: blur(12px) brightness(0.6);
+  z-index: -1;
+}
 
     h1 {
         text-align: center;
