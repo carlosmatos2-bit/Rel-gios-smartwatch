@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Polar Unite</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -39,7 +40,7 @@
         border-radius: 8px;
         font-weight: bold;
         font-size: 18px;
-        transition: background 0.3s;
+        transition: 0.3s;
     }
 
     .btn:hover {
@@ -47,7 +48,7 @@
     }
 
     .product-container {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 120px auto 50px auto;
         background: white;
         border-radius: 15px;
@@ -55,30 +56,55 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
+    /* --- GALERIA --- */
     .product-images {
         text-align: center;
     }
 
-    .product-images img {
-        border-radius: 12px;
-        margin: 15px;
-    }
-
     .main-img {
-        width: 300px;
+        width: 320px;
+        border-radius: 12px;
+        transition: 0.3s;
+        cursor: zoom-in;
     }
 
+    .main-img:hover {
+        transform: scale(1.05);
+    }
+
+    .thumbs {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .thumbs img {
+        width: 90px;
+        border-radius: 10px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: 0.3s;
+    }
+
+    .thumbs img:hover {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    /* --- TITULO --- */
     h1 {
         text-align: center;
-        margin-top: 0;
         font-size: 32px;
         color: #003366;
+        margin-top: 0;
     }
 
+    /* --- DESCRIÇÃO --- */
     .description {
-        text-align: left;
         margin-top: 30px;
         line-height: 1.6;
+        font-size: 18px;
     }
 
     .description h2 {
@@ -86,10 +112,6 @@
         font-size: 28px;
         margin-bottom: 15px;
         color: #003366;
-    }
-
-    .description ul {
-        margin-left: 20px;
     }
 
     .highlight {
@@ -101,9 +123,80 @@
         background: #cfe7ff;
         padding: 15px;
         border-radius: 8px;
-        margin-top: 20px;
         text-align: center;
         font-size: 18px;
+        margin-top: 20px;
+    }
+
+    /* --- AVALIAÇÕES --- */
+    .rating {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 22px;
+        color: #ffbb00;
+    }
+
+    /* --- PREÇO E COMPRA --- */
+    .buy-box {
+        margin-top: 40px;
+        text-align: center;
+        padding: 20px;
+        background: #e0efff;
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #777;
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 32px;
+        font-weight: bold;
+        color: green;
+        margin-top: 10px;
+    }
+
+    .btn-buy {
+        margin-top: 20px;
+        background: #003366;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-buy:hover {
+        background: #0059b3;
+        transform: scale(1.03);
+    }
+
+    /* --- FAQ --- */
+    .faq {
+        margin-top: 40px;
+    }
+
+    .faq h2 {
+        text-align: center;
+        color: #003366;
+    }
+
+    details {
+        background: #dceaff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    details[open] {
+        background: #c7ddff;
     }
 </style>
 </head>
@@ -119,29 +212,89 @@
 
     <h1>Relógio Inteligente Polar Unite</h1>
 
+    <!-- GALERIA DE IMAGENS -->
     <div class="product-images">
-        <img src="https://www.polar.com/blog/sites/blog/files/styles/media_crop/public/2020-11/polar-unite-blog-post.png" alt="Polar Unite" class="main-img">
-    </div>
+        <img id="mainImg" src="https://www.polar.com/blog/sites/blog/files/styles/media_crop/public/2020-11/polar-unite-blog-post.png" class="main-img">
 
-    <div class="description">
-        <h2>Descrição Completa</h2>
-        <p>O <span class="highlight">Polar Unite</span> é um smartwatch focado em saúde, fitness e bem-estar, ideal para quem quer monitorar suas atividades e melhorar seu estilo de vida.</p>
-
-        <ul>
-            <li><span class="highlight">Monitoramento de sono e recuperação:</span> Avalia a qualidade do sono e fornece recomendações para recuperação.</li>
-            <li><span class="highlight">Controle de frequência cardíaca:</span> Sensor preciso para acompanhar batimentos cardíacos durante exercícios e no dia a dia.</li>
-            <li><span class="highlight">Treinos guiados:</span> Oferece planos personalizados de treinamento para diferentes níveis e objetivos.</li>
-            <li><span class="highlight">Monitoramento de atividades diárias:</span> Conta passos, calorias queimadas, distância e tempo ativo.</li>
-            <li><span class="highlight">Compatível com Polar Flow:</span> Sincroniza dados com o app para análise detalhada e acompanhamento de metas.</li>
-            <li><span class="highlight">Design leve e confortável:</span> Ideal para uso diário, resistente à água e com pulseira ajustável.</li>
-        </ul>
-
-        <div class="summary">
-            Monitoramento de sono, frequência cardíaca, treinos guiados, acompanhamento de atividades e design leve — tudo para uma vida mais saudável e conectada.
+        <div class="thumbs">
+            <img src="https://m.media-amazon.com/images/I/61ZfNcaUVPL._AC_UF1000,1000_QL80_.jpg" onclick="trocarImagem(this.src)">
+            <img src="https://m.media-amazon.com/images/I/7176Yr2vNhL.jpg" onclick="trocarImagem(this.src)">
+            <img src="https://www.polar.com/sites/default/files/media_images/polar-unite-hero-2.webp" onclick="trocarImagem(this.src)">
         </div>
     </div>
 
+    <!-- AVALIAÇÃO -->
+    <div class="rating">⭐⭐⭐⭐☆ (4.7/5 baseado em 1.248 avaliações)</div>
+
+    <!-- DESCRIÇÃO -->
+    <div class="description">
+        <h2>Descrição Completa</h2>
+        <p>O <span class="highlight">Polar Unite</span> é um smartwatch focado em saúde, fitness e estilo de vida saudável. Ele oferece recursos avançados de <b>monitoramento físico, sono e treinos guiados</b>, garantindo praticidade e acompanhamento detalhado de todas as suas atividades.</p>
+
+        <ul>
+            <li><span class="highlight">Sleep Plus Stages:</span> Relatórios completos de sono.</li>
+            <li><span class="highlight">FitSpark™:</span> Sugestões diárias de treinos personalizadas.</li>
+            <li><span class="highlight">Frequência cardíaca 24h:</span> Sensor de alta precisão.</li>
+            <li><span class="highlight">GPS conectado:</span> Usa o GPS do celular para maior precisão.</li>
+            <li><span class="highlight">Respiração guiada:</span> Exercícios de relaxamento.</li>
+            <li><span class="highlight">Resistência à água:</span> 30m.</li>
+        </ul>
+
+        <div class="summary">
+            Um smartwatch completo para quem deseja acompanhar treinos, sono, saúde e performance com precisão profissional.
+        </div>
+    </div>
+
+    <!-- CAIXA DE COMPRA -->
+    <div class="buy-box">
+        <p class="old-price">R$ 199,00</p>
+        <p class="price">R$ 149,00</p>
+
+        <button class="btn-buy" onclick="adicionarCarrinho()">
+            Adicionar ao Carrinho 🛒
+        </button>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+        <h2>Perguntas Frequentes</h2>
+
+        <details>
+            <summary>Ele é resistente à água?</summary>
+            <p>Sim, resistente até 30m para natação leve.</p>
+        </details>
+
+        <details>
+            <summary>Funciona no iPhone e Android?</summary>
+            <p>Sim, é compatível com ambos sistemas.</p>
+        </details>
+
+        <details>
+            <summary>Tem GPS integrado?</summary>
+            <p>Ele usa o GPS do smartphone, trazendo ótima precisão.</p>
+        </details>
+    </div>
+
 </div>
+
+<script>
+function trocarImagem(src) {
+    document.getElementById("mainImg").src = src;
+}
+
+function adicionarCarrinho() {
+    let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let total = Number(localStorage.getItem("total")) || 0;
+
+    cart.push({ product: "Relógio Polar Unite", price: 149 });
+    total += 149;
+
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    localStorage.setItem("total", total.toFixed(2));
+
+    alert("Polar Unite adicionado ao carrinho!");
+}
+</script>
 
 </body>
 </html>
