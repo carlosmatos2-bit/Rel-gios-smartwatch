@@ -3,121 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loja de Relógios Digitais</title>
+<title>Loja Oficial Smartwatch</title>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: "Segoe UI", Arial, sans-serif;
         margin: 0;
-        background: #f2f2f2;
+        background: linear-gradient(120deg, #cfe7ff, #e8f1ff);
+        color: #1a2a40;
     }
 
+    /* HEADER */
     header {
-        background: #111;
-        padding: 15px;
+        background: #003366;
+        padding: 18px;
         color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     header h1 {
         margin: 0;
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: bold;
     }
 
     nav a {
         color: white;
-        margin-left: 20px;
+        margin-left: 25px;
         text-decoration: none;
         font-size: 18px;
+        transition: 0.2s;
     }
 
+    nav a:hover {
+        color: #87cefa;
+    }
+
+    /* CONTAINER */
     .container {
         max-width: 1200px;
         margin: auto;
+        margin-top: 40px;
         padding: 20px;
+        background: white;
+        border-radius: 14px;
+        border: 3px solid #003366;
+        box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
+        animation: fadeIn 0.8s ease-in-out;
     }
 
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        color: #002244;
+        font-size: 28px;
+    }
+
+    /* CARDS DOS PRODUTOS */
     .products {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
     }
 
     .product {
-        background: white;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        text-align: center;
+        background: #f7faff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border: 2px solid #003366;
+    }
+
+    .product:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 18px rgba(0, 51, 102, 0.7);
+    }
+
+    .product h3 {
+        color: #002244;
     }
 
     .old-price {
         text-decoration: line-through;
         color: #777;
+        font-size: 15px;
     }
 
     .price {
         color: green;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: bold;
     }
 
+    /* BOTÕES */
     button {
-        margin-top: 10px;
-        background: #111;
+        margin-top: 12px;
+        background: #003366;
         color: white;
         border: none;
-        padding: 10px 15px;
+        padding: 12px 18px;
         cursor: pointer;
         border-radius: 8px;
         transition: 0.3s;
+        font-size: 16px;
+        font-weight: bold;
+        width: 90%;
     }
 
     button:hover {
-        background: #333;
+        background: #004b8d;
     }
 
+    /* CARRINHO */
     #cart {
         position: fixed;
-        right: 20px;
-        bottom: 20px;
+        right: 25px;
+        bottom: 25px;
         background: white;
         padding: 20px;
-        width: 300px;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        width: 320px;
+        border-radius: 14px;
+        border: 3px solid #003366;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
         display: none;
+        animation: fadeIn 0.5s ease;
     }
 
     #cart h2 {
         margin-top: 0;
+        color: #002244;
     }
 
     .cart-item {
         border-bottom: 1px solid #ddd;
         padding: 10px 0;
+        font-size: 15px;
     }
 
     .total {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
+        color: #002244;
         margin-top: 10px;
     }
 
     .btn-cart {
         background: #e60000;
-        margin-left: 10px;
     }
 
-    /* Texto azul escuro */
+    .btn-cart:hover {
+        background: #b30000;
+    }
+
+    /* TÍTULOS CLICÁVEIS */
     .dark-blue {
         color: #003366;
+        font-size: 20px;
         font-weight: bold;
     }
 
-    /* Efeito relevo */
     .effect-relief:hover {
         box-shadow: 0 0 15px rgba(0, 51, 102, 0.7);
         border-radius: 8px;
@@ -128,7 +182,7 @@
 <body>
 
 <header>
-    <h1>Loja Digital</h1>
+    <h1>SMARTWATCH STORE</h1>
     <nav>
         <a href="#">Home</a>
         <a href="#" onclick="toggleCart()">Carrinho 🛒</a>
@@ -136,59 +190,47 @@
 </header>
 
 <div class="container">
-    <h2>Relógios Digitais em Promoção</h2>
+    <h2>Relógios Premium em Promoção</h2>
 
     <div class="products">
 
-        <!-- PRODUTO 1: Polar Unite -->
+        <!-- PRODUTO 1 -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
-                <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
-                    Relógio inteligente Polar Unite
-                </div>
+                <div class="dark-blue effect-relief">Relógio Polar Unite</div>
             </a>
-            <h3>Monitoramento de atividades e saúde</h3>
+            <h3>Monitoramento completo de saúde</h3>
             <p class="old-price">R$ 199,00</p>
             <p class="price">R$ 149,00</p>
-            <button onclick="addToCart('Relógio inteligente Polar Unite', 149)">
-                Adicionar ao Carrinho
-            </button>
+            <button onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- PRODUTO 2: Garmin Epix Gen 2 -->
+        <!-- PRODUTO 2 -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
-                <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
-                    Relógio inteligente Garmin Epix Gen 2
-                </div>
+                <div class="dark-blue effect-relief">Garmin Epix Gen 2</div>
             </a>
-            <h3>Alta performance e GPS avançado</h3>
+            <h3>GPS avançado e extrema performance</h3>
             <p class="old-price">R$ 350,00</p>
             <p class="price">R$ 259,00</p>
-            <button onclick="addToCart('Relógio inteligente Garmin Epix Gen 2', 259)">
-                Adicionar ao Carrinho
-            </button>
+            <button onclick="addToCart('Garmin Epix Gen 2', 259)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- PRODUTO 3: Ultra AI 3 5G -->
+        <!-- PRODUTO 3 -->
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
-                <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
-                    Relógio inteligente Ultra AI 3 5G
-                </div>
+                <div class="dark-blue effect-relief">Ultra AI 3 5G</div>
             </a>
-            <h3>Com entrada para chip</h3>
+            <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-            <button onclick="addToCart('Com entrada para chip', 349)">
-                Adicionar ao Carrinho
-            </button>
+            <button onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
 
     </div>
 </div>
 
-<!-- Carrinho -->
+<!-- CARRINHO -->
 <div id="cart">
     <h2>Seu Carrinho</h2>
     <div id="cart-items"></div>
@@ -205,7 +247,6 @@
         cart.push({ product, price });
         total += price;
         updateCart();
-        alert(product + " foi adicionado ao carrinho!");
     }
 
     function updateCart() {
@@ -238,7 +279,8 @@
 
     function toggleCart() {
         const cartBox = document.getElementById("cart");
-        cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
+        cartBox.style.display = 
+            cartBox.style.display === "block" ? "none" : "block";
     }
 
     function finalizarCompra() {
