@@ -6,213 +6,209 @@
 <title>Loja Oficial Smartwatch</title>
 
 <style>
-    body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        margin: 0;
-        background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
-        background-size: cover;
-        color: #1a2a40;
-        position: relative;
-    }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
+    background-size: cover;
+    color: #1a2a40;
+    position: relative;
+}
 
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: inherit;
-        background-size: cover;
-        filter: blur(18px) brightness(0.7);
-        z-index: -1;
-    }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-size: cover;
+    filter: blur(18px) brightness(0.7);
+    z-index: -1;
+}
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background: #002b55;
-        color: white;
-        position: relative;
-    }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #002b55;
+    color: white;
+    position: relative;
+}
 
-    header h1 {
-        margin: 0;
-        font-size: 26px;
-        font-weight: bold;
-    }
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+}
 
-    #cart-btn {
-        background:#004080;
-        color:white;
-        padding:8px 15px;
-        border:none;
-        border-radius:6px;
-        cursor:pointer;
-        font-size:16px;
-        font-weight:bold;
-        box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
-        transition: all 0.3s ease;
-    }
+#usuario-logado {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
 
-    #cart-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
-    }
+#cart-btn {
+    background:#004080;
+    color:white;
+    padding:8px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
+    transition: all 0.3s ease;
+}
 
-    #minha-conta {
-        color: #fff;
-        font-weight: bold;
-        font-size: 16px;
-        margin-left: 20px;
-    }
+#cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
+}
 
-    .container {
-        max-width: 1200px;
-        margin: auto;
-        margin-top: 40px;
-        padding: 20px;
-        background: rgba(255,255,255,0.85);
-        border-radius: 14px;
-        border: 3px solid #003366;
-        box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
-        backdrop-filter: blur(10px);
-    }
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
+    backdrop-filter: blur(10px);
+}
 
-    h2 {
-        text-align: center;
-        color: #002244;
-        font-size: 28px;
-    }
+h2 {
+    text-align: center;
+    color: #002244;
+    font-size: 28px;
+}
 
-    .products {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
-    }
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
 
-    .product {
-        background: #f7faff;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transition: 0.3s;
-        border: 2px solid #003366;
-    }
+.product {
+    background: #f7faff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 2px solid #003366;
+}
 
-    .product:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 18px rgba(0, 51, 102, 0.7);
-    }
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(0, 51, 102, 0.7);
+}
 
-    .product h3 {
-        color: #002244;
-    }
+.product h3 {
+    color: #002244;
+}
 
-    .old-price {
-        text-decoration: line-through;
-        color: #777;
-        font-size: 15px;
-    }
+.old-price {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 15px;
+}
 
-    .price {
-        color: green;
-        font-size: 22px;
-        font-weight: bold;
-    }
+.price {
+    color: green;
+    font-size: 22px;
+    font-weight: bold;
+}
 
-    button.add-cart {
-        margin-top: 12px;
-        background: #003366;
-        color: white;
-        border: none;
-        padding: 12px 18px;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: 0.3s;
-        font-size: 16px;
-        font-weight: bold;
-        width: 90%;
-    }
+button.add-cart {
+    margin-top: 12px;
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    width: 90%;
+}
 
-    button.add-cart:hover {
-        background: #004b8d;
-    }
+button.add-cart:hover {
+    background: #004b8d;
+}
 
-    /* CARRINHO */
-    #cart {
-        position: fixed;
-        right: 20px;
-        top: 70px;
-        width: 350px;
-        background: rgba(255,255,255,0.95);
-        border-radius: 14px;
-        border: 3px solid #003366;
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        display: none;
-        padding: 20px;
-        z-index: 1000;
-    }
+/* CARRINHO */
+#cart {
+    position: fixed;
+    right: 20px;
+    top: 70px;
+    width: 350px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    display: none;
+    padding: 20px;
+    z-index: 1000;
+}
 
-    #cart h2 {
-        margin-top: 0;
-        color: #002244;
-    }
+#cart h2 {
+    margin-top: 0;
+    color: #002244;
+}
 
-    .cart-item {
-        border-bottom: 1px solid #ddd;
-        padding: 10px 0;
-        font-size: 15px;
-    }
+.cart-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    font-size: 15px;
+}
 
-    .total {
-        font-size: 20px;
-        font-weight: bold;
-        color: #002244;
-        margin-top: 10px;
-    }
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    color: #002244;
+    margin-top: 10px;
+}
 
-    .btn-cart {
-        background: #e60000;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        margin-top: 10px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        width: 100%;
-    }
+.btn-cart {
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
 
-    .btn-cart:hover {
-        background: #b30000;
-    }
+.btn-cart:hover {
+    background: #b30000;
+}
 
-    .dark-blue {
-        color: #003366;
-        font-size: 20px;
-        font-weight: bold;
-    }
+.dark-blue {
+    color: #003366;
+    font-size: 20px;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
 
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <div style="display:flex; align-items:center;">
-        <div id="minha-conta">Minha Conta</div>
-        <button id="cart-btn">🛒 Carrinho</button>
-    </div>
+    <div id="usuario-logado"></div>
+    <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
     <div class="products">
-        <!-- PRODUTO 1 -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue">Relógio Polar Unite</div>
@@ -223,7 +219,6 @@
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- PRODUTO 2 -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue">Garmin Epix Gen 2</div>
@@ -234,7 +229,6 @@
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 259)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- PRODUTO 3 -->
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
                 <div class="dark-blue">Ultra AI 3 5G</div>
@@ -247,7 +241,6 @@
     </div>
 </div>
 
-<!-- CARRINHO -->
 <div id="cart">
     <h2>Seu Carrinho</h2>
     <div id="cart-items"></div>
@@ -262,7 +255,13 @@ let total = 0;
 const cartBtn = document.getElementById("cart-btn");
 const cartBox = document.getElementById("cart");
 
-// Abrir/fechar o carrinho
+// Mostrar nome do usuário logado
+let nomeUsuario = localStorage.getItem("usuarioLogado");
+if(nomeUsuario){
+    document.getElementById("usuario-logado").innerText = "Olá, " + nomeUsuario;
+}
+
+// Abrir/fechar carrinho
 cartBtn.addEventListener("click", () => {
     cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
 });
@@ -272,10 +271,10 @@ function addToCart(product, price) {
     cart.push({ product, price });
     total += price;
     updateCart();
-    cartBox.style.display = "block"; // abre o carrinho automaticamente
+    cartBox.style.display = "block";
 }
 
-// Atualiza o conteúdo do carrinho
+// Atualiza o carrinho
 function updateCart() {
     const cartDiv = document.getElementById("cart-items");
     cartDiv.innerHTML = "";
@@ -292,7 +291,7 @@ function updateCart() {
     document.getElementById("total").innerText = total.toFixed(2);
 }
 
-// Remover item
+// Remover item do carrinho
 function removeItem(index) {
     total -= cart[index].price;
     cart.splice(index, 1);
@@ -309,17 +308,6 @@ function finalizarCompra() {
     localStorage.setItem("total", total.toFixed(2));
     window.location.href = "finalizar.html";
 }
-
-// Mostrar usuário logado
-window.addEventListener("DOMContentLoaded", () => {
-    const usuario = localStorage.getItem("usuarioLogado");
-    const minhaContaDiv = document.getElementById("minha-conta");
-    if(usuario){
-        minhaContaDiv.innerText = `Olá, ${usuario}`;
-    } else {
-        minhaContaDiv.innerText = "Minha Conta";
-    }
-});
 </script>
 
 </body>
