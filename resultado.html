@@ -33,14 +33,12 @@
 
     /* HEADER */
     header {
-        background: rgba(0, 51, 102, 0.8);
-        padding: 18px;
-        color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        backdrop-filter: blur(6px);
+        padding: 20px;
+        background: #002b55;
+        color: white;
         position: relative;
     }
 
@@ -51,30 +49,64 @@
         font-weight: bold;
     }
 
-    /* MENU DROPDOWN */
+    /* BOTÃO MENU ULTRA */
+    #menu-btn {
+        background:#004080;
+        color:white;
+        padding:12px 18px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:18px;
+        font-weight:bold;
+        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff, 0 0 60px #00ffff;
+        transition: all 0.3s ease;
+    }
+
+    #menu-btn:hover {
+        transform: scale(1.1) rotate(-3deg);
+        box-shadow: 0 0 25px #00ffff, 0 0 50px #00bfff, 0 0 80px #00ffff;
+    }
+
+    /* MENU DROPDOWN NEON */
     #menu-box {
         display: none;
         position: absolute;
-        top: 70px;
-        right: 20px;
-        background: white;
-        border: 2px solid #003366;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        top:70px;
+        left:20px;
+        background: rgba(0,0,0,0.9);
+        border-radius:20px;
+        padding:20px 30px;
+        width:200px;
+        box-shadow: 0 0 20px #00ffff, 0 0 50px #00bfff, 0 0 80px #00ffff;
+        transform-origin: top left;
+        opacity:0;
+        transform: translateY(-20px) rotateX(-15deg) scale(0.7);
+        transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         z-index: 50;
     }
 
     #menu-box a {
         display: block;
-        margin: 10px 0;
-        font-size: 18px;
-        color: #003366;
+        margin: 15px 0;
+        font-size: 20px;
+        color: #00ffff;
         text-decoration: none;
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00bfff, 0 0 15px #00ffff;
+        transition: all 0.3s ease;
     }
 
     #menu-box a:hover {
-        color: #005bb5;
+        color: #ffffff;
+        text-shadow: 0 0 10px #00ffff, 0 0 25px #00bfff, 0 0 40px #00ffff;
+        transform: translateX(10px) scale(1.1) rotateY(5deg);
+    }
+
+    /* ANIMAÇÃO OPEN */
+    .menu-open {
+        display: block !important;
+        opacity: 1 !important;
+        transform: translateY(0) rotateX(0deg) scale(1) !important;
     }
 
     /* CONTAINER */
@@ -211,19 +243,14 @@
 <body>
 
 <header>
+    <!-- BOTÃO MENU -->
+    <button id="menu-btn">☰ Menu</button>
     <h1>SMARTWATCH STORE</h1>
 
-    <!-- BOTÃO MENU -->
-    <button id="menu-btn" onclick="toggleMenu()" 
-        style="background:#002b55; color:white; padding:12px 18px; border:none; 
-        border-radius:8px; cursor:pointer; font-size:18px; font-weight:bold;">
-        ☰ Menu
-    </button>
-
-    <!-- MENU DROPDOWN -->
+    <!-- MENU DROPDOWN ANIMADO -->
     <nav id="menu-box">
-        <a href="#">Home</a>
-        <a href="#" onclick="toggleCart()">Carrinho 🛒</a>
+        <a href="#">🏠 Home</a>
+        <a href="#" onclick="toggleCart()">🛒 Carrinho</a>
     </nav>
 </header>
 
@@ -231,7 +258,6 @@
     <h2>Relógios Premium em Promoção</h2>
 
     <div class="products">
-
         <!-- PRODUTO 1 -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
@@ -264,7 +290,6 @@
             <p class="price">R$ 349,00</p>
             <button onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
-
     </div>
 </div>
 
@@ -281,10 +306,28 @@
     let cart = [];
     let total = 0;
 
-    function toggleMenu() {
-        const menu = document.getElementById("menu-box");
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
+    const menuBtn = document.getElementById("menu-btn");
+    const menuBox = document.getElementById("menu-box");
+
+    menuBtn.addEventListener("mouseenter", () => {
+        menuBox.classList.add("menu-open");
+    });
+
+    menuBtn.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+            menuBox.classList.remove("menu-open");
+        }, 300);
+    });
+
+    menuBox.addEventListener("mouseenter", () => {
+        menuBox.classList.add("menu-open");
+    });
+
+    menuBox.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+            menuBox.classList.remove("menu-open");
+        }, 300);
+    });
 
     function addToCart(product, price) {
         cart.push({ product, price });
