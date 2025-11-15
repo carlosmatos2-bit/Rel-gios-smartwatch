@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ultra AI 3 5G — Smartwatch</title>
 <style>
   :root{
@@ -12,14 +12,29 @@
     --card:#ffffff;
     --glass: rgba(255,255,255,0.6);
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;}
   body{
     font-family: "Segoe UI", Arial, sans-serif;
     margin:0;
-    background: linear-gradient(180deg,#eaf6ff 0%, #f7fbff 100%);
+    /* Fundo com a imagem borrada */
+    background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
+    background-size: cover;
     color:#112;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
+    position: relative;
+  }
+  body::before {
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: inherit;
+    background-size: cover;
+    filter: blur(18px) brightness(0.65);
+    z-index: -1;
   }
 
   /* header */
@@ -43,159 +58,75 @@
 
   /* page container */
   .wrap{max-width:1100px; margin:40px auto; padding:0 20px;}
-
-  /* product grid */
-  .grid{
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:28px;
-    align-items:start;
-  }
-
-  /* LEFT: gallery + info */
-  .card{
-    background:var(--card);
-    border-radius:14px;
-    padding:22px;
-    box-shadow:0 10px 30px rgba(2,30,66,0.08);
-  }
-
-  .gallery{
-    display:flex;
-    gap:16px;
-  }
-
-  .main-image{
-    width:100%;
-    max-width:520px;
-    border-radius:12px;
-    overflow:hidden;
-    position:relative;
-    margin:auto;
-  }
-  .main-image img{
-    width:100%;
-    height:auto;
-    display:block;
-    transition: transform .35s ease, filter .35s;
-    cursor:zoom-in;
-  }
+  /* produto em grid */
+  .grid{display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start;}
+  /* cartão produto */
+  .card{background:var(--card); border-radius:14px; padding:22px; box-shadow:0 10px 30px rgba(2,30,66,0.08);}
+  .gallery{display:flex; gap:16px;}
+  .main-image{width:100%; max-width:520px; border-radius:12px; overflow:hidden; position:relative; margin:auto;}
+  .main-image img{width:100%; height:auto; display:block; transition: transform .35s ease, filter .35s; cursor:zoom-in;}
   .main-image:hover img{ transform:scale(1.06) }
+  .thumbs{display:flex; gap:12px; margin-top:12px; justify-content:center;}
+  .thumbs img{width:96px; height:96px; object-fit:cover; border-radius:10px; border:2px solid transparent; cursor:pointer; transition:transform .22s, border-color .2s;}
+  .thumbs img:hover{ transform:scale(1.03); }
+  .thumbs img.active{ border-color:var(--brand); box-shadow:0 6px 18px rgba(0,51,102,0.18); }
 
-  /* thumbnails */
-  .thumbs{
-    display:flex;
-    gap:12px;
-    margin-top:12px;
-    justify-content:center;
-  }
-  .thumbs img{
-    width:96px; height:96px; object-fit:cover; border-radius:10px;
-    border:2px solid transparent;
-    cursor:pointer; transition:transform .22s, border-color .2s;
-  }
-  .thumbs img:hover{ transform:scale(1.03) }
-  .thumbs img.active{ border-color:var(--brand); box-shadow:0 6px 18px rgba(0,51,102,0.18) }
+  .title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .title h1{color:var(--brand); font-size:26px; margin:0 0 8px;}
+  .price-block{text-align:right;}
+  .price-block .old{ text-decoration:line-through; color:#888; font-size:14px;}
+  .price-block .now{ color:#0a8a3a; font-weight:800; font-size:22px;}
 
-  /* product header */
-  .title{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:10px;
-  }
-  .title h1{ color:var(--brand); font-size:26px; margin:0 0 8px; }
-  .price-block{ text-align:right }
-  .price-block .old{ text-decoration:line-through; color:#888; font-size:14px }
-  .price-block .now{ color:#0a8a3a; font-weight:800; font-size:22px }
+  .badges{display:flex; gap:10px; margin:14px 0 18px; flex-wrap:wrap;}
+  .badge{background:var(--soft); color:var(--brand); padding:8px 12px; border-radius:999px; font-weight:700; border:1px solid rgba(0,51,102,0.06);}
 
-  /* badges/short features */
-  .badges{ display:flex; gap:10px; margin:14px 0 18px; flex-wrap:wrap }
-  .badge{ background:var(--soft); color:var(--brand); padding:8px 12px; border-radius:999px; font-weight:700; border:1px solid rgba(0,51,102,0.06) }
+  .specs{margin-top:18px; display:grid; gap:8px;}
+  .specs p{margin:0; line-height:1.5; color:#1b2b3a;}
+  .specs ul{margin:10px 0 0 18px;}
 
-  /* description */
-  .specs{ margin-top:18px; display:grid; gap:8px }
-  .specs p{ margin:0; line-height:1.5; color:#1b2b3a }
-  .specs ul{ margin:10px 0 0 18px }
+  .buybox{position:sticky; top:92px; background:linear-gradient(180deg,#fff,#fbfdff); border-radius:12px; padding:18px; box-shadow:0 10px 24px rgba(2,30,66,0.06); border:2px solid rgba(0,51,102,0.06);}
+  .buybox h3{color:var(--brand); margin:0 0 8px; font-size:20px;}
+  .buybox .sku{color:#556; font-size:13px; margin-bottom:14px;}
+  .qtd{display:flex; gap:8px; align-items:center; margin:10px 0 14px;}
+  .qtd button{width:42px; height:42px; border-radius:8px; border:1px solid #ddd; background:#fff; cursor:pointer;}
+  .qtd input{width:64px; padding:10px; text-align:center; border-radius:8px; border:1px solid #ddd;}
 
-  /* right column: buy box */
-  .buybox{
-    position:sticky;
-    top:92px;
-    background:linear-gradient(180deg,#fff,#fbfdff);
-    border-radius:12px; padding:18px;
-    box-shadow:0 10px 24px rgba(2,30,66,0.06);
-    border:2px solid rgba(0,51,102,0.06);
-  }
-  .buybox h3{ color:var(--brand); margin:0 0 8px; font-size:20px }
-  .buybox .sku{ color:#556; font-size:13px; margin-bottom:14px }
-  .qtd{ display:flex; gap:8px; align-items:center; margin:10px 0 14px }
-  .qtd button{ width:42px; height:42px; border-radius:8px; border:1px solid #ddd; background:#fff; cursor:pointer }
-  .qtd input{ width:64px; padding:10px; text-align:center; border-radius:8px; border:1px solid #ddd }
+  .cta{display:flex; gap:12px; margin-top:12px;}
+  .btn-primary{flex:1; background:var(--brand); color:#fff; padding:12px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:800; box-shadow:0 8px 20px rgba(0,75,141,0.12); transition: transform .12s, box-shadow .12s;}
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,75,141,0.18); }
+  .btn-outline{padding:12px 14px; border-radius:10px; border:2px solid var(--brand); background:transparent; color:var(--brand); cursor:pointer; font-weight:700;}
 
-  .cta{
-    display:flex; gap:12px; margin-top:12px;
-  }
-  .btn-primary{
-    flex:1; background:var(--brand); color:#fff; padding:12px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:800;
-    box-shadow:0 8px 20px rgba(0,75,141,0.12); transition: transform .12s, box-shadow .12s;
-  }
-  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,75,141,0.18) }
-  .btn-outline{
-    padding:12px 14px; border-radius:10px; border:2px solid var(--brand); background:transparent; color:var(--brand); cursor:pointer; font-weight:700;
-  }
-
-  /* small interactive area */
-  .interactions{ margin-top:18px; display:flex; gap:12px; align-items:center; justify-content:space-between }
+  .interactions{margin-top:18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
   .pulse{ color:var(--brand); font-weight:800; }
 
-  /* carousel area: lightweight autoplay (mini) */
-  .carousel{
-    margin-top:22px;
-    display:flex;
-    gap:12px;
-    overflow:hidden;
-    border-radius:12px;
-  }
-  .carousel img{ width:220px; height:140px; object-fit:cover; border-radius:10px; transition:transform .25s }
-  .carousel img:hover{ transform:scale(1.04) }
+  .carousel{margin-top:22px; display:flex; gap:12px; overflow:hidden; border-radius:12px;}
+  .carousel img{ width:220px; height:140px; object-fit:cover; border-radius:10px; transition:transform .25s;}
+  .carousel img:hover{ transform:scale(1.04);}
 
-  /* FAQ */
-  .faq{ margin-top:22px; }
-  .faq details{ background:#f8fdff; padding:12px 14px; border-radius:10px; margin-bottom:10px; border:1px solid rgba(0,51,102,0.05) }
-  .faq summary{ font-weight:700; cursor:pointer; color:var(--brand) }
+  .faq{margin-top:22px;}
+  .faq details{background:#f8fdff; padding:12px 14px; border-radius:10px; margin-bottom:10px; border:1px solid rgba(0,51,102,0.05);}
+  .faq summary{font-weight:700; cursor:pointer; color:var(--brand);}
 
-  /* specs table */
-  .tech{
-    margin-top:18px; background:#ffffff; padding:12px; border-radius:10px; border:1px solid rgba(0,0,0,0.04)
-  }
-  .tech table{ width:100%; border-collapse:collapse; font-size:15px }
-  .tech td{ padding:8px 6px; border-bottom:1px solid #f0f4f8; color:#2a3b4a }
-  .tech td:first-child{ font-weight:700; color:#123 }
+  .tech{margin-top:18px; background:#ffffff; padding:12px; border-radius:10px; border:1px solid rgba(0,0,0,0.04);}
+  .tech table{width:100%; border-collapse:collapse; font-size:15px;}
+  .tech td{padding:8px 6px; border-bottom:1px solid #f0f4f8; color:#2a3b4a;}
+  .tech td:first-child{font-weight:700; color:#123;}
 
-  /* cart sidebar (floating) */
-  .cart-panel{
-    position:fixed; right:24px; top:90px; width:340px; max-height:70vh; overflow:auto; background:white; border-radius:12px; padding:16px;
-    box-shadow:0 22px 60px rgba(2,30,66,0.14); border:2px solid rgba(0,51,102,0.06); display:none; z-index:120;
-  }
-  .cart-panel h4{ margin:0 0 8px; color:var(--brand) }
-  .cart-item{ display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eef3f9 }
-  .cart-total{ font-weight:800; margin-top:10px; text-align:right; color:#0f5d2f }
+  .cart-panel{position:fixed; right:24px; top:90px; width:340px; max-height:70vh; overflow:auto; background:white; border-radius:12px; padding:16px; box-shadow:0 22px 60px rgba(2,30,66,0.14); border:2px solid rgba(0,51,102,0.06); display:none; z-index:120;}
+  .cart-panel h4{margin:0 0 8px; color:var(--brand);}
+  .cart-item{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eef3f9;}
+  .cart-total{font-weight:800; margin-top:10px; text-align:right; color:#0f5d2f;}
 
-  /* modal (simulate on wrist) */
-  .modal{
-    position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:140;
-  }
-  .modal .box{ width:520px; max-width:92%; background:white; border-radius:12px; padding:20px; text-align:center }
-  .mock-wrist{ width:250px; margin:auto; transform:rotate(-10deg); transition:transform .5s }
-  .close{ margin-top:14px; background:#003366; color:#fff; padding:10px 14px; border-radius:8px; cursor:pointer; border:none }
+  .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:140;}
+  .modal .box{width:520px; max-width:92%; background:white; border-radius:12px; padding:20px; text-align:center;}
+  .mock-wrist{width:250px; margin:auto; transform:rotate(-10deg); transition:transform .5s;}
+  .close{margin-top:14px; background:#003366; color:#fff; padding:10px 14px; border-radius:8px; cursor:pointer; border:none;}
 
-  /* responsive */
   @media (max-width:980px){
-    .grid{ grid-template-columns: 1fr; }
-    .carousel img{ width:160px; height:100px }
-    .buybox{ position:static; margin-top:16px }
-    .cart-panel{ right:12px; top:70px; width:92%; max-height:50vh; }
+    .grid{grid-template-columns:1fr;}
+    .carousel img{width:160px;height:100px;}
+    .buybox{position:static;margin-top:16px;}
+    .cart-panel{right:12px;top:70px; width:92%; max-height:50vh;}
   }
 </style>
 </head>
@@ -214,7 +145,6 @@
     <!-- LEFT: gallery + details -->
     <div>
       <div class="card">
-
         <div class="title" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
           <div>
             <h1>Relógio Inteligente Ultra AI 3 5G</h1>
@@ -226,7 +156,6 @@
           </div>
         </div>
 
-        <!-- gallery main -->
         <div class="gallery" style="margin-top:16px">
           <div style="flex:1">
             <div class="main-image" id="mainImageWrap">
@@ -239,7 +168,6 @@
               <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=500&q=60" data-full="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1000&q=80" alt="pulso lifestyle">
             </div>
 
-            <!-- small carousel -->
             <div class="carousel" id="carousel">
               <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=800&q=60" alt="">
               <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=60" alt="">
@@ -247,7 +175,6 @@
             </div>
           </div>
 
-          <!-- right column: buy box -->
           <aside class="buybox">
             <h3>Comprar</h3>
             <div class="sku">SKU: UAI3-5G-BLK</div>
@@ -293,7 +220,7 @@
               <button class="btn-outline" onclick="openSimulator()">Simular no pulso</button>
             </div>
           </aside>
-        </div> <!-- gallery -->
+        </div>
 
         <div class="specs">
           <p><strong>Resumo:</strong> Ultra AI 3 5G combina conectividade completa (5G + chip), sistema Android, câmeras, GPS e longa autonomia em um design premium.</p>
@@ -338,12 +265,10 @@
           </details>
         </div>
 
-      </div> <!-- card -->
+      </div>
     </div>
-
-    <!-- RIGHT column already embedded in gallery above for sticky buybox pattern -->
-  </div> <!-- grid -->
-</div> <!-- wrap -->
+  </div>
+</div>
 
 <!-- CART PANEL -->
 <div id="cartPanel" class="cart-panel" aria-hidden="true">
@@ -393,7 +318,7 @@ if(carousel){
   }, 2800);
 }
 
-/* zoom click: open larger in new tab (lightweight) */
+/* zoom click: open larger in new tab */
 document.getElementById('mainImageWrap').addEventListener('click', ()=> {
   window.open(mainImg.src, '_blank');
 });
@@ -407,7 +332,7 @@ function closeSimulator(){ modal.style.display='none'; modal.setAttribute('aria-
 function increaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)+1); }
 function decreaseQty(){ document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value||1)-1); }
 
-/* ========== Cart logic (persistent with localStorage) ========== */
+/* ========== Cart logic ========== */
 let cart = JSON.parse(localStorage.getItem('carrinho')) || [];
 let total = parseFloat(localStorage.getItem('total')) || 0;
 const cartPanel = document.getElementById('cartPanel');
@@ -427,27 +352,44 @@ function renderCartPanel(){
     cart.forEach((it, idx) => {
       const div = document.createElement('div');
       div.className = 'cart-item';
-      div.innerHTML = `<div>${it.product} x${it.qty}</div><div>R$ ${ (it.price*it.qty).toFixed(2) }</div>`;
+      div.innerHTML = `<div>${it.product} x${it.qty}</div><div>R$ ${(it.price*it.qty).toFixed(2)}</div>`;
       cartItemsContainer.appendChild(div);
     });
   }
   cartTotalEl.innerText = 'Total: R$ ' + total.toFixed(2);
 }
 
-/* open/close cart */
 function openCart(){
   cartPanel.style.display = 'block';
   cartPanel.setAttribute('aria-hidden','false');
   renderCartPanel();
 }
-function closeCart(){
-  cartPanel.style.display = 'none';
-  cartPanel.setAttribute('aria-hidden','true');
+function clearCart(){
+  if(!confirm('Limpar todo o carrinho?')) return;
+  cart = []; total = 0;
+  syncCartToStorage();
+  renderCartPanel();
+}
+function goToFinalize(){
+  if(cart.length === 0){ alert('Seu carrinho está vazio!'); return; }
+  syncCartToStorage();
+  window.location.href = 'finalizar.html';
 }
 
-/* add to cart (used by Comprar agora) */
+function buyNow(){
+  const q = Math.max(1, parseInt(document.getElementById('qty').value||1));
+  addToCart('Ultra AI 3 5G', 349.00, q);
+  openCart();
+  const el = document.createElement('div');
+  el.style.position='fixed'; el.style.right='28px'; el.style.bottom='130px';
+  el.style.background='linear-gradient(90deg,#00b894,#00d388)'; el.style.color='#fff';
+  el.style.padding='12px 16px'; el.style.borderRadius='10px'; el.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';
+  el.innerText = `${q}× Ultra AI 3 5G adicionado(s) ao carrinho`;
+  document.body.appendChild(el);
+  setTimeout(()=> el.remove(),1800);
+}
+
 function addToCart(product, price, qty=1){
-  // if product exists, increase qty
   const existing = cart.find(i=>i.product===product);
   if(existing){
     existing.qty += qty;
@@ -459,50 +401,10 @@ function addToCart(product, price, qty=1){
   renderCartPanel();
 }
 
-/* clear/remove */
-function clearCart(){
-  if(!confirm('Limpar todo o carrinho?')) return;
-  cart = []; total = 0;
-  syncCartToStorage();
-  renderCartPanel();
-}
-
-/* buyNow: add and open cart */
-function buyNow(){
-  const q = Math.max(1, parseInt(document.getElementById('qty').value||1));
-  addToCart('Ultra AI 3 5G', 349.00, q);
-  openCart();
-  // small success feedback
-  const el = document.createElement('div');
-  el.style.position='fixed'; el.style.right='28px'; el.style.bottom='130px';
-  el.style.background='linear-gradient(90deg,#00b894,#00d388)'; el.style.color='#fff';
-  el.style.padding='12px 16px'; el.style.borderRadius='10px'; el.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';
-  el.innerText = `${q}× Ultra AI 3 5G adicionado(s) ao carrinho`;
-  document.body.appendChild(el);
-  setTimeout(()=> el.remove(),1800);
-}
-
-/* finalize behavior: redirect to finalizar.html */
-function goToFinalize(){
-  if(cart.length === 0){ alert('Seu carrinho está vazio!'); return; }
-  syncCartToStorage();
-  window.location.href = 'finalizar.html';
-}
-
-/* initialize UI from storage */
+/* init */
 (function initFromStorage(){
   renderCartPanel();
 })();
-
-/* small accessibility: close cart by clicking outside */
-document.addEventListener('click', (e)=>{
-  if(cartPanel.style.display==='block'){
-    if(!cartPanel.contains(e.target) && !e.target.closest('.small-cta') && !e.target.closest('.btn-outline') && !e.target.closest('.btn-primary')){
-      // don't auto-close aggressively; comment this if undesired
-      // cartPanel.style.display='none';
-    }
-  }
-});
 </script>
 
 </body>
