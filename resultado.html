@@ -34,7 +34,7 @@
     /* HEADER */
     header {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         padding: 20px;
         background: #002b55;
@@ -49,15 +49,28 @@
         font-weight: bold;
     }
 
-    /* BOTÃO MENU NO CANTO DIREITO (DIMINUIDO) */
-    #menu-btn {
+    /* HOME LINK */
+    #home-link {
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        text-decoration: none;
+        margin-left: 20px;
+    }
+
+    #home-link:hover {
+        text-decoration: underline;
+    }
+
+    /* BOTÃO CARRINHO NO CANTO DIREITO */
+    #cart-btn {
         background:#004080;
         color:white;
-        padding:5px 8px; /* diminuiu o tamanho do botão */
+        padding:5px 10px;
         border:none;
         border-radius:6px;
         cursor:pointer;
-        font-size:16px; /* menor que antes */
+        font-size:16px;
         font-weight:bold;
         box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
         transition: all 0.3s ease;
@@ -66,49 +79,9 @@
         right:20px;
     }
 
-    #menu-btn:hover {
+    #cart-btn:hover {
         transform: scale(1.1);
         box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
-    }
-
-    /* MENU DROPDOWN */
-    #menu-box {
-        display: none;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: rgba(0,0,0,0.9);
-        border-radius:12px;
-        padding:15px 20px;
-        width: 180px; 
-        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
-        opacity:0;
-        transform: translateY(-10px) scale(0.8);
-        transition: all 0.3s ease;
-        z-index:50;
-        overflow: hidden;
-    }
-
-    #menu-box a {
-        display: block;
-        margin: 8px 0;
-        font-size: 16px;
-        color: #00ffff;
-        text-decoration: none;
-        text-shadow: 0 0 3px #00ffff, 0 0 5px #00bfff;
-        transition: all 0.3s ease;
-    }
-
-    #menu-box a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 10px #00ffff, 0 0 20px #00bfff;
-        transform: translateX(5px) scale(1.05);
-    }
-
-    .menu-open {
-        display: block !important;
-        opacity:1 !important;
-        transform: translateY(0) scale(1) !important;
     }
 
     /* CONTAINER */
@@ -246,14 +219,8 @@
 
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <!-- BOTÃO MENU NO CANTO DIREITO -->
-    <button id="menu-btn">☰</button>
-
-    <!-- MENU DROPDOWN -->
-    <nav id="menu-box">
-        <a href="#">🏠 Home</a>
-        <a href="#" onclick="toggleCart()">🛒 Carrinho</a>
-    </nav>
+    <a id="home-link" href="#">🏠 Home</a>
+    <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
 <div class="container">
@@ -308,13 +275,9 @@
     let cart = [];
     let total = 0;
 
-    const menuBtn = document.getElementById("menu-btn");
-    const menuBox = document.getElementById("menu-box");
+    const cartBtn = document.getElementById("cart-btn");
 
-    // ABRIR / FECHAR MENU AO CLICAR
-    menuBtn.addEventListener("click", () => {
-        menuBox.classList.toggle("menu-open");
-    });
+    cartBtn.addEventListener("click", toggleCart);
 
     function addToCart(product, price) {
         cart.push({ product, price });
