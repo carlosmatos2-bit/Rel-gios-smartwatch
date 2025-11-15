@@ -62,6 +62,13 @@
         box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
     }
 
+    #minha-conta {
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 20px;
+    }
+
     .container {
         max-width: 1200px;
         margin: auto;
@@ -195,7 +202,10 @@
 
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <button id="cart-btn">🛒 Carrinho</button>
+    <div style="display:flex; align-items:center;">
+        <div id="minha-conta">Minha Conta</div>
+        <button id="cart-btn">🛒 Carrinho</button>
+    </div>
 </header>
 
 <div class="container">
@@ -295,12 +305,21 @@ function finalizarCompra() {
         alert("Seu carrinho está vazio!");
         return;
     }
-    // Armazena no localStorage
     localStorage.setItem("carrinho", JSON.stringify(cart));
     localStorage.setItem("total", total.toFixed(2));
-    // Redireciona para a página de finalização
     window.location.href = "finalizar.html";
 }
+
+// Mostrar usuário logado
+window.addEventListener("DOMContentLoaded", () => {
+    const usuario = localStorage.getItem("usuarioLogado");
+    const minhaContaDiv = document.getElementById("minha-conta");
+    if(usuario){
+        minhaContaDiv.innerText = `Olá, ${usuario}`;
+    } else {
+        minhaContaDiv.innerText = "Minha Conta";
+    }
+});
 </script>
 
 </body>
