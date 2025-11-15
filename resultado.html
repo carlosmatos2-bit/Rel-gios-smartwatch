@@ -111,13 +111,13 @@
         margin-left: 10px;
     }
 
-    /* Nova classe para texto azul escuro */
+    /* Texto azul escuro */
     .dark-blue {
         color: #003366;
         font-weight: bold;
     }
 
-    /* Efeito relevo ao passar o mouse */
+    /* Efeito relevo */
     .effect-relief:hover {
         box-shadow: 0 0 15px rgba(0, 51, 102, 0.7);
         border-radius: 8px;
@@ -142,12 +142,21 @@
 
     <div class="products">
 
-        <!-- PRODUTO 1 -->
+        <!-- PRODUTO 1 COM COR AZUL ESCURO, EFEITO RELEVO E LINK PARA DESCRIÇÃO -->
         <div class="product">
-            <h3>Relógio inteligente Polar Unite</h3>
+            <a href="polar.html" style="text-decoration:none;">
+                <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
+                    Relógio inteligente Polar Unite
+                </div>
+            </a>
+
+            <h3>Monitoramento de atividades e saúde</h3>
             <p class="old-price">R$ 199,00</p>
             <p class="price">R$ 149,00</p>
-            <button onclick="addToCart('Relógio inteligente Polar Unite', 149)">Adicionar ao Carrinho</button>
+
+            <button onclick="addToCart('Relógio inteligente Polar Unite', 149)">
+                Adicionar ao Carrinho
+            </button>
         </div>
 
         <!-- PRODUTO 2 COM COR AZUL ESCURO, EFEITO RELEVO E LINK PARA DESCRIÇÃO -->
