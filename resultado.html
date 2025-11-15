@@ -49,64 +49,66 @@
         font-weight: bold;
     }
 
-    /* BOTÃO MENU ULTRA */
+    /* BOTÃO MENU NO CANTO DIREITO */
     #menu-btn {
         background:#004080;
         color:white;
-        padding:12px 18px;
+        padding:8px 12px;
         border:none;
-        border-radius:12px;
+        border-radius:8px;
         cursor:pointer;
         font-size:18px;
         font-weight:bold;
-        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff, 0 0 60px #00ffff;
+        box-shadow: 0 0 10px #00ffff, 0 0 20px #00bfff;
         transition: all 0.3s ease;
+        position: absolute;
+        top:20px;
+        right:20px;
     }
 
     #menu-btn:hover {
-        transform: scale(1.1) rotate(-3deg);
-        box-shadow: 0 0 25px #00ffff, 0 0 50px #00bfff, 0 0 80px #00ffff;
+        transform: scale(1.1);
+        box-shadow: 0 0 20px #00ffff, 0 0 40px #00bfff;
     }
 
-    /* MENU DROPDOWN NEON */
+    /* MENU DROPDOWN */
     #menu-box {
         display: none;
         position: absolute;
-        top:70px;
-        left:20px;
+        top: 60px;
+        right: 20px;
         background: rgba(0,0,0,0.9);
-        border-radius:20px;
-        padding:20px 30px;
-        width:200px;
-        box-shadow: 0 0 20px #00ffff, 0 0 50px #00bfff, 0 0 80px #00ffff;
-        transform-origin: top left;
+        border-radius:12px;
+        padding:15px 25px;
+        width:160px;
+        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
         opacity:0;
-        transform: translateY(-20px) rotateX(-15deg) scale(0.7);
-        transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        z-index: 50;
+        transform: translateY(-10px) scale(0.8);
+        transition: all 0.3s ease;
+        z-index:50;
     }
 
     #menu-box a {
         display: block;
-        margin: 15px 0;
-        font-size: 20px;
+        margin: 12px 0;
+        font-size: 18px;
         color: #00ffff;
         text-decoration: none;
-        text-shadow: 0 0 5px #00ffff, 0 0 10px #00bfff, 0 0 15px #00ffff;
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00bfff;
         transition: all 0.3s ease;
     }
 
     #menu-box a:hover {
         color: #ffffff;
-        text-shadow: 0 0 10px #00ffff, 0 0 25px #00bfff, 0 0 40px #00ffff;
-        transform: translateX(10px) scale(1.1) rotateY(5deg);
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00bfff;
+        transform: translateX(5px) scale(1.05);
     }
 
-    /* ANIMAÇÃO OPEN */
+    /* ANIMAÇÃO DE ABRIR */
     .menu-open {
         display: block !important;
-        opacity: 1 !important;
-        transform: translateY(0) rotateX(0deg) scale(1) !important;
+        opacity:1 !important;
+        transform: translateY(0) scale(1) !important;
     }
 
     /* CONTAINER */
@@ -243,11 +245,11 @@
 <body>
 
 <header>
-    <!-- BOTÃO MENU -->
-    <button id="menu-btn">☰ Menu</button>
     <h1>SMARTWATCH STORE</h1>
+    <!-- BOTÃO MENU NO CANTO DIREITO -->
+    <button id="menu-btn">☰</button>
 
-    <!-- MENU DROPDOWN ANIMADO -->
+    <!-- MENU DROPDOWN -->
     <nav id="menu-box">
         <a href="#">🏠 Home</a>
         <a href="#" onclick="toggleCart()">🛒 Carrinho</a>
@@ -309,24 +311,9 @@
     const menuBtn = document.getElementById("menu-btn");
     const menuBox = document.getElementById("menu-box");
 
-    menuBtn.addEventListener("mouseenter", () => {
-        menuBox.classList.add("menu-open");
-    });
-
-    menuBtn.addEventListener("mouseleave", () => {
-        setTimeout(() => {
-            menuBox.classList.remove("menu-open");
-        }, 300);
-    });
-
-    menuBox.addEventListener("mouseenter", () => {
-        menuBox.classList.add("menu-open");
-    });
-
-    menuBox.addEventListener("mouseleave", () => {
-        setTimeout(() => {
-            menuBox.classList.remove("menu-open");
-        }, 300);
+    // ABRIR / FECHAR MENU AO CLICAR
+    menuBtn.addEventListener("click", () => {
+        menuBox.classList.toggle("menu-open");
     });
 
     function addToCart(product, price) {
