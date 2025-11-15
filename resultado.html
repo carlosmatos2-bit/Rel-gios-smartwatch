@@ -71,7 +71,7 @@
         box-shadow: 0 0 20px #00ffff, 0 0 40px #00bfff;
     }
 
-    /* MENU DROPDOWN */
+    /* MENU DROPDOWN COMPACTO */
     #menu-box {
         display: none;
         position: absolute;
@@ -79,22 +79,23 @@
         right: 20px;
         background: rgba(0,0,0,0.9);
         border-radius:12px;
-        padding:15px 25px;
-        width:160px;
+        padding:15px 15px; /* padding menor */
+        width: 40px; /* reduzido para ser compacto */
         box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
         opacity:0;
         transform: translateY(-10px) scale(0.8);
         transition: all 0.3s ease;
         z-index:50;
+        overflow: hidden;
     }
 
     #menu-box a {
         display: block;
-        margin: 12px 0;
-        font-size: 18px;
+        margin: 8px 0;
+        font-size: 14px; /* fonte menor para caber */
         color: #00ffff;
         text-decoration: none;
-        text-shadow: 0 0 5px #00ffff, 0 0 10px #00bfff;
+        text-shadow: 0 0 3px #00ffff, 0 0 5px #00bfff;
         transition: all 0.3s ease;
     }
 
@@ -104,7 +105,6 @@
         transform: translateX(5px) scale(1.05);
     }
 
-    /* ANIMAÇÃO DE ABRIR */
     .menu-open {
         display: block !important;
         opacity:1 !important;
