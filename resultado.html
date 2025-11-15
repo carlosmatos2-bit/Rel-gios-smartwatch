@@ -32,20 +32,6 @@
         font-size: 18px;
     }
 
-    /* Estilo do botão Finalizar Compra */
-    .btn-finalizar {
-        background:#003366;
-        padding:8px 12px;
-        color:white;
-        border-radius:5px;
-        text-decoration:none;
-        transition:0.3s;
-    }
-
-    .btn-finalizar:hover {
-        background:#001f33;
-    }
-
     .container {
         max-width: 1200px;
         margin: auto;
@@ -137,9 +123,7 @@
         border-radius: 8px;
         transition: all 0.3s;
     }
-
 </style>
-
 </head>
 <body>
 
@@ -148,7 +132,6 @@
     <nav>
         <a href="#">Home</a>
         <a href="#" onclick="toggleCart()">Carrinho 🛒</a>
-        <a href="finalizar.html" class="btn-finalizar">Finalizar Compra</a>
     </nav>
 </header>
 
@@ -157,52 +140,46 @@
 
     <div class="products">
 
-        <!-- PRODUTO 1 COM COR AZUL ESCURO, EFEITO RELEVO E LINK PARA DESCRIÇÃO -->
+        <!-- PRODUTO 1: Polar Unite -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
                     Relógio inteligente Polar Unite
                 </div>
             </a>
-
             <h3>Monitoramento de atividades e saúde</h3>
             <p class="old-price">R$ 199,00</p>
             <p class="price">R$ 149,00</p>
-
             <button onclick="addToCart('Relógio inteligente Polar Unite', 149)">
                 Adicionar ao Carrinho
             </button>
         </div>
 
-        <!-- PRODUTO 2 COM COR AZUL ESCURO, EFEITO RELEVO E LINK PARA DESCRIÇÃO -->
+        <!-- PRODUTO 2: Garmin Epix Gen 2 -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
                     Relógio inteligente Garmin Epix Gen 2
                 </div>
             </a>
-
             <h3>Alta performance e GPS avançado</h3>
             <p class="old-price">R$ 350,00</p>
             <p class="price">R$ 259,00</p>
-
             <button onclick="addToCart('Relógio inteligente Garmin Epix Gen 2', 259)">
                 Adicionar ao Carrinho
             </button>
         </div>
 
-        <!-- PRODUTO 3 COM COR AZUL ESCURO E EFEITO RELEVO -->
+        <!-- PRODUTO 3: Ultra AI 3 5G -->
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
                 <div class="dark-blue effect-relief" style="font-size: 20px; padding: 20px; cursor:pointer;">
                     Relógio inteligente Ultra AI 3 5G
                 </div>
             </a>
-
             <h3>Com entrada para chip</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-
             <button onclick="addToCart('Com entrada para chip', 349)">
                 Adicionar ao Carrinho
             </button>
@@ -211,11 +188,13 @@
     </div>
 </div>
 
+<!-- Carrinho -->
 <div id="cart">
     <h2>Seu Carrinho</h2>
     <div id="cart-items"></div>
     <p class="total">Total: R$ <span id="total">0</span></p>
     <button class="btn-cart" onclick="clearCart()">Limpar Carrinho</button>
+    <button class="btn-cart" onclick="finalizarCompra()">Finalizar Compra</button>
 </div>
 
 <script>
@@ -260,6 +239,16 @@
     function toggleCart() {
         const cartBox = document.getElementById("cart");
         cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
+    }
+
+    function finalizarCompra() {
+        if(cart.length === 0){
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+        localStorage.setItem("carrinho", JSON.stringify(cart));
+        localStorage.setItem("total", total.toFixed(2));
+        window.location.href = "finalizar.html";
     }
 </script>
 
