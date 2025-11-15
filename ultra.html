@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ultra AI 3 5G</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,16 +16,18 @@
         header {
             background: #003366;
             color: white;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
+        /* Botão voltar */
         .btn-container {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 25px;
+            left: 25px;
         }
 
         .btn {
@@ -32,23 +35,25 @@
             color: white;
             text-decoration: none;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: bold;
             font-size: 18px;
-            transition: background 0.3s;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
         .btn:hover {
             background: #0059b3;
         }
 
+        /* Container do produto */
         .product-container {
-            max-width: 900px;
-            margin: 120px auto 50px auto;
+            max-width: 950px;
+            margin: 140px auto 60px auto;
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
 
         .product-images {
@@ -56,35 +61,36 @@
         }
 
         .product-images img {
-            border-radius: 12px;
+            border-radius: 14px;
             margin: 15px;
         }
 
         .main-img {
-            width: 300px;
+            width: 330px;
         }
 
         .medium-img {
-            width: 220px;
+            width: 240px;
         }
 
         h1 {
             text-align: center;
             margin-top: 0;
-            font-size: 32px;
+            font-size: 34px;
             color: #003366;
         }
 
         .description {
             text-align: left;
             margin-top: 30px;
-            line-height: 1.6;
+            font-size: 18px;
+            line-height: 1.7;
         }
 
         .description h2 {
             text-align: center;
             font-size: 28px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #003366;
         }
 
@@ -99,11 +105,28 @@
 
         .summary {
             background: #cfe7ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 25px;
             text-align: center;
-            font-size: 18px;
+            font-size: 19px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Rodapé com redes sociais */
+        .social-footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-footer img {
+            width: 50px;
+            margin: 15px;
+            transition: transform 0.3s;
+        }
+
+        .social-footer img:hover {
+            transform: scale(1.15);
         }
     </style>
 </head>
@@ -111,9 +134,9 @@
 
     <header>Loja Digital - Produto</header>
 
-    <!-- BOTÃO VOLTAR PARA RESULTADO.HTML -->
+    <!-- BOTÃO VOLTAR QUE MANTÉM O CARRINHO -->
     <div class="btn-container">
-        <a href="resultado.html" class="btn">Voltar</a>
+        <a href="resultado.html" class="btn">⬅ Voltar</a>
     </div>
 
     <div class="product-container">
@@ -122,27 +145,43 @@
 
         <div class="product-images">
             <img src="https://img.kabum.com.br/produtos/fotos/729381/smart-watch-microwear-ultra-3-ai-5g-chip-android-8-1-tela-amoled-acessorios-chatgpt-baixa-apps-cor-preto_1713969035_gg.jpg" alt="Ultra AI 3 5G" class="main-img">
+
             <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Ultra AI 3 5G extra" class="medium-img">
         </div>
 
         <div class="description">
             <h2>Descrição Completa</h2>
-            <p>O <span class="highlight">Ultra AI 3 5G</span> é um smartwatch de última geração, ideal para quem deseja alta performance, conectividade total e design premium no pulso.</p>
+
+            <p>O <span class="highlight">Ultra AI 3 5G</span> é um smartwatch de última geração, ideal para quem deseja alta performance, conectividade total e design premium.</p>
 
             <ul>
-                <li><span class="highlight">Conectividade completa:</span> Suporte 5G, chip SIM, Wi-Fi, Bluetooth e GPS integrado.</li>
-                <li><span class="highlight">Sistema Android:</span> Permite instalar apps como WhatsApp, Instagram, YouTube, TikTok, Spotify e Google Maps.</li>
-                <li><span class="highlight">Tela AMOLED:</span> Excelente visibilidade mesmo sob luz direta.</li>
-                <li><span class="highlight">Processamento e memória:</span> Quad-core, ~2GB RAM, ~16GB armazenamento (varia conforme versão).</li>
-                <li><span class="highlight">Câmeras integradas:</span> 8MP principal, 2MP secundária, gravação Full HD.</li>
-                <li><span class="highlight">Recursos inteligentes:</span> Assistente de voz AI, ChatGPT integrado, notificações, chamadas, controle de música e monitoramento de saúde.</li>
-                <li><span class="highlight">Design premium:</span> Corpo leve e resistente, pulseira de silicone confortável para uso diário.</li>
-                <li><span class="highlight">Ideal para:</span> Substituir o smartphone em atividades rápidas mantendo conectividade e estilo.</li>
+                <li><span class="highlight">Conectividade completa:</span> 5G, chip SIM, Wi-Fi, Bluetooth e GPS.</li>
+                <li><span class="highlight">Sistema Android:</span> suporte para apps como WhatsApp, Insta, Maps e YouTube.</li>
+                <li><span class="highlight">Tela AMOLED:</span> cores vibrantes e excelente visibilidade.</li>
+                <li><span class="highlight">Processamento:</span> Quad-core, 2GB RAM e 16GB internos.</li>
+                <li><span class="highlight">Câmeras:</span> 8MP + 2MP com gravação em Full HD.</li>
+                <li><span class="highlight">Funções inteligentes:</span> AI assistente, ChatGPT, chamadas, notificações e muito mais.</li>
+                <li><span class="highlight">Design premium:</span> leve, elegante e resistente.</li>
             </ul>
 
             <div class="summary">
-                Internet 5G, chip SIM, apps Android, câmeras, GPS e design premium — uma experiência completa de smartwatch para quem vive conectado.
+                Um smartwatch completo com 5G, chip, Android, câmeras e design premium. Perfeito para quem vive conectado.
             </div>
+        </div>
+
+        <!-- RODAPÉ SOCIAL -->
+        <div class="social-footer">
+            <a href="https://facebook.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png">
+            </a>
+
+            <a href="https://wa.me/5562940028922" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+            </a>
+
+            <a href="https://instagram.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
+            </a>
         </div>
 
     </div>
