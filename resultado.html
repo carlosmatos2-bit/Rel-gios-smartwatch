@@ -49,17 +49,17 @@
         font-weight: bold;
     }
 
-    /* BOTÃO MENU NO CANTO DIREITO */
+    /* BOTÃO MENU NO CANTO DIREITO (DIMINUIDO) */
     #menu-btn {
         background:#004080;
         color:white;
-        padding:8px 12px;
+        padding:5px 8px; /* diminuiu o tamanho do botão */
         border:none;
-        border-radius:8px;
+        border-radius:6px;
         cursor:pointer;
-        font-size:18px;
+        font-size:16px; /* menor que antes */
         font-weight:bold;
-        box-shadow: 0 0 10px #00ffff, 0 0 20px #00bfff;
+        box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
         transition: all 0.3s ease;
         position: absolute;
         top:20px;
@@ -68,10 +68,10 @@
 
     #menu-btn:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 20px #00ffff, 0 0 40px #00bfff;
+        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
     }
 
-    /* MENU DROPDOWN COMPACTO */
+    /* MENU DROPDOWN */
     #menu-box {
         display: none;
         position: absolute;
@@ -79,8 +79,8 @@
         right: 20px;
         background: rgba(0,0,0,0.9);
         border-radius:12px;
-        padding:15px 15px; /* padding menor */
-        width: 40px; /* reduzido para ser compacto */
+        padding:15px 20px;
+        width: 180px; 
         box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
         opacity:0;
         transform: translateY(-10px) scale(0.8);
@@ -92,7 +92,7 @@
     #menu-box a {
         display: block;
         margin: 8px 0;
-        font-size: 14px; /* fonte menor para caber */
+        font-size: 16px;
         color: #00ffff;
         text-decoration: none;
         text-shadow: 0 0 3px #00ffff, 0 0 5px #00bfff;
