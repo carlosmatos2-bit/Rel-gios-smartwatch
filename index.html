@@ -9,18 +9,28 @@
 /* ======== RESET ======== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ======== BODY ======== */
+/* ======== BODY COM FUNDO BORRADO ======== */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom right, #0047b3, #00bfff);
-  color: #1b1b1b;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  filter: blur(12px) brightness(0.6);
+  z-index: -1;
 }
 
 /* ======== HEADER ======== */
 header {
   width: 100%;
   padding: 20px 40px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
@@ -42,7 +52,7 @@ nav a {
   font-weight: bold;
 }
 
-/* ======== HERO (banner principal) ======== */
+/* ======== HERO ======== */
 .hero {
   padding: 60px 20px;
   text-align: center;
@@ -176,12 +186,10 @@ footer {
   color: white;
   margin-top: 40px;
 }
-
 </style>
 </head>
 <body>
 
-<!-- ======== HEADER ======== -->
 <header>
   <h1>Smartwatch Premium</h1>
   <nav>
@@ -191,14 +199,12 @@ footer {
   </nav>
 </header>
 
-<!-- ======== HERO ======== -->
 <section class="hero">
   <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f">
   <h2>Tecnologia no Seu Pulso</h2>
   <p>O smartwatch perfeito para o seu estilo e rotina.</p>
 </section>
 
-<!-- ======== BENEFICIOS ======== -->
 <section class="beneficios">
   <h2>Por que escolher nosso Smartwatch?</h2>
 
@@ -212,7 +218,6 @@ footer {
   </div>
 </section>
 
-<!-- ======== FORMULÁRIO ======== -->
 <form id="formulario">
   <h2>Cadastre-se para receber novidades</h2>
 
@@ -251,14 +256,12 @@ footer {
 
 </form>
 
-<!-- ======== WHATSAPP FIXO ======== -->
 <div class="whatsapp-fixo">
   <a href="https://wa.me/5562940028922" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
   </a>
 </div>
 
-<!-- ======== RODAPÉ ======== -->
 <footer>
   © 2025 Smartwatch Premium — Todos os direitos reservados.
 </footer>
