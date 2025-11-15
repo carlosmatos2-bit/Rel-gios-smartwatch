@@ -209,7 +209,7 @@ footer {
   </div>
 </section>
 
-<!-- FORMULÁRIO COMPLETO -->
+<!-- FORMULÁRIO COMPLETO COM TELEFONE E SENHA -->
 <form id="formulario">
   <h2>Cadastre-se para acessar a loja</h2>
 
@@ -218,6 +218,12 @@ footer {
 
   <label>E-mail:</label>
   <input type="email" required>
+
+  <label>Telefone:</label>
+  <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+
+  <label>Senha:</label>
+  <input type="password" id="senha" required>
 
   <button type="submit">Entrar na Loja</button>
 </form>
@@ -258,7 +264,14 @@ footer {
 document.getElementById("formulario").addEventListener("submit", (e)=>{
   e.preventDefault();
   let nome = document.getElementById("nome").value;
+  let telefone = document.getElementById("telefone").value;
+  let senha = document.getElementById("senha").value;
+
+  // Salvar informações no localStorage
   localStorage.setItem("usuarioLogado", nome);
+  localStorage.setItem("telefone", telefone);
+  localStorage.setItem("senha", senha);
+
   window.location.href = "resultado.html";
 });
 
