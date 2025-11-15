@@ -6,18 +6,15 @@
 <title>Loja Oficial Smartwatch</title>
 
 <style>
-    /* FUNDO COM A IMAGEM DO SMARTWATCH BORRADA */
     body {
         font-family: "Segoe UI", Arial, sans-serif;
         margin: 0;
         background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
         background-size: cover;
-        filter: blur(0px);
         color: #1a2a40;
         position: relative;
     }
 
-    /* CAMADA DE DESFOQUE NO FUNDO */
     body::before {
         content: "";
         position: fixed;
@@ -31,24 +28,40 @@
         z-index: -1;
     }
 
-    /* HEADER */
     header {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         padding: 20px;
         background: #002b55;
         color: white;
+        position: relative;
     }
 
     header h1 {
         margin: 0;
         font-size: 26px;
-        letter-spacing: 1px;
         font-weight: bold;
     }
 
-    /* CONTAINER */
+    #cart-btn {
+        background:#004080;
+        color:white;
+        padding:8px 15px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:16px;
+        font-weight:bold;
+        box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
+        transition: all 0.3s ease;
+    }
+
+    #cart-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
+    }
+
     .container {
         max-width: 1200px;
         margin: auto;
@@ -58,13 +71,7 @@
         border-radius: 14px;
         border: 3px solid #003366;
         box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
-        animation: fadeIn 0.8s ease-in-out;
         backdrop-filter: blur(10px);
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
@@ -73,7 +80,6 @@
         font-size: 28px;
     }
 
-    /* CARDS DOS PRODUTOS */
     .products {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -111,8 +117,7 @@
         font-weight: bold;
     }
 
-    /* BOTÕES DE PRODUTOS */
-    button {
+    button.add-cart {
         margin-top: 12px;
         background: #003366;
         color: white;
@@ -126,24 +131,23 @@
         width: 90%;
     }
 
-    button:hover {
+    button.add-cart:hover {
         background: #004b8d;
     }
 
     /* CARRINHO */
     #cart {
         position: fixed;
-        right: 25px;
-        bottom: 25px;
-        background: rgba(255,255,255,0.9);
-        padding: 20px;
-        width: 320px;
+        right: 20px;
+        top: 70px;
+        width: 350px;
+        background: rgba(255,255,255,0.95);
         border-radius: 14px;
         border: 3px solid #003366;
         box-shadow: 0 0 20px rgba(0,0,0,0.3);
         display: none;
-        animation: fadeIn 0.5s ease;
-        backdrop-filter: blur(8px);
+        padding: 20px;
+        z-index: 1000;
     }
 
     #cart h2 {
@@ -166,6 +170,14 @@
 
     .btn-cart {
         background: #e60000;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin-top: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 100%;
     }
 
     .btn-cart:hover {
@@ -183,6 +195,7 @@
 
 <header>
     <h1>SMARTWATCH STORE</h1>
+    <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
 <div class="container">
@@ -197,7 +210,7 @@
             <h3>Monitoramento completo de saúde</h3>
             <p class="old-price">R$ 199,00</p>
             <p class="price">R$ 149,00</p>
-            <button onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
         <!-- PRODUTO 2 -->
@@ -208,7 +221,7 @@
             <h3>GPS avançado e extrema performance</h3>
             <p class="old-price">R$ 350,00</p>
             <p class="price">R$ 259,00</p>
-            <button onclick="addToCart('Garmin Epix Gen 2', 259)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 259)">Adicionar ao Carrinho</button>
         </div>
 
         <!-- PRODUTO 3 -->
@@ -219,7 +232,7 @@
             <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-            <button onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
     </div>
 </div>
@@ -229,57 +242,65 @@
     <h2>Seu Carrinho</h2>
     <div id="cart-items"></div>
     <p class="total">Total: R$ <span id="total">0</span></p>
-    <button class="btn-cart" onclick="clearCart()">Limpar Carrinho</button>
     <button class="btn-cart" onclick="finalizarCompra()">Finalizar Compra</button>
 </div>
 
 <script>
-    let cart = [];
-    let total = 0;
+let cart = [];
+let total = 0;
 
-    function addToCart(product, price) {
-        cart.push({ product, price });
-        total += price;
-        updateCart();
+const cartBtn = document.getElementById("cart-btn");
+const cartBox = document.getElementById("cart");
+
+// Abrir/fechar o carrinho
+cartBtn.addEventListener("click", () => {
+    cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
+});
+
+// Adicionar produto ao carrinho
+function addToCart(product, price) {
+    cart.push({ product, price });
+    total += price;
+    updateCart();
+    cartBox.style.display = "block"; // abre o carrinho automaticamente
+}
+
+// Atualiza o conteúdo do carrinho
+function updateCart() {
+    const cartDiv = document.getElementById("cart-items");
+    cartDiv.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        cartDiv.innerHTML += `
+            <div class="cart-item">
+                ${item.product} - R$ ${item.price.toFixed(2)}
+                <button class="btn-cart" onclick="removeItem(${index})">X</button>
+            </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+// Remover item
+function removeItem(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
+}
+
+// Finalizar compra
+function finalizarCompra() {
+    if(cart.length === 0){
+        alert("Seu carrinho está vazio!");
+        return;
     }
-
-    function updateCart() {
-        const cartDiv = document.getElementById("cart-items");
-        cartDiv.innerHTML = "";
-
-        cart.forEach((item, index) => {
-            cartDiv.innerHTML += `
-                <div class="cart-item">
-                    ${item.product} - R$ ${item.price}
-                    <button class="btn-cart" onclick="removeItem(${index})">X</button>
-                </div>
-            `;
-        });
-
-        document.getElementById("total").innerText = total.toFixed(2);
-    }
-
-    function removeItem(index) {
-        total -= cart[index].price;
-        cart.splice(index, 1);
-        updateCart();
-    }
-
-    function clearCart() {
-        cart = [];
-        total = 0;
-        updateCart();
-    }
-
-    function finalizarCompra() {
-        if(cart.length === 0){
-            alert("Seu carrinho está vazio!");
-            return;
-        }
-        localStorage.setItem("carrinho", JSON.stringify(cart));
-        localStorage.setItem("total", total.toFixed(2));
-        window.location.href = "finalizar.html";
-    }
+    // Armazena no localStorage
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    localStorage.setItem("total", total.toFixed(2));
+    // Redireciona para a página de finalização
+    window.location.href = "finalizar.html";
+}
 </script>
 
 </body>
