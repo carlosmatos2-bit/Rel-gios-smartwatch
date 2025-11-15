@@ -18,9 +18,27 @@
         color: #003366;
     }
 
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #003366;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .back-button:hover {
+        background: #0059b3;
+    }
+
     .cart-summary {
         max-width: 600px;
-        margin: auto;
+        margin: 60px auto 0 auto; /* distância do topo para não sobrepor o botão */
         background: white;
         padding: 20px;
         border-radius: 10px;
@@ -41,7 +59,7 @@
         margin-top: 20px;
     }
 
-    button {
+    button.finalizar {
         margin-top: 20px;
         background: #003366;
         color: white;
@@ -54,13 +72,16 @@
         transition: 0.3s;
     }
 
-    button:hover {
+    button.finalizar:hover {
         background: #0059b3;
     }
 
 </style>
 </head>
 <body>
+
+<!-- Botão de Voltar -->
+<button class="back-button" onclick="voltarPagina()">← Voltar</button>
 
 <h1>Finalizar Compra</h1>
 
@@ -69,6 +90,11 @@
 </div>
 
 <script>
+    // Função para voltar à página anterior
+    function voltarPagina() {
+        window.location.href = "resultado.html"; // altere para a página que deseja voltar
+    }
+
     // Recupera os dados do carrinho
     const cart = JSON.parse(localStorage.getItem("carrinho")) || [];
     const total = localStorage.getItem("total") || 0;
@@ -94,6 +120,7 @@
         cartSummary.appendChild(totalDiv);
 
         const btnFinalizar = document.createElement("button");
+        btnFinalizar.classList.add("finalizar");
         btnFinalizar.innerText = "Concluir Compra";
         btnFinalizar.onclick = () => {
             alert("Compra concluída com sucesso!");
