@@ -9,8 +9,10 @@
     body {
         font-family: 'Segoe UI', sans-serif;
         margin: 0;
-        background: #eef3ff;
         padding: 20px;
+        background: url('https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f') no-repeat center center fixed;
+        background-size: cover;
+        backdrop-filter: blur(10px);
     }
 
     h1 {
@@ -47,7 +49,7 @@
     .cart-summary {
         max-width: 850px;
         margin: 40px auto;
-        background: white;
+        background: rgba(255,255,255,0.9);
         padding: 30px;
         border-radius: 14px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -93,7 +95,6 @@
         font-size: 16px;
     }
 
-    /* ÁREAS DE PAGAMENTO */
     .hidden { display: none; }
 
     .box {
@@ -124,161 +125,4 @@
         color: white;
         border: none;
         padding: 15px 20px;
-        cursor: pointer;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: bold;
-        width: 100%;
-        transition: 0.3s;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    button.finalizar:hover {
-        background: #0059b3;
-        transform: scale(1.03);
-    }
-</style>
-</head>
-<body>
-
-<button class="back-button" onclick="voltarPagina()">← Voltar</button>
-
-<h1>Finalizar Compra</h1>
-
-<div class="cart-summary" id="cart-summary"></div>
-
-<script>
-function voltarPagina() {
-    window.history.back();
-}
-
-let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
-let total = parseFloat(localStorage.getItem("total")) || 0;
-
-const cartSummary = document.getElementById("cart-summary");
-
-function renderCart() {
-    cartSummary.innerHTML = "";
-
-    if (cart.length === 0) {
-        cartSummary.innerHTML = "<p>Seu carrinho está vazio.</p>";
-        return;
-    }
-
-    cart.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-            <span>${item.product}</span>
-            <span>R$ ${item.price}</span>
-        `;
-        cartSummary.appendChild(div);
-    });
-
-    cartSummary.innerHTML += `
-        <div class="total">Total: R$ ${total.toFixed(2)}</div>
-    `;
-
-    // FORMAS DE PAGAMENTO
-    cartSummary.innerHTML += `
-        <div class="payment-box">
-            <label><b>Forma de Pagamento:</b></label>
-            <select id="pagamento" onchange="mostrarOpcoes()">
-                <option value="">Selecione...</option>
-                <option value="cartao">Cartão</option>
-                <option value="pix">PIX</option>
-                <option value="boleto">Boleto</option>
-            </select>
-
-            <!-- CARTÃO -->
-            <div id="cartao-box" class="hidden box">
-                <h3>Pagamento com Cartão</h3>
-                <label>Tipo:</label>
-                <select id="tipoCartao">
-                    <option value="credito">Crédito</option>
-                    <option value="debito">Débito</option>
-                </select>
-
-                <label>Número do Cartão:</label>
-                <input type="text" id="numCartao" placeholder="0000 0000 0000 0000">
-
-                <label>Validade:</label>
-                <input type="text" id="validade" placeholder="MM/AA">
-
-                <label>CVV:</label>
-                <input type="text" id="cvv" placeholder="000">
-            </div>
-
-            <!-- PIX -->
-            <div id="pix-box" class="hidden box">
-                <h3>Pagamento via PIX</h3>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=PAGAMENTO+PIX+FALSO"
-                class="pix-img">
-                <p><b>Chave PIX:</b></p>
-                <p style="word-break: break-all; color:#003366;">
-                https://pagamento-pix-falso.com/${Math.random().toString(36).substring(2)}
-                </p>
-            </div>
-
-            <!-- BOLETO -->
-            <div id="boleto-box" class="hidden box">
-                <h3>Boleto Bancário</h3>
-                <p><b>Linha Digitável:</b></p>
-                <p id="boletoLinha" style="font-size:18px; color:#003366;"></p>
-                <button onclick="window.print()" style="
-                    background:#003366; color:white; padding:10px 20px; border:none; border-radius:8px; margin-top:10px;">
-                    Imprimir Boleto
-                </button>
-            </div>
-        </div>
-
-        <button class="finalizar" onclick="finalizarCompra()">Concluir Compra</button>
-    `;
-}
-
-function mostrarOpcoes() {
-    let tipo = document.getElementById("pagamento").value;
-    document.getElementById("cartao-box").classList.add("hidden");
-    document.getElementById("pix-box").classList.add("hidden");
-    document.getElementById("boleto-box").classList.add("hidden");
-
-    if (tipo === "cartao") {
-        document.getElementById("cartao-box").classList.remove("hidden");
-    } else if (tipo === "pix") {
-        document.getElementById("pix-box").classList.remove("hidden");
-    } else if (tipo === "boleto") {
-        document.getElementById("boleto-box").classList.remove("hidden");
-        gerarBoleto();
-    }
-}
-
-function gerarBoleto() {
-    const linha =
-        Math.floor(Math.random()*99999) + "." +
-        Math.floor(Math.random()*99999) + " " +
-        Math.floor(Math.random()*99999) + "." +
-        Math.floor(Math.random()*99999);
-    document.getElementById("boletoLinha").innerText = linha;
-}
-
-function finalizarCompra() {
-    let tipo = document.getElementById("pagamento").value;
-
-    if (!tipo) {
-        alert("Escolha uma forma de pagamento.");
-        return;
-    }
-
-    alert("Compra concluída com sucesso!");
-
-    localStorage.removeItem("carrinho");
-    localStorage.removeItem("total");
-
-    window.location.href = "resultado.html";
-}
-
-renderCart();
-</script>
-
-</body>
-</html>
+        cursor
