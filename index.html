@@ -1,144 +1,274 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smartwatch - Tecnologia no Seu Pulso</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #cfe7ff; /* azul clarinho */
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartwatch Premium</title>
 
-    .container {
-      max-width: 1200px; 
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      border: 4px solid #003366; /* borda azul escuro */
-      box-shadow: 0 0 20px rgba(0, 51, 102, 0.7); /* brilho azul escuro */
-    }
+<style>
+/* ======== RESET ======== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    img {
-      max-width: 60%;  /* imagem menor */
-      height: auto;
-      display: block;   /* centralizar */
-      margin: 0 auto;   /* centralizar */
-      border-radius: 8px;
-    }
+/* ======== BODY ======== */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #0047b3, #00bfff);
+  color: #1b1b1b;
+}
 
-    h1 {
-      color: #1a2a40;
-      text-align: center;
-    }
+/* ======== HEADER ======== */
+header {
+  width: 100%;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
 
-    p {
-      line-height: 1.6;
-    }
+header h1 {
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: 1px;
+}
 
-    form {
-      margin-top: 30px;
-      background: #ecf3ff;
-      padding: 20px;
-      border-radius: 8px;
-      border: 2px solid #003366;
-    }
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+/* ======== HERO (banner principal) ======== */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
 
-    input, textarea, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #003366;
-      border-radius: 5px;
-      font-size: 1em;
-    }
+.hero img {
+  width: 280px;
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.4));
+  animation: pulse 2s infinite;
+}
 
-    button {
-      background-color: #003366;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-weight: bold;
-    }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
 
-    button:hover {
-      background-color: #004080;
-    }
-  </style>
+.hero h2 {
+  margin-top: 20px;
+  font-size: 32px;
+}
+
+/* ======== BENEFICIOS ======== */
+.beneficios {
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  margin-top: 40px;
+}
+
+.beneficios h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #003366;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
+}
+
+.beneficio {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* ======== FORMULÁRIO ======== */
+form {
+  max-width: 600px;
+  background: white;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+form h2 { 
+  text-align: center; 
+  margin-bottom: 20px; 
+  color: #003366;
+}
+
+label { margin-top: 10px; font-weight: bold; display: block; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 2px solid #0077cc;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  background: #003366;
+  color: white;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0059b3;
+}
+
+/* ======== REDES SOCIAIS ======== */
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+.redes img {
+  width: 45px;
+  transition: 0.3s;
+}
+
+.redes img:hover {
+  transform: scale(1.2);
+}
+
+/* ======== WHATSAPP FIXO ======== */
+.whatsapp-fixo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.whatsapp-fixo img {
+  width: 60px;
+  filter: drop-shadow(0 0 8px #000);
+}
+
+/* ======== RODAPÉ ======== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #003366;
+  color: white;
+  margin-top: 40px;
+}
+
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Smartwatch: Tecnologia no Seu Pulso</h1>
 
-    <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Imagem de um smartwatch moderno">
-    
-    <p>O <strong>smartwatch</strong>, ou relógio inteligente, é mais do que um simples acessório para mostrar as horas. Ele atua como uma extensão do seu smartphone, permitindo visualizar notificações, atender chamadas, ler mensagens e controlar músicas diretamente do seu pulso.</p>
+<!-- ======== HEADER ======== -->
+<header>
+  <h1>Smartwatch Premium</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Funções</a>
+    <a href="#">Contato</a>
+  </nav>
+</header>
 
-    <p>Esses dispositivos também são aliados na saúde e no bem-estar, oferecendo monitoramento de batimentos cardíacos, qualidade do sono, níveis de estresse e até oxigenação do sangue. Para os praticantes de atividades físicas, os smartwatches registram passos, calorias queimadas e contam com modos esportivos personalizados.</p>
+<!-- ======== HERO ======== -->
+<section class="hero">
+  <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f">
+  <h2>Tecnologia no Seu Pulso</h2>
+  <p>O smartwatch perfeito para o seu estilo e rotina.</p>
+</section>
 
-    <p>Com design moderno e funcionalidades práticas, o smartwatch é ideal para quem busca produtividade, conectividade e cuidados com a saúde em um só lugar.</p>
+<!-- ======== BENEFICIOS ======== -->
+<section class="beneficios">
+  <h2>Por que escolher nosso Smartwatch?</h2>
 
-    <form id="formulario" action="#" method="post">
-      <h2>Cadastre-se para receber mais informações</h2>
+  <div class="beneficios-grid">
+    <div class="beneficio">Monitoramento cardíaco avançado</div>
+    <div class="beneficio">Resistente à água</div>
+    <div class="beneficio">Notificações inteligentes</div>
+    <div class="beneficio">Bateria de longa duração</div>
+    <div class="beneficio">Modo esportivo completo</div>
+    <div class="beneficio">Conexão com Android e iOS</div>
+  </div>
+</section>
 
-      <label for="nome">Nome completo:</label>
-      <input type="text" id="nome" name="nome" required>
+<!-- ======== FORMULÁRIO ======== -->
+<form id="formulario">
+  <h2>Cadastre-se para receber novidades</h2>
 
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" required>
+  <label>Nome completo:</label>
+  <input type="text" required>
 
-      <label for="telefone">Telefone (opcional):</label>
-      <input type="tel" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx">
+  <label>E-mail:</label>
+  <input type="email" required>
 
-      <label for="interesse">Nível de interesse:</label>
-      <select id="interesse" name="interesse">
-        <option value="alto">Alto - Quero comprar em breve</option>
-        <option value="medio">Médio - Quero saber mais</option>
-        <option value="baixo">Baixo - Apenas curioso(a)</option>
-      </select>
+  <label>Telefone:</label>
+  <input type="tel" placeholder="(XX) XXXXX-XXXX">
 
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua dúvida ou comentário..."></textarea>
+  <label>Nível de interesse:</label>
+  <select>
+    <option>Alto</option>
+    <option>Médio</option>
+    <option>Baixo</option>
+  </select>
 
-      <button type="submit">Enviar</button>
-      <window.location.href = "resultado.html";>
+  <label>Mensagem:</label>
+  <textarea rows="4"></textarea>
 
-      <div style="margin-top: 20px; display: flex; justify-content: center; gap: 40px;">
+  <button type="submit">Enviar</button>
 
-        <a href="https://facebook.com" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" width="40" height="40" alt="Facebook">
-        </a>
-
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <a href="https://wa.me/5562940028922" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" height="40" alt="WhatsApp">
-          </a>
-        </div>
-
-        <a href="https://instagram.com" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" width="40" height="40" alt="Instagram">
-        </a>
-
-      </div>
-    </form>
+  <div class="redes">
+    <a href="https://facebook.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png">
+    </a>
+    <a href="https://wa.me/5562940028922" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+    </a>
+    <a href="https://instagram.com" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
+    </a>
   </div>
 
-  <script>
-    document.getElementById("formulario").addEventListener("submit", function(event) {
-      event.preventDefault(); 
-      window.location.href = "resultado.html"; 
-    });
-  </script>
+</form>
+
+<!-- ======== WHATSAPP FIXO ======== -->
+<div class="whatsapp-fixo">
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
+</div>
+
+<!-- ======== RODAPÉ ======== -->
+<footer>
+  © 2025 Smartwatch Premium — Todos os direitos reservados.
+</footer>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  window.location.href = "resultado.html";
+});
+</script>
 
 </body>
 </html>
