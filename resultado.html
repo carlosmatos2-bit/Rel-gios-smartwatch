@@ -86,42 +86,25 @@ h2 {
     font-size: 28px;
 }
 
-/* ===== BARRA DE PESQUISA AJUSTADA ===== */
+/* ===== BARRA DE PESQUISA ===== */
 #search-bar {
-    width: 50%;
-    padding: 10px 15px;
-    margin-bottom: 15px;
+    width: 50%; /* metade do tamanho */
+    padding: 14px 20px;
+    margin-bottom: 25px;
     border-radius: 12px;
     border: 2px solid #003366;
-    font-size: 14px;
+    font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* centraliza a barra */
 }
 
 #search-bar:focus {
     border-color: #00bfff;
-    box-shadow: 0 4px 10px rgba(0,191,255,0.4);
-}
-
-/* ===== CARROSSEL DE PROPAGANDAS ===== */
-#carousel {
-    width: 80%;
-    height: 150px; /* altura menor */
-    margin: 0 auto 25px auto;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 2px solid #003366;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-#carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 1s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
 }
 
 .products {
@@ -157,13 +140,13 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     transition: all 0.3s ease;
-    animation: piscar 2s infinite;
+    animation: piscar 2s infinite; /* efeito de piscar */
 }
 
 @keyframes piscar {
-    0% { color: #a8d0ff; }
-    50% { color: #003366; }
-    100% { color: #001a33; }
+    0% { color: #a8d0ff; }    /* azul clarinho */
+    50% { color: #003366; }   /* azul normal */
+    100% { color: #001a33; }  /* azul escuro */
 }
 
 .dark-blue:hover {
@@ -249,6 +232,27 @@ button.add-cart:hover {
 .btn-cart:hover {
     background: #b30000;
 }
+
+/* CARROSSEL DE PROPAGANDAS - QUADRADO E VISÍVEL */
+#carousel {
+    width: 300px;       /* largura fixa */
+    height: 300px;      /* altura fixa */
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* mantém proporção e preenche todo o espaço */
+    transition: opacity 1s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -264,7 +268,7 @@ button.add-cart:hover {
 
     <!-- CARROSSEL DE PROPAGANDAS -->
     <div id="carousel">
-        <img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda 1">
+        <img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda">
     </div>
 
     <!-- BARRA DE PESQUISA -->
@@ -401,7 +405,7 @@ const carousel = document.getElementById("carousel").querySelector("img");
 setInterval(() => {
     currentIndex = (currentIndex + 1) % carouselImages.length;
     carousel.src = carouselImages[currentIndex];
-}, 3000); // troca a cada 3 segundos
+}, 3000);
 </script>
 
 </body>
