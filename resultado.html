@@ -113,6 +113,7 @@ h2 {
     margin-top: 30px;
 }
 
+/* PRODUTOS */
 .product {
     background: #f7faff;
     border-radius: 12px;
@@ -144,6 +145,7 @@ h2 {
 
 .old-price { text-decoration: line-through; }
 
+/* CARROSSEL */
 #carousel {
     width: 360px;
     height: 320px;
@@ -184,6 +186,7 @@ h2 {
     background: rgba(0,0,0,0.7);
 }
 
+/* POPUP DO CARRINHO */
 #cart-popup {
     display: none;
     position: fixed;
@@ -255,6 +258,7 @@ h2 {
     <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
+<!-- POPUP DO CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -263,6 +267,7 @@ h2 {
         <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
 
         <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
+        <!-- BOTÃO FINALIZAR COMPRA REDIRECIONANDO -->
         <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
         <button class="cart-btn" id="close-cart">Fechar</button>
     </div>
@@ -315,6 +320,8 @@ h2 {
 </div>
 
 <script>
+/* ===== SISTEMA DO CARRINHO ===== */
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -366,12 +373,20 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
+// NOVA FUNÇÃO: FINALIZAR COMPRA REDIRECIONANDO
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
-    } else {
-        window.location.href = "finalizar.html";  // ✔ REDIRECIONA PARA finalizar.html
+        return;
     }
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    // SALVAR NO LOCALSTORAGE PARA FINALIZAR
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    localStorage.setItem("total", total.toFixed(2));
+
+    window.location.href = "finalizar.html";
 };
 
 /* ===== BUSCA ===== */
