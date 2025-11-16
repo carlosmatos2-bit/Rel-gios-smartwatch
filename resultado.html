@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loja Oficial Smartwatch</title>
-<style>
-/* ========= GERAL ========= */
-:root{
-  --blue-600:#003366;
-  --blue-500:#004080;
-  --accent:#00bfff;
-  --card:#f7faff;
-  --glass: rgba(255,255,255,0.85);
-}
 
-*{box-sizing:border-box}
+<style>
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -22,493 +13,301 @@ body {
     background-size: cover;
     color: #1a2a40;
     position: relative;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
 }
+
 body::before {
     content: "";
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: inherit;
     background-size: cover;
     filter: blur(18px) brightness(0.7);
     z-index: -1;
 }
 
-/* ========= HEADER ========= */
 header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 20px;
-    background: var(--blue-600);
-    color:white;
-    gap:12px;
-    flex-wrap:wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #002b55;
+    color: white;
+    position: relative;
 }
-header h1{ margin:0; font-size:22px; font-weight:700; letter-spacing:0.6px;}
-.header-right{display:flex;gap:12px;align-items:center}
 
-/* carrinho - botão com badge */
-#cart-btn{
-    background: linear-gradient(135deg,var(--blue-500),var(--blue-600));
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#usuario-logado {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#cart-btn {
+    background:#004080;
     color:white;
-    padding:10px 14px;
+    padding:8px 15px;
     border:none;
-    border-radius:9px;
+    border-radius:6px;
     cursor:pointer;
-    font-size:15px;
-    font-weight:700;
-    box-shadow:0 0 10px rgba(0,191,255,0.12);
-    position:relative;
-    transition:transform .18s ease, box-shadow .18s ease;
-}
-#cart-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,191,255,0.18); }
-#cart-count{
-    position:absolute;
-    top:-6px; right:-6px;
-    background:#ff4757; color:white; font-weight:800;
-    font-size:12px; padding:4px 7px; border-radius:999px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.2);
+    font-size:16px;
+    font-weight:bold;
+    box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
+    transition: all 0.3s ease;
 }
 
-/* ========= CONTAINER PRINCIPAL ========= */
-.container{
-  max-width:1200px;
-  margin:36px auto;
-  padding:20px;
-  background: var(--glass);
-  border-radius:14px;
-  border: 3px solid var(--blue-600);
-  box-shadow:0 8px 30px rgba(0,51,102,0.2);
+#cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
 
-/* título */
-h2{ text-align:center; color:var(--blue-600); font-size:26px; margin:6px 0 18px 0; }
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
+    backdrop-filter: blur(10px);
+}
 
-/* ========= CARROSSEL ========= */
+h2 {
+    text-align: center;
+    color: #002244;
+    font-size: 28px;
+}
+
+/* ===== BARRA DE PESQUISA ===== */
+#search-bar {
+    width: 50%;
+    padding: 14px 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#search-bar:focus {
+    border-color: #00bfff;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* ===== PRODUTOS ===== */
+.product {
+    background: #f7faff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid #003366;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
+    transition: all 0.4s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        6px 6px 20px rgba(0, 51, 102, 0.7),
+        inset 2px 2px 8px rgba(255,255,255,0.7),
+        inset -2px -2px 8px rgba(0,0,0,0.1);
+}
+
+.dark-blue {
+    font-size: 20px;
+    font-weight: bold;
+    animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+    0% { color: #a8d0ff; }
+    50% { color: #003366; }
+    100% { color: #001a33; }
+}
+
+.old-price { text-decoration: line-through; }
+
+/* ===== CARROSSEL ===== */
 #carousel {
-    width:100%;
-    max-width:420px;
-    height:320px;
-    margin: 0 auto 20px auto;
-    overflow:hidden;
-    border-radius:12px;
-    border:2px solid var(--blue-600);
-    position:relative;
-}
-#carousel .slides{ display:flex; width:100%; height:100%; transition:transform .7s cubic-bezier(.2,.9,.2,1); }
-#carousel .slide{ min-width:100%; height:100%; flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-#carousel img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-.carousel-btn{
-    position:absolute; top:50%; transform:translateY(-50%);
-    font-size:30px; color:white; background: rgba(0,0,0,0.45);
-    border:none; padding:8px 12px; cursor:pointer; border-radius:6px; transition:background .18s ease;
-}
-.carousel-btn:hover{ background: rgba(0,0,0,0.75); }
-#prevBtn{ left:8px } #nextBtn{ right:8px }
-
-/* indicadores */
-.carousel-indicators{ position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:8px; z-index:5; }
-.ind-dot{ width:10px; height:10px; border-radius:999px; background:rgba(255,255,255,0.5); cursor:pointer; border:2px solid rgba(0,0,0,0.12); transition: all .18s; }
-.ind-dot.active{ background:var(--accent); transform:scale(1.15); box-shadow:0 6px 14px rgba(0,191,255,0.12); }
-
-/* ========= BARRA DE PESQUISA ========= */
-#search-wrap{ display:flex; justify-content:center; margin-bottom:18px; }
-#search-bar{
-    width:100%; max-width:520px; padding:12px 16px; border-radius:12px; border:2px solid var(--blue-600);
-    font-size:15px; outline:none; box-shadow:0 6px 18px rgba(0,0,0,0.06);
-}
-#search-bar:focus{ border-color:var(--accent); box-shadow:0 10px 26px rgba(0,191,255,0.08); }
-
-/* ========= PRODUTOS ========= */
-.products{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-  margin-top:10px;
+    width: 360px;
+    height: 320px;
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.product{
-  background:var(--card);
-  border-radius:12px;
-  padding:18px;
-  border:2px solid var(--blue-600);
-  box-shadow: 4px 6px 18px rgba(0,0,0,0.12);
-  transition: transform .18s, box-shadow .18s;
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
 }
-.product:hover{ transform: translateY(-6px); box-shadow: 10px 18px 40px rgba(0,51,102,0.14); }
 
-.product a{ text-decoration:none; color:inherit; display:block; }
-.dark-blue{ font-size:18px; font-weight:800; color:var(--blue-600); margin-bottom:6px; display:inline-block; }
-
-/* preço */
-.old-price{ text-decoration:line-through; color: #7b7b7b; margin:6px 0 0 0; }
-.price{ font-weight:800; margin:6px 0 8px; color:#073b6a; }
-
-/* botão adicionar com estilo melhor (mantendo azul) */
-.add-cart{
-  width:100%;
-  padding:12px 14px;
-  border-radius:10px;
-  border:none;
-  background: linear-gradient(135deg,var(--accent), #0060c9);
-  color:white;
-  font-weight:800;
-  cursor:pointer;
-  box-shadow: 0 6px 18px rgba(0,140,255,0.18);
-  transition: transform .16s, box-shadow .16s;
+/* SETAS DO CARROSSEL */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
 }
-.add-cart:hover{ transform:translateY(-4px); box-shadow: 0 10px 26px rgba(0,140,255,0.24); }
 
-/* ========= SIDEBAR CARRINHO ========= */
-#cart-side{
-  position:fixed;
-  right:-420px;
-  top:0;
-  height:100%;
-  width:380px;
-  max-width:92%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
-  border-left:4px solid var(--blue-600);
-  box-shadow: -10px 0 40px rgba(0,0,0,0.2);
-  transition: right .35s cubic-bezier(.2,.9,.2,1);
-  z-index:9999;
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-}
-#cart-side.open{ right:0; }
-.cart-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
-.cart-items{ flex:1; overflow:auto; padding:8px 0; display:flex; flex-direction:column; gap:12px; }
-.cart-empty{ color:#666; text-align:center; padding:20px 8px; }
-.cart-item{ display:flex; gap:12px; align-items:center; border-radius:10px; padding:8px; border:1px solid rgba(0,0,0,0.05); background:rgba(255,255,255,0.85);}
-.cart-item .meta{ flex:1; }
-.cart-item .meta h4{ margin:0 0 6px 0; font-size:14px; }
-.cart-item .meta p{ margin:0; font-size:13px; color:#555; }
-.qty-controls{ display:flex; gap:8px; align-items:center; margin-top:8px; }
-.qty-controls button{ padding:6px 8px; border-radius:8px; border:none; cursor:pointer; background:var(--blue-500); color:white; font-weight:700; }
-.remove-btn{ background:#ff6b6b; border:none; padding:8px 10px; border-radius:8px; color:white; cursor:pointer; font-weight:700; }
+#prevBtn { left: 5px; }
+#nextBtn { right: 5px; }
 
-/* rodapé do carrinho */
-.cart-footer{ margin-top:12px; border-top:1px dashed rgba(0,0,0,0.06); padding-top:12px; display:flex; flex-direction:column; gap:10px;}
-.checkout-btn{ padding:12px; border-radius:10px; background:linear-gradient(135deg,#00bfff,#0060c9); color:white; font-weight:800; border:none; cursor:pointer; }
-
-/* ========= RESPONSIVIDADE ========= */
-@media (max-width:900px){
-  .container{ margin:18px; padding:14px; }
-  #carousel{ max-width:100%; height:240px; }
-}
-@media (max-width:520px){
-  header h1{ font-size:18px; }
-  #search-bar{ max-width:100%; }
-  #cart-side{ width:100%; max-width:100%; }
-  .product{ padding:14px; }
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
 }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>SMARTWATCH STORE</h1>
-  <div class="header-right">
-    <button id="cart-btn" aria-label="Abrir carrinho">🛒 Carrinho <span id="cart-count" style="display:none">0</span></button>
-  </div>
+    <h1>SMARTWATCH STORE</h1>
+    <div id="usuario-logado"></div>
+    <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
 <div class="container">
-  <h2>Relógios Premium em Promoção</h2>
+    <h2>Relógios Premium em Promoção</h2>
 
-  <!-- CARROSSEL -->
-  <div id="carousel" aria-label="Carrossel de anúncios">
-    <div class="slides" id="slides">
-      <div class="slide"><img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="banner 1"></div>
-      <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk" alt="banner 2"></div>
-      <div class="slide"><img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="banner 3"></div>
+    <!-- CARROSSEL -->
+    <div id="carousel">
+        <button id="prevBtn" class="carousel-btn">❮</button>
+        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda">
+        <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
-    <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
-    <button id="nextBtn" class="carousel-btn" aria-label="Próxima">❯</button>
+    <!-- BARRA DE PESQUISA -->
+    <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
-    <div class="carousel-indicators" id="indicators"></div>
-  </div>
+    <div class="products">
 
-  <!-- BUSCA -->
-  <div id="search-wrap">
-    <input id="search-bar" type="text" placeholder="Pesquisar produto..." aria-label="Pesquisar produto">
-  </div>
+        <div class="product">
+            <a href="polar.html" style="text-decoration:none;">
+                <div class="dark-blue">Relógio Polar Unite</div>
+            </a>
+            <h3>Monitoramento completo de saúde</h3>
+            <p class="old-price">R$ 199,00</p>
+            <p class="price">R$ 149,00</p>
+            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+        </div>
 
-  <!-- PRODUTOS -->
-  <div class="products" id="products-list">
+        <div class="product">
+            <a href="garmin.html" style="text-decoration:none;">
+                <div class="dark-blue">Garmin Epix Gen 2</div>
+            </a>
+            <h3>GPS avançado e extrema performance</h3>
+            <p class="old-price">R$ 4500,00</p>
+            <p class="price">R$ 3599,99</p>
+            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
+        </div>
 
-    <div class="product" data-name="relógio polar unite">
-        <a href="polar.html"><div class="dark-blue">Relógio Polar Unite</div></a>
-        <h3>Monitoramento completo de saúde</h3>
-        <p class="old-price">R$ 199,00</p>
-        <p class="price">R$ 149,00</p>
-        <button class="add-cart" data-name="Relógio Polar Unite" data-price="149">Adicionar ao Carrinho</button>
+        <div class="product">
+            <a href="ultra.html" style="text-decoration:none;">
+                <div class="dark-blue">Ultra AI 3 5G</div>
+            </a>
+            <h3>Chip 5G e resistência extrema</h3>
+            <p class="old-price">R$ 499,00</p>
+            <p class="price">R$ 349,00</p>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+        </div>
+
     </div>
-
-    <div class="product" data-name="garmin epix gen 2">
-        <a href="garmin.html"><div class="dark-blue">Garmin Epix Gen 2</div></a>
-        <h3>GPS avançado e extrema performance</h3>
-        <p class="old-price">R$ 4500,00</p>
-        <p class="price">R$ 3599,99</p>
-        <button class="add-cart" data-name="Garmin Epix Gen 2" data-price="3599.99">Adicionar ao Carrinho</button>
-    </div>
-
-    <div class="product" data-name="ultra ai 3 5g">
-        <a href="ultra.html"><div class="dark-blue">Ultra AI 3 5G</div></a>
-        <h3>Chip 5G e resistência extrema</h3>
-        <p class="old-price">R$ 499,00</p>
-        <p class="price">R$ 349,00</p>
-        <button class="add-cart" data-name="Ultra AI 3 5G" data-price="349">Adicionar ao Carrinho</button>
-    </div>
-
-  </div>
 </div>
 
-<!-- SIDEBAR CARRINHO -->
-<aside id="cart-side" aria-label="Carrinho de compras">
-  <div class="cart-head">
-    <h3>Seu carrinho</h3>
-    <div>
-      <button id="close-cart" aria-label="Fechar carrinho" style="padding:8px 10px;border-radius:8px;border:none;background:#eee;cursor:pointer">Fechar</button>
-    </div>
-  </div>
-
-  <div class="cart-items" id="cart-items">
-    <!-- itens serão renderizados aqui -->
-  </div>
-
-  <div class="cart-footer">
-    <div style="display:flex; justify-content:space-between; align-items:center">
-      <strong>Total:</strong>
-      <strong id="cart-total">R$ 0,00</strong>
-    </div>
-    <button class="checkout-btn" id="checkout-btn">Finalizar compra</button>
-  </div>
-</aside>
-
 <script>
-/* ========= UTILIDADES ========= */
-function normalize(text){
-  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-function formatBRL(value){
-  return "R$ " + Number(value).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
-}
-
-/* ========= BUSCA (filtrar produtos) ========= */
+/* ===== SISTEMA DE BUSCA ===== */
 const searchBar = document.getElementById("search-bar");
-const productCards = document.querySelectorAll(".product");
+const products = document.querySelectorAll(".product");
+
+// Função que remove acentos e deixa minúsculo
+function normalize(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
 
 searchBar.addEventListener("input", () => {
-  const termo = normalize(searchBar.value.trim());
-  productCards.forEach(card => {
-    const name = normalize(card.getAttribute("data-name") || card.innerText);
-    card.style.display = (termo === "" || name.includes(termo)) ? "block" : "none";
-  });
-});
+    let termo = normalize(searchBar.value.trim());
 
-/* ========= CARROSSEL APRIMORADO ========= */
-const slidesEl = document.getElementById("slides");
-const slides = Array.from(document.querySelectorAll("#slides .slide"));
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const indicators = document.getElementById("indicators");
+    products.forEach(product => {
+        let nomeProduto = normalize(product.innerText);
 
-let slideIndex = 0;
-let autoplayTimer = null;
-
-// criar indicadores dinamicamente
-slides.forEach((_,i)=>{
-  const dot = document.createElement("div");
-  dot.className = "ind-dot" + (i===0?" active":"");
-  dot.dataset.index = i;
-  dot.addEventListener("click", ()=> { goToSlide(i); resetAutoplay(); });
-  indicators.appendChild(dot);
-});
-
-function updateIndicators(){
-  document.querySelectorAll(".ind-dot").forEach((d, i)=> d.classList.toggle("active", i===slideIndex));
-}
-
-function goToSlide(i){
-  slideIndex = (i + slides.length) % slides.length;
-  slidesEl.style.transform = `translateX(-${slideIndex*100}%)`;
-  updateIndicators();
-}
-
-nextBtn.addEventListener("click", ()=> { goToSlide(slideIndex+1); resetAutoplay(); });
-prevBtn.addEventListener("click", ()=> { goToSlide(slideIndex-1); resetAutoplay(); });
-
-// autoplay inteligente (pausa ao pairar)
-function startAutoplay(){
-  stopAutoplay();
-  autoplayTimer = setInterval(()=> goToSlide(slideIndex+1), 3500);
-}
-function stopAutoplay(){ if(autoplayTimer) clearInterval(autoplayTimer); autoplayTimer = null; }
-function resetAutoplay(){ startAutoplay(); }
-
-document.getElementById("carousel").addEventListener("mouseenter", stopAutoplay);
-document.getElementById("carousel").addEventListener("mouseleave", startAutoplay);
-
-// iniciar
-goToSlide(0);
-startAutoplay();
-
-/* ========= CARRINHO (localStorage) ========= */
-const addButtons = document.querySelectorAll(".add-cart");
-const cartBtn = document.getElementById("cart-btn");
-const cartSide = document.getElementById("cart-side");
-const closeCartBtn = document.getElementById("close-cart");
-const cartItemsEl = document.getElementById("cart-items");
-const cartTotalEl = document.getElementById("cart-total");
-const cartCountEl = document.getElementById("cart-count");
-
-let cart = {}; // estrutura: { "nome": { price: number, qty: number } }
-
-// carregar do localStorage
-function loadCart(){
-  try{
-    const raw = localStorage.getItem("loja_cart_v1");
-    if(raw) cart = JSON.parse(raw);
-    else cart = {};
-  }catch(e){ cart = {}; }
-  renderCart();
-}
-function saveCart(){ localStorage.setItem("loja_cart_v1", JSON.stringify(cart)); renderCart(); }
-
-function addToCart(name, price, qty=1){
-  if(cart[name]){
-    cart[name].qty += qty;
-  } else {
-    cart[name] = { price: Number(price), qty: qty };
-  }
-  saveCart();
-  openCart();
-}
-
-// event listeners para botões "Adicionar"
-addButtons.forEach(btn=>{
-  btn.addEventListener("click", (e)=>{
-    const name = btn.dataset.name;
-    const price = Number(btn.dataset.price);
-    addToCart(name, price, 1);
-  });
-});
-
-// abrir / fechar sidebar
-function openCart(){ cartSide.classList.add("open"); }
-function closeCart(){ cartSide.classList.remove("open"); }
-cartBtn.addEventListener("click", ()=> openCart() );
-closeCartBtn.addEventListener("click", ()=> closeCart() );
-
-// renderizar carrinho
-function renderCart(){
-  // atualizar badge
-  const totalQty = Object.values(cart).reduce((s,i)=> s + i.qty, 0);
-  if(totalQty > 0){
-    cartCountEl.style.display = "inline-block";
-    cartCountEl.textContent = totalQty;
-  } else {
-    cartCountEl.style.display = "none";
-  }
-
-  // limpar e preencher
-  cartItemsEl.innerHTML = "";
-  const names = Object.keys(cart);
-  if(names.length === 0){
-    cartItemsEl.innerHTML = `<div class="cart-empty">Seu carrinho está vazio.</div>`;
-    cartTotalEl.textContent = formatBRL(0);
-    return;
-  }
-
-  let total = 0;
-  names.forEach(name=>{
-    const item = cart[name];
-    total += item.price * item.qty;
-
-    const itemEl = document.createElement("div");
-    itemEl.className = "cart-item";
-
-    const meta = document.createElement("div");
-    meta.className = "meta";
-    meta.innerHTML = `<h4>${name}</h4><p>${formatBRL(item.price)}</p>`;
-
-    const controls = document.createElement("div");
-    controls.style.display = "flex";
-    controls.style.flexDirection = "column";
-    controls.style.alignItems = "flex-end";
-    controls.style.gap = "6px";
-
-    const qtyControls = document.createElement("div");
-    qtyControls.className = "qty-controls";
-
-    const btnMinus = document.createElement("button");
-    btnMinus.textContent = "-";
-    btnMinus.title = "Diminuir";
-    btnMinus.addEventListener("click", ()=> {
-      if(item.qty > 1) { item.qty--; cart[name] = item; saveCart(); }
-      else { delete cart[name]; saveCart(); }
+        if (termo === "") {
+            product.style.display = "block"; 
+        } else if (nomeProduto.includes(termo)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
     });
+});
 
-    const qtySpan = document.createElement("span");
-    qtySpan.textContent = item.qty;
-    qtySpan.style.minWidth = "24px";
-    qtySpan.style.textAlign = "center";
-    qtySpan.style.fontWeight = "700";
+/* ===== CARROSSEL ===== */
+const carouselImages = [
+    "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
+    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
+    "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f"
+];
 
-    const btnPlus = document.createElement("button");
-    btnPlus.textContent = "+";
-    btnPlus.title = "Aumentar";
-    btnPlus.addEventListener("click", ()=>{
-      item.qty++; cart[name] = item; saveCart();
-    });
+let currentIndex = 0;
+const carouselImg = document.getElementById("carousel-img");
 
-    qtyControls.appendChild(btnMinus);
-    qtyControls.appendChild(qtySpan);
-    qtyControls.appendChild(btnPlus);
-
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove-btn";
-    removeBtn.textContent = "Remover";
-    removeBtn.addEventListener("click", ()=>{
-      delete cart[name]; saveCart();
-    });
-
-    controls.appendChild(qtyControls);
-    controls.appendChild(removeBtn);
-
-    itemEl.appendChild(meta);
-    itemEl.appendChild(controls);
-    cartItemsEl.appendChild(itemEl);
-  });
-
-  cartTotalEl.textContent = formatBRL(total);
+function showImage(index) {
+    carouselImg.style.opacity = 0;
+    setTimeout(() => {
+        carouselImg.src = carouselImages[index];
+        carouselImg.style.opacity = 1;
+    }, 300);
 }
 
-/* ========= FINALIZAR COMPRA (NOVO REDIRECIONAMENTO) ========= */
-document.getElementById("checkout-btn").addEventListener("click", ()=>{
-  if(Object.keys(cart).length === 0){
-    alert("Seu carrinho está vazio.");
-    return;
-  }
+document.getElementById("nextBtn").onclick = () => {
+    currentIndex = (currentIndex + 1) % carouselImages.length;
+    showImage(currentIndex);
+};
 
-  // redireciona para página de finalização
-  window.location.href = "finalizar.html";
-});
+document.getElementById("prevBtn").onclick = () => {
+    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+    showImage(currentIndex);
+};
 
-// iniciar carregamento
-loadCart();
-
-/* ========= ACESSIBILIDADE: fechar com ESC ========= */
-document.addEventListener("keydown", (e)=>{
-  if(e.key === "Escape" && cartSide.classList.contains("open")) closeCart();
-});
+// troca automática
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % carouselImages.length;
+    showImage(currentIndex);
+}, 3000);
 </script>
+
 </body>
 </html>
