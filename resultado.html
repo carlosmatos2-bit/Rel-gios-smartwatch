@@ -86,16 +86,9 @@ h2 {
     font-size: 28px;
 }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
 /* ===== BARRA DE PESQUISA ===== */
 #search-bar {
-    width: 100%;
+    width: 50%; /* metade do tamanho */
     padding: 14px 20px;
     margin-bottom: 25px;
     border-radius: 12px;
@@ -104,11 +97,21 @@ h2 {
     outline: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* centraliza a barra */
 }
 
 #search-bar:focus {
     border-color: #00bfff;
     box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
 }
 
 /* ===== PRODUTOS COM EFEITO DE RELEVO ===== */
@@ -137,13 +140,13 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     transition: all 0.3s ease;
-    animation: piscar 2s infinite;
+    animation: piscar 2s infinite; /* efeito de piscar */
 }
 
 @keyframes piscar {
-    0% { color: #a8d0ff; }
-    50% { color: #003366; }
-    100% { color: #001a33; }
+    0% { color: #a8d0ff; }    /* azul clarinho */
+    50% { color: #003366; }   /* azul normal */
+    100% { color: #001a33; }  /* azul escuro */
 }
 
 .dark-blue:hover {
@@ -243,9 +246,9 @@ button.add-cart:hover {
     <h2>Relógios Premium em Promoção</h2>
 
     <!-- BARRA DE PESQUISA -->
-    <input type="text" id="search-bar" placeholder="🔍 Pesquise um relógio...">
+    <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
-    <div class="products" id="products-container">
+    <div class="products">
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue">Relógio Polar Unite</div>
@@ -346,15 +349,16 @@ function finalizarCompra() {
     window.location.href = "finalizar.html";
 }
 
-// ===== FILTRO DE PRODUTOS =====
+// ===== FILTRAR PRODUTOS =====
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
 searchBar.addEventListener("input", () => {
-    const query = searchBar.value.toLowerCase();
+    const searchValue = searchBar.value.toLowerCase();
+
     products.forEach(product => {
-        const name = product.querySelector(".dark-blue").innerText.toLowerCase();
-        if(name.includes(query) || query === "") {
+        const productName = product.querySelector(".dark-blue").textContent.toLowerCase();
+        if(productName.includes(searchValue) || searchValue === "") {
             product.style.display = "block";
         } else {
             product.style.display = "none";
