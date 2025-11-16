@@ -98,13 +98,14 @@ h2 {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: 0.3s;
+    transition: all 0.4s ease;
     border: 2px solid #003366;
 }
 
+/* Efeito de relevo em toda a caixa ao passar o mouse */
 .product:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 18px rgba(0, 51, 102, 0.7);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(0, 51, 102, 0.7), 0 0 30px rgba(0,0,0,0.2);
 }
 
 .product h3 {
@@ -190,11 +191,11 @@ button.add-cart:hover {
     background: #b30000;
 }
 
+/* Efeito de relevo nos títulos */
 .dark-blue {
     color: #003366;
     font-size: 20px;
     font-weight: bold;
-    /* EFEITO DE RELEVO AO PASSAR O MOUSE */
     transition: all 0.3s ease;
 }
 .dark-blue:hover {
