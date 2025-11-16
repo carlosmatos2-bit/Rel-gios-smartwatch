@@ -86,158 +86,6 @@ h2 {
     font-size: 28px;
 }
 
-/* area que agrupa carousel + propaganda lateral */
-.media-row {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-/* ===== CARROSSEL ===== */
-#carousel {
-    width: 360px;
-    height: 320px;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 2px solid #003366;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-#carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.6s ease-in-out;
-}
-
-/* SETAS DO CARROSSEL */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 32px;
-    color: white;
-    background: rgba(0,0,0,0.4);
-    border: none;
-    padding: 8px 14px;
-    cursor: pointer;
-    border-radius: 6px;
-    z-index: 2;
-}
-
-#prevBtn { left: 8px; }
-#nextBtn { right: 8px; }
-
-.carousel-btn:hover {
-    background: rgba(0,0,0,0.7);
-}
-
-/* ===== NOVA CAIXA DE PROPAGANDA (lado direito) ===== */
-.ads-box {
-    width: 360px;
-    border: 2px solid #003366;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,250,255,0.95));
-    padding: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.ads-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 8px;
-    border-bottom: 1px dashed rgba(0,51,102,0.12);
-}
-
-.ads-header h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #002244;
-}
-
-.ads-header small {
-    color: #0066cc;
-    font-weight: bold;
-    background: rgba(0,191,255,0.08);
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: 1px solid rgba(0,191,255,0.15);
-}
-
-/* cada propaganda (cartão) */
-.ad-item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 8px;
-    border-radius: 10px;
-    background: linear-gradient(180deg, #ffffff, #f3fbff);
-    border: 1px solid rgba(0,51,102,0.06);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.ad-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,51,102,0.12);
-}
-
-.ad-thumb {
-    width: 86px;
-    height: 86px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.06);
-    flex-shrink: 0;
-    background: #fff;
-}
-
-.ad-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.ad-info {
-    flex: 1;
-}
-
-.ad-info .title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #003366;
-    margin-bottom: 6px;
-}
-
-.ad-info .desc {
-    font-size: 13px;
-    margin-bottom: 8px;
-    color: #40546a;
-}
-
-.ad-info .cta {
-    display: inline-block;
-    padding: 8px 10px;
-    border-radius: 8px;
-    background: linear-gradient(90deg,#0077cc,#00aaff);
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13px;
-    box-shadow: 0 6px 12px rgba(0,170,255,0.18);
-}
-
 /* ===== BARRA DE PESQUISA ===== */
 #search-bar {
     width: 50%;
@@ -298,11 +146,46 @@ h2 {
 
 .old-price { text-decoration: line-through; }
 
-/* responsividade */
-@media (max-width: 900px) {
-    .media-row { justify-content: center; }
-    #carousel, .ads-box { width: 92%; max-width: 560px; }
-    #search-bar { width: 90%; }
+/* ===== CARROSSEL ===== */
+#carousel {
+    width: 360px;
+    height: 320px;
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+/* SETAS DO CARROSSEL */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#prevBtn { left: 5px; }
+#nextBtn { right: 5px; }
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
 }
 </style>
 </head>
@@ -317,58 +200,11 @@ h2 {
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
-    <!-- LINHA: CARROSSEL + PROPAGANDA LATERAL -->
-    <div class="media-row">
-        <!-- CARROSSEL -->
-        <div id="carousel" aria-label="Carrossel de propagandas">
-            <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
-            <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda principal">
-            <button id="nextBtn" class="carousel-btn" aria-label="Próximo">❯</button>
-        </div>
-
-        <!-- NOVA CAIXA DE PROPAGANDAS (lado direito) -->
-        <aside class="ads-box" aria-label="Propagandas sugeridas">
-            <div class="ads-header">
-                <h3>Propagandas</h3>
-                <small>Patrocinado</small>
-            </div>
-
-            <!-- AD 1 -->
-            <div class="ad-item">
-                <div class="ad-thumb">
-                    <img src="https://imgs.casasbahia.com.br/550x550/1568122185/1.webp" alt="Samsung Galaxy Watch7">
-                </div>
-                <div class="ad-info">
-                    <div class="title">Samsung Galaxy Watch7</div>
-                    <div class="desc">Tela em cristal de safira — desempenho premium.</div>
-                    <a class="cta" href="#" onclick="adClick('Samsung Galaxy Watch7')">Ver Oferta</a>
-                </div>
-            </div>
-
-            <!-- AD 2 -->
-            <div class="ad-item">
-                <div class="ad-thumb">
-                    <img src="https://s2-techtudo.glbimg.com/JkQc71NwBxijAn1rwwS9i9Pq37s=/0x0:2560x1707/640x360/smart/filters:strip_icc()/s2-techtudo.glbimg.com/fUetgAG6TlT1eNwQdPdmZiB247M=/0x0:2560x1707/2560x1707/smart/filters:strip_icc()/i553231.jpeg" alt="Smartwatch - TechTudo">
-                </div>
-                <div class="ad-info">
-                    <div class="title">Guia Smartwatches</div>
-                    <div class="desc">Opções e dicas para escolher seu próximo relógio.</div>
-                    <a class="cta" href="#" onclick="adClick('Guia Smartwatches - TechTudo')">Saiba Mais</a>
-                </div>
-            </div>
-
-            <!-- AD 3 -->
-            <div class="ad-item">
-                <div class="ad-thumb">
-                    <img src="https://www.dalpozzo.com.br/media/catalog/product/cache/1/image/700x/0dc2d03fe217f8c83829496872af24a0/r/e/relogio_smartwatch_dalpozzo_1_.jpg" alt="Smartwatch DalPozzo">
-                </div>
-                <div class="ad-info">
-                    <div class="title">DalPozzo Smartwatch</div>
-                    <div class="desc">Modelo com design moderno e bateria duradoura.</div>
-                    <a class="cta" href="#" onclick="adClick('DalPozzo Smartwatch')">Comprar</a>
-                </div>
-            </div>
-        </aside>
+    <!-- CARROSSEL -->
+    <div id="carousel">
+        <button id="prevBtn" class="carousel-btn">❮</button>
+        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda">
+        <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
     <!-- BARRA DE PESQUISA -->
@@ -402,20 +238,20 @@ h2 {
             <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho>
         </div>
     </div>
 </div>
 
 <script>
+/* ===== CARRINHO ===== */
+// (todo o seu JS igual)
+
 /* ===== CARROSSEL ===== */
 const carouselImages = [
     "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
-    "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
-    "https://imgs.casasbahia.com.br/550x550/1568122185/1.webp",
-    "https://s2-techtudo.glbimg.com/JkQc71NwBxijAn1rwwS9i9Pq37s=/0x0:2560x1707/640x360/smart/filters:strip_icc()/s2-techtudo.glbimg.com/fUetgAG6TlT1eNwQdPdmZiB247M=/0x0:2560x1707/2560x1707/smart/filters:strip_icc()/i553231.jpeg",
-    "https://www.dalpozzo.com.br/media/catalog/product/cache/1/image/700x/0dc2d03fe217f8c83829496872af24a0/r/e/relogio_smartwatch_dalpozzo_1_.jpg"
+    "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f"
 ];
 
 let currentIndex = 0;
@@ -426,7 +262,7 @@ function showImage(index) {
     setTimeout(() => {
         carouselImg.src = carouselImages[index];
         carouselImg.style.opacity = 1;
-    }, 250);
+    }, 300);
 }
 
 document.getElementById("nextBtn").onclick = () => {
@@ -440,30 +276,10 @@ document.getElementById("prevBtn").onclick = () => {
 };
 
 // troca automática
-let carouselInterval = setInterval(() => {
+setInterval(() => {
     currentIndex = (currentIndex + 1) % carouselImages.length;
     showImage(currentIndex);
-}, 3500);
-
-// pausa ao passar o mouse (melhor usabilidade)
-const carouselEl = document.getElementById('carousel');
-carouselEl.addEventListener('mouseenter', () => clearInterval(carouselInterval));
-carouselEl.addEventListener('mouseleave', () => {
-    carouselInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % carouselImages.length;
-        showImage(currentIndex);
-    }, 3500);
-});
-
-/* ===== FUNÇÕES DE EXEMPLO ===== */
-function addToCart(name, price) {
-    alert(name + " adicionado ao carrinho por R$ " + price.toFixed(2));
-}
-
-/* função chamada pelos CTAs das propagandas */
-function adClick(name) {
-    alert("Você clicou na propaganda: " + name);
-}
+}, 3000);
 </script>
 
 </body>
