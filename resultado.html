@@ -86,7 +86,6 @@ h2 {
     font-size: 28px;
 }
 
-/* ===== BARRA DE PESQUISA ===== */
 #search-bar {
     width: 50%;
     padding: 14px 20px;
@@ -114,7 +113,7 @@ h2 {
     margin-top: 30px;
 }
 
-/* ===== PRODUTOS ===== */
+/* PRODUTOS */
 .product {
     background: #f7faff;
     border-radius: 12px;
@@ -146,7 +145,7 @@ h2 {
 
 .old-price { text-decoration: line-through; }
 
-/* ===== CARROSSEL ===== */
+/* CARROSSEL */
 #carousel {
     width: 360px;
     height: 320px;
@@ -167,7 +166,6 @@ h2 {
     transition: opacity 1s ease-in-out;
 }
 
-/* SETAS DO CARROSSEL */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -187,6 +185,69 @@ h2 {
 .carousel-btn:hover {
     background: rgba(0,0,0,0.7);
 }
+
+/* POPUP DO CARRINHO */
+#cart-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#cart-box {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px #002244;
+}
+
+#cart-items {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.cart-title {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.cart-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#close-cart {
+    background: #002b55;
+    color: white;
+}
+
+#clear-cart {
+    background: #cc0000;
+    color: white;
+}
+
+#checkout {
+    background: #009933;
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -197,17 +258,29 @@ h2 {
     <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
+<!-- POPUP DO CARRINHO -->
+<div id="cart-popup">
+    <div id="cart-box">
+        <div class="cart-title">Seu Carrinho</div>
+
+        <div id="cart-items"></div>
+        <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
+
+        <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
+        <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
+        <button class="cart-btn" id="close-cart">Fechar</button>
+    </div>
+</div>
+
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
-    <!-- CARROSSEL -->
     <div id="carousel">
         <button id="prevBtn" class="carousel-btn">❮</button>
         <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda">
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
-    <!-- BARRA DE PESQUISA -->
     <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
     <div class="products">
@@ -228,7 +301,7 @@ h2 {
             </a>
             <h3>GPS avançado e extrema performance</h3>
             <p class="old-price">R$ 4500,00</p>
-            <p class="price">R$ 3599,99</p>
+            <p class="price">R$ 3599.99</p>
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
 
@@ -246,31 +319,85 @@ h2 {
 </div>
 
 <script>
-/* ===== SISTEMA DE BUSCA ===== */
+/* ===== SISTEMA DO CARRINHO ===== */
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    saveCart();
+    alert(name + " foi adicionado ao carrinho!");
+}
+
+function updateCartDisplay() {
+    const container = document.getElementById("cart-items");
+    container.innerHTML = "";
+
+    if (cart.length === 0) {
+        container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
+    } else {
+        cart.forEach((item, index) => {
+            container.innerHTML += `
+                <div style="border-bottom:1px solid #ccc; padding:8px 0;">
+                    <strong>${item.name}</strong><br>
+                    R$ ${item.price.toFixed(2)}
+                </div>
+            `;
+        });
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    document.getElementById("cart-total").innerHTML =
+        `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+}
+
+document.getElementById("cart-btn").onclick = () => {
+    updateCartDisplay();
+    document.getElementById("cart-popup").style.display = "flex";
+};
+
+document.getElementById("close-cart").onclick = () => {
+    document.getElementById("cart-popup").style.display = "none";
+};
+
+document.getElementById("clear-cart").onclick = () => {
+    if (confirm("Tem certeza que deseja limpar o carrinho?")) {
+        cart = [];
+        saveCart();
+        updateCartDisplay();
+    }
+};
+
+document.getElementById("checkout").onclick = () => {
+    if (cart.length === 0) {
+        alert("Seu carrinho está vazio!");
+    } else {
+        alert("Compra finalizada! Obrigado!");
+        cart = [];
+        saveCart();
+        updateCartDisplay();
+    }
+};
+
+/* ===== BUSCA ===== */
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
-// Função que remove acentos e deixa minúsculo
-function normalize(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+function normalize(t) {
+    return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 searchBar.addEventListener("input", () => {
     let termo = normalize(searchBar.value.trim());
 
     products.forEach(product => {
-        let nomeProduto = normalize(product.innerText);
+        let nome = normalize(product.innerText);
 
-        if (termo === "") {
-            product.style.display = "block"; 
-        } else if (nomeProduto.includes(termo)) {
-            product.style.display = "block";
-        } else {
-            product.style.display = "none";
-        }
+        product.style.display = nome.includes(termo) ? "block" : "none";
     });
 });
 
@@ -302,7 +429,6 @@ document.getElementById("prevBtn").onclick = () => {
     showImage(currentIndex);
 };
 
-// troca automática
 setInterval(() => {
     currentIndex = (currentIndex + 1) % carouselImages.length;
     showImage(currentIndex);
