@@ -211,6 +211,7 @@ h2 {
     <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
     <div class="products">
+
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue">Relógio Polar Unite</div>
@@ -238,14 +239,40 @@ h2 {
             <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
+
     </div>
 </div>
 
 <script>
-/* ===== CARRINHO ===== */
-// (todo o seu JS igual)
+/* ===== SISTEMA DE BUSCA ===== */
+const searchBar = document.getElementById("search-bar");
+const products = document.querySelectorAll(".product");
+
+// Função que remove acentos e deixa minúsculo
+function normalize(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+searchBar.addEventListener("input", () => {
+    let termo = normalize(searchBar.value.trim());
+
+    products.forEach(product => {
+        let nomeProduto = normalize(product.innerText);
+
+        if (termo === "") {
+            product.style.display = "block"; 
+        } else if (nomeProduto.includes(termo)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+});
 
 /* ===== CARROSSEL ===== */
 const carouselImages = [
