@@ -93,23 +93,39 @@ h2 {
     margin-top: 30px;
 }
 
+/* ===== PRODUTOS COM EFEITO DE RELEVO ===== */
 .product {
     background: #f7faff;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.4s ease;
     border: 2px solid #003366;
+    /* sombra leve inicial */
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
+    transition: all 0.4s ease;
 }
 
-/* Efeito de relevo em toda a caixa ao passar o mouse */
 .product:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 25px rgba(0, 51, 102, 0.7), 0 0 30px rgba(0,0,0,0.2);
+    box-shadow:
+        6px 6px 20px rgba(0, 51, 102, 0.7),
+        inset 2px 2px 8px rgba(255,255,255,0.7),
+        inset -2px -2px 8px rgba(0,0,0,0.1);
 }
 
 .product h3 {
     color: #002244;
+}
+
+.dark-blue {
+    color: #003366;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.dark-blue:hover {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    transform: translateY(-2px);
 }
 
 .old-price {
@@ -189,18 +205,6 @@ button.add-cart:hover {
 
 .btn-cart:hover {
     background: #b30000;
-}
-
-/* Efeito de relevo nos títulos */
-.dark-blue {
-    color: #003366;
-    font-size: 20px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-.dark-blue:hover {
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-    transform: translateY(-2px);
 }
 </style>
 </head>
