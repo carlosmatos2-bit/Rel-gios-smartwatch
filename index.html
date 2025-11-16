@@ -6,320 +6,283 @@
 <title>Smartwatch Premium</title>
 
 <style>
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
-    min-height: 100vh;
-    color: #fff;
+  font-family: 'Arial', sans-serif;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  position: relative;
+  min-height: 100vh;
 }
 
-/* Fundo desfocado */
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
-    filter: blur(12px) brightness(0.6);
-    z-index: -1;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  filter: blur(12px) brightness(0.6);
+  z-index: -1;
 }
 
-/* HEADER */
 header {
-    width: 100%;
-    padding: 18px 40px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    position: sticky;
-    top: 0;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.25);
+  width: 100%;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
 }
 
 header h1 {
-    font-size: 28px;
-    color: #fff;
-    letter-spacing: 1px;
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: 1px;
 }
 
-/* HERO */
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
 .hero {
-    padding: 50px 20px;
-    text-align: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
 }
 
 .hero img {
-    width: 270px;
-    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
-    animation: pulse 2.5s infinite ease-in-out;
+  width: 280px;
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.4));
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
 }
 
 .hero h2 {
-    margin-top: 20px;
-    font-size: 34px;
-    font-weight: bold;
+  margin-top: 20px;
+  font-size: 32px;
 }
 
-.hero p {
-    margin-top: 8px;
-    font-size: 18px;
-}
-
-/* BENEFÍCIOS */
 .beneficios {
-    padding: 50px 20px;
-    background: #fff;
-    border-radius: 30px 30px 0 0;
-    margin-top: 50px;
-    color: #003366;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  margin-top: 40px;
 }
 
 .beneficios h2 {
-    text-align: center;
-    font-size: 26px;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #003366;
 }
 
 .beneficios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
 }
 
 .beneficio {
-    background: #e7f1ff;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    font-weight: 600;
-    box-shadow: 0 0 15px rgba(0,0,0,0.12);
-    transition: 0.3s;
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.beneficio:hover {
-    transform: translateY(-5px);
-}
-
-/* FORMULÁRIOS */
 form {
-    max-width: 600px;
-    background: white;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 18px rgba(0,0,0,0.25);
+  max-width: 600px;
+  background: white;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-form h2 {
-    text-align: center;
-    margin-bottom: 18px;
-    font-size: 24px;
-    color: #003366;
+form h2 { 
+  text-align: center; 
+  margin-bottom: 20px; 
+  color: #003366;
 }
 
-label {
-    font-weight: 600;
-    margin-top: 12px;
-    display: block;
-}
+label { margin-top: 10px; font-weight: bold; display: block; }
 
-input {
-    width: 100%;
-    padding: 13px;
-    margin-top: 5px;
-    border-radius: 10px;
-    border: 2px solid #0077cc;
-    font-size: 16px;
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 2px solid #0077cc;
+  font-size: 16px;
 }
 
 button {
-    width: 100%;
-    background: #003366;
-    color: white;
-    padding: 15px;
-    margin-top: 25px;
-    border: none;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 600;
+  width: 100%;
+  background: #003366;
+  color: white;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-    background: #0057ad;
+  background: #0059b3;
 }
 
-/* REDES SOCIAIS */
 .redes {
-    display: flex;
-    justify-content: center;
-    gap: 35px;
-    margin: 30px 0 60px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
 }
 
 .redes img {
-    width: 45px;
-    transition: 0.3s ease;
+  width: 45px;
+  transition: 0.3s;
 }
 
 .redes img:hover {
-    transform: scale(1.18);
+  transform: scale(1.2);
 }
 
-/* WHATSAPP FIXO */
 .whatsapp-fixo {
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
 .whatsapp-fixo img {
-    width: 65px;
-    filter: drop-shadow(0 0 8px black);
-    transition: 0.3s;
+  width: 60px;
+  filter: drop-shadow(0 0 8px #000);
 }
 
-.whatsapp-fixo img:hover {
-    transform: scale(1.12);
-}
-
-/* RODAPÉ */
 footer {
-    text-align: center;
-    padding: 22px;
-    background: #003366;
-    color: #fff;
-    margin-top: 50px;
-    font-size: 15px;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 500px) {
-    header h1 { font-size: 22px; }
-    .hero img { width: 220px; }
+  text-align: center;
+  padding: 20px;
+  background: #003366;
+  color: white;
+  margin-top: 40px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-    <h1>Smartwatch Premium</h1>
+  <h1>Smartwatch Premium</h1>
+  <nav>
+    <!-- Navegação removida -->
+  </nav>
 </header>
 
 <section class="hero">
-    <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f">
-    <h2>Tecnologia no Seu Pulso</h2>
-    <p>O smartwatch perfeito para o seu estilo e rotina.</p>
+  <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f">
+  <h2>Tecnologia no Seu Pulso</h2>
+  <p>O smartwatch perfeito para o seu estilo e rotina.</p>
 </section>
 
 <section class="beneficios">
-    <h2>Por que escolher nosso Smartwatch?</h2>
+  <h2>Por que escolher nosso Smartwatch?</h2>
 
-    <div class="beneficios-grid">
-        <div class="beneficio">Monitoramento cardíaco avançado</div>
-        <div class="beneficio">Resistente à água</div>
-        <div class="beneficio">Notificações inteligentes</div>
-        <div class="beneficio">Bateria de longa duração</div>
-        <div class="beneficio">Modo esportivo completo</div>
-        <div class="beneficio">Conexão com Android e iOS</div>
-    </div>
+  <div class="beneficios-grid">
+    <div class="beneficio">Monitoramento cardíaco avançado</div>
+    <div class="beneficio">Resistente à água</div>
+    <div class="beneficio">Notificações inteligentes</div>
+    <div class="beneficio">Bateria de longa duração</div>
+    <div class="beneficio">Modo esportivo completo</div>
+    <div class="beneficio">Conexão com Android e iOS</div>
+  </div>
 </section>
 
-<!-- FORMULÁRIO COMPLETO -->
+<!-- FORMULÁRIO COMPLETO COM TELEFONE E SENHA -->
 <form id="formulario">
-    <h2>Cadastre-se para acessar a loja</h2>
+  <h2>Cadastre-se para acessar a loja</h2>
 
-    <label>Nome completo:</label>
-    <input type="text" id="nome" required>
+  <label>Nome completo:</label>
+  <input type="text" id="nome" required>
 
-    <label>E-mail:</label>
-    <input type="email" required>
+  <label>E-mail:</label>
+  <input type="email" required>
 
-    <label>Telefone:</label>
-    <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+  <label>Telefone:</label>
+  <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
 
-    <label>Senha:</label>
-    <input type="password" id="senha" required>
+  <label>Senha:</label>
+  <input type="password" id="senha" required>
 
-    <button type="submit">Entrar na Loja</button>
+  <button type="submit">Entrar na Loja</button>
 </form>
 
 <!-- LOGIN RÁPIDO -->
 <form id="login-rapido">
-    <h2>Login rápido</h2>
+  <h2>Login rápido</h2>
 
-    <label>Digite seu nome:</label>
-    <input type="text" id="nome-rapido" placeholder="Seu nome">
-
-    <button type="submit">Entrar rapidamente</button>
+  <label>Digite seu nome:</label>
+  <input type="text" id="nome-rapido" placeholder="Seu nome">
+  <button type="submit">Entrar rapidamente</button>
 </form>
 
-<!-- Redes sociais -->
 <div class="redes">
-    <a href="https://facebook.com" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png">
-    </a>
-    <a href="https://wa.me/5562940028922" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-    </a>
-    <a href="https://instagram.com" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
-    </a>
+  <a href="https://facebook.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png">
+  </a>
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
+  <a href="https://instagram.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
+  </a>
 </div>
 
-<!-- WhatsApp fixo -->
 <div class="whatsapp-fixo">
-    <a href="https://wa.me/5562940028922" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-    </a>
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
 </div>
 
 <footer>
-    © 2025 Smartwatch Premium — Todos os direitos reservados.
+  © 2025 Smartwatch Premium — Todos os direitos reservados.
 </footer>
 
 <script>
 // FORMULÁRIO COMPLETO
 document.getElementById("formulario").addEventListener("submit", (e)=>{
-    e.preventDefault();
-    let nome = document.getElementById("nome").value;
-    let telefone = document.getElementById("telefone").value;
-    let senha = document.getElementById("senha").value;
+  e.preventDefault();
+  let nome = document.getElementById("nome").value;
+  let telefone = document.getElementById("telefone").value;
+  let senha = document.getElementById("senha").value;
 
-    localStorage.setItem("usuarioLogado", nome);
-    localStorage.setItem("telefone", telefone);
-    localStorage.setItem("senha", senha);
+  // Salvar informações no localStorage
+  localStorage.setItem("usuarioLogado", nome);
+  localStorage.setItem("telefone", telefone);
+  localStorage.setItem("senha", senha);
 
-    window.location.href = "resultado.html";
+  window.location.href = "resultado.html";
 });
 
 // LOGIN RÁPIDO
 document.getElementById("login-rapido").addEventListener("submit", (e)=>{
-    e.preventDefault();
-    let nomeRapido = document.getElementById("nome-rapido").value.trim();
-    
-    if(nomeRapido === "") {
-        alert("Digite um nome para login rápido!");
-        return;
-    }
-
-    localStorage.setItem("usuarioLogado", nomeRapido);
-    window.location.href = "resultado.html";
+  e.preventDefault();
+  let nomeRapido = document.getElementById("nome-rapido").value.trim();
+  if(nomeRapido === "") {
+    alert("Digite um nome para login rápido!");
+    return;
+  }
+  localStorage.setItem("usuarioLogado", nomeRapido);
+  window.location.href = "resultado.html";
 });
 </script>
 
