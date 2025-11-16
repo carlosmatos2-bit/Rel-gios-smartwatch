@@ -113,7 +113,6 @@ h2 {
     margin-top: 30px;
 }
 
-/* PRODUTOS */
 .product {
     background: #f7faff;
     border-radius: 12px;
@@ -145,7 +144,6 @@ h2 {
 
 .old-price { text-decoration: line-through; }
 
-/* CARROSSEL */
 #carousel {
     width: 360px;
     height: 320px;
@@ -186,7 +184,6 @@ h2 {
     background: rgba(0,0,0,0.7);
 }
 
-/* POPUP DO CARRINHO */
 #cart-popup {
     display: none;
     position: fixed;
@@ -258,7 +255,6 @@ h2 {
     <button id="cart-btn">🛒 Carrinho</button>
 </header>
 
-<!-- POPUP DO CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -319,8 +315,6 @@ h2 {
 </div>
 
 <script>
-/* ===== SISTEMA DO CARRINHO ===== */
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -376,10 +370,7 @@ document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
     } else {
-        alert("Compra finalizada! Obrigado!");
-        cart = [];
-        saveCart();
-        updateCartDisplay();
+        window.location.href = "finalizar.html";  // ✔ REDIRECIONA PARA finalizar.html
     }
 };
 
