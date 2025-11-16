@@ -36,23 +36,17 @@ header {
   top: 0;
 }
 
-/* 🚀 NOVO: Caixa da logo + texto */
-.logo-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-box img {
-  width: 48px;
-  height: auto;
-  filter: drop-shadow(0 0 5px rgba(0,0,0,0.4));
-}
-
 header h1 {
   color: #fff;
   font-size: 26px;
   letter-spacing: 1px;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
 }
 
 .hero {
@@ -188,10 +182,10 @@ footer {
 <body>
 
 <header>
-  <div class="logo-box">
-    <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-NZVhH2YpKDqfvXfXbHdTSwuT/user-2Z4RxktC0KvvII2H0abzPWWi/img-8d373574-ce3a-4fe4-882c-802fe054f50d.png?st=2025-02-16T22%3A28%3A18Z&se=2025-02-17T00%3A28%3A18Z&sp=r&sv=2022-11-02&sr=b&rscd=inline&rsct=image/png&skoid=6fddc145-7e6c-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-02-16T15%3A55%3A23Z&ske=2025-02-17T15%3A55%3A23Z&sks=b&skv=2022-11-02&sig=o8SLMbdpfojbGFT1r0hD2Y%2BQ27i3xQL6xo4d%2B96nTx0%3D" alt="Logo SP">
-    <h1>Smartwatch Premium</h1>
-  </div>
+  <h1>Smartwatch Premium</h1>
+  <nav>
+    <!-- Navegação removida -->
+  </nav>
 </header>
 
 <section class="hero">
@@ -213,6 +207,7 @@ footer {
   </div>
 </section>
 
+<!-- FORMULÁRIO COMPLETO COM TELEFONE E SENHA -->
 <form id="formulario">
   <h2>Cadastre-se para acessar a loja</h2>
 
@@ -231,6 +226,7 @@ footer {
   <button type="submit">Entrar na Loja</button>
 </form>
 
+<!-- LOGIN RÁPIDO -->
 <form id="login-rapido">
   <h2>Login rápido</h2>
 
@@ -269,6 +265,7 @@ document.getElementById("formulario").addEventListener("submit", (e)=>{
   let telefone = document.getElementById("telefone").value;
   let senha = document.getElementById("senha").value;
 
+  // Salvar informações no localStorage
   localStorage.setItem("usuarioLogado", nome);
   localStorage.setItem("telefone", telefone);
   localStorage.setItem("senha", senha);
