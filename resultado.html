@@ -99,7 +99,6 @@ h2 {
     border-radius: 12px;
     padding: 20px;
     border: 2px solid #003366;
-    /* sombra leve inicial */
     box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
     transition: all 0.4s ease;
 }
@@ -117,10 +116,18 @@ h2 {
 }
 
 .dark-blue {
-    color: #003366;
     font-size: 20px;
     font-weight: bold;
     transition: all 0.3s ease;
+    /* ===== EFEITO DE PISCAR ===== */
+    animation: piscar 2s infinite;
+}
+
+/* Keyframes para alternar cores */
+@keyframes piscar {
+    0% { color: #a8d0ff; }    /* azul clarinho */
+    50% { color: #003366; }   /* azul normal */
+    100% { color: #001a33; }  /* azul escuro */
 }
 
 .dark-blue:hover {
