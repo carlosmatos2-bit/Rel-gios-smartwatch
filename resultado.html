@@ -93,6 +93,24 @@ h2 {
     margin-top: 30px;
 }
 
+/* ===== BARRA DE PESQUISA ===== */
+#search-bar {
+    width: 100%;
+    padding: 14px 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+#search-bar:focus {
+    border-color: #00bfff;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+}
+
 /* ===== PRODUTOS COM EFEITO DE RELEVO ===== */
 .product {
     background: #f7faff;
@@ -119,15 +137,13 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     transition: all 0.3s ease;
-    /* ===== EFEITO DE PISCAR ===== */
     animation: piscar 2s infinite;
 }
 
-/* Keyframes para alternar cores */
 @keyframes piscar {
-    0% { color: #a8d0ff; }    /* azul clarinho */
-    50% { color: #003366; }   /* azul normal */
-    100% { color: #001a33; }  /* azul escuro */
+    0% { color: #a8d0ff; }
+    50% { color: #003366; }
+    100% { color: #001a33; }
 }
 
 .dark-blue:hover {
@@ -226,7 +242,10 @@ button.add-cart:hover {
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
-    <div class="products">
+    <!-- BARRA DE PESQUISA -->
+    <input type="text" id="search-bar" placeholder="🔍 Pesquise um relógio...">
+
+    <div class="products" id="products-container">
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue">Relógio Polar Unite</div>
@@ -326,6 +345,22 @@ function finalizarCompra() {
     localStorage.setItem("total", total.toFixed(2));
     window.location.href = "finalizar.html";
 }
+
+// ===== FILTRO DE PRODUTOS =====
+const searchBar = document.getElementById("search-bar");
+const products = document.querySelectorAll(".product");
+
+searchBar.addEventListener("input", () => {
+    const query = searchBar.value.toLowerCase();
+    products.forEach(product => {
+        const name = product.querySelector(".dark-blue").innerText.toLowerCase();
+        if(name.includes(query) || query === "") {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+});
 </script>
 
 </body>
