@@ -50,7 +50,7 @@ header h1 {
     font-size: 16px;
 }
 
-#cart-btn, #account-btn, #help-btn {
+#cart-btn, #account-btn {
     background:#004080;
     color:white;
     padding:8px 15px;
@@ -64,12 +64,10 @@ header h1 {
     margin-left: 10px;
 }
 
-#cart-btn:hover, #account-btn:hover, #help-btn:hover {
+#cart-btn:hover, #account-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
-
-/* --- TODO O RESTANTE DO SEU CSS PERMANECE IGUAL --- */
 
 .container {
     max-width: 1200px;
@@ -103,8 +101,133 @@ h2 {
     margin-right: auto;
 }
 
-/* (NÃO MEXI EM MAIS NADA DO CSS AQUI) */
+#search-bar:focus {
+    border-color: #00bfff;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+}
 
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* PRODUTOS */
+.product {
+    background: #f7faff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid #003366;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
+    transition: all 0.4s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        6px 6px 20px rgba(0, 51, 102, 0.7),
+        inset 2px 2px 8px rgba(255,255,255,0.7),
+        inset -2px -2px 8px rgba(0,0,0,0.1);
+}
+
+.dark-blue {
+    font-size: 20px;
+    font-weight: bold;
+    animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+    0% { color: #a8d0ff; }
+    50% { color: #003366; }
+    100% { color: #001a33; }
+}
+
+.old-price { text-decoration: line-through; }
+
+/* CARROSSEL */
+#carousel {
+    width: 360px;
+    height: 320px;
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#prevBtn { left: 5px; }
+#nextBtn { right: 5px; }
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+/* POPUPS */
+#cart-popup, #account-popup {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#cart-box, #account-box {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px #002244;
+    text-align:center;
+}
+
+.cart-title {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 15px;
+}
+
+.cart-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#close-cart, #close-account { background:#002b55; color:white; }
+#clear-cart { background:#cc0000; color:white; }
+#checkout { background:#009933; color:white; }
 </style>
 </head>
 <body>
@@ -112,17 +235,9 @@ h2 {
 <header>
     <h1>SMARTWATCH STORE</h1>
     <div id="usuario-logado"></div>
-
     <button id="cart-btn">🛒 Carrinho</button>
-
-    <!-- 🔵 ÚNICA ADIÇÃO FEITA NO CÓDIGO -->
-    <button id="help-btn" onclick="window.location.href='ajuda.html'">❓ Ajuda</button>
-    <!-- 🔵 FIM DA ADIÇÃO -->
-
     <button id="account-btn">👤 Minha Conta</button>
 </header>
-
-<!-- TODO O RESTO DO SEU HTML PERMANECE IDÊNTICO -->
 
 <!-- POPUP DO CARRINHO -->
 <div id="cart-popup">
@@ -191,9 +306,7 @@ h2 {
 </div>
 
 <script>
-/* TODO O SEU JAVASCRIPT FOI MANTIDO INTACTO */
-/* Nenhuma linha alterada — apenas adicionei o botão no HTML */
-
+/* ===== SISTEMA DO CARRINHO ===== */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -245,6 +358,7 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
+// FINALIZAR COMPRA
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -256,6 +370,7 @@ document.getElementById("checkout").onclick = () => {
     window.location.href = "finalizar.html";
 };
 
+/* ===== BUSCA ===== */
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
@@ -271,6 +386,7 @@ searchBar.addEventListener("input", () => {
     });
 });
 
+/* ===== CARROSSEL ===== */
 const carouselImages = [
     "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
@@ -303,6 +419,7 @@ setInterval(() => {
     showImage(currentIndex);
 }, 3000);
 
+/* ===== MINHA CONTA ===== */
 const accountBtn = document.getElementById("account-btn");
 const accountPopup = document.getElementById("account-popup");
 
@@ -329,7 +446,7 @@ function trocarConta() {
     localStorage.removeItem("usuarioLogado");
     localStorage.removeItem("telefone");
     localStorage.removeItem("senha");
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // Página do primeiro código
 }
 </script>
 
