@@ -273,6 +273,7 @@ h2 {
         <div id="menu-dropdown">
             <button id="cart-btn">🛒 Carrinho</button>
             <button id="account-btn">👤 Minha Conta</button>
+            <button id="coupons-btn">🎟️ Meus Cupons</button>
         </div>
     </div>
 </header>
@@ -348,6 +349,7 @@ h2 {
 /* ===== MENU DROPDOWN ===== */
 const menuBtn = document.getElementById("menu-btn");
 const menuDropdown = document.getElementById("menu-dropdown");
+const couponsBtn = document.getElementById("coupons-btn");
 
 menuBtn.addEventListener("click", () => {
     menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
@@ -357,6 +359,10 @@ window.addEventListener("click", (e) => {
     if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
         menuDropdown.style.display = "none";
     }
+});
+
+couponsBtn.addEventListener("click", () => {
+    window.location.href = "cupons.html";
 });
 
 /* ===== SISTEMA DO CARRINHO ===== */
