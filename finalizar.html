@@ -9,16 +9,11 @@
     body {
         font-family: 'Segoe UI', sans-serif;
         margin: 0;
-        background: #eef3ff;
+        background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+        position: relative;
+        min-height: 100vh;
         padding: 20px;
     }
-
-body {
-  font-family: 'Arial', sans-serif;
-  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
-  position: relative;
-  min-height: 100vh;
-}
 
 body::before {
   content: "";
@@ -76,9 +71,26 @@ h1 {
 .cart-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid #ddd;
     font-size: 18px;
+}
+
+.cart-item button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    border: none;
+    background: #003366;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-item button:hover {
+    background: #0059b3;
+    transform: scale(1.05);
 }
 
 .total {
@@ -173,6 +185,7 @@ function voltarPagina() {
 
 let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
 let total = parseFloat(localStorage.getItem("total")) || 0;
+let descontoAplicado = false;
 
 const cartSummary = document.getElementById("cart-summary");
 
@@ -184,20 +197,24 @@ function renderCart() {
         return;
     }
 
-    cart.forEach(item => {
+    cart.forEach((item, index) => {
         const div = document.createElement("div");
         div.classList.add("cart-item");
-        // ✅ CORRIGIDO: nome dos produtos agora é item.name
+
+        let botaoCupom = "";
+        if (item.price >= 200 && !descontoAplicado) {
+            botaoCupom = `<button onclick="aplicarCupom(${index})">Aplicar Cupom</button>`;
+        }
+
         div.innerHTML = `
             <span>${item.name}</span>
-            <span>R$ ${item.price}</span>
+            <span>R$ ${item.price.toFixed(2)}</span>
+            ${botaoCupom}
         `;
         cartSummary.appendChild(div);
     });
 
-    cartSummary.innerHTML += `
-        <div class="total">Total: R$ ${total.toFixed(2)}</div>
-    `;
+    cartSummary.innerHTML += `<div class="total">Total: R$ ${total.toFixed(2)}</div>`;
 
     cartSummary.innerHTML += `
         <div class="address-box">
@@ -247,8 +264,7 @@ function renderCart() {
 
             <div id="pix-box" class="hidden box">
                 <h3>Pagamento via PIX</h3>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=PAGAMENTO+PIX+FALSO"
-                class="pix-img">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=PAGAMENTO+PIX+FALSO" class="pix-img">
                 <p><b>Chave PIX:</b></p>
                 <p style="word-break: break-all; color:#003366;">
                 https://pagamento-pix-falso.com/${Math.random().toString(36).substring(2)}
@@ -276,11 +292,9 @@ function mostrarOpcoes() {
     document.getElementById("pix-box").classList.add("hidden");
     document.getElementById("boleto-box").classList.add("hidden");
 
-    if (tipo === "cartao") {
-        document.getElementById("cartao-box").classList.remove("hidden");
-    } else if (tipo === "pix") {
-        document.getElementById("pix-box").classList.remove("hidden");
-    } else if (tipo === "boleto") {
+    if (tipo === "cartao") document.getElementById("cartao-box").classList.remove("hidden");
+    else if (tipo === "pix") document.getElementById("pix-box").classList.remove("hidden");
+    else if (tipo === "boleto") {
         document.getElementById("boleto-box").classList.remove("hidden");
         gerarBoleto();
     }
@@ -293,6 +307,31 @@ function gerarBoleto() {
         Math.floor(Math.random()*99999) + "." +
         Math.floor(Math.random()*99999);
     document.getElementById("boletoLinha").innerText = linha;
+}
+
+function aplicarCupom(index) {
+    const codigo = prompt("Digite seu cupom:");
+
+    if (descontoAplicado) {
+        alert("O cupom já foi aplicado!");
+        return;
+    }
+
+    if (codigo !== "CARLOS") {
+        alert("Cupom inválido!");
+        return;
+    }
+
+    if (!cart[index] || cart[index].price < 200) {
+        alert("Produto não elegível para cupom.");
+        return;
+    }
+
+    cart[index].price *= 0.9; // 10% de desconto
+    descontoAplicado = true;
+    total = cart.reduce((sum, i) => sum + i.price, 0);
+    alert(`Cupom aplicado! 10% de desconto em "${cart[index].name}".`);
+    renderCart();
 }
 
 function finalizarCompra() {
