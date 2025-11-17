@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finalizar Compra</title>
+<title data-pt="Finalizar Compra" data-en="Checkout" data-es="Finalizar Compra">Finalizar Compra</title>
 
 <style>
     body {
@@ -24,18 +24,19 @@ body::before {
   z-index: -1;
 }
 
-h1 {
-    text-align: center;
-    color: #003366;
-    font-size: 32px;
-    margin-top: 60px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+/* ---------------------- CABEÇALHO ---------------------- */
 
-.back-button {
+.header-top {
     position: fixed;
     top: 20px;
     left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 20;
+}
+
+.back-button {
     background: #003366;
     color: white;
     border: none;
@@ -45,12 +46,63 @@ h1 {
     font-size: 16px;
     transition: 0.3s;
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-    z-index: 10;
 }
 
 .back-button:hover {
     background: #0059b3;
     transform: scale(1.05);
+}
+
+.lang-btn {
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.lang-btn:hover {
+    background: #0059b3;
+}
+
+.lang-menu {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    overflow: hidden;
+    display: none;
+}
+
+.lang-menu button {
+    width: 160px;
+    padding: 12px;
+    background: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    color: #003366;
+}
+
+.lang-menu button:hover {
+    background: #e6ecff;
+}
+
+/* ---------------------- RESTANTE DO ESTILO ---------------------- */
+
+h1 {
+    text-align: center;
+    color: #003366;
+    font-size: 32px;
+    margin-top: 120px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .cart-summary {
@@ -130,18 +182,6 @@ select, input {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.box h3 {
-    margin-bottom: 10px;
-    color: #003366;
-}
-
-.pix-img {
-    display: block;
-    margin: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
 button.finalizar {
     margin-top: 25px;
     background: #003366;
@@ -172,9 +212,20 @@ button.finalizar:hover {
 </head>
 <body>
 
-<button class="back-button" onclick="voltarPagina()">← Voltar</button>
+<!-- TOP BAR -->
+<div class="header-top">
+    <button class="back-button" onclick="voltarPagina()" data-pt="← Voltar" data-en="← Back" data-es="← Volver">← Voltar</button>
 
-<h1>Finalizar Compra</h1>
+    <button class="lang-btn" onclick="toggleLang()">🌐 Idioma</button>
+
+    <div class="lang-menu" id="langMenu">
+        <button onclick="changeLang('pt')">Português</button>
+        <button onclick="changeLang('en')">Inglês</button>
+        <button onclick="changeLang('es')">Espanhol</button>
+    </div>
+</div>
+
+<h1 data-pt="Finalizar Compra" data-en="Checkout" data-es="Finalizar Compra">Finalizar Compra</h1>
 
 <div class="cart-summary" id="cart-summary"></div>
 
@@ -183,17 +234,33 @@ function voltarPagina() {
     window.history.back();
 }
 
+/* -------------------------- SISTEMA DE IDIOMAS -------------------------- */
+
+function toggleLang() {
+    const menu = document.getElementById("langMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function changeLang(lang) {
+    document.querySelectorAll("[data-" + lang + "]").forEach(el => {
+        el.innerHTML = el.getAttribute("data-" + lang);
+    });
+
+    document.getElementById("langMenu").style.display = "none";
+}
+
+/* -------------------------- CARRINHO -------------------------- */
+
 let cart = JSON.parse(localStorage.getItem("carrinho")) || [];
 let total = parseFloat(localStorage.getItem("total")) || 0;
 let descontoAplicado = false;
-
 const cartSummary = document.getElementById("cart-summary");
 
 function renderCart() {
     cartSummary.innerHTML = "";
 
     if (cart.length === 0) {
-        cartSummary.innerHTML = "<p>Seu carrinho está vazio.</p>";
+        cartSummary.innerHTML = `<p data-pt="Seu carrinho está vazio." data-en="Your cart is empty." data-es="Tu carrito está vacío.">Seu carrinho está vazio.</p>`;
         return;
     }
 
@@ -203,7 +270,7 @@ function renderCart() {
 
         let botaoCupom = "";
         if (item.price >= 200 && !descontoAplicado) {
-            botaoCupom = `<button onclick="aplicarCupom(${index})">Aplicar Cupom</button>`;
+            botaoCupom = `<button data-pt="Aplicar Cupom" data-en="Apply Coupon" data-es="Aplicar Cupón" onclick="aplicarCupom(${index})">Aplicar Cupom</button>`;
         }
 
         div.innerHTML = `
@@ -218,25 +285,31 @@ function renderCart() {
 
     cartSummary.innerHTML += `
         <div class="address-box">
-            <h3>Endereço de Entrega</h3>
-            <label>Rua:</label>
-            <input type="text" id="rua" placeholder="Rua">
-            <label>Número:</label>
-            <input type="text" id="numero" placeholder="Número">
-            <label>Bairro:</label>
-            <input type="text" id="bairro" placeholder="Bairro">
-            <label>Cidade:</label>
-            <input type="text" id="cidade" placeholder="Cidade">
-            <label>Estado:</label>
-            <input type="text" id="estado" placeholder="Estado">
-            <label>CEP:</label>
-            <input type="text" id="cep" placeholder="CEP">
+            <h3 data-pt="Endereço de Entrega" data-en="Shipping Address" data-es="Dirección de Entrega">Endereço de Entrega</h3>
+
+            <label data-pt="Rua:" data-en="Street:" data-es="Calle:">Rua:</label>
+            <input id="rua">
+
+            <label data-pt="Número:" data-en="Number:" data-es="Número:">Número:</label>
+            <input id="numero">
+
+            <label data-pt="Bairro:" data-en="District:" data-es="Barrio:">Bairro:</label>
+            <input id="bairro">
+
+            <label data-pt="Cidade:" data-en="City:" data-es="Ciudad:">Cidade:</label>
+            <input id="cidade">
+
+            <label data-pt="Estado:" data-en="State:" data-es="Estado:">Estado:</label>
+            <input id="estado">
+
+            <label data-pt="CEP:" data-en="ZIP Code:" data-es="Código Postal:">CEP:</label>
+            <input id="cep">
         </div>
     `;
 
     cartSummary.innerHTML += `
         <div class="payment-box">
-            <label><b>Forma de Pagamento:</b></label>
+            <label><b data-pt="Forma de Pagamento:" data-en="Payment Method:" data-es="Método de Pago:">Forma de Pagamento:</b></label>
             <select id="pagamento" onchange="mostrarOpcoes()">
                 <option value="">Selecione...</option>
                 <option value="cartao">Cartão</option>
@@ -245,46 +318,45 @@ function renderCart() {
             </select>
 
             <div id="cartao-box" class="hidden box">
-                <h3>Pagamento com Cartão</h3>
-                <label>Tipo:</label>
+                <h3 data-pt="Pagamento com Cartão" data-en="Credit/Debit Card" data-es="Pago con Tarjeta">Pagamento com Cartão</h3>
+
+                <label data-pt="Tipo:" data-en="Type:" data-es="Tipo:">Tipo:</label>
                 <select id="tipoCartao">
                     <option value="credito">Crédito</option>
                     <option value="debito">Débito</option>
                 </select>
 
-                <label>Número do Cartão:</label>
-                <input type="text" id="numCartao" placeholder="0000 0000 0000 0000">
+                <label data-pt="Número do Cartão:" data-en="Card Number:" data-es="Número de Tarjeta:">Número do Cartão:</label>
+                <input id="numCartao">
 
-                <label>Validade:</label>
-                <input type="text" id="validade" placeholder="MM/AA">
+                <label data-pt="Validade:" data-en="Expiration:" data-es="Validez:">Validade:</label>
+                <input id="validade">
 
-                <label>CVV:</label>
-                <input type="text" id="cvv" placeholder="000">
+                <label data-pt="CVV:" data-en="CVV:" data-es="CVV:">CVV:</label>
+                <input id="cvv">
             </div>
 
             <div id="pix-box" class="hidden box">
-                <h3>Pagamento via PIX</h3>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=PAGAMENTO+PIX+FALSO" class="pix-img">
-                <p><b>Chave PIX:</b></p>
-                <p style="word-break: break-all; color:#003366;">
-                https://pagamento-pix-falso.com/${Math.random().toString(36).substring(2)}
-                </p>
+                <h3 data-pt="Pagamento via PIX" data-en="PIX Payment" data-es="Pago por PIX">Pagamento via PIX</h3>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=PAGAMENTO+PIX" class="pix-img">
             </div>
 
             <div id="boleto-box" class="hidden box">
-                <h3>Boleto Bancário</h3>
+                <h3 data-pt="Boleto Bancário" data-en="Bank Slip" data-es="Boleto Bancario">Boleto Bancário</h3>
                 <p><b>Linha Digitável:</b></p>
                 <p id="boletoLinha" style="font-size:18px; color:#003366;"></p>
-                <button onclick="window.print()" style="
-                    background:#003366; color:white; padding:10px 20px; border:none; border-radius:8px; margin-top:10px;">
+
+                <button onclick="window.print()" style="background:#003366; color:white; padding:10px 20px; border:none; border-radius:8px;">
                     Imprimir Boleto
                 </button>
             </div>
         </div>
 
-        <button class="finalizar" onclick="finalizarCompra()">Concluir Compra</button>
+        <button class="finalizar" onclick="finalizarCompra()" data-pt="Concluir Compra" data-en="Finish Order" data-es="Finalizar Compra">Concluir Compra</button>
     `;
 }
+
+/* ----------------------- LÓGICA DO SISTEMA ----------------------- */
 
 function mostrarOpcoes() {
     let tipo = document.getElementById("pagamento").value;
@@ -306,31 +378,25 @@ function gerarBoleto() {
         Math.floor(Math.random()*99999) + " " +
         Math.floor(Math.random()*99999) + "." +
         Math.floor(Math.random()*99999);
+
     document.getElementById("boletoLinha").innerText = linha;
 }
 
 function aplicarCupom(index) {
     const codigo = prompt("Digite seu cupom:");
 
-    if (descontoAplicado) {
-        alert("O cupom já foi aplicado!");
-        return;
-    }
+    if (descontoAplicado) return alert("O cupom já foi aplicado!");
 
-    if (codigo !== "CARLOS") {
-        alert("Cupom inválido!");
-        return;
-    }
+    if (codigo !== "CARLOS") return alert("Cupom inválido!");
 
-    if (!cart[index] || cart[index].price < 200) {
-        alert("Produto não elegível para cupom.");
-        return;
-    }
+    if (cart[index].price < 200) return alert("Produto não elegível para cupom.");
 
-    cart[index].price *= 0.9; // 10% de desconto
+    cart[index].price *= 0.9;
     descontoAplicado = true;
-    total = cart.reduce((sum, i) => sum + i.price, 0);
-    alert(`Cupom aplicado! 10% de desconto em "${cart[index].name}".`);
+
+    total = cart.reduce((s, i) => s + i.price, 0);
+
+    alert(`Cupom aplicado com sucesso!`);
     renderCart();
 }
 
@@ -345,7 +411,7 @@ function finalizarCompra() {
     let cep = document.getElementById("cep").value.trim();
 
     if (!rua || !numero || !bairro || !cidade || !estado || !cep) {
-        alert("Preencha todos os campos do endereço antes de finalizar a compra.");
+        alert("Preencha todos os campos do endereço antes de finalizar.");
         return;
     }
 
@@ -354,7 +420,7 @@ function finalizarCompra() {
         return;
     }
 
-    alert("Compra concluída com sucesso!");
+    alert("Compra concluída!");
 
     localStorage.removeItem("carrinho");
     localStorage.removeItem("total");
