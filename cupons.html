@@ -128,7 +128,6 @@ header {
     color: #002244;
 }
 
-/* Meus cupons já resgatados */
 #my-coupons {
     margin-top: 40px;
     text-align: left;
@@ -153,7 +152,6 @@ header {
     box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
 }
 
-/* Confete */
 .confetti {
     position: fixed;
     width: 10px;
@@ -195,36 +193,40 @@ header {
 <script>
 const validCodes = ["CARLOS"];
 let redeemed = JSON.parse(localStorage.getItem("redeemedCoupons")) || [];
+let usedCoupons = JSON.parse(localStorage.getItem("usedCoupons")) || [];
 
 const input = document.getElementById("redeem-input");
 const btn = document.getElementById("redeem-btn");
 const message = document.getElementById("redeem-message");
 const couponsList = document.getElementById("coupons-list");
 
-// Função para atualizar a lista de cupons já resgatados
+// Atualiza lista de cupons resgatados (somente os não usados)
 function updateCouponsList() {
     couponsList.innerHTML = "";
-    if(redeemed.length === 0) return;
     redeemed.forEach(c => {
-        const div = document.createElement("div");
-        div.classList.add("coupon-item");
-        div.textContent = c;
-        couponsList.appendChild(div);
+        if (!usedCoupons.includes(c)) {
+            const div = document.createElement("div");
+            div.classList.add("coupon-item");
+            div.textContent = c;
+            couponsList.appendChild(div);
+        }
     });
 }
 
 // Inicializa lista
 updateCouponsList();
 
-// Se todos os códigos foram resgatados, bloqueia input
-if(redeemed.length === validCodes.length){
-    input.disabled = true;
-    btn.disabled = true;
-    message.textContent = "Todos os códigos já foram resgatados!";
-    message.style.color = "#cc0000";
+// Bloqueia input se todos os cupons válidos foram resgatados ou já usados
+function checkInputStatus() {
+    if (redeemed.length === validCodes.length || redeemed.every(c => usedCoupons.includes(c))) {
+        input.disabled = true;
+        btn.disabled = true;
+        message.textContent = "Todos os códigos já foram resgatados ou usados!";
+        message.style.color = "#cc0000";
+    }
 }
+checkInputStatus();
 
-// Função para gerar confete
 function createConfetti(){
     for(let i=0; i<50; i++){
         let conf = document.createElement('div');
@@ -237,13 +239,21 @@ function createConfetti(){
     }
 }
 
-// Evento de resgate
+// Resgatar cupom
 btn.addEventListener("click", () => {
     const code = input.value.trim().toUpperCase();
+
+    if (usedCoupons.includes(code)) {
+        message.textContent = "Este código já foi usado e não pode ser resgatado!";
+        message.style.color = "#cc0000";
+        input.value = "";
+        return;
+    }
 
     if(redeemed.includes(code)){
         message.textContent = "Você já resgatou este código!";
         message.style.color = "#cc0000";
+        input.value = "";
         return;
     }
 
@@ -254,11 +264,7 @@ btn.addEventListener("click", () => {
         message.textContent = "Código resgatado com sucesso!";
         message.style.color = "#009933";
         createConfetti();
-
-        if(redeemed.length === validCodes.length){
-            input.disabled = true;
-            btn.disabled = true;
-        }
+        checkInputStatus();
     } else {
         message.textContent = "Código inválido!";
         message.style.color = "#cc0000";
