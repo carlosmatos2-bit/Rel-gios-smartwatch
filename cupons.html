@@ -14,7 +14,6 @@ body {
     position: relative;
 }
 
-/* Fundo borrado */
 body::before {
     content: "";
     position: fixed;
@@ -28,7 +27,6 @@ body::before {
     z-index: -1;
 }
 
-/* Cabeçalho */
 header {
     background: rgba(0, 51, 102, 0.9);
     color: white;
@@ -41,7 +39,6 @@ header {
     position: relative;
 }
 
-/* Botão Voltar no canto superior esquerdo */
 #back-btn-top {
     position: absolute;
     left: 20px;
@@ -49,8 +46,8 @@ header {
     transform: translateY(-50%);
     background: #003366;
     color: white;
-    padding: 6px 12px; /* reduzido */
-    font-size: 14px;    /* reduzido */
+    padding: 6px 12px;
+    font-size: 14px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
@@ -63,41 +60,107 @@ header {
     box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
 }
 
-/* Container principal */
 .container {
     max-width: 900px;
     margin: 50px auto;
     padding: 30px;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.95);
     border-radius: 14px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     backdrop-filter: blur(5px);
+    text-align: center;
 }
 
-/* Lista de cupons */
 .coupon {
     background: #004080;
     color: white;
     padding: 25px;
     border-radius: 12px;
-    text-align: center;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
     transition: all 0.3s ease;
-    cursor: pointer;
 }
 
 .coupon:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #00bfff, 0 0 40px #00ffff;
+    transform: scale(1.03);
+    box-shadow: 0 0 25px #00bfff, 0 0 45px #00ffff;
 }
 
-.coupon-title {
-    font-size: 18px;
-    color: #a8d0ff;
-    margin-bottom: 10px;
+#redeem-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f4ff;
+    padding: 25px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,102,0.3);
+    transition: all 0.3s ease;
+    max-width: 500px;
+    margin: auto;
+}
+
+#redeem-section:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,102,0.5);
+}
+
+#redeem-input {
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 2px solid #003366;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#redeem-input:focus {
+    border-color: #00bfff;
+    box-shadow: 0 0 12px rgba(0,191,255,0.5);
+}
+
+#redeem-btn {
+    padding: 14px 22px;
+    margin-left: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #003366;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#redeem-btn:hover {
+    background: #0059b3;
+    transform: scale(1.05);
+}
+
+#redeem-message {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #002244;
+}
+
+/* Confete */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #ffcc00;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall 3s linear forwards;
+    border-radius: 50%;
+    z-index: 9999;
+}
+
+@keyframes fall {
+    0% {transform: translateY(0) rotate(0deg);}
+    100% {transform: translateY(100vh) rotate(720deg);}
 }
 </style>
 </head>
@@ -110,10 +173,70 @@ header {
 
 <div class="container">
     <div class="coupon">
-        <div class="coupon-title">CUPOM ESPECIAL</div>
-        <div class="coupon-code">CARLOS</div>
+        CUPOM ESPECIAL: <span id="coupon-code">CARLOS</span>
     </div>
+
+    <div id="redeem-section">
+        <input type="text" id="redeem-input" placeholder="Digite seu código">
+        <button id="redeem-btn">Resgatar</button>
+    </div>
+    <div id="redeem-message"></div>
 </div>
+
+<script>
+const validCode = "CARLOS";
+let redeemed = localStorage.getItem("couponRedeemed") === "true";
+
+const input = document.getElementById("redeem-input");
+const btn = document.getElementById("redeem-btn");
+const message = document.getElementById("redeem-message");
+
+// Se já resgatou
+if(redeemed){
+    input.disabled = true;
+    btn.disabled = true;
+    message.textContent = "Você já resgatou o código!";
+    message.style.color = "#cc0000";
+}
+
+// Função para gerar confete
+function createConfetti(){
+    for(let i=0; i<50; i++){
+        let conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.left = Math.random()*100 + 'vw';
+        conf.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+        conf.style.width = conf.style.height = (Math.random()*8 + 6) + 'px';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 3000);
+    }
+}
+
+// Função de resgate
+btn.addEventListener("click", () => {
+    const code = input.value.trim().toUpperCase();
+
+    if(redeemed){
+        message.textContent = "Você já resgatou o código!";
+        message.style.color = "#cc0000";
+        return;
+    }
+
+    if(code === validCode){
+        localStorage.setItem("couponRedeemed", "true");
+        message.textContent = "Código resgatado com sucesso!";
+        message.style.color = "#009933";
+        input.disabled = true;
+        btn.disabled = true;
+
+        // Gera confete
+        createConfetti();
+    } else {
+        message.textContent = "Código inválido!";
+        message.style.color = "#cc0000";
+    }
+});
+</script>
 
 </body>
 </html>
