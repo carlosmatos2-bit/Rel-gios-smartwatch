@@ -37,6 +37,7 @@
         font-weight: bold;
         box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         backdrop-filter: blur(5px);
+        position: relative;
     }
 
     /* BOTÃO VOLTAR */
@@ -44,6 +45,9 @@
         position: absolute;
         top: 20px;
         left: 20px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
     }
 
     .btn {
@@ -59,6 +63,54 @@
 
     .btn:hover {
         background: #0059b3;
+    }
+
+    /* 🔵 MENU DE IDIOMA */
+    .lang-box {
+        position: relative;
+    }
+
+    .lang-btn {
+        background: #003366;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        font-size: 17px;
+        transition: 0.3s;
+    }
+
+    .lang-btn:hover {
+        background: #0059b3;
+    }
+
+    .lang-menu {
+        display: none;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        background: #fff;
+        min-width: 140px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+        z-index: 30;
+    }
+
+    .lang-menu button {
+        width: 100%;
+        padding: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+    }
+
+    .lang-menu button:hover {
+        background: #eef4ff;
     }
 
     .product-container {
@@ -149,10 +201,40 @@
 
 <header>Garmin Epix Gen 2</header>
 
-<!-- BOTÃO VOLTAR -->
+<!-- BOTÃO VOLTAR + 🔵 BOTÃO DE IDIOMA -->
 <div class="btn-container">
+
     <a href="resultado.html" class="btn">Voltar</a>
+
+    <!-- 🔵 BOTÃO DE IDIOMA -->
+    <div class="lang-box">
+        <button class="lang-btn" onclick="toggleLang()">Idioma ▾</button>
+        <div class="lang-menu" id="langMenu">
+            <button onclick="setLang('pt')">Português</button>
+            <button onclick="setLang('en')">Inglês</button>
+            <button onclick="setLang('es')">Espanhol</button>
+        </div>
+    </div>
+
 </div>
+
+<script>
+function toggleLang(){
+    const menu = document.getElementById("langMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function setLang(lang){
+    localStorage.setItem("idioma_site", lang);
+    location.reload();
+}
+
+document.addEventListener("click", function(e){
+    if(!e.target.closest(".lang-box")){
+        document.getElementById("langMenu").style.display = "none";
+    }
+});
+</script>
 
 <div class="product-container">
 
@@ -196,15 +278,11 @@
     <div class="right">
         <h3>🛒 Informações do Produto</h3>
 
-        <!-- ❌ REMOVIDO: Quantidade + select -->
-
         <div class="info-box">
             ✔ Garantia estendida: <b>2 anos</b><br><br>
             🚚 Prazo de entrega: <b>8 dias úteis</b><br><br>
             💳 Preço: <b>R$ 3599,99</b>
         </div>
-
-        <!-- ❌ Nenhum botão -->
     </div>
 
 </div>
