@@ -50,7 +50,7 @@ header h1 {
     font-size: 16px;
 }
 
-.header-btn {
+#cart-btn, #account-btn {
     background:#004080;
     color:white;
     padding:8px 15px;
@@ -64,98 +64,207 @@ header h1 {
     margin-left: 10px;
 }
 
-.header-btn:hover {
+#cart-btn:hover, #account-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
 
-/* MENU IDIOMA */
-#idioma-menu {
-    position: absolute;
-    top: 65px;
-    right: 160px;
-    background: white;
-    border: 2px solid #003366;
-    border-radius: 10px;
-    width: 150px;
-    display: none;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    z-index: 999;
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
+    backdrop-filter: blur(10px);
 }
 
-#idioma-menu button {
+h2 {
+    text-align: center;
+    color: #002244;
+    font-size: 28px;
+}
+
+#search-bar {
+    width: 50%;
+    padding: 14px 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#search-bar:focus {
+    border-color: #00bfff;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* PRODUTOS */
+.product {
+    background: #f7faff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid #003366;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
+    transition: all 0.4s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        6px 6px 20px rgba(0, 51, 102, 0.7),
+        inset 2px 2px 8px rgba(255,255,255,0.7),
+        inset -2px -2px 8px rgba(0,0,0,0.1);
+}
+
+.dark-blue {
+    font-size: 20px;
+    font-weight: bold;
+    animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+    0% { color: #a8d0ff; }
+    50% { color: #003366; }
+    100% { color: #001a33; }
+}
+
+.old-price { text-decoration: line-through; }
+
+/* CARROSSEL */
+#carousel {
+    width: 360px;
+    height: 320px;
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#carousel img {
     width: 100%;
-    padding: 10px;
-    background: white;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: white;
+    background: rgba(0,0,0,0.4);
     border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#prevBtn { left: 5px; }
+#nextBtn { right: 5px; }
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+/* POPUPS */
+#cart-popup, #account-popup {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#cart-box, #account-box {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px #002244;
+    text-align:center;
+}
+
+.cart-title {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 15px;
+}
+
+.cart-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
     font-weight: bold;
-    color:#002244;
-    border-bottom: 1px solid #ccc;
 }
 
-#idioma-menu button:hover {
-    background: #e6f2ff;
-}
-
-#idioma-menu button:last-child {
-    border-bottom: none;
-}
+#close-cart, #close-account { background:#002b55; color:white; }
+#clear-cart { background:#cc0000; color:white; }
+#checkout { background:#009933; color:white; }
 </style>
 </head>
 <body>
 
 <header>
-    <h1 id="titulo-site">SMARTWATCH STORE</h1>
+    <h1>SMARTWATCH STORE</h1>
     <div id="usuario-logado"></div>
-
-    <button id="cart-btn" class="header-btn">🛒 <span class="txt-carrinho">Carrinho</span></button>
-
-    <!-- BOTÃO IDIOMA -->
-    <button id="idioma-btn" class="header-btn">🌐 <span class="txt-idioma">Idioma</span></button>
-
-    <!-- MENU DE IDIOMAS -->
-    <div id="idioma-menu">
-        <button onclick="mudarIdioma('pt')">🇧🇷 Português</button>
-        <button onclick="mudarIdioma('en')">🇺🇸 English</button>
-        <button onclick="mudarIdioma('es')">🇪🇸 Español</button>
-    </div>
-
-    <button id="account-btn" class="header-btn">👤 <span class="txt-conta">Minha Conta</span></button>
+    <button id="cart-btn">🛒 Carrinho</button>
+    <button id="account-btn">👤 Minha Conta</button>
 </header>
-
-<!-- RESTO DO SEU CÓDIGO MANTIDO ABAIXO (TUDO IGUAL) -->
 
 <!-- POPUP DO CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
-        <div class="cart-title txt-seu-carrinho">Seu Carrinho</div>
+        <div class="cart-title">Seu Carrinho</div>
         <div id="cart-items"></div>
         <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
-        <button class="cart-btn" id="clear-cart">🗑️ <span class="txt-limpar">Limpar Carrinho</span></button>
-        <button class="cart-btn" id="checkout">✔️ <span class="txt-finalizar">Finalizar Compra</span></button>
-        <button class="cart-btn" id="close-cart"><span class="txt-fechar">Fechar</span></button>
+        <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
+        <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
+        <button class="cart-btn" id="close-cart">Fechar</button>
     </div>
 </div>
 
 <!-- POPUP MINHA CONTA -->
 <div id="account-popup">
     <div id="account-box">
-        <h3 class="txt-minha-conta">Minha Conta</h3>
-        <p><strong class="txt-nome">Nome:</strong> <span id="account-name"></span></p>
-        <p><strong class="txt-telefone">Telefone:</strong> <span id="account-phone"></span></p>
-        <p><strong class="txt-senha">Senha:</strong> <span id="account-pass"></span></p>
-        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">
-            <span class="txt-trocar-conta">Trocar de Conta</span>
-        </button>
-        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">
-            <span class="txt-fechar">Fechar</span>
-        </button>
+        <h3>Minha Conta</h3>
+        <p><strong>Nome:</strong> <span id="account-name"></span></p>
+        <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
+        <p><strong>Senha:</strong> <span id="account-pass"></span></p>
+        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
+        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
     </div>
 </div>
 
 <div class="container">
-    <h2 class="txt-promocao">Relógios Premium em Promoção</h2>
+    <h2>Relógios Premium em Promoção</h2>
 
     <div id="carousel">
         <button id="prevBtn" class="carousel-btn">❮</button>
@@ -163,179 +272,40 @@ header h1 {
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
-    <input type="text" id="search-bar" placeholder="Pesquisar produto..." class="txt-pesquisar">
+    <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
     <div class="products">
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
-                <div class="dark-blue txt-polar">Relógio Polar Unite</div>
+                <div class="dark-blue">Relógio Polar Unite</div>
             </a>
-            <h3 class="txt-desc-polar">Monitoramento completo de saúde</h3>
+            <h3>Monitoramento completo de saúde</h3>
             <p class="old-price">R$ 199,00</p>
             <p class="price">R$ 149,00</p>
-            <button class="add-cart txt-add-carrinho" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
-
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
-                <div class="dark-blue txt-garmin">Garmin Epix Gen 2</div>
+                <div class="dark-blue">Garmin Epix Gen 2</div>
             </a>
-            <h3 class="txt-desc-garmin">GPS avançado e extrema performance</h3>
+            <h3>GPS avançado e extrema performance</h3>
             <p class="old-price">R$ 4500,00</p>
             <p class="price">R$ 3599.99</p>
-            <button class="add-cart txt-add-carrinho" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
-
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
-                <div class="dark-blue txt-ultra">Ultra AI 3 5G</div>
+                <div class="dark-blue">Ultra AI 3 5G</div>
             </a>
-            <h3 class="txt-desc-ultra">Chip 5G e resistência extrema</h3>
+            <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
-            <button class="add-cart txt-add-carrinho" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
     </div>
 </div>
 
 <script>
-/* ===================== MENU IDIOMA ===================== */
-const idiomaBtn = document.getElementById("idioma-btn");
-const idiomaMenu = document.getElementById("idioma-menu");
-
-idiomaBtn.onclick = () => {
-    idiomaMenu.style.display = idiomaMenu.style.display === "block" ? "none" : "block";
-};
-
-document.addEventListener("click", function(e) {
-    if (!idiomaBtn.contains(e.target) && !idiomaMenu.contains(e.target)) {
-        idiomaMenu.style.display = "none";
-    }
-});
-
-/* ===== TRADUÇÕES ===== */
-const traducoes = {
-    pt: {
-        titulo: "SMARTWATCH STORE",
-        carrinho: "Carrinho",
-        conta: "Minha Conta",
-        idioma: "Idioma",
-        seuCarrinho: "Seu Carrinho",
-        limpar: "Limpar Carrinho",
-        finalizar: "Finalizar Compra",
-        fechar: "Fechar",
-        minhaConta: "Minha Conta",
-        nome: "Nome:",
-        telefone: "Telefone:",
-        senha: "Senha:",
-        trocarConta: "Trocar de Conta",
-        promocao: "Relógios Premium em Promoção",
-        pesquisar: "Pesquisar produto...",
-        polar: "Relógio Polar Unite",
-        descPolar: "Monitoramento completo de saúde",
-        garmin: "Garmin Epix Gen 2",
-        descGarmin: "GPS avançado e extrema performance",
-        ultra: "Ultra AI 3 5G",
-        descUltra: "Chip 5G e resistência extrema",
-        addCarrinho: "Adicionar ao Carrinho"
-    },
-
-    en: {
-        titulo: "SMARTWATCH STORE",
-        carrinho: "Cart",
-        conta: "My Account",
-        idioma: "Language",
-        seuCarrinho: "Your Cart",
-        limpar: "Clear Cart",
-        finalizar: "Checkout",
-        fechar: "Close",
-        minhaConta: "My Account",
-        nome: "Name:",
-        telefone: "Phone:",
-        senha: "Password:",
-        trocarConta: "Switch Account",
-        promocao: "Premium Watches on Sale",
-        pesquisar: "Search product...",
-        polar: "Polar Unite Watch",
-        descPolar: "Full health monitoring",
-        garmin: "Garmin Epix Gen 2",
-        descGarmin: "Advanced GPS and extreme performance",
-        ultra: "Ultra AI 3 5G",
-        descUltra: "5G chip and extreme durability",
-        addCarrinho: "Add to Cart"
-    },
-
-    es: {
-        titulo: "TIENDA SMARTWATCH",
-        carrinho: "Carrito",
-        conta: "Mi Cuenta",
-        idioma: "Idioma",
-        seuCarrinho: "Tu Carrito",
-        limpar: "Vaciar Carrito",
-        finalizar: "Finalizar Compra",
-        fechar: "Cerrar",
-        minhaConta: "Mi Cuenta",
-        nome: "Nombre:",
-        telefone: "Teléfono:",
-        senha: "Contraseña:",
-        trocarConta: "Cambiar Cuenta",
-        promocao: "Relojes Premium en Promoción",
-        pesquisar: "Buscar producto...",
-        polar: "Reloj Polar Unite",
-        descPolar: "Monitoreo completo de salud",
-        garmin: "Garmin Epix Gen 2",
-        descGarmin: "GPS avanzado y alto rendimiento",
-        ultra: "Ultra AI 3 5G",
-        descUltra: "Chip 5G y resistencia extrema",
-        addCarrinho: "Añadir al Carrito"
-    }
-};
-
-function mudarIdioma(lang) {
-    localStorage.setItem("idiomaSite", lang);
-    aplicarIdioma();
-}
-
-function aplicarIdioma() {
-    const lang = localStorage.getItem("idiomaSite") || "pt";
-    const t = traducoes[lang];
-
-    document.getElementById("titulo-site").innerText = t.titulo;
-    document.querySelector(".txt-carrinho").innerText = t.carrinho;
-    document.querySelector(".txt-conta").innerText = t.conta;
-    document.querySelector(".txt-idioma").innerText = t.idioma;
-
-    document.querySelector(".txt-seu-carrinho").innerText = t.seuCarrinho;
-    document.querySelector(".txt-limpar").innerText = t.limpar;
-    document.querySelector(".txt-finalizar").innerText = t.finalizar;
-    document.querySelectorAll(".txt-fechar").forEach(e => e.innerText = t.fechar);
-
-    document.querySelector(".txt-minha-conta").innerText = t.minhaConta;
-    document.querySelector(".txt-nome").innerText = t.nome;
-    document.querySelector(".txt-telefone").innerText = t.telefone;
-    document.querySelector(".txt-senha").innerText = t.senha;
-    document.querySelector(".txt-trocar-conta").innerText = t.trocarConta;
-
-    document.querySelector(".txt-promocao").innerText = t.promocao;
-    document.getElementById("search-bar").placeholder = t.pesquisar;
-
-    document.querySelector(".txt-polar").innerText = t.polar;
-    document.querySelector(".txt-desc-polar").innerText = t.descPolar;
-
-    document.querySelector(".txt-garmin").innerText = t.garmin;
-    document.querySelector(".txt-desc-garmin").innerText = t.descGarmin;
-
-    document.querySelector(".txt-ultra").innerText = t.ultra;
-    document.querySelector(".txt-desc-ultra").innerText = t.descUltra;
-
-    document.querySelectorAll(".txt-add-carrinho").forEach(btn => btn.innerText = t.addCarrinho);
-}
-
-// Executa automaticamente ao carregar
-aplicarIdioma();
-
-/* ======== SEU CÓDIGO ORIGINAL ABAIXO (CARRINHO, CONTA, CARROSSEL ETC) ======== */
-
 /* ===== SISTEMA DO CARRINHO ===== */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
