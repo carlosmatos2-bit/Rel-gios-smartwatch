@@ -272,7 +272,8 @@ h2 {
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
-    <input type="text" id="search-bar" placeholder="Pesquisar produto...">
+    <!-- BARRA DE PESQUISA ALTERADA -->
+    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda' para suporte)">
 
     <div class="products">
         <div class="product">
@@ -370,7 +371,7 @@ document.getElementById("checkout").onclick = () => {
     window.location.href = "finalizar.html";
 };
 
-/* ===== BUSCA ===== */
+/* ===== BUSCA PRINCIPAL ===== */
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
@@ -384,6 +385,15 @@ searchBar.addEventListener("input", () => {
         let nome = normalize(product.innerText);
         product.style.display = nome.includes(termo) ? "block" : "none";
     });
+});
+
+/* ===== REDIRECIONAMENTO PARA AJUDA ===== */
+searchBar.addEventListener("input", () => {
+    let termo = normalize(searchBar.value.trim());
+
+    if (termo === "ajuda") {
+        window.location.href = "ajuda.html";
+    }
 });
 
 /* ===== CARROSSEL ===== */
