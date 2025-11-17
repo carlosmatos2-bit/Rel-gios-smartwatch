@@ -71,23 +71,6 @@ header {
     text-align: center;
 }
 
-.coupon {
-    background: #004080;
-    color: white;
-    padding: 25px;
-    border-radius: 12px;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
-    transition: all 0.3s ease;
-}
-
-.coupon:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px #00bfff, 0 0 45px #00ffff;
-}
-
 #redeem-section {
     display: flex;
     justify-content: center;
@@ -145,6 +128,31 @@ header {
     color: #002244;
 }
 
+/* Meus cupons já resgatados */
+#my-coupons {
+    margin-top: 40px;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#my-coupons h3 {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 15px;
+}
+
+.coupon-item {
+    background: #004080;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
+}
+
 /* Confete */
 .confetti {
     position: fixed;
@@ -172,30 +180,47 @@ header {
 </header>
 
 <div class="container">
-    <div class="coupon">
-        CUPOM ESPECIAL: <span id="coupon-code">CARLOS</span>
-    </div>
-
     <div id="redeem-section">
         <input type="text" id="redeem-input" placeholder="Digite seu código">
         <button id="redeem-btn">Resgatar</button>
     </div>
     <div id="redeem-message"></div>
+
+    <div id="my-coupons">
+        <h3>Meus cupons já resgatados</h3>
+        <div id="coupons-list"></div>
+    </div>
 </div>
 
 <script>
-const validCode = "CARLOS";
-let redeemed = localStorage.getItem("couponRedeemed") === "true";
+const validCodes = ["CARLOS"];
+let redeemed = JSON.parse(localStorage.getItem("redeemedCoupons")) || [];
 
 const input = document.getElementById("redeem-input");
 const btn = document.getElementById("redeem-btn");
 const message = document.getElementById("redeem-message");
+const couponsList = document.getElementById("coupons-list");
 
-// Se já resgatou
-if(redeemed){
+// Função para atualizar a lista de cupons já resgatados
+function updateCouponsList() {
+    couponsList.innerHTML = "";
+    if(redeemed.length === 0) return;
+    redeemed.forEach(c => {
+        const div = document.createElement("div");
+        div.classList.add("coupon-item");
+        div.textContent = c;
+        couponsList.appendChild(div);
+    });
+}
+
+// Inicializa lista
+updateCouponsList();
+
+// Se todos os códigos foram resgatados, bloqueia input
+if(redeemed.length === validCodes.length){
     input.disabled = true;
     btn.disabled = true;
-    message.textContent = "Você já resgatou o código!";
+    message.textContent = "Todos os códigos já foram resgatados!";
     message.style.color = "#cc0000";
 }
 
@@ -212,29 +237,34 @@ function createConfetti(){
     }
 }
 
-// Função de resgate
+// Evento de resgate
 btn.addEventListener("click", () => {
     const code = input.value.trim().toUpperCase();
 
-    if(redeemed){
-        message.textContent = "Você já resgatou o código!";
+    if(redeemed.includes(code)){
+        message.textContent = "Você já resgatou este código!";
         message.style.color = "#cc0000";
         return;
     }
 
-    if(code === validCode){
-        localStorage.setItem("couponRedeemed", "true");
+    if(validCodes.includes(code)){
+        redeemed.push(code);
+        localStorage.setItem("redeemedCoupons", JSON.stringify(redeemed));
+        updateCouponsList();
         message.textContent = "Código resgatado com sucesso!";
         message.style.color = "#009933";
-        input.disabled = true;
-        btn.disabled = true;
-
-        // Gera confete
         createConfetti();
+
+        if(redeemed.length === validCodes.length){
+            input.disabled = true;
+            btn.disabled = true;
+        }
     } else {
         message.textContent = "Código inválido!";
         message.style.color = "#cc0000";
     }
+
+    input.value = "";
 });
 </script>
 
