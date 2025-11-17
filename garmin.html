@@ -61,7 +61,6 @@
         background: #0059b3;
     }
 
-    /* ===== LAYOUT PRINCIPAL ===== */
     .product-container {
         max-width: 1200px;
         margin: 130px auto 50px auto;
@@ -79,7 +78,6 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* LADO ESQUERDO */
     .left {
         width: 55%;
     }
@@ -123,7 +121,6 @@
         box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
     }
 
-    /* LADO DIREITO */
     .right {
         width: 40%;
         background: #f7faff;
@@ -136,15 +133,6 @@
     .right h3 {
         color: #003366;
         margin-top: 0;
-    }
-
-    select, input {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-        font-size: 17px;
-        border-radius: 10px;
-        border: 2px solid #003366;
     }
 
     .info-box {
@@ -208,12 +196,7 @@
     <div class="right">
         <h3>🛒 Informações do Produto</h3>
 
-        <label>Quantidade</label>
-        <select id="qtd">
-            <option value="1">1 unidade</option>
-            <option value="2">2 unidades</option>
-            <option value="3">3 unidades</option>
-        </select>
+        <!-- ❌ REMOVIDO: Quantidade + select -->
 
         <div class="info-box">
             ✔ Garantia estendida: <b>2 anos</b><br><br>
@@ -221,7 +204,7 @@
             💳 Preço: <b>R$ 3599,99</b>
         </div>
 
-        <!-- ❌ BOTÕES REMOVIDOS AQUI -->
+        <!-- ❌ Nenhum botão -->
     </div>
 
 </div>
