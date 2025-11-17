@@ -47,6 +47,79 @@
         box-shadow: 0 0 6px rgba(0,102,204,0.4);
     }
 
+    /* ------- FAQ INTERATIVO ------- */
+    .faq-box {
+        margin-top: 25px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #eef3fa;
+        border-left: 6px solid #003366;
+        padding: 10px 0;
+    }
+
+    .faq-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #003366;
+        padding-bottom: 10px;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #cdd7e6;
+    }
+
+    .accordion-header {
+        width: 100%;
+        background: none;
+        padding: 18px;
+        font-size: 19px;
+        font-weight: 600;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #003366;
+        transition: 0.3s;
+    }
+
+    .accordion-header:hover {
+        background: #dfe8f5;
+    }
+
+    .accordion-header span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .arrow {
+        transition: transform 0.3s ease;
+        font-weight: bold;
+    }
+
+    .active .arrow {
+        transform: rotate(90deg);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 18px;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+    .accordion-content p {
+        font-size: 17px;
+        line-height: 1.6;
+        padding: 15px 0;
+        margin: 0;
+    }
+
+    /* Área de Resultado */
     #result-area {
         margin-top: 25px;
         padding: 20px;
@@ -68,6 +141,7 @@
         font-size: 18px;
         line-height: 1.6;
     }
+
     /* Fundo borrado */
     body::before {
         content: "";
@@ -89,48 +163,150 @@
 <a href="resultado.html" style="display:inline-block;margin:20px auto 0 auto;padding:12px 20px;background:#003366;color:white;font-size:18px;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.2);text-align:center;width:140px;">← Voltar</a>
 
 <div id="container">
+
     <input type="text" id="search-box" placeholder="Digite o que você precisa de ajuda..." />
 
+    <!-- 🔵 FAQ INTERATIVO COMPLETO -->
+    <div class="faq-box">
+        <div class="faq-title">Informações Importantes Antes de Comprar um Smartwatch</div>
+
+        <!-- ITEM 1 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>⚡ Voltagem Permitida para Carregar</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Use apenas carregadores de <strong>5V e 1A</strong>. Carregadores turbo podem sobreaquecer e danificar a bateria do relógio.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>🔋 Cuidados ao Carregar</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Conecte o carregador primeiro na tomada e só depois no smartwatch. Isso evita picos de energia e prolonga a vida útil da bateria.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>💧 Resistência à Água</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Mesmo modelos IP67/IP68 não devem ser usados em banho quente, sauna, mar ou piscina com cloro. A pressão e a temperatura podem danificar os selos internos.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>📱 Compatibilidade com Celulares</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Todos os modelos funcionam com Android e iPhone, porém alguns recursos extras exigem aplicativos específicos:</p>
+                <p>• Android: 5.0+ | • iPhone: iOS 10+</p>
+            </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>⏳ Duração da Bateria</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>A duração depende do uso: brilho alto, notificações, GPS e monitoramento contínuo reduzem a autonomia.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 6 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>❤️ Monitoramento de Saúde</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Smartwatches medem frequência cardíaca, oxigênio no sangue (SpO2) e pressão arterial. Não substituem consultas médicas.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 7 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>🏆 Modelos Recomendados</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Escolha modelos confiáveis de marcas conhecidas. Confira avaliações, compatibilidade e funcionalidades antes da compra.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 8 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>🔧 Como Aumentar a Vida Útil da Bateria</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Evite carregar durante a noite inteira, não use carregadores incompatíveis, reduza brilho e notificações quando possível.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 9 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>🧼 Como Limpar Corretamente</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Limpe com pano macio levemente umedecido. Evite produtos químicos ou água em excesso para não danificar sensores e pulseira.</p>
+            </div>
+        </div>
+
+        <!-- ITEM 10 -->
+        <div class="accordion-item">
+            <button class="accordion-header">
+                <span>🔗 Como Parear com Android/iPhone</span>
+                <span class="arrow">▶</span>
+            </button>
+            <div class="accordion-content">
+                <p>Baixe o aplicativo oficial, ative Bluetooth no celular e siga as instruções na tela para parear o smartwatch.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de resultado de pesquisa -->
     <div id="result-area">
         <div class="result-title" id="result-title"></div>
         <div class="result-text" id="result-text"></div>
     </div>
+
 </div>
 
 <script>
+    /* SEARCH BOX */
     const searchBox = document.getElementById("search-box");
     const resultArea = document.getElementById("result-area");
     const resultTitle = document.getElementById("result-title");
     const resultText = document.getElementById("result-text");
 
     function normalize(text) {
-        return text
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/\p{Diacritic}/gu, "");
+        return text.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
     }
 
     const ajudaConteudos = {
-        "compra": {
-            titulo: "Como comprar um produto?",
-            texto: "Para comprar um produto, basta navegar pela página inicial, escolher o item desejado e clicar no botão 'Comprar Agora'. Você será direcionado para a página de pagamento onde poderá finalizar sua compra de forma rápida e segura."
-        },
-        "pagamento": {
-            titulo: "Formas de pagamento",
-            texto: "Aceitamos PIX, cartão de crédito, boleto bancário e pagamento parcelado dependendo da bandeira do cartão. Todas as transações são criptografadas e seguras."
-        },
-        "entrega": {
-            titulo: "Informações de entrega",
-            texto: "Os pedidos são enviados em até 24 horas úteis após a confirmação do pagamento. O prazo de entrega varia de acordo com sua região e forma de envio selecionada."
-        },
-        "garantia": {
-            titulo: "Garantia e suporte",
-            texto: "Todos os produtos possuem garantia de 90 dias contra defeitos de fabricação. Caso note algum problema, basta entrar em contato pelo chat de suporte."
-        },
-        "contato": {
-            titulo: "Como falar com o suporte?",
-            texto: "Você pode entrar em contato através do nosso WhatsApp, e-mail de suporte ou formulário de contato disponível no rodapé do site."
-        }
+        "compra": { titulo: "Como comprar um produto?", texto: "Para comprar um produto, basta escolher o item e clicar em 'Comprar Agora'." },
+        "pagamento": { titulo: "Formas de pagamento", texto: "Aceitamos PIX, cartões e boleto." },
+        "entrega": { titulo: "Informações de entrega", texto: "O envio ocorre em até 24 horas úteis." },
+        "garantia": { titulo: "Garantia e suporte", texto: "Garantia de 90 dias contra defeitos." },
+        "contato": { titulo: "Contato com suporte", texto: "WhatsApp, e-mail e formulário." }
     };
 
     searchBox.addEventListener("input", () => {
@@ -140,12 +316,8 @@
         if (termo.length < 3) return;
 
         let encontrado = null;
-        
         for (let chave in ajudaConteudos) {
-            if (termo.includes(chave)) {
-                encontrado = ajudaConteudos[chave];
-                break;
-            }
+            if (termo.includes(chave)) { encontrado = ajudaConteudos[chave]; break; }
         }
 
         if (encontrado) {
@@ -154,9 +326,26 @@
             resultArea.style.display = "block";
         } else {
             resultTitle.textContent = "Nenhum resultado encontrado";
-            resultText.textContent = "Tente usar palavras como: compra, pagamento, entrega, garantia, contato.";
+            resultText.textContent = "Tente: compra, pagamento, entrega, garantia, contato.";
             resultArea.style.display = "block";
         }
+    });
+
+    /* ACCORDION */
+    const headers = document.querySelectorAll(".accordion-header");
+    headers.forEach(header => {
+        header.addEventListener("click", () => {
+            const item = header.parentElement;
+            const content = item.querySelector(".accordion-content");
+            item.classList.toggle("active");
+            if (item.classList.contains("active")) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = "1";
+            } else {
+                content.style.maxHeight = "0px";
+                content.style.opacity = "0";
+            }
+        });
     });
 </script>
 
