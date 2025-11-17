@@ -273,7 +273,7 @@ h2 {
     </div>
 
     <!-- BARRA DE PESQUISA ALTERADA -->
-    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda' para suporte)">
+    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
 
     <div class="products">
         <div class="product">
@@ -387,11 +387,11 @@ searchBar.addEventListener("input", () => {
     });
 });
 
-/* ===== REDIRECIONAMENTO PARA AJUDA ===== */
+/* ===== REDIRECIONAMENTO PARA AJUDA (NOVA REGRA: ajuda.sos) ===== */
 searchBar.addEventListener("input", () => {
     let termo = normalize(searchBar.value.trim());
 
-    if (termo === "ajuda") {
+    if (termo === "ajuda.sos") {
         window.location.href = "ajuda.html";
     }
 });
