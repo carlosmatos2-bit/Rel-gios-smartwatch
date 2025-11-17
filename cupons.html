@@ -38,6 +38,28 @@ header {
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     letter-spacing: 1px;
+    position: relative;
+}
+
+/* Botão Voltar no canto superior esquerdo */
+#back-btn-top {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #003366;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+#back-btn-top:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
 }
 
 /* Container principal */
@@ -76,38 +98,20 @@ header {
     color: #a8d0ff;
     margin-bottom: 10px;
 }
-
-.back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #003366;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    margin-right: 10px;
-}
-
-.back-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
-}
 </style>
 </head>
 <body>
 
-<header>Meus Cupons</header>
+<header>
+    <a href="resultado.html" id="back-btn-top">← Voltar</a>
+    Meus Cupons
+</header>
 
 <div class="container">
     <div class="coupon">
         <div class="coupon-title">CUPOM ESPECIAL</div>
         <div class="coupon-code">CARLOS</div>
     </div>
-
-    <a href="resultado.html" class="back-btn">← Voltar</a>
 </div>
 
 </body>
