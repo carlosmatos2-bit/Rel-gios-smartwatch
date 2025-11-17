@@ -50,7 +50,7 @@ header h1 {
     font-size: 16px;
 }
 
-#cart-btn {
+#cart-btn, #account-btn {
     background:#004080;
     color:white;
     padding:8px 15px;
@@ -61,9 +61,10 @@ header h1 {
     font-weight:bold;
     box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
     transition: all 0.3s ease;
+    margin-left: 10px;
 }
 
-#cart-btn:hover {
+#cart-btn:hover, #account-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
@@ -95,7 +96,6 @@ h2 {
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -186,14 +186,11 @@ h2 {
     background: rgba(0,0,0,0.7);
 }
 
-/* POPUP DO CARRINHO */
-#cart-popup {
+/* POPUPS */
+#cart-popup, #account-popup {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top:0; left:0; width:100%; height:100%;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);
     justify-content: center;
@@ -201,26 +198,20 @@ h2 {
     z-index: 9999;
 }
 
-#cart-box {
+#cart-box, #account-box {
     background: white;
     width: 380px;
     padding: 20px;
     border-radius: 14px;
     border: 3px solid #003366;
     box-shadow: 0 0 20px #002244;
-}
-
-#cart-items {
-    max-height: 260px;
-    overflow-y: auto;
-    margin-bottom: 20px;
+    text-align:center;
 }
 
 .cart-title {
     font-size: 22px;
     color: #002244;
     margin-bottom: 15px;
-    text-align: center;
 }
 
 .cart-btn {
@@ -234,20 +225,9 @@ h2 {
     font-weight: bold;
 }
 
-#close-cart {
-    background: #002b55;
-    color: white;
-}
-
-#clear-cart {
-    background: #cc0000;
-    color: white;
-}
-
-#checkout {
-    background: #009933;
-    color: white;
-}
+#close-cart, #close-account { background:#002b55; color:white; }
+#clear-cart { background:#cc0000; color:white; }
+#checkout { background:#009933; color:white; }
 </style>
 </head>
 <body>
@@ -256,20 +236,30 @@ h2 {
     <h1>SMARTWATCH STORE</h1>
     <div id="usuario-logado"></div>
     <button id="cart-btn">🛒 Carrinho</button>
+    <button id="account-btn">👤 Minha Conta</button>
 </header>
 
 <!-- POPUP DO CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
-
         <div id="cart-items"></div>
         <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
-
         <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
-        <!-- BOTÃO FINALIZAR COMPRA REDIRECIONANDO -->
         <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
         <button class="cart-btn" id="close-cart">Fechar</button>
+    </div>
+</div>
+
+<!-- POPUP MINHA CONTA -->
+<div id="account-popup">
+    <div id="account-box">
+        <h3>Minha Conta</h3>
+        <p><strong>Nome:</strong> <span id="account-name"></span></p>
+        <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
+        <p><strong>Senha:</strong> <span id="account-pass"></span></p>
+        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
+        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
     </div>
 </div>
 
@@ -285,7 +275,6 @@ h2 {
     <input type="text" id="search-bar" placeholder="Pesquisar produto...">
 
     <div class="products">
-
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="dark-blue">Relógio Polar Unite</div>
@@ -295,7 +284,6 @@ h2 {
             <p class="price">R$ 149,00</p>
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
-
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue">Garmin Epix Gen 2</div>
@@ -305,7 +293,6 @@ h2 {
             <p class="price">R$ 3599.99</p>
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
-
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
                 <div class="dark-blue">Ultra AI 3 5G</div>
@@ -315,13 +302,11 @@ h2 {
             <p class="price">R$ 349,00</p>
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
-
     </div>
 </div>
 
 <script>
 /* ===== SISTEMA DO CARRINHO ===== */
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
@@ -373,19 +358,15 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
-// NOVA FUNÇÃO: FINALIZAR COMPRA REDIRECIONANDO
+// FINALIZAR COMPRA
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
         return;
     }
-
     const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-    // SALVAR NO LOCALSTORAGE PARA FINALIZAR
     localStorage.setItem("carrinho", JSON.stringify(cart));
     localStorage.setItem("total", total.toFixed(2));
-
     window.location.href = "finalizar.html";
 };
 
@@ -399,10 +380,8 @@ function normalize(t) {
 
 searchBar.addEventListener("input", () => {
     let termo = normalize(searchBar.value.trim());
-
     products.forEach(product => {
         let nome = normalize(product.innerText);
-
         product.style.display = nome.includes(termo) ? "block" : "none";
     });
 });
@@ -439,6 +418,36 @@ setInterval(() => {
     currentIndex = (currentIndex + 1) % carouselImages.length;
     showImage(currentIndex);
 }, 3000);
+
+/* ===== MINHA CONTA ===== */
+const accountBtn = document.getElementById("account-btn");
+const accountPopup = document.getElementById("account-popup");
+
+function carregarConta() {
+    const nome = localStorage.getItem("usuarioLogado") || "Não informado";
+    const telefone = localStorage.getItem("telefone") || "Não informado";
+    const senha = localStorage.getItem("senha") || "Não informado";
+
+    document.getElementById("account-name").innerText = nome;
+    document.getElementById("account-phone").innerText = telefone;
+    document.getElementById("account-pass").innerText = senha;
+}
+
+accountBtn.onclick = () => {
+    carregarConta();
+    accountPopup.style.display = "flex";
+}
+
+function fecharConta() {
+    accountPopup.style.display = "none";
+}
+
+function trocarConta() {
+    localStorage.removeItem("usuarioLogado");
+    localStorage.removeItem("telefone");
+    localStorage.removeItem("senha");
+    window.location.href = "index.html"; // Página do primeiro código
+}
 </script>
 
 </body>
