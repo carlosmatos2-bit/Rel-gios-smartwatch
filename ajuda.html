@@ -10,6 +10,8 @@
     #container { max-width:900px; margin:40px auto; padding:20px; background:white; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
     #search-box { width:100%; padding:15px; border-radius:10px; border:2px solid #003366; font-size:18px; outline:none; transition:0.3s; }
     #search-box:focus { border-color:#0066cc; box-shadow:0 0 6px rgba(0,102,204,0.4); }
+
+    /* Área de resultados */
     #result-area { margin-top:25px; padding:20px; border-radius:10px; background:#eef3fa; min-height:150px; border-left:6px solid #003366; display:none; }
     .result-title { font-size:24px; font-weight:600; color:#003366; margin-bottom:10px; }
     .result-text { font-size:18px; line-height:1.6; margin-bottom:15px; }
@@ -17,6 +19,15 @@
     /* FAQ */
     .faq-box { margin-top:25px; border-radius:12px; overflow:hidden; background:#eef3fa; border-left:6px solid #003366; padding:10px 0; }
     .faq-title { text-align:center; font-size:24px; font-weight:700; color:#003366; padding-bottom:10px; }
+
+    /* Tags abaixo do título FAQ */
+    .faq-tags { text-align:center; margin:10px 0 20px 0; font-size:16px; color:#003366; }
+    .faq-tags span {
+        display:inline-block; background:#dfe8f5; padding:5px 10px; border-radius:12px; margin:3px; cursor:pointer; transition:0.3s;
+    }
+    .faq-tags span:hover { background:#cdd7e6; }
+
+    /* Accordion */
     .accordion-item { border-bottom:1px solid #cdd7e6; }
     .accordion-header { width:100%; background:none; padding:18px; font-size:19px; font-weight:600; border:none; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:#003366; transition:0.3s; }
     .accordion-header:hover { background:#dfe8f5; }
@@ -26,6 +37,7 @@
     .accordion-content { max-height:0; overflow:hidden; padding:0 18px; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; }
     .accordion-content p { font-size:17px; line-height:1.6; padding:15px 0; margin:0; }
 
+    /* Fundo */
     body::before { content:""; position:fixed; top:0; left:0; width:100%; height:100%; background:url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") center/cover no-repeat; filter:blur(10px); z-index:-1; }
 </style>
 </head>
@@ -39,9 +51,20 @@
 
     <input type="text" id="search-box" placeholder="Digite o que você precisa de ajuda..." />
 
-    <!-- FAQ (mantida) -->
+    <!-- FAQ -->
     <div class="faq-box">
         <div class="faq-title">Informações Importantes Antes de Comprar um Smartwatch</div>
+
+        <!-- Palavras-chave / tags -->
+        <div class="faq-tags">
+            <span data-keyword="carregar">Carregar</span>
+            <span data-keyword="voltagem">Voltagem</span>
+            <span data-keyword="garantia">Garantia</span>
+            <span data-keyword="resistencia agua">Resistência à água</span>
+            <span data-keyword="parear">Parear</span>
+            <span data-keyword="bateria">Bateria</span>
+        </div>
+
         <!-- Accordion items aqui (igual ao código anterior) -->
     </div>
 
@@ -51,14 +74,12 @@
 </div>
 
 <script>
-    function normalize(text) {
-        return text.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"");
-    }
+    function normalize(text) { return text.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,""); }
 
     const searchBox = document.getElementById("search-box");
     const resultArea = document.getElementById("result-area");
 
-    // Base de perguntas e respostas, com várias palavras-chave
+    // Base de perguntas e respostas com palavras-chave
     const ajudaConteudos = [
         { keywords: ["como carregar","carregar"], titulo: "Como carregar o smartwatch", texto: "Use apenas carregadores 5V/1A. Evite carregadores turbo para não danificar a bateria." },
         { keywords: ["voltagem","volts"], titulo: "Voltagem correta", texto: "O smartwatch aceita apenas 5V e corrente máxima de 1A." },
@@ -68,43 +89,52 @@
         { keywords: ["bateria","duracao bateria","autonomia"], titulo: "Duração da bateria", texto: "Depende do uso: brilho alto, notificações ativas e GPS reduzem a autonomia." }
     ];
 
-    searchBox.addEventListener("input", () => {
-        const termo = normalize(searchBox.value.trim());
+    // Função para mostrar resultados
+    function mostrarResultados(termo){
         resultArea.innerHTML = "";
-        if(termo.length < 2) { resultArea.style.display = "none"; return; }
+        if(termo.length < 2){ resultArea.style.display="none"; return; }
 
-        // Filtra todos os conteúdos que combinam
-        const encontrados = ajudaConteudos.filter(item => item.keywords.some(k => termo.includes(k)));
+        const encontrados = ajudaConteudos.filter(item => item.keywords.some(k=> termo.includes(k)));
 
         if(encontrados.length > 0){
-            encontrados.forEach(item => {
+            encontrados.forEach(item=>{
                 const title = document.createElement("div");
-                title.className = "result-title";
-                title.textContent = item.titulo;
+                title.className = "result-title"; title.textContent = item.titulo;
                 const text = document.createElement("div");
-                text.className = "result-text";
-                text.textContent = item.texto;
-                resultArea.appendChild(title);
-                resultArea.appendChild(text);
+                text.className = "result-text"; text.textContent = item.texto;
+                resultArea.appendChild(title); resultArea.appendChild(text);
             });
             resultArea.style.display = "block";
         } else {
             resultArea.innerHTML = "<div class='result-title'>Nenhum resultado encontrado</div><div class='result-text'>Tente palavras como: carregar, voltagem, garantia, resistência água, parear, bateria.</div>";
             resultArea.style.display = "block";
         }
+    }
+
+    // Pesquisa ao digitar
+    searchBox.addEventListener("input", ()=>{ mostrarResultados(normalize(searchBox.value.trim())); });
+
+    // Clique nas tags
+    const tags = document.querySelectorAll(".faq-tags span");
+    tags.forEach(tag=>{
+        tag.addEventListener("click", ()=>{
+            const keyword = tag.getAttribute("data-keyword");
+            searchBox.value = keyword;
+            mostrarResultados(keyword);
+        });
     });
 
     // Accordion FAQ
     const headers = document.querySelectorAll(".accordion-header");
     headers.forEach(header=>{
-        header.addEventListener("click",()=>{
+        header.addEventListener("click", ()=>{
             const item = header.parentElement;
             const content = item.querySelector(".accordion-content");
             item.classList.toggle("active");
             if(item.classList.contains("active")){
                 content.style.maxHeight = content.scrollHeight + "px";
                 content.style.opacity = "1";
-            }else{
+            } else {
                 content.style.maxHeight = "0px";
                 content.style.opacity = "0";
             }
