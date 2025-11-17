@@ -53,50 +53,85 @@
 
   header nav a{color:#fff; text-decoration:none; margin-left:20px; font-weight:600}
 
-  .wrap{max-width:1100px; margin:40px auto; padding:0 20px;}
-  .grid{display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:start;}
-  .card{background:var(--card); border-radius:14px; padding:22px; box-shadow:0 10px 30px rgba(2,30,66,0.08);}
-  
-  .gallery{display:flex; gap:16px; justify-content:center;}
-  .main-image img{width:100%; border-radius:12px;}
-
-  .title h1{color:var(--brand); font-size:26px; margin:0 0 8px;}
-
-  .price-block{text-align:right;}
-  .price-block .old{ text-decoration:line-through; color:#888; font-size:14px;}
-  .price-block .now{ color:#0a8a3a; font-weight:800; font-size:22px;}
-
-  .specs{margin-top:18px; display:grid; gap:8px;}
-  .specs ul{margin:10px 0 0 18px;}
-
-  .buybox{
-    position:sticky;
-    top:92px;
-    background:linear-gradient(180deg,#fff,#fbfdff);
-    border-radius:12px;
-    padding:18px;
-    box-shadow:0 10px 24px rgba(2,30,66,0.06);
-    border:2px solid rgba(0,51,102,0.06);
+  /* ----- DROPDOWN IDIOMA ----- */
+  .lang-box {
+    position: relative;
+    display: inline-block;
   }
-  .buybox h3{color:var(--brand); margin:0 0 8px; font-size:20px;}
-
-  .interactions{margin-top:18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
-  .pulse{ color:var(--brand); font-weight:800; }
-
-  .tech{margin-top:18px; background:#ffffff; padding:12px; border-radius:10px;}
-  .tech table{width:100%; border-collapse:collapse;}
-  .tech td{padding:8px 6px;}
-
+  .lang-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .lang-menu {
+    display: none;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    background: #fff;
+    color: #000;
+    min-width: 120px;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+  .lang-menu button {
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .lang-menu button:hover {
+    background: #eef5ff;
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">SMARTWATCH STORE</div>
+
   <nav>
     <a href="resultado.html">Voltar à loja</a>
+
+    <!-- 🔵 BOTÃO DE IDIOMA ADICIONADO -->
+    <div class="lang-box">
+      <button class="lang-btn" onclick="toggleLang()">Idioma ▾</button>
+      <div class="lang-menu" id="langMenu">
+        <button onclick="setLang('pt')">Português</button>
+        <button onclick="setLang('en')">Inglês</button>
+        <button onclick="setLang('es')">Espanhol</button>
+      </div>
+    </div>
   </nav>
 </header>
+
+<script>
+function toggleLang(){
+  let menu = document.getElementById("langMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+/* 🔵 Função que salva o idioma escolhido */
+function setLang(lang){
+  localStorage.setItem("idioma_site", lang);
+  location.reload(); // Atualiza para aplicar traduções quando existirem
+}
+
+document.addEventListener("click", function(e){
+  const menu = document.getElementById("langMenu");
+  if(!e.target.closest(".lang-box")){
+    menu.style.display = "none";
+  }
+});
+</script>
 
 <div class="wrap">
   <div class="grid">
@@ -150,9 +185,6 @@
     <aside class="buybox">
       <h3>Comprar</h3>
       <div class="sku">SKU: UAI3-5G-BLK</div>
-
-      <!-- ❌ QUANTIDADE REMOVIDA -->
-      <!-- REMOVIDO: label + input number + container -->
 
       <div style="font-size:14px;color:#556">Entrega: 3–7 dias úteis</div>
 
