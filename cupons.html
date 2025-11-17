@@ -192,19 +192,7 @@ header {
 
 <script>
 const validCodes = ["CARLOS"];
-const currentUser = localStorage.getItem("usuarioLogado");
-
-if(!currentUser) {
-    alert("Faça login primeiro!");
-    window.location.href = "index.html";
-}
-
-// Recupera cupons do usuário atual
-let allRedeemed = JSON.parse(localStorage.getItem("redeemedCouponsByUser")) || {};
-if(!allRedeemed[currentUser]) allRedeemed[currentUser] = [];
-let redeemed = allRedeemed[currentUser];
-
-// Recupera cupons já usados globalmente
+let redeemed = JSON.parse(localStorage.getItem("redeemedCoupons")) || [];
 let usedCoupons = JSON.parse(localStorage.getItem("usedCoupons")) || [];
 
 const input = document.getElementById("redeem-input");
@@ -212,10 +200,11 @@ const btn = document.getElementById("redeem-btn");
 const message = document.getElementById("redeem-message");
 const couponsList = document.getElementById("coupons-list");
 
+// Atualiza lista de cupons resgatados (somente os não usados)
 function updateCouponsList() {
     couponsList.innerHTML = "";
     redeemed.forEach(c => {
-        if(!usedCoupons.includes(c)) {
+        if (!usedCoupons.includes(c)) {
             const div = document.createElement("div");
             div.classList.add("coupon-item");
             div.textContent = c;
@@ -224,15 +213,18 @@ function updateCouponsList() {
     });
 }
 
+// Inicializa lista
+updateCouponsList();
+
+// Bloqueia input se todos os cupons válidos foram resgatados ou já usados
 function checkInputStatus() {
-    if(redeemed.length === validCodes.length || redeemed.every(c => usedCoupons.includes(c))) {
+    if (redeemed.length === validCodes.length || redeemed.every(c => usedCoupons.includes(c))) {
         input.disabled = true;
         btn.disabled = true;
         message.textContent = "Todos os códigos já foram resgatados ou usados!";
         message.style.color = "#cc0000";
     }
 }
-updateCouponsList();
 checkInputStatus();
 
 function createConfetti(){
@@ -247,10 +239,11 @@ function createConfetti(){
     }
 }
 
+// Resgatar cupom
 btn.addEventListener("click", () => {
     const code = input.value.trim().toUpperCase();
 
-    if(usedCoupons.includes(code)) {
+    if (usedCoupons.includes(code)) {
         message.textContent = "Este código já foi usado e não pode ser resgatado!";
         message.style.color = "#cc0000";
         input.value = "";
@@ -266,8 +259,7 @@ btn.addEventListener("click", () => {
 
     if(validCodes.includes(code)){
         redeemed.push(code);
-        allRedeemed[currentUser] = redeemed;
-        localStorage.setItem("redeemedCouponsByUser", JSON.stringify(allRedeemed));
+        localStorage.setItem("redeemedCoupons", JSON.stringify(redeemed));
         updateCouponsList();
         message.textContent = "Código resgatado com sucesso!";
         message.style.color = "#009933";
@@ -279,8 +271,7 @@ btn.addEventListener("click", () => {
     }
 
     input.value = "";
-}
-);
+});
 </script>
 
 </body>
