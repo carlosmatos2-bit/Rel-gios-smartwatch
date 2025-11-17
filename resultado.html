@@ -50,7 +50,8 @@ header h1 {
     font-size: 16px;
 }
 
-#cart-btn, #account-btn {
+/* MENU DROPDOWN */
+.menu-container button {
     background:#004080;
     color:white;
     padding:8px 15px;
@@ -64,11 +65,41 @@ header h1 {
     margin-left: 10px;
 }
 
-#cart-btn:hover, #account-btn:hover {
+.menu-container button:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
 
+#menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    overflow: hidden;
+    min-width: 150px;
+    z-index: 10;
+}
+
+#menu-dropdown button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #004080;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#menu-dropdown button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
+}
+
+/* RESTANTE DO SEU CSS */
 .container {
     max-width: 1200px;
     margin: auto;
@@ -235,8 +266,15 @@ h2 {
 <header>
     <h1>SMARTWATCH STORE</h1>
     <div id="usuario-logado"></div>
-    <button id="cart-btn">🛒 Carrinho</button>
-    <button id="account-btn">👤 Minha Conta</button>
+
+    <!-- MENU DROPDOWN -->
+    <div class="menu-container" style="position:relative;">
+        <button id="menu-btn">Menu ▾</button>
+        <div id="menu-dropdown">
+            <button id="cart-btn">🛒 Carrinho</button>
+            <button id="account-btn">👤 Minha Conta</button>
+        </div>
+    </div>
 </header>
 
 <!-- POPUP DO CARRINHO -->
@@ -272,7 +310,7 @@ h2 {
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
-    <!-- BARRA DE PESQUISA ALTERADA -->
+    <!-- BARRA DE PESQUISA -->
     <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
 
     <div class="products">
@@ -307,12 +345,24 @@ h2 {
 </div>
 
 <script>
+/* ===== MENU DROPDOWN ===== */
+const menuBtn = document.getElementById("menu-btn");
+const menuDropdown = document.getElementById("menu-dropdown");
+
+menuBtn.addEventListener("click", () => {
+    menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
+});
+
+window.addEventListener("click", (e) => {
+    if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+        menuDropdown.style.display = "none";
+    }
+});
+
 /* ===== SISTEMA DO CARRINHO ===== */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
+function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
 
 function addToCart(name, price) {
     cart.push({ name, price });
@@ -359,7 +409,6 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
-// FINALIZAR COMPRA
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -371,7 +420,7 @@ document.getElementById("checkout").onclick = () => {
     window.location.href = "finalizar.html";
 };
 
-/* ===== BUSCA PRINCIPAL ===== */
+/* ===== BUSCA ===== */
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
@@ -385,11 +434,6 @@ searchBar.addEventListener("input", () => {
         let nome = normalize(product.innerText);
         product.style.display = nome.includes(termo) ? "block" : "none";
     });
-});
-
-/* ===== REDIRECIONAMENTO PARA AJUDA (NOVA REGRA: ajuda.sos) ===== */
-searchBar.addEventListener("input", () => {
-    let termo = normalize(searchBar.value.trim());
 
     if (termo === "ajuda.sos") {
         window.location.href = "ajuda.html";
@@ -456,7 +500,7 @@ function trocarConta() {
     localStorage.removeItem("usuarioLogado");
     localStorage.removeItem("telefone");
     localStorage.removeItem("senha");
-    window.location.href = "index.html"; // Página do primeiro código
+    window.location.href = "index.html";
 }
 </script>
 
