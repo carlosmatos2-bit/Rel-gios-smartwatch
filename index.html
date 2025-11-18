@@ -60,20 +60,165 @@ header h1 {
   100% { transform: scale(1); }
 }
 
-/* CAMPO DA SENHA */
-.senha-container {
-  position: relative;
+.hero h2 {
+  margin-top: 20px;
+  font-size: 32px;
 }
 
-.senha-container button {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
+/* SEÇÃO SOBRE A LOJA */
+.sobre-site {
+  margin: 40px auto;
+  background: rgba(255,255,255,0.9);
+  padding: 30px;
+  max-width: 900px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.sobre-site h2 {
+  color: #003366;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.sobre-site p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #003366;
+  font-weight: 500;
+}
+
+/* DESTAQUES */
+.destaques {
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  max-width: 1000px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.destaques h2 {
+  color: #003366;
+  margin-bottom: 25px;
+}
+
+.destaques-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.destaque {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transition: .4s;
+}
+
+.destaque:hover {
+  transform: scale(1.06);
+}
+
+.destaque img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+/* PROMOÇÃO */
+.promo {
+  margin: 40px auto;
+  background: #003366;
+  color: white;
+  padding: 30px;
+  max-width: 1000px;
+  border-radius: 20px;
+  text-align: center;
   font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.promo span {
+  color: #00bfff;
+  font-size: 24px;
+}
+
+/* BENEFÍCIOS */
+.beneficios {
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  margin-top: 40px;
+}
+
+.beneficios h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #003366;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
+}
+
+.beneficio {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: .4s;
+}
+
+.beneficio:hover {
+  transform: translateY(-6px);
+}
+
+/* DEPOIMENTOS */
+.depoimentos {
+  background: white;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 20px;
+}
+
+.depoimentos h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 30px;
+}
+
+.dep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.dep {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transition: .4s;
+}
+
+.dep:hover {
+  transform: scale(1.05);
+}
+
+.dep strong {
+  color: #003366;
+  display: block;
+  margin-bottom: 8px;
 }
 
 /* FORMULÁRIOS */
@@ -84,6 +229,12 @@ form {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003366;
 }
 
 label { margin-top: 10px; font-weight: bold; display: block; }
@@ -114,6 +265,35 @@ button:hover {
   background: #0059b3;
 }
 
+/* REDES */
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+.redes img {
+  width: 45px;
+  transition: .3s;
+}
+
+.redes img:hover {
+  transform: scale(1.2);
+}
+
+/* WHATSAPP FIXO */
+.whatsapp-fixo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.whatsapp-fixo img {
+  width: 60px;
+  filter: drop-shadow(0 0 8px #000);
+}
+
 footer {
   text-align: center;
   padding: 20px;
@@ -135,6 +315,87 @@ footer {
   <p>O smartwatch perfeito para o seu estilo e rotina.</p>
 </section>
 
+<!-- SOBRE O SITE -->
+<section class="sobre-site">
+  <h2>O que você encontra em nossa loja?</h2>
+  <p>
+    Trabalhamos com smartwatches modernos, com alta durabilidade, ótimo custo-benefício e funções avançadas que facilitam seu dia a dia.
+    Nossa missão é oferecer tecnologia de qualidade com preços acessíveis e entrega rápida.
+  </p>
+</section>
+
+<!-- DESTAQUES -->
+<section class="destaques">
+  <h2>Destaques da nossa loja</h2>
+  <div class="destaques-grid">
+
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png">
+      Produto 100% testado
+    </div>
+
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/2920/2920244.png">
+      Garantia e suporte
+    </div>
+
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684831.png">
+      Envio imediato
+    </div>
+
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/3597/3597086.png">
+      Qualidade Premium
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMOÇÃO -->
+<section class="promo">
+  Promoção exclusiva de hoje: <br>
+  Use o cupom <span>CARLOS</span> para desbloquear ofertas especiais em compras acima de R$200!
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="beneficios">
+  <h2>Por que escolher nosso Smartwatch?</h2>
+
+  <div class="beneficios-grid">
+    <div class="beneficio">Monitoramento cardíaco avançado</div>
+    <div class="beneficio">Resistente à água</div>
+    <div class="beneficio">Notificações inteligentes</div>
+    <div class="beneficio">Bateria de longa duração</div>
+    <div class="beneficio">Modo esportivo completo</div>
+    <div class="beneficio">Conexão com Android e iOS</div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos">
+  <h2>O que nossos clientes dizem</h2>
+
+  <div class="dep-grid">
+
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – Lucas M.</strong>
+      Produto excelente! Chegou rápido e funciona perfeitamente. Recomendo demais.
+    </div>
+
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – Ana Beatriz</strong>
+      A bateria dura muito e o relógio é lindo. Melhor compra que fiz!
+    </div>
+
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – João Pedro</strong>
+      Ótimo custo-benefício, qualidade top! Vou comprar outro para presente.
+    </div>
+
+  </div>
+</section>
+
 <!-- FORMULÁRIO COMPLETO -->
 <form id="formulario">
   <h2>Cadastre-se para acessar a loja</h2>
@@ -149,12 +410,7 @@ footer {
   <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
 
   <label>Senha:</label>
-
-  <!-- Campo com ícone de olho -->
-  <div class="senha-container">
-    <input type="password" id="senha" required>
-    <button type="button" id="toggleSenha">👁️</button>
-  </div>
+  <input type="password" id="senha" required>
 
   <button type="submit">Entrar na Loja</button>
 </form>
@@ -162,31 +418,36 @@ footer {
 <!-- LOGIN RÁPIDO -->
 <form id="login-rapido">
   <h2>Login rápido</h2>
+
   <label>Digite seu nome:</label>
-  <input type="text" id="nome-rapido">
+  <input type="text" id="nome-rapido" placeholder="Seu nome">
   <button type="submit">Entrar rapidamente</button>
 </form>
+
+<div class="redes">
+  <a href="https://facebook.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png">
+  </a>
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
+  <a href="https://instagram.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png">
+  </a>
+</div>
+
+<div class="whatsapp-fixo">
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+  </a>
+</div>
 
 <footer>
   © 2025 Smartwatch Premium — Todos os direitos reservados.
 </footer>
 
 <script>
-// ÍCONE DE OLHO
-document.getElementById("toggleSenha").addEventListener("click", ()=>{
-  let campo = document.getElementById("senha");
-  let btn = document.getElementById("toggleSenha");
-
-  if (campo.type === "password") {
-    campo.type = "text";
-    btn.textContent = "🙈";
-  } else {
-    campo.type = "password";
-    btn.textContent = "👁️";
-  }
-});
-
-// FORMULÁRIO NORMAL
+// FORMULÁRIO COMPLETO
 document.getElementById("formulario").addEventListener("submit", (e)=>{
   e.preventDefault();
   let nome = document.getElementById("nome").value;
