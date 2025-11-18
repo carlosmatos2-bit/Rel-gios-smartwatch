@@ -60,18 +60,23 @@ header h1 {
   100% { transform: scale(1); }
 }
 
-/* SOBRE A LOJA */
-.sobre-site {
-  margin: 40px auto;
-  background: rgba(255,255,255,0.9);
-  padding: 30px;
-  max-width: 900px;
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  text-align: center;
+/* CAMPO DA SENHA */
+.senha-container {
+  position: relative;
 }
 
-/* FORMULÁRIO */
+.senha-container button {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* FORMULÁRIOS */
 form {
   max-width: 600px;
   background: white;
@@ -92,25 +97,6 @@ input {
   font-size: 16px;
 }
 
-/* ➤ Campo da senha com botão */
-.senha-container {
-  position: relative;
-}
-
-.senha-container button {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #003366;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* BOTÃO GERAL */
 button {
   width: 100%;
   background: #003366;
@@ -126,23 +112,6 @@ button {
 
 button:hover {
   background: #0059b3;
-}
-
-.redes {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 25px;
-}
-
-.whatsapp-fixo {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-
-.whatsapp-fixo img {
-  width: 60px;
 }
 
 footer {
@@ -181,10 +150,10 @@ footer {
 
   <label>Senha:</label>
 
-  <!-- ➤ Campo de senha com botão -->
+  <!-- Campo com ícone de olho -->
   <div class="senha-container">
     <input type="password" id="senha" required>
-    <button type="button" id="toggleSenha">Mostrar</button>
+    <button type="button" id="toggleSenha">👁️</button>
   </div>
 
   <button type="submit">Entrar na Loja</button>
@@ -203,21 +172,21 @@ footer {
 </footer>
 
 <script>
-// ➤ FUNÇÃO MOSTRAR/OCULTAR SENHA
+// ÍCONE DE OLHO
 document.getElementById("toggleSenha").addEventListener("click", ()=>{
   let campo = document.getElementById("senha");
   let btn = document.getElementById("toggleSenha");
 
   if (campo.type === "password") {
     campo.type = "text";
-    btn.textContent = "Ocultar";
+    btn.textContent = "🙈";
   } else {
     campo.type = "password";
-    btn.textContent = "Mostrar";
+    btn.textContent = "👁️";
   }
 });
 
-// FORMULÁRIO COMPLETO
+// FORMULÁRIO NORMAL
 document.getElementById("formulario").addEventListener("submit", (e)=>{
   e.preventDefault();
   let nome = document.getElementById("nome").value;
