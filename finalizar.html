@@ -168,6 +168,57 @@ button.finalizar:hover {
     background: #f0f4ff;
     border-radius: 10px;
 }
+
+/* Comprovante Modal */
+#comprovanteModal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+
+#comprovanteContent {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+#comprovanteContent h2 {
+    text-align:center;
+    color:#003366;
+}
+
+#comprovanteContent p {
+    margin:8px 0;
+}
+
+#closeComprovante {
+    background:#003366;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:15px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#closeComprovante:hover {
+    background:#0059b3;
+    transform: scale(1.05);
+}
 </style>
 </head>
 <body>
@@ -177,6 +228,15 @@ button.finalizar:hover {
 <h1>Finalizar Compra</h1>
 
 <div class="cart-summary" id="cart-summary"></div>
+
+<!-- Modal Comprovante -->
+<div id="comprovanteModal">
+    <div id="comprovanteContent">
+        <h2>Comprovante de Compra</h2>
+        <div id="comprovanteDetalhes"></div>
+        <button id="closeComprovante">Fechar</button>
+    </div>
+</div>
 
 <script>
 function voltarPagina() {
@@ -334,6 +394,7 @@ function aplicarCupom(index) {
     renderCart();
 }
 
+// Função para finalizar e gerar comprovante
 function finalizarCompra() {
     let tipo = document.getElementById("pagamento").value;
 
@@ -354,13 +415,41 @@ function finalizarCompra() {
         return;
     }
 
-    alert("Compra concluída com sucesso!");
+    // Montar comprovante
+    const comprovanteDiv = document.getElementById("comprovanteDetalhes");
+    comprovanteDiv.innerHTML = "";
 
+    cart.forEach(item => {
+        const p = document.createElement("p");
+        p.textContent = `Produto: ${item.name} - R$ ${item.price.toFixed(2)}`;
+        comprovanteDiv.appendChild(p);
+    });
+
+    const totalP = document.createElement("p");
+    totalP.innerHTML = `<b>Total: R$ ${total.toFixed(2)}</b>`;
+    comprovanteDiv.appendChild(totalP);
+
+    const enderecoP = document.createElement("p");
+    enderecoP.innerHTML = `<b>Endereço:</b> ${rua}, ${numero}, ${bairro}, ${cidade} - ${estado}, CEP: ${cep}`;
+    comprovanteDiv.appendChild(enderecoP);
+
+    const pagamentoP = document.createElement("p");
+    pagamentoP.innerHTML = `<b>Pagamento:</b> ${tipo.toUpperCase()}`;
+    comprovanteDiv.appendChild(pagamentoP);
+
+    // Mostrar modal
+    document.getElementById("comprovanteModal").style.display = "flex";
+
+    // Limpar carrinho
     localStorage.removeItem("carrinho");
     localStorage.removeItem("total");
-
-    window.location.href = "resultado.html";
 }
+
+// Fechar comprovante
+document.getElementById("closeComprovante").addEventListener("click", () => {
+    document.getElementById("comprovanteModal").style.display = "none";
+    window.location.href = "resultado.html";
+});
 
 renderCart();
 </script>
