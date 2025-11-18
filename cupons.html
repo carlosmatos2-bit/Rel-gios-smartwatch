@@ -152,6 +152,23 @@ header {
     box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
 }
 
+.delete-btn {
+    display: block;
+    margin: 15px auto 0 auto;
+    padding: 10px 20px;
+    background: #cc0000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.delete-btn:hover {
+    background: #ff3333;
+}
+
 .confetti {
     position: fixed;
     width: 10px;
@@ -187,6 +204,7 @@ header {
     <div id="my-coupons">
         <h3>Meus cupons já resgatados</h3>
         <div id="coupons-list"></div>
+        <button class="delete-btn" id="delete-coupons">Excluir Todos os Cupons</button>
     </div>
 </div>
 
@@ -198,6 +216,7 @@ const input = document.getElementById("redeem-input");
 const btn = document.getElementById("redeem-btn");
 const message = document.getElementById("redeem-message");
 const couponsList = document.getElementById("coupons-list");
+const deleteBtn = document.getElementById("delete-coupons");
 
 // Atualiza a lista de cupons resgatados
 function updateCouponsList() {
@@ -226,7 +245,7 @@ function createConfetti(){
     }
 }
 
-// Evento de resgate
+// Resgatar cupom
 btn.addEventListener("click", () => {
     const code = input.value.trim().toUpperCase();
 
@@ -241,7 +260,6 @@ btn.addEventListener("click", () => {
         message.textContent = "Este cupom já está na lista de resgatados!";
         message.style.color = "#cc0000";
     } else {
-        // Adiciona o cupom à lista
         redeemed.push(code);
         localStorage.setItem("redeemedCoupons", JSON.stringify(redeemed));
         updateCouponsList();
@@ -251,6 +269,17 @@ btn.addEventListener("click", () => {
     }
 
     input.value = "";
+});
+
+// Excluir todos os cupons
+deleteBtn.addEventListener("click", () => {
+    if(confirm("Deseja realmente excluir todos os cupons resgatados?")) {
+        redeemed = [];
+        localStorage.removeItem("redeemedCoupons");
+        updateCouponsList();
+        message.textContent = "Todos os cupons foram excluídos! Você pode resgatá-los novamente.";
+        message.style.color = "#003366";
+    }
 });
 </script>
 
