@@ -4,13 +4,19 @@
 <meta charset="UTF-8">
 <title>SMARTWATCH STORE</title>
 <style>
+    :root{
+        --glass-bg: rgba(255,255,255,0.85);
+        --header-bg: rgba(0,0,0,0.65);
+        --accent: #333;
+    }
+
     body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
         background: url('https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f') no-repeat center center fixed;
         background-size: cover;
-        backdrop-filter: blur(10px);
+        -webkit-font-smoothing: antialiased;
     }
 
     /* CABEÇALHO */
@@ -20,10 +26,12 @@
         align-items: center;
         gap: 20px;
         padding: 15px 25px;
-        background: rgba(0,0,0,0.6);
+        background: var(--header-bg);
         color: white;
         position: sticky;
         top: 0;
+        backdrop-filter: blur(8px);
+        z-index: 8;
     }
 
     .header-title {
@@ -33,7 +41,7 @@
 
     /* BOTÃO VOLTAR */
     .btn-voltar {
-        background: #333;
+        background: var(--accent);
         color: white;
         padding: 10px 18px;
         border-radius: 8px;
@@ -41,40 +49,47 @@
         font-size: 16px;
         transition: 0.2s;
     }
-
     .btn-voltar:hover {
         background: #555;
     }
 
+    /* CONTAINER */
     .container {
         width: 90%;
         max-width: 1200px;
         margin: 40px auto;
-        background: rgba(255, 255, 255, 0.85);
+        background: var(--glass-bg);
         padding: 25px;
         border-radius: 10px;
         display: flex;
-        gap: 30px;
+        gap: 40px;
+        flex-wrap: wrap;
     }
 
     .left, .right {
         flex: 1;
+        min-width: 290px;
     }
 
     .left img {
-        width: 50%;
+        width: 100%;
+        max-width: 350px;
         border-radius: 10px;
+        display: block;
+        margin-bottom: 20px;
     }
 
     h1 {
         margin-top: 0;
         font-size: 28px;
+        color: #222;
     }
 
     .price {
-        font-size: 26px;
+        font-size: 30px;
         color: green;
         font-weight: bold;
+        margin-bottom: 20px;
     }
 
     .info {
@@ -82,8 +97,9 @@
         padding: 12px;
         border-radius: 8px;
         margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.5;
     }
-
 </style>
 </head>
 <body>
@@ -94,11 +110,12 @@
     <div class="header-title">SMARTWATCH STORE</div>
 </div>
 
+<!-- CONTEÚDO -->
 <div class="container">
 
     <!-- LADO ESQUERDO -->
     <div class="left">
-        <img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg">
+        <img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Polar Unite">
 
         <h1>Smartwatch Polar Unite</h1>
 
@@ -121,17 +138,14 @@
     <div class="right">
         <h2>SMARTWATCH STORE</h2>
 
-        <p class="price">R$ 149.00</p>
+        <p class="price">R$ 149,00</p>
 
-        <!-- REMOVIDO: Quantidade, unidades e select -->
-
+        <!-- INFO -->
         <div class="info">
             <p><strong>Garantia:</strong> 2 anos</p>
             <p><strong>Entrega:</strong> 8 dias úteis</p>
             <p><strong>Disponível:</strong> Acompanhar no carrinho</p>
         </div>
-
-        <!-- Nenhum botão aparece mais -->
     </div>
 
 </div>
