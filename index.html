@@ -1,150 +1,483 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>SMARTWATCH STORE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartwatch Premium</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
-        background-size: cover;
-        backdrop-filter: blur(10px);
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* CABEÇALHO */
-    .header {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        padding: 15px 25px;
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+body {
+  font-family: 'Arial', sans-serif;
+  background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center/cover;
+  position: relative;
+  min-height: 100vh;
+}
 
-    .header-title {
-        font-size: 28px;
-        font-weight: bold;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: inherit;
+  filter: blur(12px) brightness(0.6);
+  z-index: -1;
+}
 
-    /* BOTÃO VOLTAR */
-    .btn-voltar {
-        background: #333;
-        color: white;
-        padding: 10px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.2s;
-    }
+/* HEADER */
+header {
+  width: 100%;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
 
-    .btn-voltar:hover {
-        background: #555;
-    }
+header h1 {
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: 1px;
+}
 
-    /* CONTEÚDO */
-    .container {
-        width: 90%;
-        max-width: 1200px;
-        margin: 40px auto;
-        background: rgba(255, 255, 255, 0.85);
-        padding: 25px;
-        border-radius: 10px;
-        display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
-    }
+/* HERO */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
 
-    .left, .right {
-        flex: 1;
-        min-width: 300px;
-    }
+.hero img {
+  width: 280px;
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.4));
+  animation: pulse 2s infinite;
+}
 
-    .left img {
-        width: 50%;
-        border-radius: 10px;
-        display: block;
-        margin-bottom: 15px;
-    }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
 
-    h1 {
-        margin-top: 0;
-        font-size: 28px;
-    }
+.hero h2 {
+  margin-top: 20px;
+  font-size: 32px;
+}
 
-    .price {
-        font-size: 26px;
-        color: green;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+/* SOBRE */
+.sobre-site {
+  margin: 40px auto;
+  background: rgba(255,255,255,0.9);
+  padding: 30px;
+  max-width: 900px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
 
-    .info {
-        background: #f1f1f1;
-        padding: 12px;
-        border-radius: 8px;
-        margin-top: 10px;
-    }
+.sobre-site h2 {
+  color: #003366;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
 
-    ul {
-        padding-left: 18px;
-    }
+.sobre-site p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #003366;
+  font-weight: 500;
+}
+
+/* DESTAQUES */
+.destaques {
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  max-width: 1000px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.destaques h2 {
+  color: #003366;
+  margin-bottom: 25px;
+}
+
+.destaques-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.destaque {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transition: .4s;
+}
+
+.destaque:hover {
+  transform: scale(1.06);
+}
+
+.destaque img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+/* PROMOÇÃO */
+.promo {
+  margin: 40px auto;
+  background: #003366;
+  color: white;
+  padding: 30px;
+  max-width: 1000px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.promo span {
+  color: #00bfff;
+  font-size: 24px;
+}
+
+/* BENEFÍCIOS */
+.beneficios {
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  margin-top: 40px;
+}
+
+.beneficios h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #003366;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
+}
+
+.beneficio {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: .4s;
+}
+
+.beneficio:hover {
+  transform: translateY(-6px);
+}
+
+/* DEPOIMENTOS */
+.depoimentos {
+  background: white;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 20px;
+}
+
+.depoimentos h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 30px;
+}
+
+.dep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.dep {
+  background: #e6f2ff;
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transition: .4s;
+}
+
+.dep:hover {
+  transform: scale(1.05);
+}
+
+.dep strong {
+  color: #003366;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* FORMULÁRIOS */
+form {
+  max-width: 600px;
+  background: white;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003366;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 2px solid #0077cc;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  background: #003366;
+  color: white;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: #0059b3;
+}
+
+/* REDES */
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+.redes img {
+  width: 45px;
+  transition: .3s;
+}
+
+.redes img:hover {
+  transform: scale(1.2);
+}
+
+/* WHATSAPP FIXO */
+.whatsapp-fixo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.whatsapp-fixo img {
+  width: 60px;
+  filter: drop-shadow(0 0 8px #000);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #003366;
+  color: white;
+  margin-top: 40px;
+}
 </style>
 </head>
-
 <body>
 
-<!-- CABEÇALHO -->
-<div class="header">
-    <a href="resultado.html" class="btn-voltar">⬅ Voltar</a>
-    <div class="header-title">SMARTWATCH STORE</div>
-</div>
+<header>
+  <h1>Smartwatch Premium</h1>
+</header>
 
-<!-- CONTEÚDO -->
-<div class="container">
+<section class="hero">
+  <img src="https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f" alt="Smartwatch">
+  <h2>Tecnologia no Seu Pulso</h2>
+  <p>O smartwatch perfeito para o seu estilo e rotina.</p>
+</section>
 
-    <!-- LADO ESQUERDO -->
-    <div class="left">
-        <img src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Smartwatch Polar Unite">
+<section class="sobre-site">
+  <h2>O que você encontra em nossa loja?</h2>
+  <p>
+    Trabalhamos com smartwatches modernos, com alta durabilidade, ótimo custo-benefício e funções avançadas que facilitam seu dia a dia.
+    Nossa missão é oferecer tecnologia de qualidade com preços acessíveis e entrega rápida.
+  </p>
+</section>
 
-        <h1>Smartwatch Polar Unite</h1>
+<section class="destaques">
+  <h2>Destaques da nossa loja</h2>
 
-        <p><strong>Descrição:</strong></p>
-        <p>O Polar Unite é um dos smartwatches mais completos do mercado, equipado com GPS avançado, monitoramento de saúde, resistência militar e bateria de longa duração. Perfeito para treinos, aventuras e uso diário.</p>
-
-        <h3>Benefícios:</h3>
-        <ul>
-            <li>Tela AMOLED de alta resolução</li>
-            <li>GPS multi-band de extrema precisão</li>
-            <li>Monitoramento completo de saúde (sono, batimentos, oxigênio, stress)</li>
-            <li>Bateria de longa duração: até 16 dias</li>
-            <li>Resistência militar MIL-STD-810</li>
-            <li>Mais de 60 modos esportivos</li>
-            <li>Mapas offline pré-carregados</li>
-        </ul>
+  <div class="destaques-grid">
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png" alt="">
+      Produto 100% testado
     </div>
 
-    <!-- LADO DIREITO -->
-    <div class="right">
-        <h2>SMARTWATCH STORE</h2>
-
-        <p class="price">R$ 149,00</p>
-
-        <div class="info">
-            <p><strong>Garantia:</strong> 2 anos</p>
-            <p><strong>Entrega:</strong> 8 dias úteis</p>
-            <p><strong>Disponível:</strong> Acompanhar no carrinho</p>
-        </div>
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/2920/2920244.png" alt="">
+      Garantia e suporte
     </div>
 
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684831.png" alt="">
+      Envio imediato
+    </div>
+
+    <div class="destaque">
+      <img src="https://cdn-icons-png.flaticon.com/512/3597/3597086.png" alt="">
+      Qualidade Premium
+    </div>
+  </div>
+</section>
+
+<section class="promo">
+  Promoção exclusiva de hoje: <br>
+  Use o cupom <span>CARLOS</span> para desbloquear ofertas especiais em compras acima de R$200!
+</section>
+
+<section class="beneficios">
+  <h2>Por que escolher nosso Smartwatch?</h2>
+
+  <div class="beneficios-grid">
+    <div class="beneficio">Monitoramento cardíaco avançado</div>
+    <div class="beneficio">Resistente à água</div>
+    <div class="beneficio">Notificações inteligentes</div>
+    <div class="beneficio">Bateria de longa duração</div>
+    <div class="beneficio">Modo esportivo completo</div>
+    <div class="beneficio">Conexão com Android e iOS</div>
+  </div>
+</section>
+
+<section class="depoimentos">
+  <h2>O que nossos clientes dizem</h2>
+
+  <div class="dep-grid">
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – Lucas M.</strong>
+      Produto excelente! Chegou rápido e funciona perfeitamente. Recomendo demais.
+    </div>
+
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – Ana Beatriz</strong>
+      A bateria dura muito e o relógio é lindo. Melhor compra que fiz!
+    </div>
+
+    <div class="dep">
+      <strong>★ ★ ★ ★ ★ – João Pedro</strong>
+      Ótimo custo-benefício, qualidade top! Vou comprar outro para presente.
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO COMPLETO -->
+<form id="formulario">
+  <h2>Cadastre-se para acessar a loja</h2>
+
+  <label for="nome">Nome completo:</label>
+  <input type="text" id="nome" required>
+
+  <label for="email">E-mail:</label>
+  <input type="email" id="email" required>
+
+  <label for="telefone">Telefone:</label>
+  <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+
+  <label for="senha">Senha:</label>
+  <input type="password" id="senha" required>
+
+  <button type="submit">Entrar na Loja</button>
+</form>
+
+<!-- LOGIN RÁPIDO -->
+<form id="login-rapido">
+  <h2>Login rápido</h2>
+
+  <label for="nome-rapido">Digite seu nome:</label>
+  <input type="text" id="nome-rapido" placeholder="Seu nome">
+
+  <button type="submit">Entrar rapidamente</button>
+</form>
+
+<div class="redes">
+  <a href="https://facebook.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook">
+  </a>
+
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+  </a>
+
+  <a href="https://instagram.com" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram">
+  </a>
 </div>
+
+<div class="whatsapp-fixo">
+  <a href="https://wa.me/5562940028922" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+  </a>
+</div>
+
+<footer>
+  © 2025 Smartwatch Premium — Todos os direitos reservados.
+</footer>
+
+<script>
+// FORMULÁRIO COMPLETO
+document.getElementById("formulario").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value;
+  const telefone = document.getElementById("telefone").value;
+  const senha = document.getElementById("senha").value;
+
+  localStorage.setItem("usuarioLogado", nome);
+  localStorage.setItem("telefone", telefone);
+  localStorage.setItem("senha", senha);
+
+  window.location.href = "resultado.html";
+});
+
+// LOGIN RÁPIDO
+document.getElementById("login-rapido").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const nomeRapido = document.getElementById("nome-rapido").value.trim();
+
+  if(nomeRapido === "") {
+    alert("Digite um nome para login rápido!");
+    return;
+  }
+
+  localStorage.setItem("usuarioLogado", nomeRapido);
+  window.location.href = "resultado.html";
+});
+</script>
 
 </body>
 </html>
