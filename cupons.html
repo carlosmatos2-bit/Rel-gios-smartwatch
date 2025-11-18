@@ -128,7 +128,6 @@ header {
     color: #002244;
 }
 
-/* Meus cupons já resgatados */
 #my-coupons {
     margin-top: 40px;
     text-align: left;
@@ -153,7 +152,6 @@ header {
     box-shadow: 0 0 15px #00bfff, 0 0 30px #00ffff;
 }
 
-/* Confete */
 .confetti {
     position: fixed;
     width: 10px;
@@ -201,10 +199,9 @@ const btn = document.getElementById("redeem-btn");
 const message = document.getElementById("redeem-message");
 const couponsList = document.getElementById("coupons-list");
 
-// Função para atualizar a lista de cupons já resgatados
+// Atualiza a lista de cupons resgatados
 function updateCouponsList() {
     couponsList.innerHTML = "";
-    if(redeemed.length === 0) return;
     redeemed.forEach(c => {
         const div = document.createElement("div");
         div.classList.add("coupon-item");
@@ -215,14 +212,6 @@ function updateCouponsList() {
 
 // Inicializa lista
 updateCouponsList();
-
-// Se todos os códigos foram resgatados, bloqueia input
-if(redeemed.length === validCodes.length){
-    input.disabled = true;
-    btn.disabled = true;
-    message.textContent = "Todos os códigos já foram resgatados!";
-    message.style.color = "#cc0000";
-}
 
 // Função para gerar confete
 function createConfetti(){
@@ -241,27 +230,24 @@ function createConfetti(){
 btn.addEventListener("click", () => {
     const code = input.value.trim().toUpperCase();
 
-    if(redeemed.includes(code)){
-        message.textContent = "Você já resgatou este código!";
+    if(!validCodes.includes(code)) {
+        message.textContent = "Código inválido!";
         message.style.color = "#cc0000";
+        input.value = "";
         return;
     }
 
-    if(validCodes.includes(code)){
+    if(redeemed.includes(code)) {
+        message.textContent = "Este cupom já está na lista de resgatados!";
+        message.style.color = "#cc0000";
+    } else {
+        // Adiciona o cupom à lista
         redeemed.push(code);
         localStorage.setItem("redeemedCoupons", JSON.stringify(redeemed));
         updateCouponsList();
         message.textContent = "Código resgatado com sucesso!";
         message.style.color = "#009933";
         createConfetti();
-
-        if(redeemed.length === validCodes.length){
-            input.disabled = true;
-            btn.disabled = true;
-        }
-    } else {
-        message.textContent = "Código inválido!";
-        message.style.color = "#cc0000";
     }
 
     input.value = "";
