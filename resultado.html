@@ -6,6 +6,7 @@
 <title>Loja Oficial Smartwatch</title>
 
 <style>
+/* ===== FUNDO ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -13,6 +14,7 @@ body {
     background-size: cover;
     color: #1a2a40;
     position: relative;
+    animation: fadeIn 1s ease-in-out;
 }
 
 body::before {
@@ -24,37 +26,46 @@ body::before {
     height: 100%;
     background: inherit;
     background-size: cover;
-    filter: blur(18px) brightness(0.7);
+    filter: blur(18px) brightness(0.65);
     z-index: -1;
 }
 
+/* ANIMAÇÃO GLOBAL */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== HEADER ===== */
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background: #002b55;
+    padding: 22px;
+    background: linear-gradient(to bottom, #003868, #00264d);
     color: white;
     position: relative;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.4);
 }
 
 header h1 {
     margin: 0;
-    font-size: 26px;
+    font-size: 32px;
     font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00d4ff;
 }
 
-/* Letreiro animado */
+/* LETREIRO */
 #letreiro {
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: bold;
-    color: #00ffff;
+    color: #00eaff;
     text-shadow: 0 0 6px #00bfff, 0 0 12px #00ffff;
     overflow: hidden;
     white-space: nowrap;
-    box-sizing: border-box;
-    width: 100%;
+    width: 95%;
     animation: scroll 12s linear infinite;
 }
 
@@ -63,151 +74,112 @@ header h1 {
     100% { transform: translateX(-100%); }
 }
 
-/* Menu container ajustado para canto direito */
+/* ===== MENU ===== */
 .menu-container {
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 22px;
 }
 
-/* MENU DROPDOWN */
 .menu-container button {
-    background:#004080;
-    color:white;
-    padding:8px 15px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    box-shadow: 0 0 8px #00ffff, 0 0 15px #00bfff;
+    background: linear-gradient(135deg, #0059b3, #003d80);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00deff;
     transition: all 0.3s ease;
-    margin-left: 10px;
 }
 
 .menu-container button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #00eaff;
 }
 
 #menu-dropdown {
     display: none;
     position: absolute;
     right: 0;
-    top: 42px;
+    top: 45px;
     background: white;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
     overflow: hidden;
-    min-width: 150px;
-    z-index: 10;
+    min-width: 160px;
+    animation: fadeIn 0.3s ease;
 }
 
 #menu-dropdown button {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    background: #004080;
+    background: #0059b3;
     color: white;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 #menu-dropdown button:hover {
+    background: #007bff;
     transform: scale(1.05);
-    box-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff;
 }
 
-/* RESTANTE DO SEU CSS */
+/* ===== CONTAINER PRINCIPAL ===== */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: auto;
     margin-top: 40px;
-    padding: 20px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 14px;
-    border: 3px solid #003366;
-    box-shadow: 0 0 25px rgba(0, 51, 102, 0.3);
+    padding: 26px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 16px;
+    border: 2px solid #004080;
+    box-shadow: 0 0 30px rgba(0, 51, 102, 0.45);
     backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease;
 }
 
 h2 {
     text-align: center;
     color: #002244;
-    font-size: 28px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 6px #00bfff;
 }
 
+/* ===== BARRA DE PESQUISA ===== */
 #search-bar {
-    width: 50%;
+    width: 55%;
     padding: 14px 20px;
-    margin-bottom: 25px;
     border-radius: 12px;
     border: 2px solid #003366;
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,80,160,0.3);
 }
 
 #search-bar:focus {
     border-color: #00bfff;
-    box-shadow: 0 4px 12px rgba(0,191,255,0.5);
+    box-shadow: 0 0 16px rgba(0,191,255,0.7);
 }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
-/* PRODUTOS */
-.product {
-    background: #f7faff;
-    border-radius: 12px;
-    padding: 20px;
-    border: 2px solid #003366;
-    box-shadow: 4px 4px 12px rgba(0,0,0,0.2), inset -2px -2px 6px rgba(255,255,255,0.7);
-    transition: all 0.4s ease;
-}
-
-.product:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow:
-        6px 6px 20px rgba(0, 51, 102, 0.7),
-        inset 2px 2px 8px rgba(255,255,255,0.7),
-        inset -2px -2px 8px rgba(0,0,0,0.1);
-}
-
-.dark-blue {
-    font-size: 20px;
-    font-weight: bold;
-    animation: piscar 2s infinite;
-}
-
-@keyframes piscar {
-    0% { color: #a8d0ff; }
-    50% { color: #003366; }
-    100% { color: #001a33; }
-}
-
-.old-price { text-decoration: line-through; }
-
-/* CARROSSEL */
+/* ===== CARROSSEL ===== */
 #carousel {
-    width: 360px;
-    height: 320px;
+    width: 390px;
+    height: 330px;
     margin: 0 auto 25px auto;
     overflow: hidden;
-    border-radius: 12px;
-    border: 2px solid #003366;
+    border-radius: 14px;
+    border: 2px solid #002f66;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 18px rgba(0,0,0,0.4);
 }
 
 #carousel img {
@@ -221,23 +193,86 @@ h2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 32px;
+    font-size: 34px;
     color: white;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.45);
     border: none;
-    padding: 8px 14px;
+    padding: 8px 16px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
-
-#prevBtn { left: 5px; }
-#nextBtn { right: 5px; }
 
 .carousel-btn:hover {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
+    transform: translateY(-50%) scale(1.12);
 }
 
-/* POPUPS */
+#prevBtn { left: 6px; }
+#nextBtn { right: 6px; }
+
+/* ===== PRODUTOS ===== */
+.products {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    gap: 28px;
+}
+
+.product {
+    background: #f8fbff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 2px solid #003366;
+    box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
+    transition: all 0.35s ease;
+    transform: translateY(0);
+}
+
+.product:hover {
+    transform: translateY(-8px) scale(1.045);
+    box-shadow:
+        8px 8px 22px rgba(0, 51, 102, 0.75),
+        inset 2px 2px 8px rgba(255,255,255,0.8),
+        inset -3px -3px 10px rgba(0,0,0,0.1);
+}
+
+.dark-blue {
+    font-size: 21px;
+    font-weight: bold;
+    animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+    0% { color: #88c7ff; }
+    50% { color: #003366; }
+    100% { color: #001a33; }
+}
+
+.old-price { text-decoration: line-through; }
+
+/* BOTÕES DO PRODUTO */
+.add-cart {
+    width: 100%;
+    background: linear-gradient(135deg, #0077cc, #004f80);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0,140,255,0.6);
+}
+
+.add-cart:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(0,180,255,0.9);
+}
+
+/* ===== POPUPS ===== */
 #cart-popup, #account-popup {
     display: none;
     position: fixed;
@@ -257,12 +292,13 @@ h2 {
     border: 3px solid #003366;
     box-shadow: 0 0 20px #002244;
     text-align:center;
+    animation: fadeIn 0.4s ease;
 }
 
 .cart-title {
     font-size: 22px;
     color: #002244;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .cart-btn {
@@ -270,15 +306,22 @@ h2 {
     padding: 12px;
     margin-top: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
+    transition: 0.3s;
+}
+
+.cart-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
 }
 
 #close-cart, #close-account { background:#002b55; color:white; }
 #clear-cart { background:#cc0000; color:white; }
 #checkout { background:#009933; color:white; }
+
 </style>
 </head>
 <body>
@@ -286,9 +329,7 @@ h2 {
 <header>
     <h1>SMARTWATCH STORE</h1>
     <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Compre agora e aproveite!</div>
-    <div id="usuario-logado"></div>
 
-    <!-- MENU DROPDOWN -->
     <div class="menu-container">
         <button id="menu-btn">Menu ▾</button>
         <div id="menu-dropdown">
@@ -299,7 +340,7 @@ h2 {
     </div>
 </header>
 
-<!-- POPUP DO CARRINHO -->
+<!-- POPUP CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -326,15 +367,17 @@ h2 {
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
+    <!-- CARROSSEL -->
     <div id="carousel">
         <button id="prevBtn" class="carousel-btn">❮</button>
-        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Propaganda">
+        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg">
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
     <!-- BARRA DE PESQUISA -->
     <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
 
+    <!-- PRODUTOS -->
     <div class="products">
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
@@ -345,6 +388,7 @@ h2 {
             <p class="price">R$ 149,00</p>
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
+
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue">Garmin Epix Gen 2</div>
@@ -354,6 +398,7 @@ h2 {
             <p class="price">R$ 3599.99</p>
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
+
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
                 <div class="dark-blue">Ultra AI 3 5G</div>
@@ -386,7 +431,7 @@ couponsBtn.addEventListener("click", () => {
     window.location.href = "cupons.html";
 });
 
-/* ===== SISTEMA DO CARRINHO ===== */
+/* ===== CARRINHO ===== */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
@@ -419,15 +464,18 @@ function updateCartDisplay() {
         `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
 }
 
+/* Abrir carrinho */
 document.getElementById("cart-btn").onclick = () => {
     updateCartDisplay();
     document.getElementById("cart-popup").style.display = "flex";
 };
 
+/* Fechar carrinho */
 document.getElementById("close-cart").onclick = () => {
     document.getElementById("cart-popup").style.display = "none";
 };
 
+/* Limpar carrinho */
 document.getElementById("clear-cart").onclick = () => {
     if (confirm("Tem certeza que deseja limpar o carrinho?")) {
         cart = [];
@@ -436,6 +484,7 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
+/* Finalizar compra */
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
@@ -447,7 +496,7 @@ document.getElementById("checkout").onclick = () => {
     window.location.href = "finalizar.html";
 };
 
-/* ===== BUSCA ===== */
+/* ===== PESQUISA ===== */
 const searchBar = document.getElementById("search-bar");
 const products = document.querySelectorAll(".product");
 
