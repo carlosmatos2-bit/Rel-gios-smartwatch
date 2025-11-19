@@ -226,6 +226,14 @@ h2 {
     gap: 28px;
 }
 
+/* Wrapper que força dois produtos empilhados em uma coluna */
+.product-column {
+    grid-column: 1 / -1; /* ocupa toda a largura da grade */
+    display: grid;
+    grid-template-columns: 1fr; /* uma coluna interna só */
+    gap: 18px; /* espaço entre Polar e T800 */
+}
+
 .product {
     background: #f8fbff;
     border-radius: 14px;
@@ -386,25 +394,27 @@ h2 {
 
     <!-- PRODUTOS -->
     <div class="products">
-        <div class="product">
-            <a href="polar.html" style="text-decoration:none;">
-                <div class="dark-blue">Relógio Polar Unite</div>
-            </a>
-            <h3>Monitoramento completo de saúde</h3>
-            <p class="old-price">R$ 199,00</p>
-            <p class="price">R$ 149,00</p>
-            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
-        </div>
-        
-       <!-- NOVO PRODUTO ADICIONADO -->
-        <div class="product">
-            <a href="T800.html" style="text-decoration:none;">
-                <div class="dark-blue">T800 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design elegante</h3>
-            <p class="old-price">R$ 699,00</p>
-            <p class="price">R$ 549,00</p>
-            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+        <!-- Wrappper que força Polar e T800 empilhados -->
+        <div class="product-column">
+            <div class="product">
+                <a href="polar.html" style="text-decoration:none;">
+                    <div class="dark-blue">Relógio Polar Unite</div>
+                </a>
+                <h3>Monitoramento completo de saúde</h3>
+                <p class="old-price">R$ 199,00</p>
+                <p class="price">R$ 149,00</p>
+                <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product">
+                <a href="T800.html" style="text-decoration:none;">
+                    <div class="dark-blue">T800 Ultra 2</div>
+                </a>
+                <h3>Desempenho avançado e design elegante</h3>
+                <p class="old-price">R$ 699,00</p>
+                <p class="price">R$ 549,00</p>
+                <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+            </div>
         </div>
 
         <div class="product">
