@@ -111,8 +111,6 @@ header h1 {
     overflow: visible;
     min-width: 160px;
     animation: fadeIn 0.3s ease;
-
-    /* AGORA FUNCIONA */
     flex-direction: row;
     gap: 6px;
     padding: 10px;
@@ -226,14 +224,46 @@ h2 {
     gap: 28px;
 }
 
-/* Wrapper que força dois produtos empilhados em uma coluna */
-.product-column {
-    grid-column: 1 / -1; /* ocupa toda a largura da grade */
-    display: grid;
-    grid-template-columns: 1fr; /* uma coluna interna só */
-    gap: 18px; /* espaço entre Polar e T800 */
+/* garantir que todos os cards tenham altura visual uniforme */
+.products .product {
+    min-height: 320px; /* ajustável para manter "quadrado" visual */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+/* card que contém os dois itens empilhados */
+.product.stacked {
+    padding: 0; /* padding interno será nos mini-blocos */
+    overflow: hidden;
+}
+
+/* mini-blocos internos que ficam empilhados dentro do card stacked */
+.mini-product {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f8fbff;
+    border-bottom: 1px solid rgba(0,51,102,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%; /* cada mini ocupa metade do card */
+    box-sizing: border-box;
+}
+
+/* remover bordas duplicadas e manter estética */
+.mini-product + .mini-product {
+    border-top: 1px solid rgba(0,51,102,0.06);
+}
+
+/* reaplicar sombra e bordas suaves no card stacked como um todo */
+.product.stacked {
+    border: 2px solid #003366;
+    box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
+    border-radius: 14px;
+}
+
+/* estilos base para produtos normais (mantidos) */
 .product {
     background: #f8fbff;
     border-radius: 14px;
@@ -394,29 +424,35 @@ h2 {
 
     <!-- PRODUTOS -->
     <div class="products">
-        <!-- Wrappper que força Polar e T800 empilhados -->
-        <div class="product-column">
-            <div class="product">
+
+        <!-- CARD ÚNICO (mesmo tamanho) com Polar + T800 empilhados internamente -->
+        <div class="product stacked">
+            <div class="mini-product">
                 <a href="polar.html" style="text-decoration:none;">
                     <div class="dark-blue">Relógio Polar Unite</div>
                 </a>
-                <h3>Monitoramento completo de saúde</h3>
-                <p class="old-price">R$ 199,00</p>
-                <p class="price">R$ 149,00</p>
-                <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+                <div>
+                    <h3 style="margin:8px 0 6px 0;">Monitoramento completo de saúde</h3>
+                    <p class="old-price" style="margin:0;">R$ 199,00</p>
+                    <p class="price" style="margin:0 0 8px 0;">R$ 149,00</p>
+                    <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+                </div>
             </div>
 
-            <div class="product">
+            <div class="mini-product">
                 <a href="T800.html" style="text-decoration:none;">
                     <div class="dark-blue">T800 Ultra 2</div>
                 </a>
-                <h3>Desempenho avançado e design elegante</h3>
-                <p class="old-price">R$ 699,00</p>
-                <p class="price">R$ 549,00</p>
-                <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+                <div>
+                    <h3 style="margin:8px 0 6px 0;">Desempenho avançado e design elegante</h3>
+                    <p class="old-price" style="margin:0;">R$ 699,00</p>
+                    <p class="price" style="margin:0 0 8px 0;">R$ 549,00</p>
+                    <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+                </div>
             </div>
         </div>
 
+        <!-- demais produtos continuam como antes, cada um em seu card -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue">Garmin Epix Gen 2</div>
