@@ -99,7 +99,7 @@ header h1 {
     box-shadow: 0 0 20px #00eaff;
 }
 
-/* ===== DROPDOWN CORRIGIDO ===== */
+/* ===== DROPDOWN ===== */
 #menu-dropdown {
     display: none;
     position: absolute;
@@ -111,6 +111,9 @@ header h1 {
     overflow: visible;
     min-width: 160px;
     animation: fadeIn 0.3s ease;
+
+    /* agora usa flex para funcionar corretamente */
+    display: none;
     flex-direction: row;
     gap: 6px;
     padding: 10px;
@@ -217,61 +220,23 @@ h2 {
 #nextBtn { right: 6px; }
 
 /* ===== PRODUTOS ===== */
+
+/* agora os produtos são flexíveis, para permitir quebrar exatamente onde queremos */
 .products {
     margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 28px;
 }
 
-/* garantir que todos os cards tenham altura visual uniforme */
-.products .product {
-    min-height: 320px; /* ajustável para manter "quadrado" visual */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* card que contém os dois itens empilhados */
-.product.stacked {
-    padding: 0; /* padding interno será nos mini-blocos */
-    overflow: hidden;
-}
-
-/* mini-blocos internos que ficam empilhados dentro do card stacked */
-.mini-product {
-    padding: 18px;
-    border-radius: 14px;
-    background: #f8fbff;
-    border-bottom: 1px solid rgba(0,51,102,0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 50%; /* cada mini ocupa metade do card */
-    box-sizing: border-box;
-}
-
-/* remover bordas duplicadas e manter estética */
-.mini-product + .mini-product {
-    border-top: 1px solid rgba(0,51,102,0.06);
-}
-
-/* reaplicar sombra e bordas suaves no card stacked como um todo */
-.product.stacked {
-    border: 2px solid #003366;
-    box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
-    border-radius: 14px;
-}
-
-/* estilos base para produtos normais (mantidos) */
 .product {
     background: #f8fbff;
     border-radius: 14px;
     padding: 20px;
     border: 2px solid #003366;
+    width: 265px;
     box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
     transition: all 0.35s ease;
-    transform: translateY(0);
 }
 
 .product:hover {
@@ -282,39 +247,10 @@ h2 {
         inset -3px -3px 10px rgba(0,0,0,0.1);
 }
 
-.dark-blue {
-    font-size: 21px;
-    font-weight: bold;
-    animation: piscar 2s infinite;
-}
-
-@keyframes piscar {
-    0% { color: #88c7ff; }
-    50% { color: #003366; }
-    100% { color: #001a33; }
-}
-
-.old-price { text-decoration: line-through; }
-
-/* BOTÕES DO PRODUTO */
-.add-cart {
-    width: 100%;
-    background: linear-gradient(135deg, #0077cc, #004f80);
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 12px rgba(0,140,255,0.6);
-}
-
-.add-cart:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 20px rgba(0,180,255,0.9);
+/* força o T800 a pular para a linha de baixo */
+.break {
+    flex-basis: 100%;
+    height: 0;
 }
 
 /* ===== POPUPS ===== */
@@ -366,7 +302,6 @@ h2 {
 #close-cart, #close-account { background:#002b55; color:white; }
 #clear-cart { background:#cc0000; color:white; }
 #checkout { background:#009933; color:white; }
-
 </style>
 </head>
 <body>
@@ -424,35 +359,33 @@ h2 {
 
     <!-- PRODUTOS -->
     <div class="products">
-
-        <!-- CARD ÚNICO (mesmo tamanho) com Polar + T800 empilhados internamente -->
-        <div class="product stacked">
-            <div class="mini-product">
-                <a href="polar.html" style="text-decoration:none;">
-                    <div class="dark-blue">Relógio Polar Unite</div>
-                </a>
-                <div>
-                    <h3 style="margin:8px 0 6px 0;">Monitoramento completo de saúde</h3>
-                    <p class="old-price" style="margin:0;">R$ 199,00</p>
-                    <p class="price" style="margin:0 0 8px 0;">R$ 149,00</p>
-                    <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-
-            <div class="mini-product">
-                <a href="T800.html" style="text-decoration:none;">
-                    <div class="dark-blue">T800 Ultra 2</div>
-                </a>
-                <div>
-                    <h3 style="margin:8px 0 6px 0;">Desempenho avançado e design elegante</h3>
-                    <p class="old-price" style="margin:0;">R$ 699,00</p>
-                    <p class="price" style="margin:0 0 8px 0;">R$ 549,00</p>
-                    <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
-                </div>
-            </div>
+        
+        <!-- 1) POLAR UNITE -->
+        <div class="product">
+            <a href="polar.html" style="text-decoration:none;">
+                <div class="dark-blue">Relógio Polar Unite</div>
+            </a>
+            <h3>Monitoramento completo de saúde</h3>
+            <p class="old-price">R$ 199,00</p>
+            <p class="price">R$ 149,00</p>
+            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- demais produtos continuam como antes, cada um em seu card -->
+        <!-- FORÇA O T800 A IR PARA BAIXO -->
+        <div class="break"></div>
+
+        <!-- 2) T800 ULTRA 2 -->
+        <div class="product">
+            <a href="T800.html" style="text-decoration:none;">
+                <div class="dark-blue">T800 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design elegante</h3>
+            <p class="old-price">R$ 699,00</p>
+            <p class="price">R$ 549,00</p>
+            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- 3) GARMIN -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
                 <div class="dark-blue">Garmin Epix Gen 2</div>
@@ -463,6 +396,7 @@ h2 {
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
 
+        <!-- 4) ULTRA AI 3 -->
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
                 <div class="dark-blue">Ultra AI 3 5G</div>
@@ -472,6 +406,7 @@ h2 {
             <p class="price">R$ 349,00</p>
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
+
     </div>
 </div>
 
