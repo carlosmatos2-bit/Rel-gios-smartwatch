@@ -3,32 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>SMARTWATCH STORE</title>
-
 <style>
     :root{
-        --glass-bg: rgba(255,255,255,0.82);
-        --glass-border: rgba(255,255,255,0.38);
-        --header-bg: rgba(0,0,0,0.6);
-        --accent: #001a33;
-        --glow: rgba(0,150,255,0.55);
+        --glass-bg: rgba(255,255,255,0.85);
+        --header-bg: rgba(0,0,0,0.65);
+        --accent: #333;
     }
 
     body {
         margin: 0;
         padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
+        font-family: Arial, sans-serif;
         background: url('https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f') no-repeat center center fixed;
         background-size: cover;
         -webkit-font-smoothing: antialiased;
-        animation: fadeBG 6s ease-in-out infinite alternate;
     }
 
-    @keyframes fadeBG {
-        from { filter: brightness(0.92) blur(0px); }
-        to   { filter: brightness(1.05) blur(1px); }
-    }
-
-    /* HEADER -------------------------- */
+    /* CABEÇALHO */
     .header {
         width: 100%;
         display: flex;
@@ -41,118 +32,75 @@
         top: 0;
         backdrop-filter: blur(8px);
         z-index: 8;
-        box-shadow: 0 0 18px rgba(0,0,0,0.45);
     }
 
     .header-title {
         font-size: 28px;
         font-weight: bold;
-        letter-spacing: 1px;
-        text-shadow: 0 0 12px var(--glow);
     }
 
-    /* BOTÃO VOLTAR -------------------- */
+    /* BOTÃO VOLTAR */
     .btn-voltar {
         background: var(--accent);
         color: white;
         padding: 10px 18px;
-        border-radius: 10px;
+        border-radius: 8px;
         text-decoration: none;
         font-size: 16px;
-        transition: 0.25s;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        transition: 0.2s;
     }
     .btn-voltar:hover {
-        background: #004080;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+        background: #555;
     }
 
-    /* CONTAINER ----------------------- */
+    /* CONTAINER */
     .container {
-        width: 92%;
+        width: 90%;
         max-width: 1200px;
-        margin: 45px auto;
+        margin: 40px auto;
         background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        padding: 35px;
-        border-radius: 18px;
+        padding: 25px;
+        border-radius: 10px;
         display: flex;
         gap: 40px;
         flex-wrap: wrap;
-        backdrop-filter: blur(15px);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.25),
-                    0 0 18px var(--glow);
-        animation: floatUp 0.6s ease;
-    }
-
-    @keyframes floatUp {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
     .left, .right {
         flex: 1;
-        min-width: 280px;
+        min-width: 290px;
     }
 
-    /* IMAGEM -------------------------- */
     .left img {
         width: 100%;
-        max-width: 360px;
-        border-radius: 15px;
+        max-width: 350px;
+        border-radius: 10px;
         display: block;
         margin-bottom: 20px;
-        border: 3px solid rgba(255,255,255,0.55);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.45),
-                    0 0 20px rgba(0,153,255,0.35);
-        transition: 0.3s;
-    }
-
-    .left img:hover {
-        transform: scale(1.03);
-        box-shadow: 0 15px 32px rgba(0,0,0,0.55),
-                    0 0 28px rgba(0,153,255,0.6);
     }
 
     h1 {
         margin-top: 0;
-        font-size: 30px;
-        color: #001a33;
-        text-shadow: 0 0 8px rgba(0,153,255,0.45);
+        font-size: 28px;
+        color: #222;
     }
 
     .price {
-        font-size: 32px;
-        color: #009933;
+        font-size: 30px;
+        color: green;
         font-weight: bold;
         margin-bottom: 20px;
-        text-shadow: 0 0 8px rgba(0,255,0,0.3);
     }
 
     .info {
-        background: rgba(255,255,255,0.75);
-        padding: 15px;
-        border-radius: 12px;
+        background: #f1f1f1;
+        padding: 12px;
+        border-radius: 8px;
         margin-top: 10px;
-        font-size: 17px;
-        line-height: 1.6;
-        border: 1px solid rgba(0,0,0,0.1);
-        box-shadow: inset 0 0 18px rgba(0,0,0,0.08),
-                    0 0 15px rgba(0,153,255,0.35);
-        animation: glowPulse 2.4s infinite alternate ease-in-out;
-    }
-
-    @keyframes glowPulse {
-        from { box-shadow: inset 0 0 12px rgba(0,0,0,0.07), 0 0 12px rgba(0,153,255,0.25); }
-        to   { box-shadow: inset 0 0 16px rgba(0,0,0,0.1), 0 0 20px rgba(0,153,255,0.55); }
-    }
-
-    ul li {
-        margin-bottom: 6px;
+        font-size: 16px;
+        line-height: 1.5;
     }
 </style>
-
 </head>
 <body>
 
@@ -188,7 +136,7 @@
 
     <!-- LADO DIREITO -->
     <div class="right">
-        <h2 style="color:#001a33; text-shadow:0 0 10px rgba(0,153,255,0.35);">SMARTWATCH STORE</h2>
+        <h2>SMARTWATCH STORE</h2>
 
         <p class="price">R$ 149,00</p>
 
