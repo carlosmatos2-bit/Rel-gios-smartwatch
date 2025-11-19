@@ -112,7 +112,6 @@ header h1 {
     min-width: 160px;
     animation: fadeIn 0.3s ease;
 
-    /* agora usa flex para funcionar corretamente */
     display: none;
     flex-direction: row;
     gap: 6px;
@@ -220,8 +219,6 @@ h2 {
 #nextBtn { right: 6px; }
 
 /* ===== PRODUTOS ===== */
-
-/* agora os produtos são flexíveis, para permitir quebrar exatamente onde queremos */
 .products {
     margin-top: 20px;
     display: flex;
@@ -247,7 +244,6 @@ h2 {
         inset -3px -3px 10px rgba(0,0,0,0.1);
 }
 
-/* força o T800 a pular para a linha de baixo */
 .break {
     flex-basis: 100%;
     height: 0;
@@ -371,20 +367,6 @@ h2 {
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- FORÇA O T800 A IR PARA BAIXO -->
-        <div class="break"></div>
-
-        <!-- 2) T800 ULTRA 2 -->
-        <div class="product">
-            <a href="T800.html" style="text-decoration:none;">
-                <div class="dark-blue">T800 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design elegante</h3>
-            <p class="old-price">R$ 699,00</p>
-            <p class="price">R$ 549,00</p>
-            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
-        </div>
-
         <!-- 3) GARMIN -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
@@ -405,6 +387,20 @@ h2 {
             <p class="old-price">R$ 499,00</p>
             <p class="price">R$ 349,00</p>
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- QUEBRA APÓS OS PRIMEIROS 3 PRODUTOS -->
+        <div class="break"></div>
+
+        <!-- 2) T800 ULTRA 2 (AGORA EMBAIXO DO POLAR) -->
+        <div class="product">
+            <a href="T800.html" style="text-decoration:none;">
+                <div class="dark-blue">T800 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design elegante</h3>
+            <p class="old-price">R$ 699,00</p>
+            <p class="price">R$ 549,00</p>
+            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
         </div>
 
     </div>
