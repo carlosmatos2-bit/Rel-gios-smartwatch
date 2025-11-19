@@ -99,6 +99,7 @@ header h1 {
     box-shadow: 0 0 20px #00eaff;
 }
 
+/* ===== DROPDOWN CORRIGIDO ===== */
 #menu-dropdown {
     display: none;
     position: absolute;
@@ -107,13 +108,18 @@ header h1 {
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    overflow: visible; /* ← CORREÇÃO ÚNICA */
+    overflow: visible;
     min-width: 160px;
     animation: fadeIn 0.3s ease;
+
+    /* CORREÇÃO PARA FICAR LADO A LADO */
+    display: none;
+    flex-direction: row;
+    gap: 6px;
+    padding: 10px;
 }
 
 #menu-dropdown button {
-    width: 100%;
     padding: 14px;
     border: none;
     background: #0059b3;
@@ -121,6 +127,10 @@ header h1 {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.25s ease;
+
+    /* PARA FICAR ALINHADO LADO A LADO */
+    flex: 1;
+    white-space: nowrap;
 }
 
 #menu-dropdown button:hover {
@@ -418,7 +428,8 @@ const menuDropdown = document.getElementById("menu-dropdown");
 const couponsBtn = document.getElementById("coupons-btn");
 
 menuBtn.addEventListener("click", () => {
-    menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
+    menuDropdown.style.display =
+        menuDropdown.style.display === "flex" ? "none" : "flex";
 });
 
 window.addEventListener("click", (e) => {
@@ -449,7 +460,7 @@ function updateCartDisplay() {
     if (cart.length === 0) {
         container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
     } else {
-        cart.forEach((item, index) => {
+        cart.forEach((item) => {
             container.innerHTML += `
                 <div style="border-bottom:1px solid #ccc; padding:8px 0;">
                     <strong>${item.name}</strong><br>
@@ -464,18 +475,15 @@ function updateCartDisplay() {
         `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
 }
 
-/* Abrir carrinho */
 document.getElementById("cart-btn").onclick = () => {
     updateCartDisplay();
     document.getElementById("cart-popup").style.display = "flex";
 };
 
-/* Fechar carrinho */
 document.getElementById("close-cart").onclick = () => {
     document.getElementById("cart-popup").style.display = "none";
 };
 
-/* Limpar carrinho */
 document.getElementById("clear-cart").onclick = () => {
     if (confirm("Tem certeza que deseja limpar o carrinho?")) {
         cart = [];
@@ -484,7 +492,6 @@ document.getElementById("clear-cart").onclick = () => {
     }
 };
 
-/* Finalizar compra */
 document.getElementById("checkout").onclick = () => {
     if (cart.length === 0) {
         alert("Seu carrinho está vazio!");
