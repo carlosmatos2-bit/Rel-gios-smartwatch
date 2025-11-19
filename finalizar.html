@@ -295,6 +295,9 @@ function renderCart() {
 
             <label>CEP:</label>
             <input type="text" id="cep" placeholder="CEP">
+
+            <label>CPF:</label>
+            <input type="text" id="cpf" placeholder="000.000.000-00">
         </div>
     `;
 
@@ -354,7 +357,7 @@ function mostrarOpcoes() {
     let tipo = document.getElementById("pagamento").value;
     document.getElementById("cartao-box").classList.add("hidden");
     document.getElementById("pix-box").classList.add("hidden");
-    document.getElementById("boleto-box").classList.add("hidden");
+    document.getElementById("boleto-box").classclassList.add("hidden");
 
     if (tipo === "cartao") document.getElementById("cartao-box").classList.remove("hidden");
     else if (tipo === "pix") document.getElementById("pix-box").classList.remove("hidden");
@@ -407,9 +410,10 @@ function finalizarCompra() {
     let cidade = document.getElementById("cidade").value.trim();
     let estado = document.getElementById("estado").value.trim();
     let cep = document.getElementById("cep").value.trim();
+    let cpf = document.getElementById("cpf").value.trim();
 
-    if (!rua || !numero || !bairro || !cidade || !estado || !cep) {
-        alert("Preencha todos os campos do endereço antes de finalizar a compra.");
+    if (!rua || !numero || !bairro || !cidade || !estado || !cep || !cpf) {
+        alert("Preencha todos os campos do endereço (incluindo CPF) antes de finalizar a compra.");
         return;
     }
 
@@ -434,6 +438,10 @@ function finalizarCompra() {
     const enderecoP = document.createElement("p");
     enderecoP.innerHTML = `<b>Endereço:</b> ${rua}, ${numero}, ${bairro}, ${cidade} - ${estado}, CEP: ${cep}`;
     comprovanteDiv.appendChild(enderecoP);
+
+    const cpfP = document.createElement("p");
+    cpfP.innerHTML = `<b>CPF:</b> ${cpf}`;
+    comprovanteDiv.appendChild(cpfP);
 
     const pagamentoP = document.createElement("p");
     pagamentoP.innerHTML = `<b>Pagamento:</b> ${tipo.toUpperCase()}`;
