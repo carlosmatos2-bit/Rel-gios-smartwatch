@@ -11,11 +11,10 @@
     --accent:#004b8d;
     --soft:#e6f8ff;
     --card:#ffffff;
+    --shadow:0 10px 30px rgba(2,30,66,0.18);
   }
 
-  * {
-    box-sizing:border-box;
-  }
+  * { box-sizing:border-box; }
 
   body {
     font-family:"Segoe UI", Arial, sans-serif;
@@ -23,6 +22,7 @@
     background:url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center / cover fixed;
     color:#112;
     position:relative;
+    animation:fadeIn 0.5s ease-in-out;
   }
 
   body::before {
@@ -33,6 +33,11 @@
     background-size:cover;
     filter:blur(18px) brightness(0.65);
     z-index:-1;
+  }
+
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(8px); }
+    to { opacity:1; transform:translateY(0); }
   }
 
   /* HEADER ------------------------------ */
@@ -47,13 +52,19 @@
     position:sticky;
     top:0;
     z-index:50;
-    box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    box-shadow:0 6px 22px rgba(0,0,0,0.25);
+    transition:0.3s;
+  }
+
+  header:hover {
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
   }
 
   .logo {
     font-weight:800;
     letter-spacing:1px;
-    font-size:20px;
+    font-size:22px;
+    text-shadow:0 2px 4px rgba(0,0,0,0.25);
   }
 
   nav a {
@@ -61,6 +72,11 @@
     text-decoration:none;
     margin-left:20px;
     font-weight:600;
+    transition:0.3s;
+  }
+
+  nav a:hover {
+    opacity:0.7;
   }
 
   /* CONTENT WRAP ----------------------- */
@@ -82,30 +98,54 @@
     background:var(--card);
     border-radius:14px;
     padding:22px;
-    box-shadow:0 10px 30px rgba(2,30,66,0.08);
+    box-shadow:var(--shadow);
+    transition:0.25s;
+    transform-origin:center;
+  }
+
+  .card:hover {
+    transform:translateY(-4px);
+    box-shadow:0 12px 38px rgba(2,30,66,0.22);
   }
 
   /* TITLE + PRICE ---------------------- */
   .title h1 {
     color:var(--brand);
-    font-size:26px;
+    font-size:28px;
     margin:0 0 8px;
+    text-shadow:0 1px 2px rgba(0,0,0,0.08);
+    animation:slideIn 0.6s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity:0; transform:translateX(-10px); }
+    to { opacity:1; transform:translateX(0); }
   }
 
   .price-block {
     text-align:right;
+    padding:10px;
+    border-radius:8px;
+    background:linear-gradient(90deg,#f1f7ff,#ffffff);
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    transition:0.25s;
+  }
+
+  .price-block:hover {
+    transform:scale(1.02);
   }
 
   .old {
     text-decoration:line-through;
     color:#888;
-    font-size:14px;
+    font-size:15px;
   }
 
   .now {
     color:#0a8a3a;
     font-weight:800;
-    font-size:22px;
+    font-size:24px;
+    text-shadow:0 1px 2px rgba(0,0,0,0.1);
   }
 
   /* GALLERY --------------------------- */
@@ -118,6 +158,13 @@
   .main-image img {
     width:100%;
     border-radius:12px;
+    transition:0.3s;
+    box-shadow:0 10px 28px rgba(0,0,0,0.15);
+  }
+
+  .main-image img:hover {
+    transform:scale(1.03);
+    box-shadow:0 14px 36px rgba(0,0,0,0.25);
   }
 
   /* SPECS ------------------------------ */
@@ -125,12 +172,23 @@
     margin:10px 0 0 18px;
   }
 
+  .specs p, .specs li {
+    animation:fadeSpecs 0.7s ease;
+  }
+
+  @keyframes fadeSpecs {
+    from { opacity:0; transform:translateY(6px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
   /* TECH TABLE ------------------------ */
   .tech {
     margin-top:20px;
-    background:#fff;
+    background:#ffffffcc;
     padding:12px;
     border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    backdrop-filter:blur(4px);
   }
 
   .tech table {
@@ -140,49 +198,53 @@
 
   .tech td {
     padding:8px 6px;
+    border-bottom:1px solid #eee;
   }
 
   /* BUY BOX --------------------------- */
   .buybox {
     position:sticky;
     top:92px;
-    background:linear-gradient(180deg,#fff,#fbfdff);
+    background:linear-gradient(180deg,#ffffffee,#fbfdffee);
     border-radius:12px;
     padding:18px;
-    box-shadow:0 10px 24px rgba(2,30,66,0.06);
-    border:2px solid rgba(0,51,102,0.06);
+    box-shadow:0 10px 28px rgba(2,30,66,0.12);
+    border:2px solid rgba(0,51,102,0.08);
+    transition:0.25s;
+  }
+
+  .buybox:hover {
+    transform:translateY(-4px);
+    box-shadow:0 14px 34px rgba(2,30,66,0.2);
   }
 
   .buybox h3 {
     color:var(--brand);
     margin:0 0 8px;
     font-size:20px;
-  }
-
-  .interactions {
-    margin-top:18px;
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
+    text-shadow:0 1px 3px rgba(0,0,0,0.1);
   }
 
   .pulse {
     color:var(--brand);
     font-weight:800;
+    animation:pulse 1.8s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% { opacity:1; }
+    50% { opacity:0.55; }
+    100% { opacity:1; }
   }
 
   /* RESPONSIVE ------------------------- */
   @media (max-width:900px) {
-    .grid {
-      grid-template-columns:1fr;
-    }
+    .grid { grid-template-columns:1fr; }
     .buybox {
       position:static;
-      top:auto;
       margin-top:20px;
     }
   }
-
 </style>
 </head>
 
@@ -198,10 +260,9 @@
 <div class="wrap">
   <div class="grid">
 
-    <!-- ESQUERDA - INFORMAÇÕES -->
+    <!-- ESQUERDA - CARD PRINCIPAL -->
     <div>
       <div class="card">
-
         <div class="title">
           <h1>Relógio Inteligente Ultra AI 3 5G</h1>
           <div style="color:#556">Modelo: Ultra AI 3 • Versão 5G</div>
@@ -248,7 +309,6 @@
     <aside class="buybox">
       <h3>Comprar</h3>
       <div class="sku">SKU: UAI3-5G-BLK</div>
-
       <div style="font-size:14px;color:#556;margin-top:8px">Entrega: 3–7 dias úteis</div>
 
       <div class="interactions">
@@ -262,7 +322,6 @@
           <div style="color:#0a8a3a;font-weight:800">Em estoque</div>
         </div>
       </div>
-
     </aside>
 
   </div>
