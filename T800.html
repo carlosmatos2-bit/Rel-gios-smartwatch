@@ -21,12 +21,12 @@ header {
     position: relative;
 }
 
-/* BOTÃO VOLTAR */
+/* BOTÃO VOLTAR (AGORA AZUL ESCURO) */
 .back-button {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: #00bfff;
+    background: #00264d; /* azul escuro */
     color: white;
     padding: 8px 14px;
     border-radius: 8px;
@@ -38,7 +38,7 @@ header {
 }
 
 .back-button:hover {
-    background: #0099cc;
+    background: #001a33;
     transform: scale(1.05);
 }
 
@@ -96,23 +96,9 @@ h2 {
     margin-left: 20px;
 }
 
+/* estilo antigo do botão — deixei mas não será usado */
 .add-cart {
-    width: 100%;
-    background: linear-gradient(135deg, #0077cc, #004f80);
-    color: white;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-}
-
-.add-cart:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 16px rgba(0,140,255,0.7);
+    display: none; /* garante que o botão não apareça */
 }
 
 footer {
@@ -142,7 +128,8 @@ footer {
     <h3>Preço</h3>
     <p class="old-price">R$ 699,00</p>
     <p class="price">R$ 549,00</p>
-    <button class="add-cart" onclick="alert('T800 Ultra 2 adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+
+    <!-- Botão de adicionar ao carrinho removido -->
 
     <div class="specs">
         <h3>Descrição Completa</h3>
