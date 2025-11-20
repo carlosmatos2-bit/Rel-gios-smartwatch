@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -249,6 +250,17 @@ h2 {
     height: 0;
 }
 
+/* ===== NOMES DOS RELÓGIOS ===== */
+.product-name {
+    background: #003d80; /* Azul escuro igual ao botão menu */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
 /* ===== POPUPS ===== */
 #cart-popup, #account-popup {
     display: none;
@@ -299,13 +311,11 @@ h2 {
 #clear-cart { background:#cc0000; color:white; }
 #checkout { background:#009933; color:white; }
 </style>
-</head>
-<body>
 
+<body>
 <header>
     <h1>SMARTWATCH STORE</h1>
     <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Compre agora e aproveite!</div>
-
     <div class="menu-container">
         <button id="menu-btn">Menu ▾</button>
         <div id="menu-dropdown">
@@ -316,7 +326,8 @@ h2 {
     </div>
 </header>
 
-<!-- POPUP CARRINHO -->
+<!-- POPUPS -->
+
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -328,7 +339,6 @@ h2 {
     </div>
 </div>
 
-<!-- POPUP MINHA CONTA -->
 <div id="account-popup">
     <div id="account-box">
         <h3>Minha Conta</h3>
@@ -339,93 +349,94 @@ h2 {
         <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
     </div>
 </div>
-
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
 
-    <!-- CARROSSEL -->
-    <div id="carousel">
-        <button id="prevBtn" class="carousel-btn">❮</button>
-        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg">
-        <button id="nextBtn" class="carousel-btn">❯</button>
+```
+<!-- CARROSSEL -->
+<div id="carousel">
+    <button id="prevBtn" class="carousel-btn">❮</button>
+    <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg">
+    <button id="nextBtn" class="carousel-btn">❯</button>
+</div>
+
+<!-- BARRA DE PESQUISA -->
+<input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
+
+<!-- PRODUTOS -->
+<div class="products">
+    
+    <!-- 1) POLAR UNITE -->
+    <div class="product">
+        <a href="polar.html" style="text-decoration:none;">
+            <div class="product-name">Relógio Polar Unite</div>
+        </a>
+        <h3>Monitoramento completo de saúde</h3>
+        <p class="old-price">R$ 199,00</p>
+        <p class="price">R$ 149,00</p>
+        <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
     </div>
 
-    <!-- BARRA DE PESQUISA -->
-    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
-
-    <!-- PRODUTOS -->
-    <div class="products">
-        
-        <!-- 1) POLAR UNITE -->
-        <div class="product">
-            <a href="polar.html" style="text-decoration:none;">
-                <div class="dark-blue">Relógio Polar Unite</div>
-            </a>
-            <h3>Monitoramento completo de saúde</h3>
-            <p class="old-price">R$ 199,00</p>
-            <p class="price">R$ 149,00</p>
-            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
-        </div>
-
-        <!-- 3) GARMIN -->
-        <div class="product">
-            <a href="garmin.html" style="text-decoration:none;">
-                <div class="dark-blue">Garmin Epix Gen 2</div>
-            </a>
-            <h3>GPS avançado e extrema performance</h3>
-            <p class="old-price">R$ 4500,00</p>
-            <p class="price">R$ 3599.99</p>
-            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
-        </div>
-
-        <!-- 4) ULTRA AI 3 -->
-        <div class="product">
-            <a href="ultra.html" style="text-decoration:none;">
-                <div class="dark-blue">Ultra AI 3 5G</div>
-            </a>
-            <h3>Chip 5G e resistência extrema</h3>
-            <p class="old-price">R$ 499,00</p>
-            <p class="price">R$ 349,00</p>
-            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
-        </div>
-
-        <!-- QUEBRA APÓS OS PRIMEIROS 3 PRODUTOS -->
-        <div class="break"></div>
-
-        <!-- 2) T800 ULTRA 2 (AGORA EMBAIXO DO POLAR) -->
-        <div class="product">
-            <a href="T800.html" style="text-decoration:none;">
-                <div class="dark-blue">T800 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design elegante</h3>
-            <p class="old-price">R$ 699,00</p>
-            <p class="price">R$ 549,00</p>
-            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
-        </div>
-
-         <!-- 5) T900 ULTRA 2 (AGORA ao lado DO T800 Ultra 2) -->
-        <div class="product">
-            <a href="T900.html" style="text-decoration:none;">
-                <div class="dark-blue">T900 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design melhorado</h3>
-            <p class="old-price">R$ 400,00</p>
-            <p class="price">R$ 349,99</p>
-            <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
-        </div>
-
-        <!-- 6) X8 Pro Max (AGORA ao lado DO T900 Ultra 2) -->
-        <div class="product">
-            <a href="X8.html" style="text-decoration:none;">
-                <div class="dark-blue">X8 Pro Max</div>
-            </a>
-            <h3>Tecnologia de ponta e À prova D'Água</h3>
-            <p class="old-price">R$ 250,00</p>
-            <p class="price">R$ 219,99</p>
-            <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
-        </div>
-
+    <!-- 3) GARMIN -->
+    <div class="product">
+        <a href="garmin.html" style="text-decoration:none;">
+            <div class="product-name">Garmin Epix Gen 2</div>
+        </a>
+        <h3>GPS avançado e extrema performance</h3>
+        <p class="old-price">R$ 4500,00</p>
+        <p class="price">R$ 3599.99</p>
+        <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
     </div>
+
+    <!-- 4) ULTRA AI 3 -->
+    <div class="product">
+        <a href="ultra.html" style="text-decoration:none;">
+            <div class="product-name">Ultra AI 3 5G</div>
+        </a>
+        <h3>Chip 5G e resistência extrema</h3>
+        <p class="old-price">R$ 499,00</p>
+        <p class="price">R$ 349,00</p>
+        <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="break"></div>
+
+    <!-- 2) T800 ULTRA 2 -->
+    <div class="product">
+        <a href="T800.html" style="text-decoration:none;">
+            <div class="product-name">T800 Ultra 2</div>
+        </a>
+        <h3>Desempenho avançado e design elegante</h3>
+        <p class="old-price">R$ 699,00</p>
+        <p class="price">R$ 549,00</p>
+        <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+    </div>
+
+     <!-- 5) T900 ULTRA 2 -->
+    <div class="product">
+        <a href="T900.html" style="text-decoration:none;">
+            <div class="product-name">T900 Ultra 2</div>
+        </a>
+        <h3>Desempenho avançado e design melhorado</h3>
+        <p class="old-price">R$ 400,00</p>
+        <p class="price">R$ 349,99</p>
+        <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- 6) X8 Pro Max -->
+    <div class="product">
+        <a href="X8.html" style="text-decoration:none;">
+            <div class="product-name">X8 Pro Max</div>
+        </a>
+        <h3>Tecnologia de ponta e À prova D'Água</h3>
+        <p class="old-price">R$ 250,00</p>
+        <p class="price">R$ 219,99</p>
+        <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
+    </div>
+
+</div>
+```
+
 </div>
 
 <script>
@@ -478,124 +489,88 @@ function updateCartDisplay() {
     }
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
-    document.getElementById("cart-total").innerHTML =
-        `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+```
+document.getElementById("cart-total").innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+```
+
 }
 
-document.getElementById("cart-btn").onclick = () => {
-    updateCartDisplay();
-    document.getElementById("cart-popup").style.display = "flex";
-};
+/* ===== BOTÕES POPUP ===== */
+const cartPopup = document.getElementById("cart-popup");
+const accountPopup = document.getElementById("account-popup");
 
-document.getElementById("close-cart").onclick = () => {
-    document.getElementById("cart-popup").style.display = "none";
-};
-
-document.getElementById("clear-cart").onclick = () => {
-    if (confirm("Tem certeza que deseja limpar o carrinho?")) {
-        cart = [];
-        saveCart();
-        updateCartDisplay();
-    }
-};
-
-document.getElementById("checkout").onclick = () => {
-    if (cart.length === 0) {
-        alert("Seu carrinho está vazio!");
-        return;
-    }
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    localStorage.setItem("carrinho", JSON.stringify(cart));
-    localStorage.setItem("total", total.toFixed(2));
-    window.location.href = "finalizar.html";
-};
-
-/* ===== PESQUISA ===== */
-const searchBar = document.getElementById("search-bar");
-const products = document.querySelectorAll(".product");
-
-function normalize(t) {
-    return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-searchBar.addEventListener("input", () => {
-    let termo = normalize(searchBar.value.trim());
-    products.forEach(product => {
-        let nome = normalize(product.innerText);
-        product.style.display = nome.includes(termo) ? "block" : "none";
-    });
-
-    if (termo === "ajuda.sos") {
-        window.location.href = "ajuda.html";
-    }
+document.getElementById("cart-btn").addEventListener("click", () => {
+updateCartDisplay();
+cartPopup.style.display = "flex";
 });
+
+document.getElementById("close-cart").addEventListener("click", () => {
+cartPopup.style.display = "none";
+});
+
+document.getElementById("clear-cart").addEventListener("click", () => {
+if (confirm("Deseja realmente limpar o carrinho?")) {
+cart = [];
+saveCart();
+updateCartDisplay();
+}
+});
+
+/* ===== POPUP CONTA ===== */
+const accountName = document.getElementById("account-name");
+const accountPhone = document.getElementById("account-phone");
+const accountPass = document.getElementById("account-pass");
+
+document.getElementById("account-btn").addEventListener("click", () => {
+accountName.textContent = localStorage.getItem("accountName") || "Usuário";
+accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
+accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
+accountPopup.style.display = "flex";
+});
+
+function fecharConta() { accountPopup.style.display = "none"; }
+function trocarConta() {
+localStorage.removeItem("accountName");
+localStorage.removeItem("accountPhone");
+localStorage.removeItem("accountPass");
+alert("Conta removida. Faça login novamente.");
+accountPopup.style.display = "none";
+}
 
 /* ===== CARROSSEL ===== */
 const carouselImages = [
-    "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
-    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
-    "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
-    "https://cf.shopee.com.br/file/br-11134207-7r98o-m76a9f6kg1807c",
-    "https://down-br.img.susercontent.com/file/cn-11134207-7ras8-m1ozbbaxput08e",
-    "https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/relogio-smart-watch-x8-pro-max-a-prova-d-agua-tecnologia-de-ponta-hapes/hapes/x8-promax-r-16/a48d1a9e227d00e436709225eca91ea3.jpeg"
+"[https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg](https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg)",
+"[https://m.media-amazon.com/images/I/61o8k5qZ-5L.jpg](https://m.media-amazon.com/images/I/61o8k5qZ-5L.jpg)",
+"[https://m.media-amazon.com/images/I/61x9E1v7ZnL.jpg](https://m.media-amazon.com/images/I/61x9E1v7ZnL.jpg)"
 ];
 
 let currentIndex = 0;
 const carouselImg = document.getElementById("carousel-img");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
 
 function showImage(index) {
-    carouselImg.style.opacity = 0;
-    setTimeout(() => {
-        carouselImg.src = carouselImages[index];
-        carouselImg.style.opacity = 1;
-    }, 300);
+carouselImg.src = carouselImages[index];
 }
 
-document.getElementById("nextBtn").onclick = () => {
-    currentIndex = (currentIndex + 1) % carouselImages.length;
-    showImage(currentIndex);
-};
+prevBtn.addEventListener("click", () => {
+currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+showImage(currentIndex);
+});
 
-document.getElementById("prevBtn").onclick = () => {
-    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
-    showImage(currentIndex);
-};
+nextBtn.addEventListener("click", () => {
+currentIndex = (currentIndex + 1) % carouselImages.length;
+showImage(currentIndex);
+});
 
-setInterval(() => {
-    currentIndex = (currentIndex + 1) % carouselImages.length;
-    showImage(currentIndex);
-}, 3000);
-
-/* ===== MINHA CONTA ===== */
-const accountBtn = document.getElementById("account-btn");
-const accountPopup = document.getElementById("account-popup");
-
-function carregarConta() {
-    const nome = localStorage.getItem("usuarioLogado") || "Não informado";
-    const telefone = localStorage.getItem("telefone") || "Não informado";
-    const senha = localStorage.getItem("senha") || "Não informado";
-
-    document.getElementById("account-name").innerText = nome;
-    document.getElementById("account-phone").innerText = telefone;
-    document.getElementById("account-pass").innerText = senha;
+/* ===== PESQUISA RÁPIDA ===== */
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener("keyup", (e) => {
+if (e.target.value.toLowerCase() === "ajuda.sos") {
+alert("Suporte acionado! Entre em contato pelo WhatsApp: +55 11 99999-9999");
+e.target.value = "";
 }
-
-accountBtn.onclick = () => {
-    carregarConta();
-    accountPopup.style.display = "flex";
-}
-
-function fecharConta() {
-    accountPopup.style.display = "none";
-}
-
-function trocarConta() {
-    localStorage.removeItem("usuarioLogado");
-    localStorage.removeItem("telefone");
-    localStorage.removeItem("senha");
-    window.location.href = "index.html";
-}
-</script>
+}); </script>
 
 </body>
 </html>
