@@ -191,9 +191,11 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
+    display: block;
 }
 
+/* botões do carrossel */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -206,6 +208,7 @@ h2 {
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .carousel-btn:hover {
@@ -374,9 +377,9 @@ h2 {
     <h2>Relógios Premium em Promoção</h2>
     <!-- CARROSSEL -->
     <div id="carousel">
-        <button id="prevBtn" class="carousel-btn">❮</button>
-        <img id="carousel-img" src="https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg" alt="Destaque">
-        <button id="nextBtn" class="carousel-btn">❯</button>
+        <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
+        <img id="carousel-img" src="" alt="Destaque" onerror="this.src='https://via.placeholder.com/390x330?text=Imagem+indisponivel'">
+        <button id="nextBtn" class="carousel-btn" aria-label="Próximo">❯</button>
     </div>
 
     <!-- BARRA DE PESQUISA -->
@@ -456,137 +459,192 @@ h2 {
     </div> <!-- fim .products -->
 </div> <!-- fim .container -->
 <script>
-/* ===== MENU DROPDOWN ===== */
-const menuBtn = document.getElementById("menu-btn");
-const menuDropdown = document.getElementById("menu-dropdown");
-const couponsBtn = document.getElementById("coupons-btn");
+document.addEventListener("DOMContentLoaded", function () {
+    /* ===== MENU DROPDOWN ===== */
+    const menuBtn = document.getElementById("menu-btn");
+    const menuDropdown = document.getElementById("menu-dropdown");
+    const couponsBtn = document.getElementById("coupons-btn");
 
-menuBtn.addEventListener("click", () => {
-    menuDropdown.style.display =
-        menuDropdown.style.display === "flex" ? "none" : "flex";
-});
+    if (menuBtn && menuDropdown) {
+        menuBtn.addEventListener("click", () => {
+            menuDropdown.style.display =
+                menuDropdown.style.display === "flex" ? "none" : "flex";
+        });
 
-window.addEventListener("click", (e) => {
-    if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
-        menuDropdown.style.display = "none";
-    }
-});
-
-couponsBtn.addEventListener("click", () => {
-    window.location.href = "cupons.html";
-});
-
-/* ===== CARRINHO ===== */
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function addToCart(name, price) {
-    cart.push({ name, price });
-    saveCart();
-    alert(name + " foi adicionado ao carrinho!");
-}
-
-function updateCartDisplay() {
-    const container = document.getElementById("cart-items");
-    container.innerHTML = "";
-
-    if (cart.length === 0) {
-        container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
-    } else {
-        cart.forEach((item) => {
-            container.innerHTML += `
-                <div style="border-bottom:1px solid #ccc; padding:8px 0;">
-                    <strong>${item.name}</strong><br>
-                    R$ ${item.price.toFixed(2)}
-                </div>
-            `;
+        window.addEventListener("click", (e) => {
+            if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+                menuDropdown.style.display = "none";
+            }
         });
     }
 
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    document.getElementById("cart-total").innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
-}
+    if (couponsBtn) {
+        couponsBtn.addEventListener("click", () => {
+            window.location.href = "cupons.html";
+        });
+    }
 
-/* ===== BOTÕES POPUP ===== */
-const cartPopup = document.getElementById("cart-popup");
-const accountPopup = document.getElementById("account-popup");
+    /* ===== CARRINHO ===== */
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-document.getElementById("cart-btn").addEventListener("click", () => {
-    updateCartDisplay();
-    cartPopup.style.display = "flex";
-});
+    function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
 
-document.getElementById("close-cart").addEventListener("click", () => {
-    cartPopup.style.display = "none";
-});
-
-document.getElementById("clear-cart").addEventListener("click", () => {
-    if (confirm("Deseja realmente limpar o carrinho?")) {
-        cart = [];
+    window.addToCart = function (name, price) {
+        cart.push({ name, price });
         saveCart();
-        updateCartDisplay();
+        alert(name + " foi adicionado ao carrinho!");
+    };
+
+    function updateCartDisplay() {
+        const container = document.getElementById("cart-items");
+        if (!container) return;
+        container.innerHTML = "";
+
+        if (cart.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
+        } else {
+            cart.forEach((item) => {
+                container.innerHTML += `
+                    <div style="border-bottom:1px solid #ccc; padding:8px 0;">
+                        <strong>${item.name}</strong><br>
+                        R$ ${item.price.toFixed(2)}
+                    </div>
+                `;
+            });
+        }
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        const totalEl = document.getElementById("cart-total");
+        if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     }
-});
 
-/* ===== POPUP CONTA ===== */
-const accountName = document.getElementById("account-name");
-const accountPhone = document.getElementById("account-phone");
-const accountPass = document.getElementById("account-pass");
+    /* POPUP CARRINHO */
+    const cartPopup = document.getElementById("cart-popup");
+    const cartBtn = document.getElementById("cart-btn");
+    const closeCartBtn = document.getElementById("close-cart");
+    const clearCartBtn = document.getElementById("clear-cart");
+    const checkoutBtn = document.getElementById("checkout");
 
-document.getElementById("account-btn").addEventListener("click", () => {
-    accountName.textContent = localStorage.getItem("accountName") || "Usuário";
-    accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
-    accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
-    accountPopup.style.display = "flex";
-});
-
-function fecharConta() { accountPopup.style.display = "none"; }
-function trocarConta() {
-    localStorage.removeItem("accountName");
-    localStorage.removeItem("accountPhone");
-    localStorage.removeItem("accountPass");
-    alert("Conta removida. Faça login novamente.");
-    accountPopup.style.display = "none";
-}
-
-/* ===== CARROSSEL ===== */
-const carouselImages = [
-    "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
-    "https://m.media-amazon.com/images/I/61o8k5qZ-5L.jpg",
-    "https://m.media-amazon.com/images/I/61x9E1v7ZnL.jpg"
-];
-
-let currentIndex = 0;
-const carouselImg = document.getElementById("carousel-img");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-function showImage(index) {
-    carouselImg.src = carouselImages[index];
-}
-
-prevBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
-    showImage(currentIndex);
-});
-
-nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % carouselImages.length;
-    showImage(currentIndex);
-});
-
-/* ===== PESQUISA RÁPIDA ===== */
-const searchBar = document.getElementById("search-bar");
-searchBar.addEventListener("keyup", (e) => {
-    if (e.target.value.toLowerCase() === "ajuda.sos") {
-        alert("Suporte acionado! Entre em contato pelo WhatsApp: +55 11 99999-9999");
-        e.target.value = "";
+    if (cartBtn) {
+        cartBtn.addEventListener("click", () => {
+            updateCartDisplay();
+            if (cartPopup) cartPopup.style.display = "flex";
+        });
     }
+    if (closeCartBtn) {
+        closeCartBtn.addEventListener("click", () => {
+            if (cartPopup) cartPopup.style.display = "none";
+        });
+    }
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener("click", () => {
+            if (confirm("Deseja realmente limpar o carrinho?")) {
+                cart = [];
+                saveCart();
+                updateCartDisplay();
+            }
+        });
+    }
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+                alert("O carrinho está vazio!");
+            } else {
+                window.location.href = "finalizar_compra.html";
+            }
+        });
+    }
+
+    /* ===== POPUP CONTA ===== */
+    const accountBtn = document.getElementById("account-btn");
+    const accountPopup = document.getElementById("account-popup");
+    const accountName = document.getElementById("account-name");
+    const accountPhone = document.getElementById("account-phone");
+    const accountPass = document.getElementById("account-pass");
+    const closeAccountBtn = document.getElementById("close-account");
+
+    if (accountBtn) {
+        accountBtn.addEventListener("click", () => {
+            if (accountName) accountName.textContent = localStorage.getItem("accountName") || "Usuário";
+            if (accountPhone) accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
+            if (accountPass) accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
+            if (accountPopup) accountPopup.style.display = "flex";
+        });
+    }
+
+    window.fecharConta = function () {
+        if (accountPopup) accountPopup.style.display = "none";
+    };
+    window.trocarConta = function () {
+        localStorage.removeItem("accountName");
+        localStorage.removeItem("accountPhone");
+        localStorage.removeItem("accountPass");
+        alert("Conta removida. Faça login novamente.");
+        if (accountPopup) accountPopup.style.display = "none";
+    };
+
+    /* ===== CARROSSEL ===== */
+    const carouselImages = [
+        "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
+        "https://m.media-amazon.com/images/I/61o8k5qZ-5L.jpg",
+        "https://m.media-amazon.com/images/I/61x9E1v7ZnL.jpg"
+    ];
+
+    let currentIndex = 0;
+    const carouselImg = document.getElementById("carousel-img");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    // seta imagem inicial com segurança e adiciona fallback
+    function setInitialImage() {
+        if (!carouselImg) return;
+        const url = carouselImages[0] || '';
+        carouselImg.src = url;
+    }
+
+    function showImage(index) {
+        if (!carouselImg) return;
+        if (index < 0 || index >= carouselImages.length) return;
+        carouselImg.style.opacity = 0;
+        // troca com pequeno delay pra smooth
+        setTimeout(() => {
+            carouselImg.src = carouselImages[index];
+            carouselImg.style.opacity = 1;
+        }, 150);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+            showImage(currentIndex);
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % carouselImages.length;
+            showImage(currentIndex);
+        });
+    }
+
+    // fallback: se alguma imagem falhar, já temos onerror no <img> para placeholder
+    setInitialImage();
+
+    /* ===== PESQUISA RÁPIDA ===== */
+    const searchBar = document.getElementById("search-bar");
+    if (searchBar) {
+        searchBar.addEventListener("keyup", (e) => {
+            if (e.target.value.toLowerCase() === "ajuda.sos") {
+                alert("Suporte acionado! Entre em contato pelo WhatsApp: +55 11 99999-9999");
+                e.target.value = "";
+            }
+        });
+    }
+
+    // opcional: carregar carrinho do storage ao abrir a página
+    updateCartDisplay();
 });
 </script>
-
 </body>
 </html>
