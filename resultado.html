@@ -251,14 +251,22 @@ h2 {
 }
 
 /* ===== NOMES DOS RELÓGIOS ===== */
+@keyframes pulseBlue {
+    0% { background-color: #4da6ff; }
+    50% { background-color: #0059b3; }
+    100% { background-color: #00264d; }
+}
+
 .product-name {
-    background: #003d80; /* Azul escuro igual ao botão menu */
+    background: #003d80;
     color: white;
     padding: 8px 12px;
     border-radius: 8px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 12px;
+
+    animation: pulseBlue 3s infinite alternate;
 }
 
 /* ===== POPUPS ===== */
