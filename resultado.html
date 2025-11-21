@@ -44,6 +44,7 @@ header {
     padding: 22px;
     background: linear-gradient(to bottom, #003868, #00264d);
     color: white;
+    position: relative;
     box-shadow: 0 3px 12px rgba(0,0,0,0.4);
 }
 
@@ -109,6 +110,7 @@ header h1 {
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     overflow: visible;
     min-width: 160px;
+    animation: fadeIn 0.3s ease;
 
     display: none;
     flex-direction: row;
@@ -247,26 +249,57 @@ h2 {
     height: 0;
 }
 
-/* ===== NOMES DOS RELÓGIOS ===== */
-@keyframes pulseBlue {
-    0% { background-color: #4da6ff; }
-    50% { background-color: #0059b3; }
-    100% { background-color: #00264d; }
+/* ===== POPUPS ===== */
+#cart-popup, #account-popup {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.product-name {
-    background: #003d80;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 12px;
-    animation: pulseBlue 3s infinite alternate;
+#cart-box, #account-box {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px #002244;
+    text-align:center;
+    animation: fadeIn 0.4s ease;
 }
+
+.cart-title {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 12px;
+}
+
+.cart-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cart-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+#close-cart, #close-account { background:#002b55; color:white; }
+#clear-cart { background:#cc0000; color:white; }
+#checkout { background:#009933; color:white; }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -283,7 +316,7 @@ h2 {
     </div>
 </header>
 
-<!-- POPUPS -->
+<!-- POPUP CARRINHO -->
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -295,6 +328,7 @@ h2 {
     </div>
 </div>
 
+<!-- POPUP MINHA CONTA -->
 <div id="account-popup">
     <div id="account-box">
         <h3>Minha Conta</h3>
@@ -307,7 +341,6 @@ h2 {
 </div>
 
 <div class="container">
-
     <h2>Relógios Premium em Promoção</h2>
 
     <!-- CARROSSEL -->
@@ -317,14 +350,16 @@ h2 {
         <button id="nextBtn" class="carousel-btn">❯</button>
     </div>
 
+    <!-- BARRA DE PESQUISA -->
     <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
 
     <!-- PRODUTOS -->
     <div class="products">
-
+        
+        <!-- 1) POLAR UNITE -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
-                <div class="product-name">Relógio Polar Unite</div>
+                <div class="dark-blue">Relógio Polar Unite</div>
             </a>
             <h3>Monitoramento completo de saúde</h3>
             <p class="old-price">R$ 199,00</p>
@@ -332,9 +367,10 @@ h2 {
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
+        <!-- 3) GARMIN -->
         <div class="product">
             <a href="garmin.html" style="text-decoration:none;">
-                <div class="product-name">Garmin Epix Gen 2</div>
+                <div class="dark-blue">Garmin Epix Gen 2</div>
             </a>
             <h3>GPS avançado e extrema performance</h3>
             <p class="old-price">R$ 4500,00</p>
@@ -342,9 +378,10 @@ h2 {
             <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
         </div>
 
+        <!-- 4) ULTRA AI 3 -->
         <div class="product">
             <a href="ultra.html" style="text-decoration:none;">
-                <div class="product-name">Ultra AI 3 5G</div>
+                <div class="dark-blue">Ultra AI 3 5G</div>
             </a>
             <h3>Chip 5G e resistência extrema</h3>
             <p class="old-price">R$ 499,00</p>
@@ -352,11 +389,13 @@ h2 {
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
 
+        <!-- QUEBRA APÓS OS PRIMEIROS 3 PRODUTOS -->
         <div class="break"></div>
 
+        <!-- 2) T800 ULTRA 2 (AGORA EMBAIXO DO POLAR) -->
         <div class="product">
             <a href="T800.html" style="text-decoration:none;">
-                <div class="product-name">T800 Ultra 2</div>
+                <div class="dark-blue">T800 Ultra 2</div>
             </a>
             <h3>Desempenho avançado e design elegante</h3>
             <p class="old-price">R$ 699,00</p>
@@ -364,9 +403,10 @@ h2 {
             <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
         </div>
 
+         <!-- 5) T900 ULTRA 2 (AGORA ao lado DO T800 Ultra 2) -->
         <div class="product">
             <a href="T900.html" style="text-decoration:none;">
-                <div class="product-name">T900 Ultra 2</div>
+                <div class="dark-blue">T900 Ultra 2</div>
             </a>
             <h3>Desempenho avançado e design melhorado</h3>
             <p class="old-price">R$ 400,00</p>
@@ -374,9 +414,10 @@ h2 {
             <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
         </div>
 
+        <!-- 6) X8 Pro Max (AGORA ao lado DO T900 Ultra 2) -->
         <div class="product">
             <a href="X8.html" style="text-decoration:none;">
-                <div class="product-name">X8 Pro Max</div>
+                <div class="dark-blue">X8 Pro Max</div>
             </a>
             <h3>Tecnologia de ponta e À prova D'Água</h3>
             <p class="old-price">R$ 250,00</p>
@@ -384,14 +425,14 @@ h2 {
             <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
         </div>
 
-    </div><!-- FIM DOS PRODUTOS -->
-
-</div><!-- FIM CONTAINER -->
+    </div>
+</div>
 
 <script>
-/* ===== MENU ===== */
+/* ===== MENU DROPDOWN ===== */
 const menuBtn = document.getElementById("menu-btn");
 const menuDropdown = document.getElementById("menu-dropdown");
+const couponsBtn = document.getElementById("coupons-btn");
 
 menuBtn.addEventListener("click", () => {
     menuDropdown.style.display =
@@ -404,7 +445,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
-document.getElementById("coupons-btn").addEventListener("click", () => {
+couponsBtn.addEventListener("click", () => {
     window.location.href = "cupons.html";
 });
 
@@ -441,76 +482,119 @@ function updateCartDisplay() {
         `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
 }
 
-/* ===== BOTÕES DO POPUP ===== */
-const cartPopup = document.getElementById("cart-popup");
-
-document.getElementById("cart-btn").addEventListener("click", () => {
+document.getElementById("cart-btn").onclick = () => {
     updateCartDisplay();
-    cartPopup.style.display = "flex";
-});
+    document.getElementById("cart-popup").style.display = "flex";
+};
 
-document.getElementById("close-cart").addEventListener("click", () => {
-    cartPopup.style.display = "none";
-});
+document.getElementById("close-cart").onclick = () => {
+    document.getElementById("cart-popup").style.display = "none";
+};
 
-document.getElementById("clear-cart").addEventListener("click", () => {
-    if (confirm("Deseja realmente limpar o carrinho?")) {
+document.getElementById("clear-cart").onclick = () => {
+    if (confirm("Tem certeza que deseja limpar o carrinho?")) {
         cart = [];
         saveCart();
         updateCartDisplay();
     }
-});
+};
 
-/* ===== POPUP CONTA ===== */
-const accountPopup = document.getElementById("account-popup");
-const accountName = document.getElementById("account-name");
-const accountPhone = document.getElementById("account-phone");
-const accountPass = document.getElementById("account-pass");
+document.getElementById("checkout").onclick = () => {
+    if (cart.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+    localStorage.setItem("total", total.toFixed(2));
+    window.location.href = "finalizar.html";
+};
 
-document.getElementById("account-btn").addEventListener("click", () => {
-    accountName.textContent = localStorage.getItem("accountName") || "Usuário";
-    accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
-    accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
-    accountPopup.style.display = "flex";
-});
+/* ===== PESQUISA ===== */
+const searchBar = document.getElementById("search-bar");
+const products = document.querySelectorAll(".product");
 
-function fecharConta() { accountPopup.style.display = "none"; }
-
-function trocarConta() {
-    localStorage.removeItem("accountName");
-    localStorage.removeItem("accountPhone");
-    localStorage.removeItem("accountPass");
-    alert("Conta removida. Faça login novamente.");
-    accountPopup.style.display = "none";
+function normalize(t) {
+    return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+searchBar.addEventListener("input", () => {
+    let termo = normalize(searchBar.value.trim());
+    products.forEach(product => {
+        let nome = normalize(product.innerText);
+        product.style.display = nome.includes(termo) ? "block" : "none";
+    });
+
+    if (termo === "ajuda.sos") {
+        window.location.href = "ajuda.html";
+    }
+});
 
 /* ===== CARROSSEL ===== */
 const carouselImages = [
     "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
-    "https://m.media-amazon.com/images/I/61o8k5qZ-5L.jpg",
-    "https://m.media-amazon.com/images/I/61x9E1v7ZnL.jpg"
+    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
+    "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
+    "https://cf.shopee.com.br/file/br-11134207-7r98o-m76a9f6kg1807c",
+    "https://down-br.img.susercontent.com/file/cn-11134207-7ras8-m1ozbbaxput08e",
+    "https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/relogio-smart-watch-x8-pro-max-a-prova-d-agua-tecnologia-de-ponta-hapes/hapes/x8-promax-r-16/a48d1a9e227d00e436709225eca91ea3.jpeg"
 ];
 
 let currentIndex = 0;
 const carouselImg = document.getElementById("carousel-img");
 
-document.getElementById("prevBtn").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
-    carouselImg.src = carouselImages[currentIndex];
-});
+function showImage(index) {
+    carouselImg.style.opacity = 0;
+    setTimeout(() => {
+        carouselImg.src = carouselImages[index];
+        carouselImg.style.opacity = 1;
+    }, 300);
+}
 
-document.getElementById("nextBtn").addEventListener("click", () => {
+document.getElementById("nextBtn").onclick = () => {
     currentIndex = (currentIndex + 1) % carouselImages.length;
-    carouselImg.src = carouselImages[currentIndex];
-});
+    showImage(currentIndex);
+};
 
-/* ===== PESQUISA ===== */
-document.getElementById("search-bar").addEventListener("keyup", (e) => {
-    if (e.target.value.toLowerCase() === "ajuda.sos") {
-        alert("Suporte acionado! Entre em contato pelo WhatsApp: +55 11 99999-9999");
-        e.target.value = "";
-    }
-});
+document.getElementById("prevBtn").onclick = () => {
+    currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+    showImage(currentIndex);
+};
+
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % carouselImages.length;
+    showImage(currentIndex);
+}, 3000);
+
+/* ===== MINHA CONTA ===== */
+const accountBtn = document.getElementById("account-btn");
+const accountPopup = document.getElementById("account-popup");
+
+function carregarConta() {
+    const nome = localStorage.getItem("usuarioLogado") || "Não informado";
+    const telefone = localStorage.getItem("telefone") || "Não informado";
+    const senha = localStorage.getItem("senha") || "Não informado";
+
+    document.getElementById("account-name").innerText = nome;
+    document.getElementById("account-phone").innerText = telefone;
+    document.getElementById("account-pass").innerText = senha;
+}
+
+accountBtn.onclick = () => {
+    carregarConta();
+    accountPopup.style.display = "flex";
+}
+
+function fecharConta() {
+    accountPopup.style.display = "none";
+}
+
+function trocarConta() {
+    localStorage.removeItem("usuarioLogado");
+    localStorage.removeItem("telefone");
+    localStorage.removeItem("senha");
+    window.location.href = "index.html";
+}
 </script>
 
 </body>
