@@ -332,6 +332,12 @@ h2 {
 #close-cart, #close-account { background:#002b55; color:white; }
 #clear-cart { background:#cc0000; color:white; }
 #checkout { background:#009933; color:white; }
+
+@media (max-width: 800px) {
+    #carousel { width: 90%; height: 260px; }
+    #search-bar { width: 90%; }
+    .product { width: 100%; }
+}
 </style>
 </head>
 
@@ -458,6 +464,7 @@ h2 {
 
     </div> <!-- fim .products -->
 </div> <!-- fim .container -->
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     /* ===== MENU DROPDOWN ===== */
@@ -466,7 +473,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const couponsBtn = document.getElementById("coupons-btn");
 
     if (menuBtn && menuDropdown) {
-        menuBtn.addEventListener("click", () => {
+        menuBtn.addEventListener("click", (ev) => {
+            ev.stopPropagation();
             menuDropdown.style.display =
                 menuDropdown.style.display === "flex" ? "none" : "flex";
         });
@@ -488,12 +496,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     function saveCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
+        try {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        } catch (err) {
+            console.warn("Não foi possível salvar o carrinho no localStorage:", err);
+        }
     }
 
     window.addToCart = function (name, price) {
         cart.push({ name, price });
         saveCart();
+        updateCartDisplay();
         alert(name + " foi adicionado ao carrinho!");
     };
 
@@ -505,17 +518,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cart.length === 0) {
             container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
         } else {
-            cart.forEach((item) => {
+            cart.forEach((item, i) => {
                 container.innerHTML += `
                     <div style="border-bottom:1px solid #ccc; padding:8px 0;">
                         <strong>${item.name}</strong><br>
-                        R$ ${item.price.toFixed(2)}
+                        R$ ${Number(item.price).toFixed(2)}
                     </div>
                 `;
             });
         }
 
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        const total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
         const totalEl = document.getElementById("cart-total");
         if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     }
@@ -599,8 +612,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const carouselImg = document.getElementById("carousel-img");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    let autoplayIntervalId = null;
 
-    // seta imagem inicial com segurança e adiciona fallback
     function setInitialImage() {
         if (!carouselImg) return;
         const url = carouselImages[0] || '';
@@ -610,11 +623,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
-        carouselImg.style.opacity = 0;
-        // troca com pequeno delay pra smooth
+        // smooth fade-out / fade-in
+        try {
+            carouselImg.style.opacity = 0;
+        } catch (err) {}
         setTimeout(() => {
+            if (!carouselImg) return;
             carouselImg.src = carouselImages[index];
-            carouselImg.style.opacity = 1;
+            try {
+                carouselImg.style.opacity = 1;
+            } catch (err) {}
         }, 150);
     }
 
@@ -622,17 +640,45 @@ document.addEventListener("DOMContentLoaded", function () {
         prevBtn.addEventListener("click", () => {
             currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
             showImage(currentIndex);
+            restartAutoplay();
         });
     }
     if (nextBtn) {
         nextBtn.addEventListener("click", () => {
             currentIndex = (currentIndex + 1) % carouselImages.length;
             showImage(currentIndex);
+            restartAutoplay();
         });
     }
 
-    // fallback: se alguma imagem falhar, já temos onerror no <img> para placeholder
+    // AUTOPLAY — troca sozinho a cada 3.5s
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayIntervalId = setInterval(() => {
+            currentIndex = (currentIndex + 1) % carouselImages.length;
+            showImage(currentIndex);
+        }, 3500);
+    }
+    function stopAutoplay() {
+        if (autoplayIntervalId !== null) {
+            clearInterval(autoplayIntervalId);
+            autoplayIntervalId = null;
+        }
+    }
+    function restartAutoplay() {
+        // reinicia o temporizador sempre que o usuário clicar nas setas
+        startAutoplay();
+    }
+
+    // opcional: pausar autoplay ao passar o mouse por cima (melhora UX)
+    const carouselElem = document.getElementById("carousel");
+    if (carouselElem) {
+        carouselElem.addEventListener("mouseenter", stopAutoplay);
+        carouselElem.addEventListener("mouseleave", startAutoplay);
+    }
+
     setInitialImage();
+    startAutoplay();
 
     /* ===== PESQUISA RÁPIDA ===== */
     const searchBar = document.getElementById("search-bar");
@@ -645,8 +691,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // opcional: carregar carrinho do storage ao abrir a página
+    // carregar carrinho do storage ao abrir a página
     updateCartDisplay();
+
+    // fechar popups ao clicar fora (melhoria)
+    document.addEventListener("click", function (e) {
+        if (cartPopup && cartPopup.style.display === "flex" && !document.getElementById("cart-box").contains(e.target) && e.target !== cartBtn) {
+            cartPopup.style.display = "none";
+        }
+        if (accountPopup && accountPopup.style.display === "flex" && !document.getElementById("account-box").contains(e.target) && e.target !== accountBtn) {
+            accountPopup.style.display = "none";
+        }
+    });
+
 });
 </script>
 </body>
