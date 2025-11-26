@@ -251,9 +251,8 @@ h2 {
 }
 
 /* ===== NOMES DOS RELÓGIOS ===== */
-/* Agora a animação pulsante alterna entre azul claro -> azul normal -> azul escuro */
 .product-name {
-    background: #003d80; /* cor inicial (médio) */
+    background: #003d80;
     color: white;
     padding: 8px 12px;
     border-radius: 8px;
@@ -264,20 +263,19 @@ h2 {
     animation: pulseBlue 4s ease-in-out infinite;
 }
 
-/* keyframes para alternar as 3 cores */
 @keyframes pulseBlue {
     0% {
-        background-color: #8bb7ff;   /* azul claro */
+        background-color: #8bb7ff;
         border-color: #6aa4ff;
         box-shadow: 0 0 8px rgba(139,183,255,0.25);
     }
     50% {
-        background-color: #003d80;   /* azul médio */
+        background-color: #003d80;
         border-color: #002f66;
         box-shadow: 0 0 12px rgba(0,61,128,0.18);
     }
     100% {
-        background-color: #0d2657;   /* azul escuro */
+        background-color: #0d2657;
         border-color: #091c3f;
         box-shadow: 0 0 16px rgba(13,38,87,0.25);
     }
@@ -426,7 +424,6 @@ h2 {
             <p class="price">R$ 349,00</p>
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
-
         <div class="break"></div>
 
         <!-- T800 ULTRA 2 -->
@@ -620,7 +617,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
-        // smooth fade-out / fade-in
         try {
             carouselImg.style.opacity = 0;
         } catch (err) {}
@@ -663,11 +659,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     function restartAutoplay() {
-        // reinicia o temporizador sempre que o usuário clicar nas setas
         startAutoplay();
     }
 
-    // opcional: pausar autoplay ao passar o mouse por cima (melhora UX)
     const carouselElem = document.getElementById("carousel");
     if (carouselElem) {
         carouselElem.addEventListener("mouseenter", stopAutoplay);
