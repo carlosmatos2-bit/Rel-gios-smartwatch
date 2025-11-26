@@ -1,210 +1,471 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>T800 Ultra 2 - Smartwatch Premium</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja Oficial Smartwatch</title>
 
-    <style>
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            margin: 0;
-            background: #f0f4f8;
-            color: #1a2a40;
-        }
+<style>
+/* ===== FUNDO ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: url("https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f") no-repeat center center fixed;
+    background-size: cover;
+    color: #1a2a40;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+}
 
-        header {
-            background: linear-gradient(90deg, #1a2a40, #253f5a);
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-size: cover;
+    filter: blur(18px) brightness(0.65);
+    z-index: -1;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-            letter-spacing: 1px;
-        }
+/* ANIMAÇÃO GLOBAL */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        .menu {
-            width: 100%;
-            background: #1a2a40;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 10px 0;
-        }
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px;
+    background: linear-gradient(to bottom, #003868, #00264d);
+    color: white;
+    position: relative;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+}
 
-        .menu button {
-            background: #253f5a;
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 14px;
-        }
+header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00d4ff;
+}
 
-        .menu button:hover {
-            background: #314e70;
-        }
+/* LETREIRO */
+#letreiro {
+    margin-top: 10px;
+    font-size: 19px;
+    font-weight: bold;
+    color: #00eaff;
+    text-shadow: 0 0 6px #00bfff, 0 0 12px #00ffff;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 95%;
+    animation: scroll 12s linear infinite;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
 
-        .produto-detalhes {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
+/* ===== MENU ===== */
+.menu-container {
+    position: absolute;
+    right: 20px;
+    top: 22px;
+}
 
-        .produto-detalhes img {
-            width: 330px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
+.menu-container button {
+    background: linear-gradient(135deg, #0059b3, #003d80);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00deff;
+    transition: all 0.3s ease;
+}
 
-        .info {
-            max-width: 600px;
-        }
+.menu-container button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #00eaff;
+}
 
-        .info h2 {
-            margin-top: 0;
-            font-size: 28px;
-        }
+/* ===== DROPDOWN ===== */
+#menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    overflow: visible;
+    min-width: 160px;
+    animation: fadeIn 0.3s ease;
+    flex-direction: row;
+    gap: 6px;
+    padding: 10px;
+}
 
-        .preco {
-            font-size: 22px;
-            color: #1a2a40;
-            margin: 10px 0 20px;
-            font-weight: bold;
-        }
+#menu-dropdown button {
+    padding: 14px;
+    border: none;
+    background: #0059b3;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.25s ease;
+    flex: 1;
+    white-space: nowrap;
+}
 
-        .opcoes {
-            margin-bottom: 20px;
-        }
+#menu-dropdown button:hover {
+    background: #007bff;
+    transform: scale(1.05);
+}
 
-        select, input {
-            padding: 10px;
-            width: 100%;
-            border-radius: 6px;
-            border: 1px solid #253f5a;
-            margin-bottom: 10px;
-        }
+/* ===== CONTAINER PRINCIPAL ===== */
+.container {
+    max-width: 1300px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 26px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 16px;
+    border: 2px solid #004080;
+    box-shadow: 0 0 30px rgba(0, 51, 102, 0.45);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease;
+}
 
-        .btn-add {
-            width: 100%;
-            padding: 12px;
-            background: #1a2a40;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+h2 {
+    text-align: center;
+    color: #002244;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 6px #00bfff;
+}
 
-        .btn-add:hover {
-            background: #314e70;
-        }
+/* ===== BARRA DE PESQUISA ===== */
+#search-bar {
+    width: 55%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 2px solid #003366;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,80,160,0.3);
+}
 
-        .carrinho-container {
-            margin-top: 40px;
-        }
+#search-bar:focus {
+    border-color: #00bfff;
+    box-shadow: 0 0 16px rgba(0,191,255,0.7);
+}
 
-        .carrinho-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px;
-            background: #fff;
-            border-radius: 6px;
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 12px;
-        }
+/* ===== CARROSSEL ===== */
+#carousel {
+    width: 390px;
+    height: 330px;
+    margin: 0 auto 25px auto;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 2px solid #002f66;
+    position: relative;
+    box-shadow: 0 0 18px rgba(0,0,0,0.4);
+}
 
-        .carrinho-item button {
-            background: #c62828;
-            border: none;
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+#carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.6s ease-in-out;
+    display: block;
+}
 
-        .finalizar {
-            margin-top: 20px;
-            width: 100%;
-            padding: 14px;
-            background: #2e7d32;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 18px;
-        }
+/* botões do carrossel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 34px;
+    color: white;
+    background: rgba(0,0,0,0.45);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
 
-        .finalizar:hover {
-            background: #1b5e20;
-        }
-    </style>
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.75);
+    transform: translateY(-50%) scale(1.12);
+}
+
+#prevBtn { left: 6px; }
+#nextBtn { right: 6px; }
+
+/* ===== PRODUTOS ===== */
+.products {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.product {
+    background: #f8fbff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 2px solid #003366;
+    width: 365px;
+    box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
+    transition: all 0.35s ease;
+}
+
+.product:hover {
+    transform: translateY(-8px) scale(1.045);
+    box-shadow:
+        8px 8px 22px rgba(0, 51, 102, 0.75),
+        inset 2px 2px 8px rgba(255,255,255,0.8),
+        inset -3px -3px 10px rgba(0,0,0,0.1);
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+/* ===== NOMES DOS RELÓGIOS ===== */
+/* Agora a animação pulsante alterna entre azul claro -> azul normal -> azul escuro */
+.product-name {
+    background: #003d80; /* cor inicial (médio) */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+    border: 2px solid #002f66;
+    animation: pulseBlue 4s ease-in-out infinite;
+}
+
+/* keyframes para alternar as 3 cores */
+@keyframes pulseBlue {
+    0% {
+        background-color: #8bb7ff;   /* azul claro */
+        border-color: #6aa4ff;
+        box-shadow: 0 0 8px rgba(139,183,255,0.25);
+    }
+    50% {
+        background-color: #003d80;   /* azul médio */
+        border-color: #002f66;
+        box-shadow: 0 0 12px rgba(0,61,128,0.18);
+    }
+    100% {
+        background-color: #0d2657;   /* azul escuro */
+        border-color: #091c3f;
+        box-shadow: 0 0 16px rgba(13,38,87,0.25);
+    }
+}
+
+/* ===== POPUPS ===== */
+#cart-popup, #account-popup {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#cart-box, #account-box {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid #003366;
+    box-shadow: 0 0 20px #002244;
+    text-align:center;
+    animation: fadeIn 0.4s ease;
+}
+
+.cart-title {
+    font-size: 22px;
+    color: #002244;
+    margin-bottom: 12px;
+}
+
+.cart-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cart-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+#close-cart, #close-account { background:#002b55; color:white; }
+#clear-cart { background:#cc0000; color:white; }
+#checkout { background:#009933; color:white; }
+
+@media (max-width: 800px) {
+    #carousel { width: 90%; height: 260px; }
+    #search-bar { width: 90%; }
+    .product { width: 100%; }
+}
+</style>
 </head>
 
 <body>
 <header>
-    <h1>T800 Ultra 2 - Smartwatch Premium</h1>
-</header>
-
-<div class="menu">
-    <button onclick="window.location.href='index.html'">Home</button>
-    <button onclick="window.location.href='produtos.html'">Produtos</button>
-    <button onclick="window.location.href='carrinho.html'">Carrinho</button>
-    <button onclick="trocarConta()">Minha Conta</button>
-</div>
-
-<main class="container">
-    <div class="produto-detalhes">
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-ls7sbb9f0gj2de" alt="T800 Ultra 2">
-
-        <div class="info">
-            <h2>T800 Ultra 2</h2>
-            <p class="preco">R$ 149,90</p>
-
-            <div class="opcoes">
-                <label for="cor">Selecione a cor:</label>
-                <select id="cor">
-                    <option value="Preto">Preto</option>
-                    <option value="Branco">Branco</option>
-                    <option value="Laranja">Laranja</option>
-                </select>
-
-                <label for="pulseira">Selecione a pulseira:</label>
-                <select id="pulseira">
-                    <option value="Esportiva">Esportiva</option>
-                    <option value="Aço Inoxidável">Aço Inoxidável</option>
-                    <option value="Nylon">Nylon</option>
-                </select>
-
-                <label for="quantidade">Quantidade:</label>
-                <input type="number" id="quantidade" min="1" value="1">
-            </div>
-
-            <button class="btn-add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
+    <h1>SMARTWATCH STORE</h1>
+    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Otimo custo beneficio - Compre agora e aproveite!</div>
+    <div class="menu-container">
+        <button id="menu-btn">Menu ▾</button>
+        <div id="menu-dropdown">
+            <button id="cart-btn">🛒 Carrinho</button>
+            <button id="account-btn">👤 Minha Conta</button>
+            <button id="coupons-btn">🎟️ Meus Cupons</button>
         </div>
     </div>
+</header>
 
-    <div class="carrinho-container" id="carrinho">
-        <h2>Seu Carrinho</h2>
-        <div id="itens-carrinho"></div>
-        <button class="finalizar" id="checkout">Finalizar Compra</button>
+<!-- POPUPS -->
+
+<div id="cart-popup">
+    <div id="cart-box">
+        <div class="cart-title">Seu Carrinho</div>
+        <div id="cart-items"></div>
+        <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
+        <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
+        <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
+        <button class="cart-btn" id="close-cart">Fechar</button>
     </div>
-</main>
+</div>
+
+<div id="account-popup">
+    <div id="account-box">
+        <h3>Minha Conta</h3>
+        <p><strong>Nome:</strong> <span id="account-name"></span></p>
+        <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
+        <p><strong>Senha:</strong> <span id="account-pass"></span></p>
+        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
+        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Relógios Premium em Promoção</h2>
+    <!-- CARROSSEL -->
+    <div id="carousel">
+        <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
+        <img id="carousel-img" src="" alt="Destaque" onerror="this.src='https://via.placeholder.com/390x330?text=Imagem+indisponivel'">
+        <button id="nextBtn" class="carousel-btn" aria-label="Próximo">❯</button>
+    </div>
+
+    <!-- BARRA DE PESQUISA -->
+    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
+
+    <!-- PRODUTOS -->
+    <div class="products">
+
+        <!-- 1) POLAR UNITE -->
+        <div class="product">
+            <a href="polar.html" style="text-decoration:none;">
+                <div class="product-name">Relógio Polar Unite</div>
+            </a>
+            <h3>Monitoramento completo de saúde</h3>
+            <p class="old-price">R$ 199,00</p>
+            <p class="price">R$ 149,00</p>
+            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- GARMIN -->
+        <div class="product">
+            <a href="garmin.html" style="text-decoration:none;">
+                <div class="product-name">Garmin Epix Gen 2</div>
+            </a>
+            <h3>GPS avançado e extrema performance</h3>
+            <p class="old-price">R$ 4500,00</p>
+            <p class="price">R$ 3599.99</p>
+            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- ULTRA AI 3 -->
+        <div class="product">
+            <a href="ultra.html" style="text-decoration:none;">
+                <div class="product-name">Ultra AI 3 5G</div>
+            </a>
+            <h3>Chip 5G e resistência extrema</h3>
+            <p class="old-price">R$ 499,00</p>
+            <p class="price">R$ 349,00</p>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="break"></div>
+
+        <!-- T800 ULTRA 2 -->
+        <div class="product">
+            <a href="T800.html" style="text-decoration:none;">
+                <div class="product-name">T800 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design elegante</h3>
+            <p class="old-price">R$ 699,00</p>
+            <p class="price">R$ 549,00</p>
+            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+        </div>
+
+         <!-- T900 ULTRA 2 -->
+        <div class="product">
+            <a href="T900.html" style="text-decoration:none;">
+                <div class="product-name">T900 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design melhorado</h3>
+            <p class="old-price">R$ 400,00</p>
+            <p class="price">R$ 349,99</p>
+            <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
+        </div>
+        <!-- X8 Pro Max -->
+        <div class="product">
+            <a href="X8.html" style="text-decoration:none;">
+                <div class="product-name">X8 Pro Max</div>
+            </a>
+            <h3>Tecnologia de ponta e À prova D'Água</h3>
+            <p class="old-price">R$ 250,00</p>
+            <p class="price">R$ 219,99</p>
+            <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
+        </div>
+
+    </div> <!-- fim .products -->
+</div> <!-- fim .container -->
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
     /* ===== MENU DROPDOWN ===== */
     const menuBtn = document.getElementById("menu-btn");
     const menuDropdown = document.getElementById("menu-dropdown");
@@ -298,13 +559,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-    /*  
-     =========================================================
-     🔧 CORREÇÃO DO BOTÃO "FINALIZAR COMPRA"
-     Agora salva o carrinho e envia tudo para finalizar.html
-     =========================================================
-    */
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
             if (cart.length === 0) {
@@ -336,13 +590,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.fecharConta = function () {
         if (accountPopup) accountPopup.style.display = "none";
     };
-
-    /*
-     =========================================================
-     🔧 CORREÇÃO DO "TROCAR CONTA"
-     Agora abre index.html — sem apagar nada do armazenamento
-     =========================================================
-    */
+    /* ===== TROCAR CONTA (alterado para redirecionar) ===== */
     window.trocarConta = function () {
         window.location.href = "index.html";
     };
@@ -372,6 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
+        // smooth fade-out / fade-in
         try {
             carouselImg.style.opacity = 0;
         } catch (err) {}
@@ -399,6 +648,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // AUTOPLAY — troca sozinho a cada 3.5s
     function startAutoplay() {
         stopAutoplay();
         autoplayIntervalId = setInterval(() => {
@@ -406,18 +656,18 @@ document.addEventListener("DOMContentLoaded", function () {
             showImage(currentIndex);
         }, 3500);
     }
-
     function stopAutoplay() {
         if (autoplayIntervalId !== null) {
             clearInterval(autoplayIntervalId);
             autoplayIntervalId = null;
         }
     }
-
     function restartAutoplay() {
+        // reinicia o temporizador sempre que o usuário clicar nas setas
         startAutoplay();
     }
 
+    // opcional: pausar autoplay ao passar o mouse por cima (melhora UX)
     const carouselElem = document.getElementById("carousel");
     if (carouselElem) {
         carouselElem.addEventListener("mouseenter", stopAutoplay);
@@ -427,21 +677,31 @@ document.addEventListener("DOMContentLoaded", function () {
     setInitialImage();
     startAutoplay();
 
-    /* PESQUISA RÁPIDA */
+    /* ===== PESQUISA RÁPIDA ===== */
     const searchBar = document.getElementById("search-bar");
     if (searchBar) {
         searchBar.addEventListener("keyup", (e) => {
             if (e.target.value.toLowerCase() === "ajuda.sos") {
-                alert("Você será direcionado à página");
+                alert("Você será direcionado a pagina");
                 e.target.value = "";
             }
         });
     }
 
+    // carregar carrinho do storage ao abrir a página
     updateCartDisplay();
+
+    // fechar popups ao clicar fora (melhoria)
+    document.addEventListener("click", function (e) {
+        if (cartPopup && cartPopup.style.display === "flex" && !document.getElementById("cart-box").contains(e.target) && e.target !== cartBtn) {
+            cartPopup.style.display = "none";
+        }
+        if (accountPopup && accountPopup.style.display === "flex" && !document.getElementById("account-box").contains(e.target) && e.target !== accountBtn) {
+            accountPopup.style.display = "none";
+        }
+    });
 
 });
 </script>
-
 </body>
 </html>
