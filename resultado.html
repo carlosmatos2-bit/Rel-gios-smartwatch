@@ -425,7 +425,6 @@ h2 {
             <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
         </div>
         <div class="break"></div>
-
         <!-- T800 ULTRA 2 -->
         <div class="product">
             <a href="T800.html" style="text-decoration:none;">
@@ -586,9 +585,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (accountBtn) {
         accountBtn.addEventListener("click", () => {
-            if (accountName) accountName.textContent = localStorage.getItem("accountName") || "Usuário";
-            if (accountPhone) accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
-            if (accountPass) accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
+            if (accountName) accountName.textContent = localStorage.getItem("usuarioLogado") || "Usuário";
+            if (accountPhone) accountPhone.textContent = localStorage.getItem("telefone") || "(00) 00000-0000";
+            const pass = localStorage.getItem("senha");
+            if (accountPass) accountPass.textContent = pass ? "••••••••" : "••••••••";
             if (accountPopup) accountPopup.style.display = "flex";
         });
     }
