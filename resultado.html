@@ -372,8 +372,8 @@ h2 {
         <p><strong>Nome:</strong> <span id="account-name"></span></p>
         <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
         <p><strong>Senha:</strong> <span id="account-pass"></span></p>
-        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
-        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
+        <button class="cart-btn" id="trocar-conta-btn" style="background:#cc0000; color:white;">Trocar de Conta</button>
+        <button class="cart-btn" id="fechar-conta-btn" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
     </div>
 </div>
 
@@ -462,11 +462,26 @@ h2 {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    /* ===== MENU DROPDOWN ===== */
+    /* ===== ELEMENTOS ===== */
     const menuBtn = document.getElementById("menu-btn");
     const menuDropdown = document.getElementById("menu-dropdown");
     const couponsBtn = document.getElementById("coupons-btn");
 
+    const cartPopup = document.getElementById("cart-popup");
+    const cartBtn = document.getElementById("cart-btn");
+    const closeCartBtn = document.getElementById("close-cart");
+    const clearCartBtn = document.getElementById("clear-cart");
+    const checkoutBtn = document.getElementById("checkout");
+
+    const accountBtn = document.getElementById("account-btn");
+    const accountPopup = document.getElementById("account-popup");
+    const accountNameEl = document.getElementById("account-name");
+    const accountPhoneEl = document.getElementById("account-phone");
+    const accountPassEl = document.getElementById("account-pass");
+    const trocarContaBtn = document.getElementById("trocar-conta-btn");
+    const fecharContaBtn = document.getElementById("fechar-conta-btn");
+
+    /* ===== MENU DROPDOWN ===== */
     if (menuBtn && menuDropdown) {
         menuBtn.addEventListener("click", (ev) => {
             ev.stopPropagation();
@@ -499,7 +514,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addToCart = function (name, price) {
-        cart.push({ name, price });
+        // garante que price seja número
+        const numericPrice = Number(price) || 0;
+        cart.push({ name, price: numericPrice });
         saveCart();
         updateCartDisplay();
         alert(name + " foi adicionado ao carrinho!");
@@ -528,13 +545,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     }
 
-    /* POPUP CARRINHO */
-    const cartPopup = document.getElementById("cart-popup");
-    const cartBtn = document.getElementById("cart-btn");
-    const closeCartBtn = document.getElementById("close-cart");
-    const clearCartBtn = document.getElementById("clear-cart");
-    const checkoutBtn = document.getElementById("checkout");
-
+    /* POPUP CARRINHO eventos */
     if (cartBtn) {
         cartBtn.addEventListener("click", () => {
             updateCartDisplay();
@@ -557,51 +568,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
-    if (cart.length === 0) {
-        alert("O carrinho está vazio!");
-        return;
-    }
+            if (cart.length === 0) {
+                alert("O carrinho está vazio!");
+                return;
+            }
 
-    // Salva o carrinho exatamente como o código 2 espera
-    localStorage.setItem("carrinho", JSON.stringify(cart));
+            // Salva o carrinho no formato que o finalizar.html espera
+            try {
+                localStorage.setItem("carrinho", JSON.stringify(cart));
+                let total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
+                // salva como string com 2 casas (compatível com código de finalização)
+                localStorage.setItem("total", total.toFixed(2));
+            } catch (err) {
+                console.warn("Erro ao salvar carrinho para finalização:", err);
+            }
 
-    // Calcula o total e salva
-    let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
-    localStorage.setItem("total", total.toFixed(2));
-
-    // Vai para o Código 2
-    window.location.href = "finalizar.html";
-});
-
+            // Redireciona para a página de finalizar compra
+            window.location.href = "finalizar.html";
+        });
     }
 
     /* ===== POPUP CONTA ===== */
-    const accountBtn = document.getElementById("account-btn");
-    const accountPopup = document.getElementById("account-popup");
-    const accountName = document.getElementById("account-name");
-    const accountPhone = document.getElementById("account-phone");
-    const accountPass = document.getElementById("account-pass");
-    const closeAccountBtn = document.getElementById("close-account");
+    function loadAccountFromStorage() {
+        const nome = localStorage.getItem("usuarioLogado") || "";
+        const telefone = localStorage.getItem("telefone") || "";
+        const senha = localStorage.getItem("senha") || "";
+
+        // Se tiver login rápido (apenas nome salvo), também funciona porque usamos a mesma chave usuarioLogado
+        if (accountNameEl) accountNameEl.textContent = nome || "Usuário";
+        if (accountPhoneEl) accountPhoneEl.textContent = telefone || "(00) 00000-0000";
+        if (accountPassEl) accountPassEl.textContent = senha ? "••••••••" : "••••••••";
+    }
 
     if (accountBtn) {
         accountBtn.addEventListener("click", () => {
-            if (accountName) accountName.textContent = localStorage.getItem("usuarioLogado") || "Usuário";
-            if (accountPhone) accountPhone.textContent = localStorage.getItem("telefone") || "(00) 00000-0000";
-            const pass = localStorage.getItem("senha");
-            if (accountPass) accountPass.textContent = pass ? "••••••••" : "••••••••";
+            loadAccountFromStorage();
             if (accountPopup) accountPopup.style.display = "flex";
         });
     }
 
-    window.fecharConta = function () {
-        if (accountPopup) accountPopup.style.display = "none";
-    };
-    /* ===== TROCAR CONTA (alterado para redirecionar) ===== */
-    window.trocarConta = function () {
-        window.location.href = "index.html";
-    };
+    if (fecharContaBtn) {
+        fecharContaBtn.addEventListener("click", () => {
+            if (accountPopup) accountPopup.style.display = "none";
+        });
+    }
 
-    /* ===== CARROSSEL ===== */
+    if (trocarContaBtn) {
+        trocarContaBtn.addEventListener("click", () => {
+            // leva para a página inicial (index.html) para novo login / cadastro
+            window.location.href = "index.html";
+        });
+    }
+
+    /* CARROSSEL (inicialização) */
     const carouselImages = [
         "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
         "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
@@ -619,22 +638,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setInitialImage() {
         if (!carouselImg) return;
-        const url = carouselImages[0] || '';
-        carouselImg.src = url;
+        carouselImg.src = carouselImages[0] || '';
     }
 
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
-        try {
-            carouselImg.style.opacity = 0;
-        } catch (err) {}
+        try { carouselImg.style.opacity = 0; } catch (err) {}
         setTimeout(() => {
             if (!carouselImg) return;
             carouselImg.src = carouselImages[index];
-            try {
-                carouselImg.style.opacity = 1;
-            } catch (err) {}
+            try { carouselImg.style.opacity = 1; } catch (err) {}
         }, 150);
     }
 
@@ -653,7 +667,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // AUTOPLAY — troca sozinho a cada 3.5s
     function startAutoplay() {
         stopAutoplay();
         autoplayIntervalId = setInterval(() => {
@@ -667,9 +680,7 @@ document.addEventListener("DOMContentLoaded", function () {
             autoplayIntervalId = null;
         }
     }
-    function restartAutoplay() {
-        startAutoplay();
-    }
+    function restartAutoplay() { startAutoplay(); }
 
     const carouselElem = document.getElementById("carousel");
     if (carouselElem) {
@@ -691,8 +702,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // carregar carrinho do storage ao abrir a página
+    // Carrega carrinho salvo em localStorage ao abrir a página (se existir)
+    try {
+        const saved = JSON.parse(localStorage.getItem("cart"));
+        if (Array.isArray(saved) && saved.length > 0) {
+            cart = saved;
+        }
+    } catch (err) {
+        // se parsing falhar, ignorar e usar cart como está
+    }
     updateCartDisplay();
+
+    // Ao carregar a loja, já carrega dados de conta para evitar necessidade de clicar antes
+    loadAccountFromStorage();
 
     // fechar popups ao clicar fora (melhoria)
     document.addEventListener("click", function (e) {
