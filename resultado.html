@@ -558,13 +558,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
-            if (cart.length === 0) {
-                alert("O carrinho está vazio!");
-            } else {
-                localStorage.setItem("carrinhoFinal", JSON.stringify(cart));
-                window.location.href = "finalizar.html";
-            }
-        });
+    if (cart.length === 0) {
+        alert("O carrinho está vazio!");
+        return;
+    }
+
+    // Salva o carrinho exatamente como o código 2 espera
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+
+    // Calcula o total e salva
+    let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+    localStorage.setItem("total", total.toFixed(2));
+
+    // Vai para o Código 2
+    window.location.href = "finalizar.html";
+});
+
     }
 
     /* ===== POPUP CONTA ===== */
