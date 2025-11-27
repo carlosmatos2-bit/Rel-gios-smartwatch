@@ -342,7 +342,7 @@ h2 {
 <body>
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Otimo custo beneficio - Compre agora e aproveite!</div>
+    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Ótimo custo benefício - Compre agora e aproveite!</div>
     <div class="menu-container">
         <button id="menu-btn">Menu ▾</button>
         <div id="menu-dropdown">
@@ -354,7 +354,6 @@ h2 {
 </header>
 
 <!-- POPUPS -->
-
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -372,13 +371,14 @@ h2 {
         <p><strong>Nome:</strong> <span id="account-name"></span></p>
         <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
         <p><strong>Senha:</strong> <span id="account-pass"></span></p>
-        <button class="cart-btn" id="trocar-conta-btn" style="background:#cc0000; color:white;">Trocar de Conta</button>
-        <button class="cart-btn" id="fechar-conta-btn" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
+        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
+        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
     </div>
 </div>
 
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
+
     <!-- CARROSSEL -->
     <div id="carousel">
         <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
@@ -391,8 +391,7 @@ h2 {
 
     <!-- PRODUTOS -->
     <div class="products">
-
-        <!-- 1) POLAR UNITE -->
+        <!-- Exemplo de produto -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="product-name">Relógio Polar Unite</div>
@@ -403,85 +402,26 @@ h2 {
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- GARMIN -->
-        <div class="product">
-            <a href="garmin.html" style="text-decoration:none;">
-                <div class="product-name">Garmin Epix Gen 2</div>
-            </a>
-            <h3>GPS avançado e extrema performance</h3>
-            <p class="old-price">R$ 4500,00</p>
-            <p class="price">R$ 3599.99</p>
-            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
-        </div>
-
-        <!-- ULTRA AI 3 -->
-        <div class="product">
-            <a href="ultra.html" style="text-decoration:none;">
-                <div class="product-name">Ultra AI 3 5G</div>
-            </a>
-            <h3>Chip 5G e resistência extrema</h3>
-            <p class="old-price">R$ 499,00</p>
-            <p class="price">R$ 349,00</p>
-            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
-        </div>
-        <div class="break"></div>
-        <!-- T800 ULTRA 2 -->
-        <div class="product">
-            <a href="T800.html" style="text-decoration:none;">
-                <div class="product-name">T800 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design elegante</h3>
-            <p class="old-price">R$ 699,00</p>
-            <p class="price">R$ 549,00</p>
-            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
-        </div>
-
-         <!-- T900 ULTRA 2 -->
-        <div class="product">
-            <a href="T900.html" style="text-decoration:none;">
-                <div class="product-name">T900 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design melhorado</h3>
-            <p class="old-price">R$ 400,00</p>
-            <p class="price">R$ 349,99</p>
-            <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
-        </div>
-        <!-- X8 Pro Max -->
+        <!-- Outro produto -->
         <div class="product">
             <a href="X8.html" style="text-decoration:none;">
                 <div class="product-name">X8 Pro Max</div>
             </a>
-            <h3>Tecnologia de ponta e À prova D'Água</h3>
+            <h3>Tecnologia de ponta e à prova d'água</h3>
             <p class="old-price">R$ 250,00</p>
             <p class="price">R$ 219,99</p>
             <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
         </div>
-
     </div> <!-- fim .products -->
 </div> <!-- fim .container -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    /* ===== ELEMENTOS ===== */
+    /* ===== MENU DROPDOWN ===== */
     const menuBtn = document.getElementById("menu-btn");
     const menuDropdown = document.getElementById("menu-dropdown");
     const couponsBtn = document.getElementById("coupons-btn");
 
-    const cartPopup = document.getElementById("cart-popup");
-    const cartBtn = document.getElementById("cart-btn");
-    const closeCartBtn = document.getElementById("close-cart");
-    const clearCartBtn = document.getElementById("clear-cart");
-    const checkoutBtn = document.getElementById("checkout");
-
-    const accountBtn = document.getElementById("account-btn");
-    const accountPopup = document.getElementById("account-popup");
-    const accountNameEl = document.getElementById("account-name");
-    const accountPhoneEl = document.getElementById("account-phone");
-    const accountPassEl = document.getElementById("account-pass");
-    const trocarContaBtn = document.getElementById("trocar-conta-btn");
-    const fecharContaBtn = document.getElementById("fechar-conta-btn");
-
-    /* ===== MENU DROPDOWN ===== */
     if (menuBtn && menuDropdown) {
         menuBtn.addEventListener("click", (ev) => {
             ev.stopPropagation();
@@ -509,14 +449,12 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             localStorage.setItem("cart", JSON.stringify(cart));
         } catch (err) {
-            console.warn("Não foi possível salvar o carrinho no localStorage:", err);
+            console.warn("Não foi possível salvar o carrinho:", err);
         }
     }
 
     window.addToCart = function (name, price) {
-        // garante que price seja número
-        const numericPrice = Number(price) || 0;
-        cart.push({ name, price: numericPrice });
+        cart.push({ name, price });
         saveCart();
         updateCartDisplay();
         alert(name + " foi adicionado ao carrinho!");
@@ -530,7 +468,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cart.length === 0) {
             container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
         } else {
-            cart.forEach((item, i) => {
+            cart.forEach((item) => {
                 container.innerHTML += `
                     <div style="border-bottom:1px solid #ccc; padding:8px 0;">
                         <strong>${item.name}</strong><br>
@@ -545,7 +483,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     }
 
-    /* POPUP CARRINHO eventos */
+    /* ===== POPUP CARRINHO ===== */
+    const cartPopup = document.getElementById("cart-popup");
+    const cartBtn = document.getElementById("cart-btn");
+    const closeCartBtn = document.getElementById("close-cart");
+    const clearCartBtn = document.getElementById("clear-cart");
+    const checkoutBtn = document.getElementById("checkout");
+
     if (cartBtn) {
         cartBtn.addEventListener("click", () => {
             updateCartDisplay();
@@ -572,62 +516,52 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("O carrinho está vazio!");
                 return;
             }
-
-            // Salva o carrinho no formato que o finalizar.html espera
-            try {
-                localStorage.setItem("carrinho", JSON.stringify(cart));
-                let total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
-                // salva como string com 2 casas (compatível com código de finalização)
-                localStorage.setItem("total", total.toFixed(2));
-            } catch (err) {
-                console.warn("Erro ao salvar carrinho para finalização:", err);
-            }
-
-            // Redireciona para a página de finalizar compra
+            localStorage.setItem("carrinho", JSON.stringify(cart));
+            let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+            localStorage.setItem("total", total.toFixed(2));
             window.location.href = "finalizar.html";
         });
     }
 
     /* ===== POPUP CONTA ===== */
-    function loadAccountFromStorage() {
-        const nome = localStorage.getItem("usuarioLogado") || "";
-        const telefone = localStorage.getItem("telefone") || "";
-        const senha = localStorage.getItem("senha") || "";
+    const accountBtn = document.getElementById("account-btn");
+    const accountPopup = document.getElementById("account-popup");
+    const accountName = document.getElementById("account-name");
+    const accountPhone = document.getElementById("account-phone");
+    const accountPass = document.getElementById("account-pass");
+    const closeAccountBtn = document.getElementById("close-account");
 
-        // Se tiver login rápido (apenas nome salvo), também funciona porque usamos a mesma chave usuarioLogado
-        if (accountNameEl) accountNameEl.textContent = nome || "Usuário";
-        if (accountPhoneEl) accountPhoneEl.textContent = telefone || "(00) 00000-0000";
-        if (accountPassEl) accountPassEl.textContent = senha ? "••••••••" : "••••••••";
+    function loadAccountData() {
+        // Se houver login rápido, só mostra o nome
+        const nomeRapido = localStorage.getItem("usuarioLogado");
+        const telefone = localStorage.getItem("telefone") || "Não informado";
+        const senha = localStorage.getItem("senha") || "••••••••";
+
+        if (accountName) accountName.textContent = nomeRapido || "Usuário";
+        if (accountPhone) accountPhone.textContent = telefone;
+        if (accountPass) accountPass.textContent = senha !== "••••••••" ? "••••••••" : senha;
     }
 
     if (accountBtn) {
         accountBtn.addEventListener("click", () => {
-            loadAccountFromStorage();
+            loadAccountData();
             if (accountPopup) accountPopup.style.display = "flex";
         });
     }
 
-    if (fecharContaBtn) {
-        fecharContaBtn.addEventListener("click", () => {
-            if (accountPopup) accountPopup.style.display = "none";
-        });
-    }
+    window.fecharConta = function () {
+        if (accountPopup) accountPopup.style.display = "none";
+    };
 
-    if (trocarContaBtn) {
-        trocarContaBtn.addEventListener("click", () => {
-            // leva para a página inicial (index.html) para novo login / cadastro
-            window.location.href = "index.html";
-        });
-    }
+    window.trocarConta = function () {
+        window.location.href = "index.html";
+    };
 
-    /* CARROSSEL (inicialização) */
+    /* ===== CARROSSEL ===== */
     const carouselImages = [
         "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
         "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
-        "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
-        "https://cf.shopee.com.br/file/br-11134207-7r98o-m76a9f6kg1807c",
-        "https://down-br.img.susercontent.com/file/cn-11134207-7ras8-m1ozbbaxput08e",
-        "https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/relogio-smart-watch-x8-pro-max-a-prova-d-agua-tecnologia-de-ponta-hapes/hapes/x8-promax-r-16/a48d1a9e227d00e436709225eca91ea3.jpeg"
+        "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f"
     ];
 
     let currentIndex = 0;
@@ -644,11 +578,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
-        try { carouselImg.style.opacity = 0; } catch (err) {}
+        carouselImg.style.opacity = 0;
         setTimeout(() => {
-            if (!carouselImg) return;
             carouselImg.src = carouselImages[index];
-            try { carouselImg.style.opacity = 1; } catch (err) {}
+            carouselImg.style.opacity = 1;
         }, 150);
     }
 
@@ -680,7 +613,9 @@ document.addEventListener("DOMContentLoaded", function () {
             autoplayIntervalId = null;
         }
     }
-    function restartAutoplay() { startAutoplay(); }
+    function restartAutoplay() {
+        startAutoplay();
+    }
 
     const carouselElem = document.getElementById("carousel");
     if (carouselElem) {
@@ -696,27 +631,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (searchBar) {
         searchBar.addEventListener("keyup", (e) => {
             if (e.target.value.toLowerCase() === "ajuda.sos") {
-                alert("Você será direcionado a pagina");
+                alert("Você será direcionado à página de suporte");
                 e.target.value = "";
             }
         });
     }
 
-    // Carrega carrinho salvo em localStorage ao abrir a página (se existir)
-    try {
-        const saved = JSON.parse(localStorage.getItem("cart"));
-        if (Array.isArray(saved) && saved.length > 0) {
-            cart = saved;
-        }
-    } catch (err) {
-        // se parsing falhar, ignorar e usar cart como está
-    }
     updateCartDisplay();
 
-    // Ao carregar a loja, já carrega dados de conta para evitar necessidade de clicar antes
-    loadAccountFromStorage();
-
-    // fechar popups ao clicar fora (melhoria)
     document.addEventListener("click", function (e) {
         if (cartPopup && cartPopup.style.display === "flex" && !document.getElementById("cart-box").contains(e.target) && e.target !== cartBtn) {
             cartPopup.style.display = "none";
