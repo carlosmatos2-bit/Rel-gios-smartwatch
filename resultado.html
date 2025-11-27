@@ -342,7 +342,7 @@ h2 {
 <body>
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Ótimo custo benefício - Compre agora e aproveite!</div>
+    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Otimo custo beneficio - Compre agora e aproveite!</div>
     <div class="menu-container">
         <button id="menu-btn">Menu ▾</button>
         <div id="menu-dropdown">
@@ -354,6 +354,7 @@ h2 {
 </header>
 
 <!-- POPUPS -->
+
 <div id="cart-popup">
     <div id="cart-box">
         <div class="cart-title">Seu Carrinho</div>
@@ -378,7 +379,6 @@ h2 {
 
 <div class="container">
     <h2>Relógios Premium em Promoção</h2>
-
     <!-- CARROSSEL -->
     <div id="carousel">
         <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
@@ -391,7 +391,8 @@ h2 {
 
     <!-- PRODUTOS -->
     <div class="products">
-        <!-- Exemplo de produto -->
+
+        <!-- 1) POLAR UNITE -->
         <div class="product">
             <a href="polar.html" style="text-decoration:none;">
                 <div class="product-name">Relógio Polar Unite</div>
@@ -402,16 +403,60 @@ h2 {
             <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
         </div>
 
-        <!-- Outro produto -->
+        <!-- GARMIN -->
+        <div class="product">
+            <a href="garmin.html" style="text-decoration:none;">
+                <div class="product-name">Garmin Epix Gen 2</div>
+            </a>
+            <h3>GPS avançado e extrema performance</h3>
+            <p class="old-price">R$ 4500,00</p>
+            <p class="price">R$ 3599.99</p>
+            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- ULTRA AI 3 -->
+        <div class="product">
+            <a href="ultra.html" style="text-decoration:none;">
+                <div class="product-name">Ultra AI 3 5G</div>
+            </a>
+            <h3>Chip 5G e resistência extrema</h3>
+            <p class="old-price">R$ 499,00</p>
+            <p class="price">R$ 349,00</p>
+            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="break"></div>
+         <!-- T800 ULTRA 2 -->
+        <div class="product">
+            <a href="T800.html" style="text-decoration:none;">
+                <div class="product-name">T800 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design elegante</h3>
+            <p class="old-price">R$ 699,00</p>
+            <p class="price">R$ 549,00</p>
+            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
+        </div>
+
+         <!-- T900 ULTRA 2 -->
+        <div class="product">
+            <a href="T900.html" style="text-decoration:none;">
+                <div class="product-name">T900 Ultra 2</div>
+            </a>
+            <h3>Desempenho avançado e design melhorado</h3>
+            <p class="old-price">R$ 400,00</p>
+            <p class="price">R$ 349,99</p>
+            <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
+        </div>
+        <!-- X8 Pro Max -->
         <div class="product">
             <a href="X8.html" style="text-decoration:none;">
                 <div class="product-name">X8 Pro Max</div>
             </a>
-            <h3>Tecnologia de ponta e à prova d'água</h3>
+            <h3>Tecnologia de ponta e À prova D'Água</h3>
             <p class="old-price">R$ 250,00</p>
             <p class="price">R$ 219,99</p>
             <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
         </div>
+
     </div> <!-- fim .products -->
 </div> <!-- fim .container -->
 
@@ -449,7 +494,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             localStorage.setItem("cart", JSON.stringify(cart));
         } catch (err) {
-            console.warn("Não foi possível salvar o carrinho:", err);
+            console.warn("Não foi possível salvar o carrinho no localStorage:", err);
         }
     }
 
@@ -468,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cart.length === 0) {
             container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
         } else {
-            cart.forEach((item) => {
+            cart.forEach((item, i) => {
                 container.innerHTML += `
                     <div style="border-bottom:1px solid #ccc; padding:8px 0;">
                         <strong>${item.name}</strong><br>
@@ -483,7 +528,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
     }
 
-    /* ===== POPUP CARRINHO ===== */
+    /* POPUP CARRINHO */
     const cartPopup = document.getElementById("cart-popup");
     const cartBtn = document.getElementById("cart-btn");
     const closeCartBtn = document.getElementById("close-cart");
@@ -512,15 +557,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
-            if (cart.length === 0) {
-                alert("O carrinho está vazio!");
-                return;
-            }
-            localStorage.setItem("carrinho", JSON.stringify(cart));
-            let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
-            localStorage.setItem("total", total.toFixed(2));
-            window.location.href = "finalizar.html";
-        });
+    if (cart.length === 0) {
+        alert("O carrinho está vazio!");
+        return;
+    }
+
+    // Salva o carrinho exatamente como o código 2 espera
+    localStorage.setItem("carrinho", JSON.stringify(cart));
+
+    // Calcula o total e salva
+    let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+    localStorage.setItem("total", total.toFixed(2));
+
+    // Vai para o Código 2
+    window.location.href = "finalizar.html";
+});
+
     }
 
     /* ===== POPUP CONTA ===== */
@@ -531,20 +583,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const accountPass = document.getElementById("account-pass");
     const closeAccountBtn = document.getElementById("close-account");
 
-    function loadAccountData() {
-        // Se houver login rápido, só mostra o nome
-        const nomeRapido = localStorage.getItem("usuarioLogado");
-        const telefone = localStorage.getItem("telefone") || "Não informado";
-        const senha = localStorage.getItem("senha") || "••••••••";
-
-        if (accountName) accountName.textContent = nomeRapido || "Usuário";
-        if (accountPhone) accountPhone.textContent = telefone;
-        if (accountPass) accountPass.textContent = senha !== "••••••••" ? "••••••••" : senha;
-    }
-
     if (accountBtn) {
         accountBtn.addEventListener("click", () => {
-            loadAccountData();
+            if (accountName) accountName.textContent = localStorage.getItem("accountName") || "Usuário";
+            if (accountPhone) accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
+            if (accountPass) accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
             if (accountPopup) accountPopup.style.display = "flex";
         });
     }
@@ -552,7 +595,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.fecharConta = function () {
         if (accountPopup) accountPopup.style.display = "none";
     };
-
+    /* ===== TROCAR CONTA (alterado para redirecionar) ===== */
     window.trocarConta = function () {
         window.location.href = "index.html";
     };
@@ -561,7 +604,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const carouselImages = [
         "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
         "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
-        "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f"
+        "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
+        "https://cf.shopee.com.br/file/br-11134207-7r98o-m76a9f6kg1807c",
+        "https://down-br.img.susercontent.com/file/cn-11134207-7ras8-m1ozbbaxput08e",
+        "https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/relogio-smart-watch-x8-pro-max-a-prova-d-agua-tecnologia-de-ponta-hapes/hapes/x8-promax-r-16/a48d1a9e227d00e436709225eca91ea3.jpeg"
     ];
 
     let currentIndex = 0;
@@ -572,16 +618,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setInitialImage() {
         if (!carouselImg) return;
-        carouselImg.src = carouselImages[0] || '';
+        const url = carouselImages[0] || '';
+        carouselImg.src = url;
     }
 
     function showImage(index) {
         if (!carouselImg) return;
         if (index < 0 || index >= carouselImages.length) return;
-        carouselImg.style.opacity = 0;
+        try {
+            carouselImg.style.opacity = 0;
+        } catch (err) {}
         setTimeout(() => {
+            if (!carouselImg) return;
             carouselImg.src = carouselImages[index];
-            carouselImg.style.opacity = 1;
+            try {
+                carouselImg.style.opacity = 1;
+            } catch (err) {}
         }, 150);
     }
 
@@ -600,6 +652,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // AUTOPLAY — troca sozinho a cada 3.5s
     function startAutoplay() {
         stopAutoplay();
         autoplayIntervalId = setInterval(() => {
@@ -631,14 +684,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (searchBar) {
         searchBar.addEventListener("keyup", (e) => {
             if (e.target.value.toLowerCase() === "ajuda.sos") {
-                alert("Você será direcionado à página de suporte");
+                alert("Você será direcionado a pagina");
                 e.target.value = "";
             }
         });
     }
 
+    // carregar carrinho do storage ao abrir a página
     updateCartDisplay();
 
+    // fechar popups ao clicar fora (melhoria)
     document.addEventListener("click", function (e) {
         if (cartPopup && cartPopup.style.display === "flex" && !document.getElementById("cart-box").contains(e.target) && e.target !== cartBtn) {
             cartPopup.style.display = "none";
