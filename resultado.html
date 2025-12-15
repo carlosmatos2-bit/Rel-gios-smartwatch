@@ -30,7 +30,6 @@ body::before {
     z-index: -1;
 }
 
-/* ANIMAÇÃO GLOBAL */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -108,14 +107,12 @@ header h1 {
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    overflow: visible;
     min-width: 160px;
     animation: fadeIn 0.3s ease;
     flex-direction: row;
     gap: 6px;
     padding: 10px;
 }
-
 #menu-dropdown button {
     padding: 14px;
     border: none;
@@ -125,101 +122,8 @@ header h1 {
     font-weight: bold;
     transition: all 0.25s ease;
     flex: 1;
-    white-space: nowrap;
 }
 
-#menu-dropdown button:hover {
-    background: #007bff;
-    transform: scale(1.05);
-}
-
-/* ===== CONTAINER PRINCIPAL ===== */
-.container {
-    max-width: 1300px;
-    margin: auto;
-    margin-top: 40px;
-    padding: 26px;
-    background: rgba(255,255,255,0.92);
-    border-radius: 16px;
-    border: 2px solid #004080;
-    box-shadow: 0 0 30px rgba(0, 51, 102, 0.45);
-    backdrop-filter: blur(10px);
-    animation: fadeIn 1s ease;
-}
-
-h2 {
-    text-align: center;
-    color: #002244;
-    font-size: 30px;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 6px #00bfff;
-}
-
-/* ===== BARRA DE PESQUISA ===== */
-#search-bar {
-    width: 55%;
-    padding: 14px 20px;
-    border-radius: 12px;
-    border: 2px solid #003366;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0,80,160,0.3);
-}
-
-#search-bar:focus {
-    border-color: #00bfff;
-    box-shadow: 0 0 16px rgba(0,191,255,0.7);
-}
-
-/* ===== CARROSSEL ===== */
-#carousel {
-    width: 390px;
-    height: 330px;
-    margin: 0 auto 25px auto;
-    overflow: hidden;
-    border-radius: 14px;
-    border: 2px solid #002f66;
-    position: relative;
-    box-shadow: 0 0 18px rgba(0,0,0,0.4);
-}
-
-#carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.6s ease-in-out;
-    display: block;
-}
-
-/* botões do carrossel */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 34px;
-    color: white;
-    background: rgba(0,0,0,0.45);
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.carousel-btn:hover {
-    background: rgba(0,0,0,0.75);
-    transform: translateY(-50%) scale(1.12);
-}
-
-#prevBtn { left: 6px; }
-#nextBtn { right: 6px; }
-
-/* ===== PRODUTOS ===== */
 .products {
     margin-top: 20px;
     display: flex;
@@ -233,108 +137,26 @@ h2 {
     padding: 20px;
     border: 2px solid #003366;
     width: 365px;
-    box-shadow: 4px 4px 14px rgba(0,0,0,0.25), inset -2px -2px 6px rgba(255,255,255,0.6);
     transition: all 0.35s ease;
 }
 
-.product:hover {
-    transform: translateY(-8px) scale(1.045);
-    box-shadow:
-        8px 8px 22px rgba(0, 51, 102, 0.75),
-        inset 2px 2px 8px rgba(255,255,255,0.8),
-        inset -3px -3px 10px rgba(0,0,0,0.1);
-}
-
-.break {
-    flex-basis: 100%;
-    height: 0;
-}
-
-/* ===== NOMES DOS RELÓGIOS ===== */
 .product-name {
     background: #003d80;
     color: white;
-    padding: 8px 12px;
+    padding: 8px;
     border-radius: 8px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 12px;
-    border: 2px solid #002f66;
-    animation: pulseBlue 4s ease-in-out infinite;
 }
 
-@keyframes pulseBlue {
-    0% {
-        background-color: #8bb7ff;
-        border-color: #6aa4ff;
-        box-shadow: 0 0 8px rgba(139,183,255,0.25);
-    }
-    50% {
-        background-color: #003d80;
-        border-color: #002f66;
-        box-shadow: 0 0 12px rgba(0,61,128,0.18);
-    }
-    100% {
-        background-color: #0d2657;
-        border-color: #091c3f;
-        box-shadow: 0 0 16px rgba(13,38,87,0.25);
-    }
-}
-
-/* ===== POPUPS ===== */
-#cart-popup, #account-popup {
-    display: none;
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-#cart-box, #account-box {
-    background: white;
-    width: 380px;
-    padding: 20px;
-    border-radius: 14px;
-    border: 3px solid #003366;
-    box-shadow: 0 0 20px #002244;
-    text-align:center;
-    animation: fadeIn 0.4s ease;
-}
-
-.cart-title {
-    font-size: 22px;
-    color: #002244;
-    margin-bottom: 12px;
-}
-
-.cart-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
+#search-bar {
+    width: 55%;
+    padding: 14px 20px;
     border-radius: 12px;
+    border: 2px solid #003366;
     font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.cart-btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 12px rgba(0,0,0,0.3);
-}
-
-#close-cart, #close-account { background:#002b55; color:white; }
-#clear-cart { background:#cc0000; color:white; }
-#checkout { background:#009933; color:white; }
-
-@media (max-width: 800px) {
-    #carousel { width: 90%; height: 260px; }
-    #search-bar { width: 90%; }
-    .product { width: 100%; }
+    display: block;
+    margin: 20px auto;
 }
 </style>
 </head>
@@ -342,366 +164,66 @@ h2 {
 <body>
 <header>
     <h1>SMARTWATCH STORE</h1>
-    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium - Smartwatches em promoção - Otimo custo beneficio - Compre agora e aproveite!</div>
-    <div class="menu-container">
-        <button id="menu-btn">Menu ▾</button>
-        <div id="menu-dropdown">
-            <button id="cart-btn">🛒 Carrinho</button>
-            <button id="account-btn">👤 Minha Conta</button>
-            <button id="coupons-btn">🎟️ Meus Cupons</button>
-        </div>
-    </div>
+    <div id="letreiro">Ofertas exclusivas de Smartwatches Premium</div>
 </header>
 
-<!-- POPUPS -->
-
-<div id="cart-popup">
-    <div id="cart-box">
-        <div class="cart-title">Seu Carrinho</div>
-        <div id="cart-items"></div>
-        <p id="cart-total"><strong>Total: R$ 0,00</strong></p>
-        <button class="cart-btn" id="clear-cart">🗑️ Limpar Carrinho</button>
-        <button class="cart-btn" id="checkout">✔️ Finalizar Compra</button>
-        <button class="cart-btn" id="close-cart">Fechar</button>
-    </div>
-</div>
-
-<div id="account-popup">
-    <div id="account-box">
-        <h3>Minha Conta</h3>
-        <p><strong>Nome:</strong> <span id="account-name"></span></p>
-        <p><strong>Telefone:</strong> <span id="account-phone"></span></p>
-        <p><strong>Senha:</strong> <span id="account-pass"></span></p>
-        <button class="cart-btn" onclick="trocarConta()" style="background:#cc0000; color:white;">Trocar de Conta</button>
-        <button class="cart-btn" onclick="fecharConta()" style="margin-top:10px; background:#002b55; color:white;">Fechar</button>
-    </div>
-</div>
-
 <div class="container">
-    <h2>Relógios Premium em Promoção</h2>
-    <!-- CARROSSEL -->
-    <div id="carousel">
-        <button id="prevBtn" class="carousel-btn" aria-label="Anterior">❮</button>
-        <img id="carousel-img" src="" alt="Destaque" onerror="this.src='https://via.placeholder.com/390x330?text=Imagem+indisponivel'">
-        <button id="nextBtn" class="carousel-btn" aria-label="Próximo">❯</button>
-    </div>
+<input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos')">
 
-    <!-- BARRA DE PESQUISA -->
-    <input type="text" id="search-bar" placeholder="Pesquisar produto... (Digite 'ajuda.sos' para suporte)">
+<div class="products">
 
-    <!-- PRODUTOS -->
-    <div class="products">
+<div class="product">
+<div class="product-name">Relógio Polar Unite</div>
+</div>
 
-        <!-- 1) POLAR UNITE -->
-        <div class="product">
-            <a href="polar.html" style="text-decoration:none;">
-                <div class="product-name">Relógio Polar Unite</div>
-            </a>
-            <h3>Monitoramento completo de saúde</h3>
-            <p class="old-price">R$ 199,00</p>
-            <p class="price">R$ 149,00</p>
-            <button class="add-cart" onclick="addToCart('Relógio Polar Unite', 149)">Adicionar ao Carrinho</button>
-        </div>
+<div class="product">
+<div class="product-name">Garmin Epix Gen 2</div>
+</div>
 
-        <!-- GARMIN -->
-        <div class="product">
-            <a href="garmin.html" style="text-decoration:none;">
-                <div class="product-name">Garmin Epix Gen 2</div>
-            </a>
-            <h3>GPS avançado e extrema performance</h3>
-            <p class="old-price">R$ 4500,00</p>
-            <p class="price">R$ 3599.99</p>
-            <button class="add-cart" onclick="addToCart('Garmin Epix Gen 2', 3599.99)">Adicionar ao Carrinho</button>
-        </div>
+<div class="product">
+<div class="product-name">Ultra AI 3 5G</div>
+</div>
 
-        <!-- ULTRA AI 3 -->
-        <div class="product">
-            <a href="ultra.html" style="text-decoration:none;">
-                <div class="product-name">Ultra AI 3 5G</div>
-            </a>
-            <h3>Chip 5G e resistência extrema</h3>
-            <p class="old-price">R$ 499,00</p>
-            <p class="price">R$ 349,00</p>
-            <button class="add-cart" onclick="addToCart('Ultra AI 3 5G', 349)">Adicionar ao Carrinho</button>
-        </div>
-        <div class="break"></div>
-         <!-- T800 ULTRA 2 -->
-        <div class="product">
-            <a href="T800.html" style="text-decoration:none;">
-                <div class="product-name">T800 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design elegante</h3>
-            <p class="old-price">R$ 699,00</p>
-            <p class="price">R$ 549,00</p>
-            <button class="add-cart" onclick="addToCart('T800 Ultra 2', 549)">Adicionar ao Carrinho</button>
-        </div>
+<div class="product">
+<div class="product-name">T800 Ultra 2</div>
+</div>
 
-         <!-- T900 ULTRA 2 -->
-        <div class="product">
-            <a href="T900.html" style="text-decoration:none;">
-                <div class="product-name">T900 Ultra 2</div>
-            </a>
-            <h3>Desempenho avançado e design melhorado</h3>
-            <p class="old-price">R$ 400,00</p>
-            <p class="price">R$ 349,99</p>
-            <button class="add-cart" onclick="addToCart('T900 Ultra 2', 349.99)">Adicionar ao Carrinho</button>
-        </div>
-        <!-- X8 Pro Max -->
-        <div class="product">
-            <a href="X8.html" style="text-decoration:none;">
-                <div class="product-name">X8 Pro Max</div>
-            </a>
-            <h3>Tecnologia de ponta e À prova D'Água</h3>
-            <p class="old-price">R$ 250,00</p>
-            <p class="price">R$ 219,99</p>
-            <button class="add-cart" onclick="addToCart('X8 Pro Max', 219.99)">Adicionar ao Carrinho</button>
-        </div>
+<div class="product">
+<div class="product-name">T900 Ultra 2</div>
+</div>
 
-    </div> <!-- fim .products -->
-</div> <!-- fim .container -->
+<div class="product">
+<div class="product-name">X8 Pro Max</div>
+</div>
 
+</div>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    /* ===== MENU DROPDOWN ===== */
-    const menuBtn = document.getElementById("menu-btn");
-    const menuDropdown = document.getElementById("menu-dropdown");
-    const couponsBtn = document.getElementById("coupons-btn");
 
-    if (menuBtn && menuDropdown) {
-        menuBtn.addEventListener("click", (ev) => {
-            ev.stopPropagation();
-            menuDropdown.style.display =
-                menuDropdown.style.display === "flex" ? "none" : "flex";
-        });
+const searchBar = document.getElementById("search-bar");
+const products = document.querySelectorAll(".product");
 
-        window.addEventListener("click", (e) => {
-            if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
-                menuDropdown.style.display = "none";
-            }
-        });
-    }
+searchBar.addEventListener("keyup", function () {
+    const search = searchBar.value.toLowerCase().trim();
 
-    if (couponsBtn) {
-        couponsBtn.addEventListener("click", () => {
-            window.location.href = "cupons.html";
-        });
-    }
-
-    /* ===== CARRINHO ===== */
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function saveCart() {
-        try {
-            localStorage.setItem("cart", JSON.stringify(cart));
-        } catch (err) {
-            console.warn("Não foi possível salvar o carrinho no localStorage:", err);
-        }
-    }
-
-    window.addToCart = function (name, price) {
-        cart.push({ name, price });
-        saveCart();
-        updateCartDisplay();
-        alert(name + " foi adicionado ao carrinho!");
-    };
-
-    function updateCartDisplay() {
-        const container = document.getElementById("cart-items");
-        if (!container) return;
-        container.innerHTML = "";
-
-        if (cart.length === 0) {
-            container.innerHTML = "<p style='text-align:center;'>Seu carrinho está vazio!</p>";
-        } else {
-            cart.forEach((item, i) => {
-                container.innerHTML += `
-                    <div style="border-bottom:1px solid #ccc; padding:8px 0;">
-                        <strong>${item.name}</strong><br>
-                        R$ ${Number(item.price).toFixed(2)}
-                    </div>
-                `;
-            });
-        }
-
-        const total = cart.reduce((sum, item) => sum + Number(item.price || 0), 0);
-        const totalEl = document.getElementById("cart-total");
-        if (totalEl) totalEl.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
-    }
-
-    /* POPUP CARRINHO */
-    const cartPopup = document.getElementById("cart-popup");
-    const cartBtn = document.getElementById("cart-btn");
-    const closeCartBtn = document.getElementById("close-cart");
-    const clearCartBtn = document.getElementById("clear-cart");
-    const checkoutBtn = document.getElementById("checkout");
-
-    if (cartBtn) {
-        cartBtn.addEventListener("click", () => {
-            updateCartDisplay();
-            if (cartPopup) cartPopup.style.display = "flex";
-        });
-    }
-    if (closeCartBtn) {
-        closeCartBtn.addEventListener("click", () => {
-            if (cartPopup) cartPopup.style.display = "none";
-        });
-    }
-    if (clearCartBtn) {
-        clearCartBtn.addEventListener("click", () => {
-            if (confirm("Deseja realmente limpar o carrinho?")) {
-                cart = [];
-                saveCart();
-                updateCartDisplay();
-            }
-        });
-    }
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener("click", () => {
-    if (cart.length === 0) {
-        alert("O carrinho está vazio!");
+    // 👉 ajuda.sos redireciona
+    if (search === "ajuda.sos") {
+        window.location.href = "ajuda.html";
         return;
     }
 
-    // Salva o carrinho exatamente como o código 2 espera
-    localStorage.setItem("carrinho", JSON.stringify(cart));
+    // 👉 filtro de produtos
+    products.forEach(product => {
+        const name = product.querySelector(".product-name").innerText.toLowerCase();
 
-    // Calcula o total e salva
-    let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
-    localStorage.setItem("total", total.toFixed(2));
-
-    // Vai para o Código 2
-    window.location.href = "finalizar.html";
-});
-
-    }
-
-    /* ===== POPUP CONTA ===== */
-    const accountBtn = document.getElementById("account-btn");
-    const accountPopup = document.getElementById("account-popup");
-    const accountName = document.getElementById("account-name");
-    const accountPhone = document.getElementById("account-phone");
-    const accountPass = document.getElementById("account-pass");
-    const closeAccountBtn = document.getElementById("close-account");
-
-    if (accountBtn) {
-        accountBtn.addEventListener("click", () => {
-            if (accountName) accountName.textContent = localStorage.getItem("accountName") || "Usuário";
-            if (accountPhone) accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
-            if (accountPass) accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
-            if (accountPopup) accountPopup.style.display = "flex";
-        });
-    }
-
-    window.fecharConta = function () {
-        if (accountPopup) accountPopup.style.display = "none";
-    };
-    /* ===== TROCAR CONTA (alterado para redirecionar) ===== */
-    window.trocarConta = function () {
-        window.location.href = "index.html";
-    };
-
-    /* ===== CARROSSEL ===== */
-    const carouselImages = [
-        "https://m.media-amazon.com/images/I/71OWLxOqTPL.jpg",
-        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV2o9J6yZbamu7JH72Aqq-VDW2t6_5CM3wdwb6TtK7BQJxhk4y0H4g2gDWYmdOBHnpC4TO91cLIBiZJ8z6_uaGN3J2FGCPx-xrTsvL_MZZKYhrBqrY2cBBiuk",
-        "https://down-br.img.susercontent.com/file/sg-11134201-7ra3f-m50llz0oztw74f",
-        "https://cf.shopee.com.br/file/br-11134207-7r98o-m76a9f6kg1807c",
-        "https://down-br.img.susercontent.com/file/cn-11134207-7ras8-m1ozbbaxput08e",
-        "https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/relogio-smart-watch-x8-pro-max-a-prova-d-agua-tecnologia-de-ponta-hapes/hapes/x8-promax-r-16/a48d1a9e227d00e436709225eca91ea3.jpeg"
-    ];
-
-    let currentIndex = 0;
-    const carouselImg = document.getElementById("carousel-img");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    let autoplayIntervalId = null;
-
-    function setInitialImage() {
-        if (!carouselImg) return;
-        const url = carouselImages[0] || '';
-        carouselImg.src = url;
-    }
-
-    function showImage(index) {
-        if (!carouselImg) return;
-        if (index < 0 || index >= carouselImages.length) return;
-        try {
-            carouselImg.style.opacity = 0;
-        } catch (err) {}
-        setTimeout(() => {
-            if (!carouselImg) return;
-            carouselImg.src = carouselImages[index];
-            try {
-                carouselImg.style.opacity = 1;
-            } catch (err) {}
-        }, 150);
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
-            showImage(currentIndex);
-            restartAutoplay();
-        });
-    }
-    if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % carouselImages.length;
-            showImage(currentIndex);
-            restartAutoplay();
-        });
-    }
-
-    // AUTOPLAY — troca sozinho a cada 3.5s
-    function startAutoplay() {
-        stopAutoplay();
-        autoplayIntervalId = setInterval(() => {
-            currentIndex = (currentIndex + 1) % carouselImages.length;
-            showImage(currentIndex);
-        }, 3500);
-    }
-    function stopAutoplay() {
-        if (autoplayIntervalId !== null) {
-            clearInterval(autoplayIntervalId);
-            autoplayIntervalId = null;
-        }
-    }
-    function restartAutoplay() {
-        startAutoplay();
-    }
-
-    const carouselElem = document.getElementById("carousel");
-    if (carouselElem) {
-        carouselElem.addEventListener("mouseenter", stopAutoplay);
-        carouselElem.addEventListener("mouseleave", startAutoplay);
-    }
-
-    setInitialImage();
-    startAutoplay();
-
-    /* ===== PESQUISA RÁPIDA ===== */
-    const searchBar = document.getElementById("search-bar");
-    if (searchBar) {
-        searchBar.addEventListener("keyup", (e) => {
-            if (e.target.value.toLowerCase() === "ajuda.sos") {
-                alert("Você será direcionado a pagina");
-                e.target.value = "";
-            }
-        });
-    }
-
-    // carregar carrinho do storage ao abrir a página
-    updateCartDisplay();
-
-    // fechar popups ao clicar fora (melhoria)
-    document.addEventListener("click", function (e) {
-        if (cartPopup && cartPopup.style.display === "flex" && !document.getElementById("cart-box").contains(e.target) && e.target !== cartBtn) {
-            cartPopup.style.display = "none";
-        }
-        if (accountPopup && accountPopup.style.display === "flex" && !document.getElementById("account-box").contains(e.target) && e.target !== accountBtn) {
-            accountPopup.style.display = "none";
+        if (search === "") {
+            product.style.display = "block";
+        } else {
+            product.style.display = name.includes(search) ? "block" : "none";
         }
     });
+});
 
 });
 </script>
