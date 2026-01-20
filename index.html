@@ -486,22 +486,29 @@ toggleSenha.addEventListener("click", () => {
   }
 });
 
-// FORMULÁRIO COMPLETO
+// FORMULÁRIO COMPLETO (CORRIGIDO)
 document.getElementById("formulario").addEventListener("submit", function(e){
   e.preventDefault();
 
   const nome = document.getElementById("nome").value;
+  const email = document.getElementById("email").value;
   const telefone = document.getElementById("telefone").value;
   const senha = document.getElementById("senha").value;
 
-  localStorage.setItem("usuarioLogado", nome);
-  localStorage.setItem("telefone", telefone);
-  localStorage.setItem("senha", senha);
+  // identifica tipo de login
+  localStorage.setItem("tipoLogin", "completo");
+
+  // dados padronizados para o segundo código
+  localStorage.setItem("accountName", nome);
+  localStorage.setItem("accountEmail", email);
+  localStorage.setItem("accountPhone", telefone);
+  localStorage.setItem("accountPass", senha);
 
   window.location.href = "resultado.html";
 });
 
-// LOGIN RÁPIDO
+
+// LOGIN RÁPIDO (CORRIGIDO)
 document.getElementById("login-rapido").addEventListener("submit", function(e){
   e.preventDefault();
 
@@ -512,9 +519,20 @@ document.getElementById("login-rapido").addEventListener("submit", function(e){
     return;
   }
 
-  localStorage.setItem("usuarioLogado", nomeRapido);
+  // identifica login rápido
+  localStorage.setItem("tipoLogin", "rapido");
+
+  // salva apenas o nome
+  localStorage.setItem("accountName", nomeRapido);
+
+  // remove dados que não existem no login rápido
+  localStorage.removeItem("accountEmail");
+  localStorage.removeItem("accountPhone");
+  localStorage.removeItem("accountPass");
+
   window.location.href = "resultado.html";
 });
+
 </script>
 
 </body>
