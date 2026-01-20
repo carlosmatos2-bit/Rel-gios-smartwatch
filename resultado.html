@@ -702,16 +702,43 @@ if (accountBtn) {
     setInitialImage();
     startAutoplay();
 
-    /* ===== PESQUISA RÁPIDA ===== */
-    const searchBar = document.getElementById("search-bar");
-    if (searchBar) {
-        searchBar.addEventListener("keyup", (e) => {
-            if (e.target.value.toLowerCase() === "ajuda.sos") {
-                alert("Você será direcionado a pagina");
-                e.target.value = "";
+    /* ===== PESQUISA DE PRODUTOS + AJUDA ===== */
+const searchBar = document.getElementById("search-bar");
+const products = document.querySelectorAll(".product");
+
+if (searchBar) {
+    searchBar.addEventListener("input", () => {
+        const searchValue = searchBar.value.toLowerCase().trim();
+
+        /* 👉 comando especial ajuda.sos */
+        if (searchValue === "ajuda.sos") {
+            window.location.href = "ajuda.html";
+            return;
+        }
+
+        /* 👉 filtrar produtos */
+        products.forEach(product => {
+            const productName = product
+                .querySelector(".product-name")
+                .textContent
+                .toLowerCase();
+
+            if (productName.includes(searchValue)) {
+                product.style.display = "block";
+            } else {
+                product.style.display = "none";
             }
         });
-    }
+
+        /* 👉 se a pesquisa estiver vazia, mostra tudo */
+        if (searchValue === "") {
+            products.forEach(product => {
+                product.style.display = "block";
+            });
+        }
+    });
+}
+
 
     // carregar carrinho do storage ao abrir a página
     updateCartDisplay();
