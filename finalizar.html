@@ -355,17 +355,23 @@ function renderCart() {
 
 function mostrarOpcoes() {
     let tipo = document.getElementById("pagamento").value;
+
+    // Esconde todas as caixas de pagamento
     document.getElementById("cartao-box").classList.add("hidden");
     document.getElementById("pix-box").classList.add("hidden");
-    document.getElementById("boleto-box").classclassList.add("hidden");
+    document.getElementById("boleto-box").classList.add("hidden");
 
-    if (tipo === "cartao") document.getElementById("cartao-box").classList.remove("hidden");
-    else if (tipo === "pix") document.getElementById("pix-box").classList.remove("hidden");
-    else if (tipo === "boleto") {
+    // Mostra apenas a caixa selecionada
+    if (tipo === "cartao") {
+        document.getElementById("cartao-box").classList.remove("hidden");
+    } else if (tipo === "pix") {
+        document.getElementById("pix-box").classList.remove("hidden");
+    } else if (tipo === "boleto") {
         document.getElementById("boleto-box").classList.remove("hidden");
         gerarBoleto();
     }
 }
+
 
 function gerarBoleto() {
     const linha =
