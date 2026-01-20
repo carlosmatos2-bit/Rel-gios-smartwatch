@@ -575,22 +575,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    /* ===== POPUP CONTA ===== */
-    const accountBtn = document.getElementById("account-btn");
-    const accountPopup = document.getElementById("account-popup");
-    const accountName = document.getElementById("account-name");
-    const accountPhone = document.getElementById("account-phone");
-    const accountPass = document.getElementById("account-pass");
-    const closeAccountBtn = document.getElementById("close-account");
+    /* ===== POPUP CONTA (CORRIGIDO) ===== */
+const accountBtn = document.getElementById("account-btn");
+const accountPopup = document.getElementById("account-popup");
+const accountName = document.getElementById("account-name");
+const accountPhone = document.getElementById("account-phone");
+const accountPass = document.getElementById("account-pass");
 
-    if (accountBtn) {
-        accountBtn.addEventListener("click", () => {
-            if (accountName) accountName.textContent = localStorage.getItem("accountName") || "Usuário";
-            if (accountPhone) accountPhone.textContent = localStorage.getItem("accountPhone") || "(00) 00000-0000";
-            if (accountPass) accountPass.textContent = localStorage.getItem("accountPass") || "••••••••";
-            if (accountPopup) accountPopup.style.display = "flex";
-        });
-    }
+if (accountBtn) {
+    accountBtn.addEventListener("click", () => {
+
+        const tipoLogin = localStorage.getItem("tipoLogin");
+
+        // Nome sempre aparece
+        if (accountName) {
+            accountName.textContent =
+                localStorage.getItem("accountName") || "Usuário";
+        }
+
+        // Login rápido → esconde dados sensíveis
+        if (tipoLogin === "rapido") {
+            if (accountPhone) accountPhone.textContent = "—";
+            if (accountPass) accountPass.textContent = "Login rápido";
+        } 
+        // Cadastro completo
+        else {
+            if (accountPhone) {
+                accountPhone.textContent =
+                    localStorage.getItem("accountPhone") || "—";
+            }
+            if (accountPass) {
+                accountPass.textContent =
+                    localStorage.getItem("accountPass") || "—";
+            }
+        }
+
+        if (accountPopup) accountPopup.style.display = "flex";
+    });
+}
+
 
     window.fecharConta = function () {
         if (accountPopup) accountPopup.style.display = "none";
